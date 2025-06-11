@@ -3,743 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facturanza: Explorador de Arquitectura de Acceso</title>
+    <title>Roadmap de Producto - Facturanza</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Warm Neutral Harmony -->
-    <!-- Application Structure Plan: The SPA is designed as a "Feature Explorer" to make a dense technical document digestible. The structure uses top navigation to switch between thematic sections: a high-level 'Visión General', an interactive 'Modelo de Acceso' to simulate roles, a 'Modelo de Datos y API' for technical users, a visual 'Flujo de Facturación' to explain the process, a 'Diseño UI/UX' for visual mockups, and a 'Cumplimiento' section for regulatory details. This non-linear, task-oriented structure was chosen because different stakeholders (execs, devs, designers) have different needs. It allows each team to dive into the section most relevant to them, fostering better understanding and discussion than a linear document. -->
+    <!-- Application Structure Plan: This SPA serves as the main project dashboard, visualizing a product roadmap. The structure is a vertical timeline, chosen for its intuitive and chronological representation of project phases (Alpha, Beta, Release). This linear flow is ideal for communicating progress over time. Each phase is a distinct section containing cards for individual features, allowing for at-a-glance status checks (Pending/Complete). A separate section for "User Suggestions" is included at the end to capture ongoing feedback outside the main timeline. Finally, a clear call-to-action links to the detailed sub-project for "Advanced User Role Access", making this page a central hub. -->
     <!-- Visualization & Content Choices: 
-        - Report Info: Hierarchical Access Model -> Goal: Compare/Organize -> Viz: Interactive Role Simulator (HTML/JS) -> Interaction: User selects a role & access level; a permission table updates dynamically. -> Justification: Makes the abstract permission matrix (Table 1) tangible and easy to explore. -> Library: Vanilla JS.
-        - Report Info: Data Model Schema -> Goal: Inform/Organize -> Viz: Interactive ERD (HTML/CSS) -> Interaction: Clicking a table reveals its attributes in a modal. -> Justification: More engaging and less intimidating than raw table definitions. -> Library: Vanilla JS.
-        - Report Info: Billing Workflow -> Goal: Organize/Change -> Viz: Step-by-step interactive diagram (HTML/JS) -> Interaction: User clicks 'next' to follow different logic paths. -> Justification: Clarifies complex conditional logic from the report. -> Library: Vanilla JS.
-        - Report Info: Permission distribution across roles -> Goal: Compare -> Viz: Horizontal Bar Chart (Chart.js) -> Interaction: Hover tooltips show details. -> Justification: Provides a quick visual summary of how access levels impact different user roles. -> Library: Chart.js.
-        - Report Info: Consecutivo Number Structure -> Goal: Inform -> Viz: Styled HTML divs -> Interaction: Static visual breakdown. -> Justification: Simple, clear visual aid for a critical compliance concept. -> Library: N/A.
+        - Report Info: Release Phases & Dates -> Goal: Change/Organize -> Viz: Vertical Timeline (HTML/CSS) -> Interaction: Scroll-based exploration. -> Justification: Clearly shows the sequence and duration of project stages. -> Library: N/A.
+        - Report Info: Task Status (Pending/Complete) -> Goal: Inform -> Viz: Status Icons (Unicode) on Cards -> Interaction: Static visual indicator. -> Justification: Provides immediate, language-agnostic understanding of task completion. -> Library: N/A.
+        - Report Info: Current Progress in Alpha Phase -> Goal: Inform -> Viz: Dynamic Progress Bar (HTML/JS) -> Interaction: Automatically updates based on the current date. -> Justification: Gives a live, quantitative measure of how far along the current phase is. -> Library: Vanilla JS.
+        - Report Info: Link to Sub-Project -> Goal: Organize/Navigate -> Viz: Styled Button/Link -> Interaction: Click to navigate to a sub-page. -> Justification: Connects the high-level roadmap to detailed feature documentation. -> Library: N/A.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .bg-warm-neutral { background-color: #F5F5F4; }
-        .bg-warm-neutral-light { background-color: #FAFAF9; }
-        .text-warm-neutral-dark { color: #292524; }
-        .text-warm-neutral-medium { color: #57534E; }
-        .border-warm-neutral-light { border-color: #E7E5E4; }
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F4; /* bg-warm-neutral */
+            color: #292524; /* text-warm-neutral-dark */
+        }
         .accent-color { color: #1e40af; }
         .accent-bg { background-color: #1e40af; }
-        .accent-border { border-color: #1e40af; }
-        .nav-link {
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
+        
+        .timeline-item .timeline-content {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .nav-link.active, .nav-link:hover {
-            color: #1e40af;
-            border-bottom-color: #1e40af;
-        }
-        .section { display: none; }
-        .section.active { display: block; }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 400px;
-            max-height: 50vh;
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
-<body class="bg-warm-neutral text-warm-neutral-dark">
+<body class="antialiased">
 
-    <div id="app" class="min-h-screen antialiased">
-        <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-40 border-b border-warm-neutral-light">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16">
-                    <div class="flex items-center">
-                        <span class="text-2xl font-bold accent-color">Facturanza</span>
-                        <span class="hidden sm:block ml-4 text-xl font-light text-warm-neutral-medium">Explorador de Arquitectura</span>
-                    </div>
-                    <nav class="hidden md:flex space-x-6">
-                        <a href="#vision" class="nav-link text-sm font-medium text-warm-neutral-medium py-1 active" onclick="navigate(event, 'vision')">Visión General</a>
-                        <a href="#modelo-acceso" class="nav-link text-sm font-medium text-warm-neutral-medium py-1" onclick="navigate(event, 'modelo-acceso')">Modelo de Acceso</a>
-                        <a href="#datos-api" class="nav-link text-sm font-medium text-warm-neutral-medium py-1" onclick="navigate(event, 'datos-api')">Datos y API</a>
-                        <a href="#flujo-facturacion" class="nav-link text-sm font-medium text-warm-neutral-medium py-1" onclick="navigate(event, 'flujo-facturacion')">Flujo de Facturación</a>
-                        <a href="#diseno-ui" class="nav-link text-sm font-medium text-warm-neutral-medium py-1" onclick="navigate(event, 'diseno-ui')">Diseño UI/UX</a>
-                        <a href="#cumplimiento" class="nav-link text-sm font-medium text-warm-neutral-medium py-1" onclick="navigate(event, 'cumplimiento')">Cumplimiento</a>
-                    </nav>
-                    <div class="md:hidden">
-                        <select id="mobile-nav" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" onchange="navigate(event, this.value)">
-                            <option value="vision">Visión General</option>
-                            <option value="modelo-acceso">Modelo de Acceso</option>
-                            <option value="datos-api">Datos y API</option>
-                            <option value="flujo-facturacion">Flujo de Facturación</option>
-                            <option value="diseno-ui">Diseño UI/UX</option>
-                            <option value="cumplimiento">Cumplimiento</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold accent-color mb-4">Roadmap de Lanzamiento de Facturanza</h1>
+            <p class="text-lg text-stone-600 max-w-3xl mx-auto">Una vista general de las fases de desarrollo, funcionalidades clave y el progreso hacia el lanzamiento de la V1.</p>
         </header>
 
-        <main class="container mx-auto p-4 sm:p-6 lg:p-8">
-            <!-- Vision General Section -->
-            <section id="vision" class="section active">
-                <div class="text-center mb-12">
-                    <h1 class="text-4xl md:text-5xl font-bold accent-color mb-4">Control de Acceso por Sucursal y Terminal</h1>
-                    <p class="text-lg text-warm-neutral-medium max-w-3xl mx-auto">Una nueva arquitectura para ofrecer control granular, seguridad mejorada y cumplimiento normativo para las operaciones de facturación de Facturanza en Costa Rica.</p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8 mb-12 text-center">
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-xl font-semibold accent-color mb-2">Seguridad Mejorada</h3>
-                        <p class="text-warm-neutral-medium">Asigne usuarios a sucursales y terminales específicas, asegurando que solo accedan a los datos y funciones que necesitan.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-xl font-semibold accent-color mb-2">Eficiencia Operativa</h3>
-                        <p class="text-warm-neutral-medium">Agilice la facturación con asignaciones predeterminadas de sucursal/terminal, reduciendo errores y acelerando las transacciones.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-xl font-semibold accent-color mb-2">Cumplimiento Normativo</h3>
-                        <p class="text-warm-neutral-medium">Cumpla con los mandatos de facturación electrónica de Hacienda en Costa Rica, generando números de consecutivo correctos por terminal.</p>
-                    </div>
-                </div>
-
-                <div>
-                    <h2 class="text-3xl font-bold text-center mb-6 text-warm-neutral-dark">Estructura Jerárquica</h2>
-                    <p class="text-center text-warm-neutral-medium mb-8 max-w-2xl mx-auto">La arquitectura introduce una jerarquía clara. Cada Negocio (Tenant) puede tener múltiples Sucursales, y cada Sucursal puede tener múltiples Terminales. Los usuarios son asignados dentro de esta estructura para un control preciso.</p>
-                    <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
-                        <div class="flex flex-col items-center text-center">
-                            <div class="w-full bg-blue-100 border-2 border-dashed border-blue-400 p-4 rounded-lg">
-                                <span class="text-xl font-bold text-blue-800">Negocio (Tenant)</span>
-                                <div class="mt-4 flex justify-center text-2xl">▼</div>
-                            </div>
-                            <div class="w-full mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="bg-green-100 border-2 border-dashed border-green-400 p-4 rounded-lg">
-                                    <span class="text-lg font-semibold text-green-800">Sucursal A</span>
-                                    <div class="mt-2 flex justify-center text-xl">▼</div>
-                                    <div class="mt-2 flex flex-col space-y-2">
-                                        <div class="bg-yellow-100 p-2 rounded-md text-yellow-800">Terminal A1</div>
-                                        <div class="bg-yellow-100 p-2 rounded-md text-yellow-800">Terminal A2</div>
-                                    </div>
-                                </div>
-                                <div class="bg-green-100 border-2 border-dashed border-green-400 p-4 rounded-lg">
-                                    <span class="text-lg font-semibold text-green-800">Sucursal B</span>
-                                    <div class="mt-2 flex justify-center text-xl">▼</div>
-                                    <div class="mt-2 flex flex-col space-y-2">
-                                        <div class="bg-yellow-100 p-2 rounded-md text-yellow-800">Terminal B1</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Modelo de Acceso Section -->
-            <section id="modelo-acceso" class="section">
-                <div class="text-center mb-12">
-                    <h1 class="text-4xl md:text-5xl font-bold accent-color mb-4">Modelo de Acceso Jerárquico</h1>
-                    <p class="text-lg text-warm-neutral-medium max-w-3xl mx-auto">Explore cómo los diferentes niveles de acceso y roles de usuario interactúan para definir los permisos. Seleccione un rol y un nivel de acceso para ver las capacidades resultantes.</p>
-                </div>
-
-                <div class="bg-white p-8 rounded-lg shadow-md">
-                    <div class="grid md:grid-cols-2 gap-8 mb-8">
-                        <div>
-                            <label for="roleSelector" class="block text-sm font-medium text-warm-neutral-medium">Seleccionar Rol de Usuario</label>
-                            <select id="roleSelector" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                <option value="Employee">Empleado</option>
-                                <option value="Manager">Gerente</option>
-                                <option value="Accountant">Contador</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Owner">Propietario</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="accessLevelSelector" class="block text-sm font-medium text-warm-neutral-medium">Seleccionar Nivel de Acceso</label>
-                            <select id="accessLevelSelector" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                <option value="TERMINAL">Terminal (Más Restringido)</option>
-                                <option value="SUCURSAL">Sucursal</option>
-                                <option value="FULL">Full (Acceso Total)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div id="permission-display" class="transition-all duration-300">
-                        <h3 class="text-2xl font-bold text-warm-neutral-dark mb-4">Permisos Resultantes: <span id="current-role" class="accent-color"></span></h3>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acción Clave</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Permiso</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contexto / Notas</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="permission-table-body" class="bg-white divide-y divide-gray-200">
-                                    <!-- Rows will be generated by JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mt-12">
-                     <h2 class="text-3xl font-bold text-center mb-6 text-warm-neutral-dark">Distribución de Permisos por Rol</h2>
-                     <p class="text-center text-warm-neutral-medium mb-8 max-w-2xl mx-auto">Este gráfico ilustra qué roles tienen acceso a las diferentes capacidades del sistema. Es una vista de alto nivel de cómo se distribuye el poder en la nueva arquitectura de acceso.</p>
-                     <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
-                        <div class="chart-container">
-                            <canvas id="permissionChart"></canvas>
-                        </div>
-                     </div>
-                </div>
-
-            </section>
-
-            <!-- Datos y API Section -->
-            <section id="datos-api" class="section">
-                 <div class="text-center mb-12">
-                    <h1 class="text-4xl md:text-5xl font-bold accent-color mb-4">Modelo de Datos y API</h1>
-                    <p class="text-lg text-warm-neutral-medium max-w-3xl mx-auto">La base técnica de la nueva función. Explore el diagrama de entidad-relación (ERD) interactivo para entender la estructura de la base de datos y consulte la lista de nuevos endpoints de API.</p>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Link to Advanced User Role Access -->
+        <div class="mb-12">
+            <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md border border-blue-200">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                     <div>
-                        <h2 class="text-3xl font-bold mb-6 text-warm-neutral-dark">Diagrama de Entidad-Relación (ERD)</h2>
-                        <p class="text-warm-neutral-medium mb-6">Haga clic en una entidad para ver sus atributos. Este diagrama muestra cómo las nuevas tablas (`Sucursales`, `Terminales` y las tablas de asignación) se relacionan entre sí y con las tablas existentes.</p>
-                        <div id="erd-container" class="bg-white p-6 rounded-lg shadow-md space-y-4">
-                           <div class="grid grid-cols-2 gap-4">
-                               <div class="erd-table" data-table="Users">Usuarios</div>
-                               <div class="erd-table" data-table="Bills">Facturas</div>
-                           </div>
-                           <div class="flex justify-center text-2xl space-x-16"><span>↕</span><span>↕</span></div>
-                           <div class="grid grid-cols-2 gap-4">
-                                <div class="erd-table" data-table="UserSucursalAssignments">Asignaciones Usuario-Sucursal</div>
-                               <div class="erd-table" data-table="UserTerminalAssignments">Asignaciones Usuario-Terminal</div>
-                           </div>
-                            <div class="flex justify-center text-2xl"><span>↕</span></div>
-                           <div class="erd-table" data-table="Sucursales">Sucursales</div>
-                           <div class="flex justify-center text-2xl"><span>↕</span></div>
-                           <div class="erd-table" data-table="Terminales">Terminales</div>
-                        </div>
+                        <h2 class="text-2xl font-bold text-stone-800">Explorador de Arquitectura</h2>
+                        <p class="text-stone-600 mt-1">Sumérjase en los detalles técnicos de la nueva función de **Control de Acceso Avanzado para Usuarios**.</p>
                     </div>
-                    <div>
-                        <h2 class="text-3xl font-bold mb-6 text-warm-neutral-dark">Endpoints de la API</h2>
-                        <p class="text-warm-neutral-medium mb-6">Se crearán nuevos endpoints RESTful para gestionar las sucursales, terminales y asignaciones de usuarios. Haga clic en un endpoint para ver los detalles.</p>
-                        <div id="api-list" class="space-y-2">
-                          <!-- API items will be generated by JS -->
-                        </div>
-                    </div>
+                    <a href="./advanced-user-role-access/index.html" class="inline-block accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-800 transition-colors duration-300 transform hover:scale-105 whitespace-nowrap">
+                        Ver Detalles ➔
+                    </a>
                 </div>
-            </section>
-
-            <!-- Flujo de Facturación Section -->
-            <section id="flujo-facturacion" class="section">
-                <div class="text-center mb-12">
-                    <h1 class="text-4xl md:text-5xl font-bold accent-color mb-4">Simulador de Flujo de Facturación</h1>
-                    <p class="text-lg text-warm-neutral-medium max-w-3xl mx-auto">Vea cómo funciona el nuevo proceso de facturación en la práctica. Siga los pasos para diferentes perfiles de usuario y vea cómo el sistema determina la sucursal y el terminal para cada factura.</p>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto">
-                    <div id="workflow-steps">
-                        <!-- Workflow steps will be generated by JS -->
-                    </div>
-                    <div id="workflow-controls" class="mt-6 flex justify-between">
-                       <button id="workflow-prev" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md shadow-sm hover:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed">Anterior</button>
-                       <button id="workflow-next" class="px-4 py-2 accent-bg text-white rounded-md shadow-sm hover:bg-blue-800">Siguiente</button>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Diseño UI/UX Section -->
-            <section id="diseno-ui" class="section">
-                <div class="text-center mb-12">
-                    <h1 class="text-4xl md:text-5xl font-bold accent-color mb-4">Diseño UI/UX (Prototipos)</h1>
-                    <p class="text-lg text-warm-neutral-medium max-w-3xl mx-auto">Visualice cómo se verán y sentirán las nuevas funciones. Estos son prototipos de las interfaces de administración y del proceso de creación de facturas para el usuario final.</p>
-                </div>
-
-                <div class="space-y-16">
-                    <!-- UI Mockup 1: Admin - Sucursal Management -->
-                    <div>
-                        <h2 class="text-3xl font-bold mb-6 text-warm-neutral-dark">Admin: Gestión de Sucursales</h2>
-                        <p class="text-warm-neutral-medium mb-6 max-w-3xl">Los administradores tendrán una vista clara para crear, editar y gestionar todas las sucursales del negocio, incluyendo sus números oficiales de Hacienda.</p>
-                        <div class="bg-white rounded-lg shadow-2xl overflow-hidden border border-gray-200">
-                            <div class="p-4 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
-                                <h3 class="font-semibold text-lg">Panel de Sucursales</h3>
-                                <button class="px-4 py-2 text-sm accent-bg text-white rounded-md shadow-sm">✚ Nueva Sucursal</button>
-                            </div>
-                            <div class="p-4">
-                                <table class="min-w-full">
-                                    <thead class="bg-gray-100">
-                                        <tr>
-                                            <th class="px-4 py-2 text-left text-sm font-medium">Nombre</th>
-                                            <th class="px-4 py-2 text-left text-sm font-medium">Nº Hacienda</th>
-                                            <th class="px-4 py-2 text-left text-sm font-medium">Estado</th>
-                                            <th class="px-4 py-2 text-left text-sm font-medium">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="border-b">
-                                            <td class="px-4 py-3">Tienda Central</td>
-                                            <td class="px-4 py-3 font-mono">001</td>
-                                            <td class="px-4 py-3"><span class="px-2 py-1 text-xs bg-green-200 text-green-800 rounded-full">Activo</span></td>
-                                            <td class="px-4 py-3 text-sm font-medium"><a href="#" class="accent-color">Editar</a></td>
-                                        </tr>
-                                        <tr class="border-b">
-                                            <td class="px-4 py-3">Sucursal Oeste</td>
-                                            <td class="px-4 py-3 font-mono">002</td>
-                                            <td class="px-4 py-3"><span class="px-2 py-1 text-xs bg-green-200 text-green-800 rounded-full">Activo</span></td>
-                                            <td class="px-4 py-3 text-sm font-medium"><a href="#" class="accent-color">Editar</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-4 py-3">Bodega (Inactiva)</td>
-                                            <td class="px-4 py-3 font-mono">003</td>
-                                            <td class="px-4 py-3"><span class="px-2 py-1 text-xs bg-red-200 text-red-800 rounded-full">Inactivo</span></td>
-                                            <td class="px-4 py-3 text-sm font-medium"><a href="#" class="accent-color">Editar</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- UI Mockup 2: Bill Creation -->
-                    <div>
-                        <h2 class="text-3xl font-bold mb-6 text-warm-neutral-dark">Usuario Final: Creación de Factura</h2>
-                        <p class="text-warm-neutral-medium mb-6 max-w-3xl">La interfaz de facturación se adaptará dinámicamente. Los usuarios con permiso para cambiar de terminal verán selectores, mientras que otros tendrán una vista simplificada para agilizar el proceso.</p>
-                        <div class="bg-white rounded-lg shadow-2xl overflow-hidden border border-gray-200">
-                            <div class="p-4 bg-gray-50 border-b border-gray-200">
-                                <h3 class="font-semibold text-lg">Nueva Factura Electrónica</h3>
-                            </div>
-                            <div class="p-6 space-y-6">
-                                <div>
-                                    <h4 class="font-semibold mb-2">Usuario con Permiso para Cambiar de Terminal</h4>
-                                    <div class="grid md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label class="block text-sm font-medium text-warm-neutral-medium">Sucursal</label>
-                                            <select class="mt-1 block w-full bg-white border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                                                <option>Sucursal Oeste</option>
-                                                <option>Tienda Central</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label class="block text-sm font-medium text-warm-neutral-medium">Terminal</label>
-                                            <select class="mt-1 block w-full bg-white border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                                                <option>POS Ventas 2</option>
-                                                <option>POS Ventas 3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <p class="mt-1 text-xs text-gray-500">El usuario puede seleccionar entre sus terminales asignadas.</p>
-                                </div>
-                                <div class="border-t pt-6">
-                                    <h4 class="font-semibold mb-2">Usuario con Terminal Fija (sin permiso de cambio)</h4>
-                                    <div class="grid md:grid-cols-2 gap-6 p-4 bg-gray-50 rounded-lg">
-                                        <div>
-                                            <label class="block text-sm font-medium text-warm-neutral-medium">Sucursal de Emisión</label>
-                                            <p class="mt-1 text-lg font-bold text-warm-neutral-dark">Tienda Central</p>
-                                        </div>
-                                        <div>
-                                            <label class="block text-sm font-medium text-warm-neutral-medium">Terminal de Emisión</label>
-                                            <p class="mt-1 text-lg font-bold text-warm-neutral-dark">Caja Principal</p>
-                                        </div>
-                                    </div>
-                                    <p class="mt-2 text-xs text-gray-500">La selección está fija para simplificar el proceso y evitar errores.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-            
-            <!-- Cumplimiento Section -->
-            <section id="cumplimiento" class="section">
-                <div class="text-center mb-12">
-                    <h1 class="text-4xl md:text-5xl font-bold accent-color mb-4">Cumplimiento con Hacienda</h1>
-                    <p class="text-lg text-warm-neutral-medium max-w-3xl mx-auto">Esta arquitectura está diseñada para cumplir con los requisitos de facturación electrónica de Costa Rica, especialmente la generación del "Número Consecutivo".</p>
-                </div>
-
-                <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
-                    <h2 class="text-2xl font-bold text-warm-neutral-dark mb-4 text-center">Desglose del Número Consecutivo (20 dígitos)</h2>
-                    <p class="text-warm-neutral-medium mb-8 text-center">El sistema construirá este número único para cada documento, obteniendo los datos de la sucursal y terminal correctas en el momento de la emisión.</p>
-                    <div class="flex flex-col md:flex-row font-mono text-center rounded-lg border border-gray-300 overflow-hidden">
-                        <div class="p-4 bg-blue-100 flex-grow border-b md:border-b-0 md:border-r">
-                            <div class="text-sm text-blue-800 uppercase font-sans font-semibold">Nº Sucursal</div>
-                            <div class="text-2xl font-bold text-blue-900 tracking-widest">001</div>
-                            <div class="text-xs text-blue-700 font-sans">(3 dígitos)</div>
-                        </div>
-                        <div class="p-4 bg-green-100 flex-grow border-b md:border-b-0 md:border-r">
-                            <div class="text-sm text-green-800 uppercase font-sans font-semibold">Nº Terminal</div>
-                            <div class="text-2xl font-bold text-green-900 tracking-widest">00001</div>
-                            <div class="text-xs text-green-700 font-sans">(5 dígitos)</div>
-                        </div>
-                        <div class="p-4 bg-purple-100 flex-grow border-b md:border-b-0 md:border-r">
-                            <div class="text-sm text-purple-800 uppercase font-sans font-semibold">Tipo Doc.</div>
-                            <div class="text-2xl font-bold text-purple-900 tracking-widest">01</div>
-                            <div class="text-xs text-purple-700 font-sans">(2 dígitos)</div>
-                        </div>
-                        <div class="p-4 bg-orange-100 flex-grow">
-                            <div class="text-sm text-orange-800 uppercase font-sans font-semibold">Secuencia</div>
-                            <div class="text-2xl font-bold text-orange-900 tracking-widest">0000001234</div>
-                            <div class="text-xs text-orange-700 font-sans">(10 dígitos)</div>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-        </main>
-    </div>
-
-    <!-- Modal for ERD -->
-    <div id="erd-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
-            <div class="p-4 border-b flex justify-between items-center">
-                <h3 id="modal-title" class="text-xl font-bold accent-color"></h3>
-                <button id="close-modal" class="text-gray-500 hover:text-gray-800">&times;</button>
             </div>
-            <div id="modal-body" class="p-6">
-                <!-- Modal content will be generated by JS -->
+        </div>
+
+        <!-- Timeline -->
+        <div class="relative max-w-4xl mx-auto">
+            <!-- The vertical line -->
+            <div class="absolute left-4 sm:left-1/2 top-0 h-full w-0.5 bg-stone-300 transform -translate-x-1/2"></div>
+
+            <!-- Timeline Item: Alpha Testing -->
+            <div class="timeline-item mb-16 flex">
+                <div class="hidden sm:flex w-1/2"></div>
+                <div class="w-4 sm:w-auto flex-shrink-0 flex justify-center">
+                    <div class="w-8 h-8 rounded-full accent-bg text-white flex items-center justify-center ring-8 ring-white">1</div>
+                </div>
+                <div class="w-full sm:w-1/2 sm:pl-8">
+                    <div class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                        <p class="text-sm font-semibold accent-color">FASE 1: PRUEBAS ALFA</p>
+                        <h3 class="text-xl font-bold text-stone-800 mt-1">Funcionalidad Principal y Estabilidad</h3>
+                        <time class="text-xs text-stone-500">1 de Mayo, 2025 - 22 de Junio, 2025</time>
+                        
+                        <div class="mt-4">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-stone-700">Progreso Actual de la Fase</span>
+                                <span id="progress-text" class="text-sm font-medium text-stone-700"></span>
+                            </div>
+                            <div class="w-full bg-stone-200 rounded-full h-2.5">
+                                <div id="progress-bar" class="accent-bg h-2.5 rounded-full" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 space-y-3 text-sm">
+                            <div class="flex items-center"><span class="mr-2 text-lg">✅</span> Historial de pagos (verificación manual)</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Control de acceso avanzado para usuarios</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">✅</span> Verificación diaria de pagos (backend)</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Funcionalidad de duplicar productos</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">✅</span> Editar descripción de productos en el formulario de factura</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Duplicar Factura desde opciones</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">✅</span> Contrato para testers sobre uso de credenciales de Hacienda</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Item: Beta Testing -->
+            <div class="timeline-item mb-16 flex">
+                 <div class="w-full sm:w-1/2 sm:pr-8 text-right">
+                     <div class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                        <p class="text-sm font-semibold accent-color">FASE 2: PRUEBAS BETA</p>
+                        <h3 class="text-xl font-bold text-stone-800 mt-1">Pulido de UI/UX y Nuevas Funciones</h3>
+                        <time class="text-xs text-stone-500">23 de Junio, 2025 - 27 de Julio, 2025</time>
+                        <div class="mt-4 space-y-3 text-sm text-left">
+                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Migración al esquema 4.4 de Hacienda</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Rediseño del Login y notificaciones (Push y Email)</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Límites de creación de empresas por ID y actividad</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Visión general de la empresa (Enterprise overview)</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Cuenta organizacional de Apple Developer</div>
+                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Sitio web, marketing y términos y condiciones</div>
+                             <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> KYC para contadores a través de formulario web</div>
+                        </div>
+                    </div>
+                 </div>
+                <div class="w-4 sm:w-auto flex-shrink-0 flex justify-center">
+                    <div class="w-8 h-8 rounded-full bg-stone-700 text-white flex items-center justify-center ring-8 ring-white">2</div>
+                </div>
+                <div class="hidden sm:flex w-1/2"></div>
+            </div>
+
+            <!-- Timeline Item: Production Release -->
+            <div class="timeline-item mb-16 flex">
+                <div class="hidden sm:flex w-1/2"></div>
+                <div class="w-4 sm:w-auto flex-shrink-0 flex justify-center">
+                    <div class="w-8 h-8 rounded-full bg-stone-700 text-white flex items-center justify-center ring-8 ring-white">3</div>
+                </div>
+                <div class="w-full sm:w-1/2 sm:pl-8">
+                    <div class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                        <p class="text-sm font-semibold accent-color">LANZAMIENTO</p>
+                        <h3 class="text-xl font-bold text-stone-800 mt-1">Producción V1</h3>
+                        <time class="text-xs text-stone-500">28 de Julio, 2025</time>
+                        <p class="mt-4 text-sm text-stone-600">Lanzamiento oficial de la primera versión de Facturanza, incorporando todas las funcionalidades probadas y listas para el público.</p>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Timeline Item: User Suggestions -->
+            <div class="timeline-item flex">
+                 <div class="w-full sm:w-1/2 sm:pr-8 text-right">
+                     <div class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                        <p class="text-sm font-semibold accent-color">EN CURSO</p>
+                        <h3 class="text-xl font-bold text-stone-800 mt-1">Sugerencias de Usuarios</h3>
+                        <time class="text-xs text-stone-500">Feedback Continuo</time>
+                        <div class="mt-4 space-y-3 text-sm text-left">
+                            <div class="flex items-start"><span class="mr-2 text-lg">💡</span> Historial/Log de acciones de usuarios</div>
+                            <div class="flex items-start"><span class="mr-2 text-lg">💡</span> Habilitar la selección de texto en campos de montos totales</div>
+                            <div class="flex items-start"><span class="mr-2 text-lg">💡</span> Personalización de temas de PDF (clásico, moderno)</div>
+                            <div class="flex items-start"><span class="mr-2 text-lg">💡</span> Diálogo de aviso sobre la necesidad de ID de Hacienda</div>
+                            <div class="flex items-start"><span class="mr-2 text-lg">💡</span> Visualizar el IVA devuelto en facturas de servicios médicos/agrícolas</div>
+                        </div>
+                    </div>
+                 </div>
+                <div class="w-4 sm:w-auto flex-shrink-0 flex justify-center">
+                    <div class="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center ring-8 ring-white">✔</div>
+                </div>
+                <div class="hidden sm:flex w-1/2"></div>
             </div>
         </div>
     </div>
 
-<script>
-    const appData = {
-        permissions: {
-            "Create Bill": { Owner: "Allowed", Admin: "Allowed", Manager: "Allowed", Accountant: "Conditional", Employee: "Allowed" },
-            "Configure System Settings": { Owner: "Allowed", Admin: "Conditional", Manager: "Denied", Accountant: "Denied", Employee: "Denied" },
-            "Manage Sucursales/Terminals": { Owner: "Allowed", Admin: "Allowed", Manager: "Conditional", Accountant: "Denied", Employee: "Denied" },
-            "Assign User S/T Access": { Owner: "Allowed", Admin: "Allowed", Manager: "Conditional", Accountant: "Denied", Employee: "Denied" },
-            "View Financial Reports": { Owner: "Allowed", Admin: "Allowed", Manager: "Allowed", Accountant: "Allowed", Employee: "Conditional" },
-        },
-        permissionContext: {
-            "Create Bill": {
-                FULL: "Permitido para cualquier Sucursal/Terminal.",
-                SUCURSAL: "Permitido para cualquier Terminal en la(s) Sucursal(es) asignada(s).",
-                TERMINAL: "Permitido solo para la(s) Terminal(es) asignada(s)."
-            },
-            "Configure System Settings": {
-                FULL: "Permitido.",
-                SUCURSAL: "Denegado. Requiere acceso FULL.",
-                TERMINAL: "Denegado. Requiere acceso FULL."
-            },
-            "Manage Sucursales/Terminals": {
-                FULL: "Permitido para todas las entidades.",
-                SUCURSAL: "Puede ser permitido para gestionar Terminales dentro de su propia Sucursal.",
-                TERMINAL: "Denegado."
-            },
-            "Assign User S/T Access": {
-                FULL: "Permitido para todos los usuarios.",
-                SUCURSAL: "Puede ser permitido para asignar usuarios dentro de su propia Sucursal.",
-                TERMINAL: "Denegado."
-            },
-            "View Financial Reports": {
-                FULL: "Permitido para todo el negocio.",
-                SUCURSAL: "Permitido, pero filtrado para su(s) Sucursal(es) asignada(s).",
-                TERMINAL: "Permitido, pero limitado a las transacciones de su(s) Terminal(es) asignada(s)."
-            },
-        },
-        erd: {
-            Users: { description: "Almacena los perfiles de usuario. Se modificará para incluir el alcance de acceso (FULL/ASSIGNED) y el terminal de facturación predeterminado.", attributes: ["id", "name", "role", "access_level_scope", "default_terminal_id_for_billing", "allow_terminal_switching_for_billing"] },
-            Bills: { description: "Almacena los registros de facturas. Se modificará para incluir una referencia directa a la Sucursal y Terminal que emitieron la factura.", attributes: ["id", "client_id", "total", "sucursal_id", "terminal_id", "consecutivo_number_at_emission"] },
-            Sucursales: { description: "Nueva entidad para almacenar las sucursales del negocio, incluyendo su identificador oficial para Hacienda.", attributes: ["id", "tenant_id", "name", "hacienda_sucursal_number", "address", "is_active"] },
-            Terminales: { description: "Nueva entidad para las terminales (POS) dentro de cada sucursal. Gestiona su propio contador de consecutivo para facturación.", attributes: ["id", "sucursal_id", "name", "hacienda_terminal_number", "current_consecutivo_factura", "is_active"] },
-            UserSucursalAssignments: { description: "Tabla de unión (junction table) que crea una relación muchos-a-muchos entre Usuarios y Sucursales.", attributes: ["user_id", "sucursal_id"] },
-            UserTerminalAssignments: { description: "Tabla de unión (junction table) que crea una relación muchos-a-muchos entre Usuarios y Terminales.", attributes: ["user_id", "terminal_id", "is_default_for_billing"] },
-        },
-        apiEndpoints: [
-            { method: 'POST', path: '/api/v1/sucursales', description: 'Crear una nueva Sucursal.' },
-            { method: 'GET', path: '/api/v1/sucursales', description: 'Listar todas las Sucursales del negocio.' },
-            { method: 'PUT', path: '/api/v1/sucursales/{id}', description: 'Actualizar una Sucursal existente.' },
-            { method: 'POST', path: '/api/v1/terminales', description: 'Crear una nueva Terminal dentro de una Sucursal.' },
-            { method: 'GET', path: '/api/v1/sucursales/{id}/terminales', description: 'Listar las Terminales de una Sucursal.' },
-            { method: 'POST', path: '/api/v1/users/{id}/sucursalAssignments', description: 'Asignar un usuario a una o más Sucursales.' },
-            { method: 'POST', path: '/api/v1/users/{id}/terminalAssignments', description: 'Asignar un usuario a una o más Terminales.' },
-            { method: 'PUT', path: '/api/v1/users/{id}/accessSettings', description: 'Actualizar la configuración de acceso de un usuario (FULL/ASSIGNED, etc.).' },
-            { method: 'POST', path: '/api/v1/bills', description: 'Crear una nueva factura (lógica de S/T aplicada en el backend).' },
-            { method: 'GET', path: '/api/v1/users/me/accessibleTerminals', description: 'Obtener las terminales a las que el usuario actual tiene acceso.' },
-        ],
-        workflow: [
-            {
-                title: 'Paso 1: Inicia la Creación de Factura',
-                description: 'Un usuario autenticado inicia el proceso para crear una nueva factura electrónica.',
-                image: '👤'
-            },
-            {
-                title: 'Paso 2: Comprobar Nivel de Acceso',
-                description: "El sistema comprueba el `access_level_scope` del usuario. ¿Es 'FULL' o 'ASSIGNED_ONLY'?",
-                image: '🔑'
-            },
-            {
-                title: 'Paso 3: Determinar Terminal de Emisión',
-                description: "El sistema busca la terminal por defecto (`default_terminal_id_for_billing`). Si no está definida para el usuario, usa la terminal por defecto del negocio (Tenant).",
-                image: '🖥️'
-            },
-            {
-                title: 'Paso 4: Verificar Permiso de Cambio',
-                description: "El sistema comprueba si el flag `allow_terminal_switching_for_billing` está activo y si el usuario tiene acceso a múltiples terminales.",
-                image: '🔄'
-            },
-            {
-                title: 'Paso 5: Presentar Opciones (si aplica)',
-                description: "Si el cambio está permitido, la UI muestra selectores para que el usuario elija entre sus terminales autorizadas. De lo contrario, la selección está fija y los selectores ocultos.",
-                image: '🎛️'
-            },
-            {
-                title: 'Paso 6: Generar Consecutivo',
-                description: "Una vez confirmada la Terminal, el sistema obtiene y aumenta el contador de `consecutivo` específico para esa Terminal de forma atómica.",
-                image: '🔢'
-            },
-            {
-                title: 'Paso 7: Crear y Enviar Factura',
-                description: "La factura se crea con los ID de Sucursal/Terminal correctos y el número de consecutivo completo, lista para ser enviada a Hacienda.",
-                image: '✅'
-            },
-        ]
-    };
-    
-    let currentWorkflowStep = 0;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Progress Bar Calculation ---
+            const startDate = new Date('2025-05-01T00:00:00-06:00'); // CST
+            const endDate = new Date('2025-06-22T23:59:59-06:00'); // CST
+            const today = new Date();
 
-    function navigate(event, sectionId) {
-        event.preventDefault();
-        
-        document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-        document.getElementById(sectionId).classList.add('active');
+            // Clamp today's date within the phase range for calculation
+            const clampedToday = new Date(Math.max(startDate, Math.min(today, endDate)));
 
-        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-        document.querySelector(`.nav-link[href="#${sectionId}"]`).classList.add('active');
-        
-        const mobileNav = document.getElementById('mobile-nav');
-        if (mobileNav.value !== sectionId) {
-            mobileNav.value = sectionId;
-        }
-
-        window.history.pushState(null, '', `#${sectionId}`);
-        
-        if (sectionId === 'modelo-acceso' && !window.permissionChartInstance) {
-            renderPermissionChart();
-        }
-    }
-
-    function updatePermissions() {
-        const role = document.getElementById('roleSelector').value;
-        const level = document.getElementById('accessLevelSelector').value;
-        const tableBody = document.getElementById('permission-table-body');
-        
-        document.getElementById('current-role').textContent = `${role} con Acceso ${level}`;
-        tableBody.innerHTML = '';
-
-        Object.keys(appData.permissions).forEach(action => {
-            const permission = appData.permissions[action][role];
-            const context = appData.permissionContext[action][level];
-
-            let permissionClass = 'bg-gray-100 text-gray-800';
-            if (permission === "Allowed") {
-                permissionClass = 'bg-green-100 text-green-800';
-            } else if (permission === "Denied") {
-                permissionClass = 'bg-red-100 text-red-800';
+            const totalDuration = endDate.getTime() - startDate.getTime();
+            const elapsedDuration = clampedToday.getTime() - startDate.getTime();
+            
+            let progressPercentage = 0;
+            if (totalDuration > 0) {
+                 progressPercentage = (elapsedDuration / totalDuration) * 100;
             }
 
-            const row = `
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${action}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${permissionClass}">${permission}</span></td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${context}</td>
-                </tr>
-            `;
-            tableBody.innerHTML += row;
-        });
-    }
-    
-    function renderPermissionChart() {
-        const ctx = document.getElementById('permissionChart').getContext('2d');
-        const roles = ['Employee', 'Manager', 'Accountant', 'Admin', 'Owner'];
-        const actions = Object.keys(appData.permissions);
-        
-        const datasets = actions.map((action, index) => {
-            return {
-                label: action,
-                data: roles.map(role => appData.permissions[action][role] === 'Allowed' ? 1 : (appData.permissions[action][role] === 'Conditional' ? 0.5 : 0)),
-                backgroundColor: `rgba(${50 + index * 40}, ${150 - index * 20}, ${200}, 0.6)`,
-                borderColor: `rgba(${50 + index * 40}, ${150 - index * 20}, ${200}, 1)`,
-                borderWidth: 1
-            };
-        });
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
 
-        window.permissionChartInstance = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: roles,
-                datasets: datasets
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        stacked: true,
-                        ticks: {
-                            display: false
-                        },
-                         grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        stacked: true,
-                         grid: {
-                            display: false
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                const value = context.raw;
-                                if (value === 1) {
-                                    label += 'Permitido';
-                                } else if (value === 0.5) {
-                                     label += 'Condicional';
-                                } else {
-                                     label += 'Denegado';
-                                }
-                                return label;
-                            }
-                        }
-                    }
-                }
+            if (progressBar && progressText) {
+                progressBar.style.width = `${progressPercentage.toFixed(2)}%`;
+                progressText.textContent = `${progressPercentage.toFixed(0)}%`;
             }
         });
-    }
-
-    function setupErdModal() {
-        const modal = document.getElementById('erd-modal');
-        const closeModalBtn = document.getElementById('close-modal');
-        const erdTables = document.querySelectorAll('.erd-table');
-        
-        erdTables.forEach(table => {
-            table.style.cursor = 'pointer';
-            table.classList.add('bg-blue-50', 'border', 'border-blue-200', 'p-4', 'rounded-md', 'text-center', 'font-semibold', 'text-blue-800', 'hover:bg-blue-100', 'transition-colors');
-
-            table.addEventListener('click', () => {
-                const tableName = table.dataset.table;
-                const tableData = appData.erd[tableName];
-                document.getElementById('modal-title').textContent = tableName;
-                const body = document.getElementById('modal-body');
-                body.innerHTML = `<p class="text-warm-neutral-medium mb-4">${tableData.description}</p>
-                                  <h4 class="font-semibold mb-2">Atributos Clave:</h4>
-                                  <ul class="list-disc list-inside space-y-1 text-sm text-warm-neutral-medium">
-                                    ${tableData.attributes.map(attr => `<li><span class="font-mono bg-gray-200 px-1 py-0.5 rounded">${attr}</span></li>`).join('')}
-                                  </ul>`;
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            });
-        });
-
-        const closeAction = () => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        };
-
-        closeModalBtn.addEventListener('click', closeAction);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeAction();
-            }
-        });
-    }
-
-    function populateApiList() {
-        const apiList = document.getElementById('api-list');
-        apiList.innerHTML = '';
-        appData.apiEndpoints.forEach(endpoint => {
-            const methodColor = {
-                'GET': 'bg-blue-100 text-blue-800',
-                'POST': 'bg-green-100 text-green-800',
-                'PUT': 'bg-yellow-100 text-yellow-800',
-                'DELETE': 'bg-red-100 text-red-800'
-            }[endpoint.method];
-
-            const item = document.createElement('div');
-            item.className = 'bg-white rounded-md shadow-sm border border-gray-200';
-            item.innerHTML = `
-                <button class="w-full text-left p-4 flex items-center justify-between focus:outline-none">
-                    <div class="flex items-center">
-                        <span class="font-mono text-sm font-semibold px-2 py-0.5 rounded-md ${methodColor}">${endpoint.method}</span>
-                        <span class="ml-4 font-mono text-sm text-warm-neutral-medium">${endpoint.path}</span>
-                    </div>
-                    <span class="text-gray-400 transform transition-transform duration-200 chevron">▼</span>
-                </button>
-                <div class="px-4 pb-4 text-sm text-warm-neutral-medium hidden">
-                    ${endpoint.description}
-                </div>
-            `;
-            apiList.appendChild(item);
-
-            item.querySelector('button').addEventListener('click', (e) => {
-                const content = item.querySelector('div');
-                const chevron = item.querySelector('.chevron');
-                content.classList.toggle('hidden');
-                chevron.classList.toggle('rotate-180');
-            });
-        });
-    }
-    
-    function updateWorkflowStep() {
-        const step = appData.workflow[currentWorkflowStep];
-        const container = document.getElementById('workflow-steps');
-        
-        container.innerHTML = `
-            <div class="text-center">
-                <div class="text-6xl mb-4">${step.image}</div>
-                <h3 class="text-2xl font-bold accent-color mb-2">${step.title}</h3>
-                <p class="text-warm-neutral-medium">${step.description}</p>
-            </div>
-        `;
-        
-        document.getElementById('workflow-prev').disabled = currentWorkflowStep === 0;
-        document.getElementById('workflow-next').disabled = currentWorkflowStep === appData.workflow.length - 1;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const roleSelector = document.getElementById('roleSelector');
-        const accessLevelSelector = document.getElementById('accessLevelSelector');
-        
-        roleSelector.addEventListener('change', updatePermissions);
-        accessLevelSelector.addEventListener('change', updatePermissions);
-        updatePermissions();
-        
-        setupErdModal();
-        populateApiList();
-        
-        document.getElementById('workflow-prev').addEventListener('click', () => {
-            if (currentWorkflowStep > 0) {
-                currentWorkflowStep--;
-                updateWorkflowStep();
-            }
-        });
-        
-        document.getElementById('workflow-next').addEventListener('click', () => {
-             if (currentWorkflowStep < appData.workflow.length - 1) {
-                currentWorkflowStep++;
-                updateWorkflowStep();
-            }
-        });
-        
-        updateWorkflowStep();
-        
-        const initialSection = window.location.hash.substring(1) || 'vision';
-        navigate({preventDefault: () => {}}, initialSection);
-    });
-</script>
-
+    </script>
 </body>
 </html>
