@@ -28,6 +28,10 @@
             --brand-secondary: #A4D2DF;
             --logo-filter: none;
         }
+        
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             background-color: var(--bg-primary);
@@ -46,15 +50,6 @@
              filter: var(--logo-filter);
              transition: filter 0.3s ease;
         }
-        .feature-item.active {
-            background-color: var(--brand-primary);
-            color: white;
-            transform: translateX(5px);
-        }
-        .feature-item.active .text-main,
-        .feature-item.active .text-subtle {
-            color: white;
-        }
         
         .title-color {
             color: var(--brand-secondary);
@@ -70,30 +65,43 @@
         .fade-in {
             animation: fadeIn 0.5s ease-out forwards;
         }
+
+        /* Sticky Nav Styles */
+        .top-nav {
+            background-color: var(--bg-secondary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .dark .top-nav {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+        .nav-link {
+            color: var(--text-secondary);
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active {
+            color: var(--brand-primary);
+            border-bottom-color: var(--brand-primary);
+            font-weight: 600;
+        }
         
-        /* Drawer styles */
-        .drawer {
-            transition: transform 0.3s ease-in-out;
+        /* Hide scrollbar for the nav */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
     </style>
 </head>
 <body class="antialiased">
-
-    <!-- Drawer Overlay -->
-    <div id="drawer-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden"></div>
 
     <!-- Main Container -->
     <div class="container mx-auto p-4 md:p-8">
 
         <!-- Header -->
         <header class="flex justify-between items-center mb-8">
-            <div class="flex items-center gap-4">
-                <!-- Hamburger Menu Button -->
-                <button id="menu-toggle-btn" class="lg:hidden p-2 rounded-md text-subtle hover:bg-gray-200 dark:hover:bg-gray-700">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
-                <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-10 brand-logo">
-            </div>
+            <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-10 brand-logo">
             <!-- Dark Mode Toggle -->
             <div class="flex items-center space-x-2">
                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-subtle" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
@@ -103,136 +111,70 @@
                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-subtle" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
             </div>
         </header>
-
-        <!-- Main content area with responsive layout -->
-        <main class="lg:flex lg:gap-8">
-            <!-- Sidebar / Drawer -->
-            <aside id="feature-drawer" class="drawer fixed top-0 left-0 h-full w-80 max-w-[85%] bg-[var(--bg-secondary)] z-40 -translate-x-full lg:relative lg:w-1/3 lg:translate-x-0 lg:h-auto">
-                <div class="card p-6 rounded-none lg:rounded-2xl shadow-lg h-full">
-                    <h1 class="text-2xl font-bold text-main mb-1">Novedades v1.4.0</h1>
-                    <p class="text-subtle mb-6">Explora las nuevas funciones que hemos preparado para ti.</p>
-                    <nav id="features-nav" class="space-y-2"></nav>
-                </div>
-            </aside>
-
-            <!-- Main Content Display -->
-            <section id="feature-display" class="w-full lg:w-2/3 card p-8 rounded-2xl shadow-lg min-h-[600px]">
-                <!-- Content will be injected here by JavaScript -->
-            </section>
-        </main>
-        
-        <!-- Footer -->
-        <footer class="text-center mt-12 text-subtle">
-            <p>&copy; 2025 Facturanza. Gracias por tu valiosa contribución.</p>
-        </footer>
-
     </div>
+
+    <!-- Sticky Top Navigation -->
+    <nav id="top-nav-bar" class="top-nav sticky top-0 z-20">
+        <div id="nav-container" class="container mx-auto px-4 overflow-x-auto no-scrollbar">
+            <div id="nav-links" class="flex space-x-6 whitespace-nowrap py-3">
+                <!-- Nav links will be injected here by JavaScript -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content area -->
+    <main id="feature-content" class="container mx-auto p-4 md:p-8">
+        <!-- All feature sections will be rendered here -->
+    </main>
+    
+    <!-- Footer -->
+    <footer class="text-center my-12 text-subtle">
+        <p>&copy; 2025 Facturanza. Gracias por tu valiosa contribución.</p>
+    </footer>
 
     <script>
         // --- UTILITY FUNCTIONS ---
-        /**
-         * Converts a string into a URL-friendly slug.
-         * @param {string} text - The text to slugify.
-         * @returns {string} The slugified text.
-         */
         function slugify(text) {
             return text.toString().toLowerCase()
-                .replace(/\s+/g, '-')           // Replace spaces with -
-                .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-                .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-                .replace(/^-+/, '')             // Trim - from start of text
-                .replace(/-+$/, '');            // Trim - from end of text
+                .replace(/\s+/g, '-')
+                .replace(/[^\w\-]+/g, '')
+                .replace(/\-\-+/g, '-')
+                .replace(/^-+/, '')
+                .replace(/-+$/, '');
         }
 
         // --- DATA ---
-        // Add a unique ID to each feature for deep linking.
         const featuresData = [
             {
                 category: "General",
                 items: [
-                    {
-                        title: "Mejoras estéticas",
-                        description: "Se reconstruyó el diseño de diversos componentes y páginas para una experiencia de usuario más moderna e intuitiva.",
-                        images: [
-                            "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fgraficos.png?alt=media&token=675ea69e-5258-452a-a48f-d7cd588126ad",
-                            "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fclientes.png?alt=media&token=9e81abbe-7e55-41f5-9078-167130b87855",
-                            "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Freenviar_correo.png?alt=media&token=c01619fc-62a9-4a43-a099-012e17cfcbda",
-                            "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fproductos.png?alt=media&token=478195bc-ecf1-44b5-9acb-4f2c4a2d0874"
-                        ],
-                    },
-                    {
-                        title: "Visualización de estadísticas",
-                        description: "Se han incluido gráficos para la representación de ingresos y egresos de la empresa, permitiendo un análisis financiero más claro y directo.",
-                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fgraficos.png?alt=media&token=675ea69e-5258-452a-a48f-d7cd588126ad",
-                    },
-                    {
-                        title: "Indicador de facturación activa",
-                        description: "Se implementó una etiqueta para indicar cuándo los datos de facturación están completos y la facturación está activa, brindando mayor claridad sobre el estado de la cuenta.",
-                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Ffacturacion_habilitada.png?alt=media&token=e0820db5-ff5f-4f6c-b2b2-1079b375bd61",
-                    },
+                    { title: "Mejoras estéticas", description: "Se reconstruyó el diseño de diversos componentes y páginas para una experiencia de usuario más moderna e intuitiva.", images: [ "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fgraficos.png?alt=media&token=675ea69e-5258-452a-a48f-d7cd588126ad", "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fclientes.png?alt=media&token=9e81abbe-7e55-41f5-9078-167130b87855", "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Freenviar_correo.png?alt=media&token=c01619fc-62a9-4a43-a099-012e17cfcbda", "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fproductos.png?alt=media&token=478195bc-ecf1-44b5-9acb-4f2c4a2d0874" ] },
+                    { title: "Visualización de estadísticas", description: "Se han incluido gráficos para la representación de ingresos y egresos de la empresa, permitiendo un análisis financiero más claro y directo.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fgraficos.png?alt=media&token=675ea69e-5258-452a-a48f-d7cd588126ad" },
+                    { title: "Indicador de facturación activa", description: "Se implementó una etiqueta para indicar cuándo los datos de facturación están completos y la facturación está activa, brindando mayor claridad sobre el estado de la cuenta.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Ffacturacion_habilitada.png?alt=media&token=e0820db5-ff5f-4f6c-b2b2-1079b375bd61" },
                 ],
             },
             {
                 category: "Inteligencia Artificial",
                 items: [
-                    {
-                        title: "Creación de productos automatizados",
-                        description: "Se ha integrado inteligencia artificial para facilitar la creación de productos, completando automáticamente la información a partir de una simple descripción.",
-                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fgenerar_producto.png?alt=media&token=021caa35-7c03-4188-9e83-31e5e8df9046",
-                    },
-                    {
-                        title: "Explicación de rechazo de facturas",
-                        description: "Se ha implementado una función de IA para facilitar al usuario la comprensión del motivo de rechazo de una factura, traduciendo los códigos de error en explicaciones claras.",
-                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fexplicar_error.png?alt=media&token=bcab6efe-e01e-4a42-87d8-e15a3ee18b7d",
-                    },
+                    { title: "Creación de productos automatizados", description: "Se ha integrado inteligencia artificial para facilitar la creación de productos, completando automáticamente la información a partir de una simple descripción.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fgenerar_producto.png?alt=media&token=021caa35-7c03-4188-9e83-31e5e8df9046" },
+                    { title: "Explicación de rechazo de facturas", description: "Se ha implementado una función de IA para facilitar al usuario la comprensión del motivo de rechazo de una factura, traduciendo los códigos de error en explicaciones claras.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fexplicar_error.png?alt=media&token=bcab6efe-e01e-4a42-87d8-e15a3ee18b7d" },
                 ],
             },
             {
                 category: "Facturación",
                 items: [
-                    {
-                        title: "Códigos de exoneración",
-                        description: "Se ha incluido la opción para aplicar un código de exoneración por producto al momento de crear la factura, simplificando el manejo de impuestos especiales.",
-                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fexoneracion.png?alt=media&token=464354ff-e554-440a-a7a4-dd2a19fcbf0b",
-                    },
-                    {
-                        title: "Reenvío de facturas por correo",
-                        description: "Se implementó la opción para reenviar una factura a múltiples direcciones de correo electrónico de forma sencilla.",
-                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Freenviar_correo.png?alt=media&token=c01619fc-62a9-4a43-a099-012e17cfcbda",
-                    },
-                    {
-                        title: "Notas y comentarios en facturas",
-                        description: "Se incluyó un espacio dedicado para añadir notas y comentarios a una factura, mejorando la comunicación y el registro de información adicional.",
-                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fnotas.png?alt=media&token=4c67cc45-a0e8-49cd-9600-6798826d6489",
-                    },
-                     {
-                        title: "Visualización por lapsos de tiempo",
-                        description: "Se agregó un selector de fecha para visualizar la lista de facturas, permitiendo filtrar por rangos específicos. El periodo predeterminado es el mes actual.",
-                        images: [
-                            "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fselector_fecha.png?alt=media&token=f98a7394-77a8-4ec2-b49c-664a4d9fbaee",
-                            "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fcalendar.png?alt=media&token=51632303-0d73-44ee-a516-51c99980b2c9"
-                        ]
-                    },
-                    {
-                        title: "Inclusión de facturas de egresos",
-                        description: "Se añadió la función para subir los archivos .xml de las facturas de compra (egresos), con el objetivo de poder visualizar datos comparativos y tener un control financiero completo.",
-                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fsubir_compra.png?alt=media&token=2ec24d3d-515e-4f35-97c5-ab95847456ca",
-                    },
+                    { title: "Códigos de exoneración", description: "Se ha incluido la opción para aplicar un código de exoneración por producto al momento de crear la factura, simplificando el manejo de impuestos especiales.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fexoneracion.png?alt=media&token=464354ff-e554-440a-a7a4-dd2a19fcbf0b" },
+                    { title: "Reenvío de facturas por correo", description: "Se implementó la opción para reenviar una factura a múltiples direcciones de correo electrónico de forma sencilla.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Freenviar_correo.png?alt=media&token=c01619fc-62a9-4a43-a099-012e17cfcbda" },
+                    { title: "Notas y comentarios en facturas", description: "Se incluyó un espacio dedicado para añadir notas y comentarios a una factura, mejorando la comunicación y el registro de información adicional.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fnotas.png?alt=media&token=4c67cc45-a0e8-49cd-9600-6798826d6489" },
+                    { title: "Visualización por lapsos de tiempo", description: "Se agregó un selector de fecha para visualizar la lista de facturas, permitiendo filtrar por rangos específicos. El periodo predeterminado es el mes actual.", images: ["https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fselector_fecha.png?alt=media&token=f98a7394-77a8-4ec2-b49c-664a4d9fbaee", "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fcalendar.png?alt=media&token=51632303-0d73-44ee-a516-51c99980b2c9"] },
+                    { title: "Inclusión de facturas de egresos", description: "Se añadió la función para subir los archivos .xml de las facturas de compra (egresos), con el objetivo de poder visualizar datos comparativos y tener un control financiero completo.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fsubir_compra.png?alt=media&token=2ec24d3d-515e-4f35-97c5-ab95847456ca" },
                 ],
             },
             {
                 category: "Nuevas Implementaciones",
                 items: [
-                    {
-                        title: "Gestión de sucursales y terminales",
-                        description: "Esta nueva funcionalidad permite a una empresa administrar y facturar desde diferentes sucursales, así como desde múltiples terminales dentro de una misma sucursal.",
-                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fsucursales.png?alt=media&token=0df9bb7e-88d3-4f63-9862-4ba97b6663a0",
-                    },
-                    {
-                        title: "Pagos manuales de membresías",
-                        description: "Se ha implementado la funcionalidad para facilitar los pagos manuales (transferencia o Sinpe Móvil) de membresías y compra de paquetes de facturas.",
-                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fpago_manual.png?alt=media&token=bcc89247-a2e5-4a08-8013-d1f59ff8ea11",
-                    },
+                    { title: "Gestión de sucursales y terminales", description: "Esta nueva funcionalidad permite a una empresa administrar y facturar desde diferentes sucursales, así como desde múltiples terminales dentro de una misma sucursal.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fsucursales.png?alt=media&token=0df9bb7e-88d3-4f63-9862-4ba97b6663a0" },
+                    { title: "Pagos manuales de membresías", description: "Se ha implementado la funcionalidad para facilitar los pagos manuales (transferencia o Sinpe Móvil) de membresías y compra de paquetes de facturas.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fpago_manual.png?alt=media&token=bcc89247-a2e5-4a08-8013-d1f59ff8ea11" },
                 ],
             },
         ].map(category => ({
@@ -241,75 +183,69 @@
         }));
 
         // --- DOM Elements ---
-        const featuresNav = document.getElementById('features-nav');
-        const featureDisplay = document.getElementById('feature-display');
+        const navLinksContainer = document.getElementById('nav-links');
+        const featureContent = document.getElementById('feature-content');
         const themeToggle = document.getElementById('theme-toggle');
         const themeToggleIndicator = document.getElementById('theme-toggle-indicator');
         const body = document.body;
-        const menuToggleBtn = document.getElementById('menu-toggle-btn');
-        const featureDrawer = document.getElementById('feature-drawer');
-        const drawerOverlay = document.getElementById('drawer-overlay');
 
         // --- Functions ---
-        function renderNav() {
+        
+        /**
+         * Renders the sticky top navigation and the main content sections.
+         */
+        function renderPage() {
             let navHTML = '';
-            featuresData.forEach((category, categoryIndex) => {
-                navHTML += `<h3 class="text-sm font-bold text-subtle uppercase tracking-wider mt-4 mb-2">${category.category}</h3>`;
-                category.items.forEach((item, itemIndex) => {
-                    navHTML += `
-                        <a href="#${item.id}" class="feature-item flex flex-col p-3 rounded-lg transition-all duration-200" data-category="${categoryIndex}" data-item="${itemIndex}">
-                            <span class="text-main">${item.title}</span>
-                        </a>
+            let contentHTML = '';
+
+            // Welcome section
+            const welcomeId = 'bienvenido';
+            navHTML += `<a href="#${welcomeId}" class="nav-link transition-all duration-200 py-1" data-target="${welcomeId}">Bienvenido</a>`;
+            contentHTML += `
+                <section id="${welcomeId}" class="scroll-mt-24 feature-section text-center min-h-[60vh] flex flex-col justify-center items-center py-12">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-16 brand-logo mb-6">
+                    <h2 class="title-color text-4xl font-bold mb-2">¡Bienvenido a la nueva versión de Facturanza!</h2>
+                    <p class="text-2xl font-semibold text-[var(--brand-primary)] mb-4">versión 1.4.0</p>
+                    <p class="text-xl text-subtle max-w-2xl">Hemos trabajado en nuevas funciones y mejoras para potenciar tu negocio. Navega para ver los detalles.</p>
+                </section>
+            `;
+
+            // Feature sections
+            featuresData.forEach(category => {
+                const categoryId = slugify(category.category);
+                navHTML += `<a href="#${categoryId}" class="nav-link transition-all duration-200 py-1" data-target="${categoryId}">${category.category}</a>`;
+                
+                // Category Header
+                contentHTML += `
+                    <section id="${categoryId}" class="category-section scroll-mt-24 text-center pt-16 pb-8">
+                        <h2 class="text-5xl font-bold title-color">${category.category}</h2>
+                    </section>
+                `;
+
+                category.items.forEach(item => {
+                    let imagesHTML = '';
+                    if (item.images && item.images.length > 0) {
+                        imagesHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">`;
+                        item.images.forEach(imgUrl => {
+                            imagesHTML += `<img src="${imgUrl}" alt="${item.title}" class="w-full rounded-xl shadow-lg border-4 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">`;
+                        });
+                        imagesHTML += `</div>`;
+                    } else if (item.image) {
+                        imagesHTML = `<img src="${item.image}" alt="${item.title}" class="w-full rounded-xl shadow-2xl border-4 border-[var(--bg-secondary)] mt-6" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Imagen+no+disponible';">`;
+                    }
+
+                    contentHTML += `
+                        <section id="${item.id}" class="feature-section card rounded-2xl p-8 mb-8 scroll-mt-24">
+                            <h3 class="title-color text-3xl md:text-4xl font-bold mb-4">${item.title}</h3>
+                            <p class="text-lg text-subtle">${item.description}</p>
+                            ${imagesHTML}
+                        </section>
                     `;
                 });
             });
-            featuresNav.innerHTML = navHTML;
-        }
 
-        function displayFeature(categoryIndex, itemIndex, updateHistory = true) {
-            const feature = featuresData[categoryIndex].items[itemIndex];
-            let imagesHTML = '';
-
-            if (feature.images && feature.images.length > 0) {
-                imagesHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
-                feature.images.forEach(imgUrl => {
-                    imagesHTML += `<img src="${imgUrl}" alt="${feature.title}" class="w-full rounded-xl shadow-lg border-4 border-[var(--bg-primary)]" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">`;
-                });
-                imagesHTML += `</div>`;
-            } 
-            else if (feature.image) {
-                imagesHTML = `<img src="${feature.image}" alt="${feature.title}" class="w-full rounded-xl shadow-2xl border-4 border-[var(--bg-primary)]" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Imagen+no+disponible';">`;
-            }
-
-            const contentHTML = `
-                <div class="fade-in">
-                    <h2 class="title-color text-3xl md:text-4xl font-bold mb-4">${feature.title}</h2>
-                    <p class="text-lg text-subtle mb-8">${feature.description}</p>
-                    ${imagesHTML}
-                </div>
-            `;
-            featureDisplay.innerHTML = contentHTML;
-
-            document.querySelectorAll('.feature-item').forEach(el => el.classList.remove('active'));
-            document.querySelector(`.feature-item[data-category='${categoryIndex}'][data-item='${itemIndex}']`).classList.add('active');
-            
-            // Update URL hash without reloading the page
-            if (updateHistory) {
-                history.pushState({ featureId: feature.id }, '', `#${feature.id}`);
-            }
-        }
-
-        function displayWelcome() {
-             const contentHTML = `
-                <div class="fade-in text-center flex flex-col justify-center items-center h-full">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-16 brand-logo mb-6">
-                    <h2 class="title-color text-4xl font-bold mb-4">¡Bienvenido a la nueva versión de Facturanza!</h2>
-                    <p class="text-xl text-subtle max-w-2xl">Hemos trabajado en nuevas funciones y mejoras para potenciar tu negocio. Selecciona una característica de la lista para ver los detalles.</p>
-                </div>
-            `;
-            featureDisplay.innerHTML = contentHTML;
-            document.querySelectorAll('.feature-item').forEach(el => el.classList.remove('active'));
-            history.pushState({ featureId: null }, '', window.location.pathname + window.location.search);
+            navLinksContainer.innerHTML = navHTML;
+            featureContent.innerHTML = contentHTML;
         }
 
         function toggleTheme() {
@@ -332,56 +268,78 @@
             updateToggleIndicator(useDarkMode);
         }
 
-        function toggleDrawer(show) {
-            featureDrawer.classList.toggle('-translate-x-full', !show);
-            drawerOverlay.classList.toggle('hidden', !show);
-        }
-        
         /**
-         * Reads the URL hash and displays the corresponding feature.
+         * Sets up the IntersectionObserver for scrollspy functionality.
          */
-        function handleUrlChange() {
-            const featureId = window.location.hash.substring(1);
-            if (!featureId) {
-                displayWelcome();
-                return;
-            }
-
-            for (let i = 0; i < featuresData.length; i++) {
-                for (let j = 0; j < featuresData[i].items.length; j++) {
-                    if (featuresData[i].items[j].id === featureId) {
-                        displayFeature(i, j, false); // Don't update history again
-                        return;
+        function setupScrollspy() {
+            const sections = document.querySelectorAll('.feature-section, .category-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            const observer = new IntersectionObserver(entries => {
+                let bestEntry = null;
+                // Find the entry that is most visible in the viewport
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                       if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
+                           bestEntry = entry;
+                       }
                     }
+                });
+
+                if (bestEntry) {
+                    const id = bestEntry.target.getAttribute('id');
+                    let activeNavLink;
+
+                    if (bestEntry.target.classList.contains('category-section')) {
+                        activeNavLink = document.querySelector(`.nav-link[data-target='${id}']`);
+                    } else {
+                        // It's a feature card, so find its parent category nav link
+                        const parentCategory = featuresData.find(cat => cat.items.some(item => item.id === id));
+                        if(parentCategory) {
+                           const categoryId = slugify(parentCategory.category);
+                           activeNavLink = document.querySelector(`.nav-link[data-target='${categoryId}']`);
+                        }
+                    }
+                    
+                    // Fallback to the welcome link if no specific category is active
+                    if (!activeNavLink && bestEntry.target.id === 'bienvenido') {
+                        activeNavLink = document.querySelector(`.nav-link[data-target='bienvenido']`);
+                    }
+
+                    if (activeNavLink) {
+                         navLinks.forEach(link => link.classList.remove('active'));
+                         activeNavLink.classList.add('active');
+                    }
+                     // Update URL hash without polluting history
+                     history.replaceState(null, null, `#${id}`);
                 }
-            }
-            // If no feature found for the hash, show welcome
-            displayWelcome();
+            }, { 
+                threshold: 0.1,
+                rootMargin: "-88px 0px -50% 0px" // 88px top margin to account for header and nav
+            }); 
+
+            sections.forEach(section => observer.observe(section));
         }
+
 
         // --- Event Listeners ---
-        featuresNav.addEventListener('click', (e) => {
-            const target = e.target.closest('.feature-item');
-            if (target) {
-                e.preventDefault();
-                const { category, item } = target.dataset;
-                displayFeature(parseInt(category), parseInt(item));
-                if (window.innerWidth < 1024) {
-                    toggleDrawer(false);
-                }
-            }
-        });
-
         themeToggle.addEventListener('click', toggleTheme);
-        menuToggleBtn.addEventListener('click', () => toggleDrawer(true));
-        drawerOverlay.addEventListener('click', () => toggleDrawer(false));
-        window.addEventListener('popstate', handleUrlChange); // Handle back/forward buttons
 
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
             initializeTheme();
-            renderNav();
-            handleUrlChange(); // Check URL on initial load
+            renderPage();
+            setupScrollspy();
+
+            // Handle initial load with a hash
+            if (window.location.hash) {
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({ behavior: 'auto' });
+                    }, 100);
+                }
+            }
         });
     </script>
 
