@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturanza v1.4.0 - Novedades</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* * This style block defines the brand's color palette and sets up
+         * light and dark mode themes using CSS variables, based on the
+         * provided style.dart file.
+         */
+        :root {
+            /* Light Theme Colors (Default) */
+            --bg-primary: #F5F5F5;      /* lightBackground */
+            --bg-secondary: #FFFFFF;    /* lightSection */
+            --text-primary: #414141;    /* Corresponds to darkBackground, good for text */
+            --text-secondary: #6F6F6F;  /* lightText */
+            --brand-primary: #5EB0C7;   /* primaryColor */
+            --brand-secondary: #005973; /* blue */
+            --brand-accent: #63D389;    /* lightGreen */
+            --border-color: #E0E0E0;
+            --logo-filter: none;
+        }
+
+        .dark {
+            /* Dark Theme Colors */
+            --bg-primary: #2d3748;      /* A slightly softer dark background */
+            --bg-secondary: #4a5568;    /* darkSection equivalent */
+            --text-primary: #E8E8E8;    /* darkText */
+            --text-secondary: #A0AEC0;  /* A lighter grey for secondary text */
+            --brand-primary: #5EB0C7;   /* primaryColor */
+            --brand-secondary: #A4D2DF; /* primarySwatch[200] for better contrast */
+            --brand-accent: #63D389;    /* lightGreen */
+            --border-color: #4a5568;
+            --logo-filter: none; /* Logo color is preserved in dark mode */
+        }
+
+        /* Base Styles */
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Component Styles */
+        .card {
+            background-color: var(--bg-secondary);
+            transition: background-color 0.3s ease;
+        }
+        .text-main { color: var(--text-primary); }
+        .text-subtle { color: var(--text-secondary); }
+        .brand-logo {
+             filter: var(--logo-filter);
+             transition: filter 0.3s ease;
+        }
+        .feature-item.active {
+            background-color: var(--brand-primary);
+            color: white;
+            transform: translateX(5px);
+        }
+        .feature-item.active .text-main,
+        .feature-item.active .text-subtle {
+            color: white;
+        }
+        
+        /* Custom title color class */
+        .title-color {
+            color: var(--brand-secondary); /* Blue for light mode */
+        }
+        .dark .title-color {
+            color: var(--text-primary); /* Default text color for dark mode */
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-4 md:p-8">
+
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-10 brand-logo">
+            <!-- Dark Mode Toggle -->
+            <div class="flex items-center space-x-2">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-subtle" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <button id="theme-toggle" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-gray-300 dark:bg-brand-secondary">
+                    <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 ease-in-out"></span>
+                </button>
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-subtle" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            </div>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Sidebar with Feature List -->
+            <aside class="lg:col-span-1">
+                <div class="card p-6 rounded-2xl shadow-lg">
+                    <h1 class="text-2xl font-bold text-main mb-1">Novedades v1.4.0</h1>
+                    <p class="text-subtle mb-6">Explora las nuevas funciones que hemos preparado para ti.</p>
+                    <nav id="features-nav" class="space-y-2"></nav>
+                </div>
+            </aside>
+
+            <!-- Main Content Display -->
+            <section id="feature-display" class="lg:col-span-2 card p-8 rounded-2xl shadow-lg min-h-[600px]">
+                <!-- Content will be injected here by JavaScript -->
+            </section>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="text-center mt-12 text-subtle">
+            <p>&copy; 2025 Facturanza. Gracias por tu valiosa contribución.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- DATA ---
+        const featuresData = [
+            {
+                category: "General",
+                items: [
+                    {
+                        title: "Mejoras estéticas",
+                        description: "Se reconstruyó el diseño de diversos componentes y páginas para una experiencia de usuario más moderna e intuitiva.",
+                        images: [
+                            "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fgraficos.png?alt=media&token=675ea69e-5258-452a-a48f-d7cd588126ad",
+                            "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fclientes.png?alt=media&token=9e81abbe-7e55-41f5-9078-167130b87855",
+                            "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Freenviar_correo.png?alt=media&token=c01619fc-62a9-4a43-a099-012e17cfcbda",
+                            "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fproductos.png?alt=media&token=478195bc-ecf1-44b5-9acb-4f2c4a2d0874"
+                        ],
+                    },
+                    {
+                        title: "Visualización de estadísticas",
+                        description: "Se han incluido gráficos para la representación de ingresos y egresos de la empresa, permitiendo un análisis financiero más claro y directo.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fgraficos.png?alt=media&token=675ea69e-5258-452a-a48f-d7cd588126ad",
+                    },
+                    {
+                        title: "Indicador de facturación activa",
+                        description: "Se implementó una etiqueta para indicar cuándo los datos de facturación están completos y la facturación está activa, brindando mayor claridad sobre el estado de la cuenta.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Ffacturacion_habilitada.png?alt=media&token=e0820db5-ff5f-4f6c-b2b2-1079b375bd61",
+                    },
+                ],
+            },
+            {
+                category: "Inteligencia Artificial",
+                items: [
+                    {
+                        title: "Creación de productos automatizados",
+                        description: "Se ha integrado inteligencia artificial para facilitar la creación de productos, completando automáticamente la información a partir de una simple descripción.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fgenerar_producto.png?alt=media&token=021caa35-7c03-4188-9e83-31e5e8df9046",
+                    },
+                    {
+                        title: "Explicación de rechazo de facturas",
+                        description: "Se ha implementado una función de IA para facilitar al usuario la comprensión del motivo de rechazo de una factura, traduciendo los códigos de error en explicaciones claras.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fexplicar_error.png?alt=media&token=bcab6efe-e01e-4a42-87d8-e15a3ee18b7d",
+                    },
+                ],
+            },
+            {
+                category: "Facturación",
+                items: [
+                    {
+                        title: "Códigos de exoneración",
+                        description: "Se ha incluido la opción para aplicar un código de exoneración por producto al momento de crear la factura, simplificando el manejo de impuestos especiales.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fexoneracion.png?alt=media&token=464354ff-e554-440a-a7a4-dd2a19fcbf0b",
+                    },
+                    {
+                        title: "Reenvío de facturas por correo",
+                        description: "Se implementó la opción para reenviar una factura a múltiples direcciones de correo electrónico de forma sencilla.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Freenviar_correo.png?alt=media&token=c01619fc-62a9-4a43-a099-012e17cfcbda",
+                    },
+                    {
+                        title: "Notas y comentarios en facturas",
+                        description: "Se incluyó un espacio dedicado para añadir notas y comentarios a una factura, mejorando la comunicación y el registro de información adicional.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fnotas.png?alt=media&token=4c67cc45-a0e8-49cd-9600-6798826d6489",
+                    },
+                     {
+                        title: "Visualización por lapsos de tiempo",
+                        description: "Se agregó un selector de fecha para visualizar la lista de facturas, permitiendo filtrar por rangos específicos. El periodo predeterminado es el mes actual.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fselector_fecha.png?alt=media&token=f98a7394-77a8-4ec2-b49c-664a4d9fbaee",
+                    },
+                    {
+                        title: "Inclusión de facturas de egresos",
+                        description: "Se añadió la función para subir los archivos .xml de las facturas de compra (egresos), con el objetivo de poder visualizar datos comparativos y tener un control financiero completo.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fsubir_compra.png?alt=media&token=2ec24d3d-515e-4f35-97c5-ab95847456ca",
+                    },
+                ],
+            },
+            {
+                category: "Nuevas Implementaciones",
+                items: [
+                    {
+                        title: "Gestión de sucursales y terminales",
+                        description: "Esta nueva funcionalidad permite a una empresa administrar y facturar desde diferentes sucursales, así como desde múltiples terminales dentro de una misma sucursal.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fsucursales.png?alt=media&token=0df9bb7e-88d3-4f63-9862-4ba97b6663a0",
+                    },
+                    {
+                        title: "Pagos manuales de membresías",
+                        description: "Se ha implementado la funcionalidad para facilitar los pagos manuales (transferencia o Sinpe Móvil) de membresías y compra de paquetes de facturas.",
+                        image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fpago_manual.png?alt=media&token=bcc89247-a2e5-4a08-8013-d1f59ff8ea11",
+                    },
+                ],
+            },
+        ];
+
+        // --- DOM Elements ---
+        const featuresNav = document.getElementById('features-nav');
+        const featureDisplay = document.getElementById('feature-display');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleIndicator = document.getElementById('theme-toggle-indicator');
+        const body = document.body;
+
+        // --- Functions ---
+
+        function renderNav() {
+            let navHTML = '';
+            featuresData.forEach((category, categoryIndex) => {
+                // Category title is now bold
+                navHTML += `<h3 class="text-sm font-bold text-subtle uppercase tracking-wider mt-4 mb-2">${category.category}</h3>`;
+                category.items.forEach((item, itemIndex) => {
+                    // Feature item title is now regular weight
+                    navHTML += `
+                        <a href="#" class="feature-item flex flex-col p-3 rounded-lg transition-all duration-200" data-category="${categoryIndex}" data-item="${itemIndex}">
+                            <span class="text-main">${item.title}</span>
+                        </a>
+                    `;
+                });
+            });
+            featuresNav.innerHTML = navHTML;
+        }
+
+        function displayFeature(categoryIndex, itemIndex) {
+            const feature = featuresData[categoryIndex].items[itemIndex];
+            let imagesHTML = '';
+
+            if (feature.images && feature.images.length > 0) {
+                imagesHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+                feature.images.forEach(imgUrl => {
+                    imagesHTML += `
+                        <img src="${imgUrl}" alt="${feature.title}" class="w-full rounded-xl shadow-lg border-4 border-[var(--bg-primary)]"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">
+                    `;
+                });
+                imagesHTML += `</div>`;
+            } 
+            else if (feature.image) {
+                imagesHTML = `
+                    <img src="${feature.image}" alt="${feature.title}" class="w-full rounded-xl shadow-2xl border-4 border-[var(--bg-primary)]"
+                         onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Imagen+no+disponible';">
+                `;
+            }
+
+            const contentHTML = `
+                <div class="fade-in">
+                    <h2 class="title-color text-3xl md:text-4xl font-bold mb-4">${feature.title}</h2>
+                    <p class="text-lg text-subtle mb-8">${feature.description}</p>
+                    ${imagesHTML}
+                </div>
+            `;
+            featureDisplay.innerHTML = contentHTML;
+
+            document.querySelectorAll('.feature-item').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.feature-item[data-category='${categoryIndex}'][data-item='${itemIndex}']`).classList.add('active');
+        }
+
+        function displayWelcome() {
+             const contentHTML = `
+                <div class="fade-in text-center flex flex-col justify-center items-center h-full">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-16 brand-logo mb-6">
+                    <h2 class="title-color text-4xl font-bold mb-4">¡Bienvenido a la nueva versión de Facturanza!</h2>
+                    <p class="text-xl text-subtle max-w-2xl">Hemos trabajado en nuevas funciones y mejoras para potenciar tu negocio. Selecciona una característica de la lista para ver los detalles.</p>
+                </div>
+            `;
+            featureDisplay.innerHTML = contentHTML;
+        }
+
+        function toggleTheme() {
+            body.classList.toggle('dark');
+            const isDarkMode = body.classList.contains('dark');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            updateToggleIndicator(isDarkMode);
+        }
+
+        function updateToggleIndicator(isDarkMode) {
+            if (isDarkMode) {
+                themeToggleIndicator.classList.add('translate-x-5');
+                themeToggleIndicator.classList.remove('translate-x-1');
+            } else {
+                themeToggleIndicator.classList.add('translate-x-1');
+                themeToggleIndicator.classList.remove('translate-x-5');
+            }
+        }
+
+        function initializeTheme() {
+            const useDarkMode = localStorage.getItem('theme') === 'dark' ||
+                (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            
+            if (useDarkMode) {
+                body.classList.add('dark');
+            }
+            updateToggleIndicator(useDarkMode);
+        }
+
+        // --- Event Listeners ---
+        featuresNav.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = e.target.closest('.feature-item');
+            if (target) {
+                const { category, item } = target.dataset;
+                displayFeature(parseInt(category), parseInt(item));
+            }
+        });
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTheme();
+            renderNav();
+            displayWelcome();
+        });
+    </script>
+
+</body>
+</html>
