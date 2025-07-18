@@ -179,7 +179,11 @@
             },
         ].map(category => ({
             ...category,
-            items: category.items.map(item => ({...item, id: slugify(item.title)}))
+            id: slugify(category.category),
+            items: category.items.map(item => ({
+                ...item,
+                id: `${slugify(category.category)}.${slugify(item.title)}`
+            }))
         }));
 
         // --- DOM Elements ---
@@ -191,18 +195,14 @@
 
         // --- Functions ---
         
-        /**
-         * Renders the sticky top navigation and the main content sections.
-         */
         function renderPage() {
             let navHTML = '';
             let contentHTML = '';
 
-            // Welcome section
             const welcomeId = 'bienvenido';
             navHTML += `<a href="#${welcomeId}" class="nav-link transition-all duration-200 py-1" data-target="${welcomeId}">Bienvenido</a>`;
             contentHTML += `
-                <section id="${welcomeId}" class="scroll-mt-24 feature-section text-center min-h-[60vh] flex flex-col justify-center items-center py-12">
+                <section id="${welcomeId}" class="scroll-mt-24 page-section text-center min-h-[60vh] flex flex-col justify-center items-center py-12">
                     <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-16 brand-logo mb-6">
                     <h2 class="title-color text-4xl font-bold mb-2">¡Bienvenido a la nueva versión de Facturanza!</h2>
                     <p class="text-2xl font-semibold text-[var(--brand-primary)] mb-4">versión 1.4.0</p>
@@ -210,14 +210,11 @@
                 </section>
             `;
 
-            // Feature sections
             featuresData.forEach(category => {
-                const categoryId = slugify(category.category);
-                navHTML += `<a href="#${categoryId}" class="nav-link transition-all duration-200 py-1" data-target="${categoryId}">${category.category}</a>`;
+                navHTML += `<a href="#${category.id}" class="nav-link transition-all duration-200 py-1" data-target="${category.id}">${category.category}</a>`;
                 
-                // Category Header
                 contentHTML += `
-                    <section id="${categoryId}" class="category-section scroll-mt-24 text-center pt-16 pb-8">
+                    <section id="${category.id}" class="page-section scroll-mt-24 text-center pt-16 pb-8">
                         <h2 class="text-5xl font-bold title-color">${category.category}</h2>
                     </section>
                 `;
@@ -235,7 +232,7 @@
                     }
 
                     contentHTML += `
-                        <section id="${item.id}" class="feature-section card rounded-2xl p-8 mb-8 scroll-mt-24">
+                        <section id="${item.id}" class="page-section card rounded-2xl p-8 mb-8 scroll-mt-24">
                             <h3 class="title-color text-3xl md:text-4xl font-bold mb-4">${item.title}</h3>
                             <p class="text-lg text-subtle">${item.description}</p>
                             ${imagesHTML}
@@ -268,16 +265,12 @@
             updateToggleIndicator(useDarkMode);
         }
 
-        /**
-         * Sets up the IntersectionObserver for scrollspy functionality.
-         */
         function setupScrollspy() {
-            const sections = document.querySelectorAll('.feature-section, .category-section');
+            const sections = document.querySelectorAll('.page-section');
             const navLinks = document.querySelectorAll('.nav-link');
             
             const observer = new IntersectionObserver(entries => {
                 let bestEntry = null;
-                // Find the entry that is most visible in the viewport
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                        if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
@@ -287,53 +280,32 @@
                 });
 
                 if (bestEntry) {
-                    const id = bestEntry.target.getAttribute('id');
-                    let activeNavLink;
-
-                    if (bestEntry.target.classList.contains('category-section')) {
-                        activeNavLink = document.querySelector(`.nav-link[data-target='${id}']`);
-                    } else {
-                        // It's a feature card, so find its parent category nav link
-                        const parentCategory = featuresData.find(cat => cat.items.some(item => item.id === id));
-                        if(parentCategory) {
-                           const categoryId = slugify(parentCategory.category);
-                           activeNavLink = document.querySelector(`.nav-link[data-target='${categoryId}']`);
-                        }
-                    }
-                    
-                    // Fallback to the welcome link if no specific category is active
-                    if (!activeNavLink && bestEntry.target.id === 'bienvenido') {
-                        activeNavLink = document.querySelector(`.nav-link[data-target='bienvenido']`);
-                    }
+                    const fullId = bestEntry.target.getAttribute('id');
+                    const categoryId = fullId.includes('.') ? fullId.split('.')[0] : fullId;
+                    const activeNavLink = document.querySelector(`.nav-link[data-target='${categoryId}']`);
 
                     if (activeNavLink) {
                          navLinks.forEach(link => link.classList.remove('active'));
                          activeNavLink.classList.add('active');
                     }
-                     // Update URL hash without polluting history
-                     history.replaceState(null, null, `#${id}`);
+                     history.replaceState(null, null, `#${fullId}`);
                 }
             }, { 
                 threshold: 0.1,
-                rootMargin: "-88px 0px -50% 0px" // 88px top margin to account for header and nav
+                rootMargin: "-88px 0px -50% 0px"
             }); 
 
             sections.forEach(section => observer.observe(section));
         }
 
-
-        // --- Event Listeners ---
-        themeToggle.addEventListener('click', toggleTheme);
-
-        // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
             initializeTheme();
             renderPage();
             setupScrollspy();
 
-            // Handle initial load with a hash
             if (window.location.hash) {
-                const targetElement = document.querySelector(window.location.hash);
+                const targetId = window.location.hash.substring(1);
+                const targetElement = document.getElementById(targetId);
                 if (targetElement) {
                     setTimeout(() => {
                         targetElement.scrollIntoView({ behavior: 'auto' });
@@ -341,6 +313,8 @@
                 }
             }
         });
+
+        themeToggle.addEventListener('click', toggleTheme);
     </script>
 
 </body>
