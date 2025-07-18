@@ -135,12 +135,18 @@
     <script>
         // --- UTILITY FUNCTIONS ---
         function slugify(text) {
+            const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
+            const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
+            const p = new RegExp(a.split('').join('|'), 'g')
+
             return text.toString().toLowerCase()
-                .replace(/\s+/g, '-')
-                .replace(/[^\w\-]+/g, '')
-                .replace(/\-\-+/g, '-')
-                .replace(/^-+/, '')
-                .replace(/-+$/, '');
+                .replace(/\s+/g, '-') // Replace spaces with -
+                .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+                .replace(/&/g, '-and-') // Replace & with 'and'
+                .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+                .replace(/\-\-+/g, '-') // Replace multiple - with single -
+                .replace(/^-+/, '') // Trim - from start of text
+                .replace(/-+$/, '') // Trim - from end of text
         }
 
         // --- DATA ---
@@ -202,7 +208,7 @@
             const welcomeId = 'bienvenido';
             navHTML += `<a href="#${welcomeId}" class="nav-link transition-all duration-200 py-1" data-target="${welcomeId}">Bienvenido</a>`;
             contentHTML += `
-                <section id="${welcomeId}" class="scroll-mt-24 page-section text-center min-h-[60vh] flex flex-col justify-center items-center py-12">
+                <section id="${welcomeId}" class="scroll-mt-24 page-section text-center min-h-[40vh] flex flex-col justify-center items-center py-6">
                     <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-16 brand-logo mb-6">
                     <h2 class="title-color text-4xl font-bold mb-2">¡Bienvenido a la nueva versión de Facturanza!</h2>
                     <p class="text-2xl font-semibold text-[var(--brand-primary)] mb-4">versión 1.4.0</p>
