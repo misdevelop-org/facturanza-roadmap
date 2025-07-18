@@ -16,6 +16,8 @@
             --text-secondary: #6F6F6F;
             --brand-primary: #5EB0C7;
             --brand-secondary: #005973;
+            --brand-light-green: #63D389;
+            --cta-text-color: #005973; /* Consistent blue for CTA buttons */
             --logo-filter: none;
         }
 
@@ -26,6 +28,7 @@
             --text-secondary: #A0AEC0;
             --brand-primary: #5EB0C7;
             --brand-secondary: #A4D2DF;
+            --brand-light-green: #63D389;
             --logo-filter: none;
         }
         
@@ -84,6 +87,20 @@
             font-weight: 600;
         }
         
+        /* CTA Button Styles */
+        .cta-button {
+            background-color: var(--brand-light-green);
+            color: var(--cta-text-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .cta-button svg {
+            color: var(--cta-text-color);
+        }
+
         /* Hide scrollbar for the nav */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
@@ -130,6 +147,9 @@
     <!-- Footer -->
     <footer class="text-center my-12 text-subtle">
         <p>&copy; 2025 Facturanza. Gracias por tu valiosa contribución.</p>
+        <a href="https://roadmap.facturanza.com" target="_blank" rel="noopener noreferrer" class="text-sm text-subtle hover:text-[var(--brand-primary)] underline transition-colors">
+            Ver Roadmap
+        </a>
     </footer>
 
     <script>
@@ -173,7 +193,10 @@
                     { title: "Reenvío de facturas por correo", description: "Se implementó la opción para reenviar una factura a múltiples direcciones de correo electrónico de forma sencilla.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Freenviar_correo.png?alt=media&token=c01619fc-62a9-4a43-a099-012e17cfcbda" },
                     { title: "Notas y comentarios en facturas", description: "Se incluyó un espacio dedicado para añadir notas y comentarios a una factura, mejorando la comunicación y el registro de información adicional.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fnotas.png?alt=media&token=4c67cc45-a0e8-49cd-9600-6798826d6489" },
                     { title: "Visualización por lapsos de tiempo", description: "Se agregó un selector de fecha para visualizar la lista de facturas, permitiendo filtrar por rangos específicos. El periodo predeterminado es el mes actual.", images: ["https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fselector_fecha.png?alt=media&token=f98a7394-77a8-4ec2-b49c-664a4d9fbaee", "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fcalendar.png?alt=media&token=51632303-0d73-44ee-a516-51c99980b2c9"] },
-                    { title: "Inclusión de facturas de egresos", description: "Se añadió la función para subir los archivos .xml de las facturas de compra (egresos), con el objetivo de poder visualizar datos comparativos y tener un control financiero completo.", image: "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fsubir_compra.png?alt=media&token=2ec24d3d-515e-4f35-97c5-ab95847456ca" },
+                    { title: "Inclusión de facturas de egresos", 
+                    description: "Se añadió la función para subir los archivos .xml de las facturas de compra (egresos), con el objetivo de poder visualizar datos comparativos y tener un control financiero completo.", 
+                    images: ["https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fsubir_compra.png?alt=media&token=2ec24d3d-515e-4f35-97c5-ab95847456ca"
+                    ,"https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.4.0%2Fsubir_compras.png?alt=media&token=d9c351eb-b9e4-468c-a06c-603f4c15c2eb"] },
                 ],
             },
             {
@@ -212,11 +235,15 @@
                     <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-16 brand-logo mb-6">
                     <h2 class="title-color text-4xl font-bold mb-2">¡Bienvenido a la nueva versión de Facturanza!</h2>
                     <p class="text-2xl font-semibold text-[var(--brand-primary)] mb-4">versión 1.4.0</p>
-                    <p class="text-xl text-subtle max-w-2xl">Hemos trabajado en nuevas funciones y mejoras para potenciar tu negocio. Navega para ver los detalles.</p>
+                    <p class="text-xl text-subtle max-w-2xl mb-8">Hemos trabajado en nuevas funciones y mejoras para potenciar tu negocio. Navega para ver los detalles.</p>
+                    <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl">
+                        <span>Ir al facturador</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </a>
                 </section>
             `;
 
-            featuresData.forEach(category => {
+            featuresData.forEach((category, categoryIndex) => {
                 navHTML += `<a href="#${category.id}" class="nav-link transition-all duration-200 py-1" data-target="${category.id}">${category.category}</a>`;
                 
                 contentHTML += `
@@ -245,6 +272,25 @@
                         </section>
                     `;
                 });
+
+                // Add CTAs after the last item of the last category
+                if (categoryIndex === featuresData.length - 1) {
+                    contentHTML += `
+                        <section class="text-center py-12">
+                            <h3 class="text-3xl font-bold text-main mb-6">¿Listo para empezar?</h3>
+                            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                                <a href="https://facturanza.com" target="_blank" rel="noopener noreferrer" class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl w-full sm:w-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg>
+                                    <span>Visitar sitio web</span>
+                                </a>
+                                <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl w-full sm:w-auto">
+                                    <span>Ir al facturador</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                                </a>
+                            </div>
+                        </section>
+                    `;
+                }
             });
 
             navLinksContainer.innerHTML = navHTML;
