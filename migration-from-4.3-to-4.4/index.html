@@ -8,9 +8,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        /* Color Palette from style.dart */
+        :root {
+            --primary-color: #5EB0C7;
+            --brand-blue: #005973;
+            --brand-green: #00A791;
+            
+            /* Light Theme */
+            --bg-light: #F5F5F5;
+            --text-light: #6F6F6F;
+            --text-heading-light: #005973;
+            --section-bg-light: #FFFFFF;
+            --border-light: #e2e8f0;
+            --sidebar-bg-light: #FFFFFF;
+            --sidebar-text-light: #6F6F6F;
+            --sidebar-hover-light: var(--primary-color);
+            --sticky-header-bg-light: #FFFFFF;
+
+            /* Dark Theme */
+            --bg-dark: #414141;
+            --text-dark: #E8E8E8;
+            --text-heading-dark: #E8E8E8;
+            --section-bg-dark: #6F6F6F;
+            --border-dark: #5a5a5a;
+            --sidebar-bg-dark: #4a4a4a;
+            --sidebar-text-dark: #E8E8E8;
+            --sidebar-hover-dark: var(--primary-color);
+            --sticky-header-bg-dark: #5a5a5a;
+        }
+
+        .dark {
+            --bg-light: var(--bg-dark);
+            --text-light: var(--text-dark);
+            --text-heading-light: var(--text-heading-dark);
+            --section-bg-light: var(--section-bg-dark);
+            --border-light: var(--border-dark);
+            --sidebar-bg-light: var(--sidebar-bg-dark);
+            --sidebar-text-light: var(--sidebar-text-dark);
+            --sidebar-hover-light: var(--sidebar-hover-dark);
+            --sticky-header-bg-light: var(--sticky-header-bg-dark);
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            transition: background-color 0.3s, color 0.3s;
         }
         .content-section {
             border-left: 3px solid transparent;
@@ -18,8 +61,10 @@
             transition: all 0.3s ease;
         }
         .content-section:target {
-           border-left-color: #3b82f6;
-           background-color: #eff6ff;
+           border-left-color: var(--primary-color);
+           background-color: var(--section-bg-light);
+           box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+           border-radius: 0.5rem;
         }
         table {
             border-collapse: separate;
@@ -32,7 +77,8 @@
         thead th {
             position: sticky;
             top: 0;
-            background-color: #f1f5f9;
+            background-color: var(--sticky-header-bg-light);
+            color: var(--text-heading-light);
         }
         .tag {
             display: inline-block;
@@ -45,31 +91,58 @@
         .tag-modified { background-color: #ffedd5; color: #9a3412; }
         .tag-removed { background-color: #fee2e2; color: #991b1b; }
         .tag-info { background-color: #e0e7ff; color: #3730a3; }
+        
+        /* Theming classes */
+        .bg-main { background-color: var(--bg-light); }
+        .text-main { color: var(--text-light); }
+        .text-heading { color: var(--text-heading-light); }
+        .bg-section { background-color: var(--section-bg-light); }
+        .border-main { border-color: var(--border-light); }
+        .bg-sidebar { background-color: var(--sidebar-bg-light); }
+        .text-sidebar { color: var(--sidebar-text-light); }
+        .hover-sidebar-text:hover { color: var(--sidebar-hover-light); }
+        .divide-main > :not([hidden]) ~ :not([hidden]) { border-color: var(--border-light); }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="bg-main text-main">
     <div class="container mx-auto px-4 py-8 md:py-12">
-        <header class="mb-12 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Electronic Invoicing Migration Guide</h1>
-            <p class="text-2xl text-blue-600 mt-2">Version 4.3 to 4.4</p>
-            <p class="mt-4 text-slate-500 max-w-3xl mx-auto">A comprehensive guide for the development team to upgrade the full-stack application (Flutter, Node.js/TypeScript, Firebase) to comply with the latest electronic invoicing regulations.</p>
+        <header class="mb-12">
+            <div class="flex justify-between items-center mb-4">
+                <div></div>
+                <div id="theme-switcher" class="flex items-center p-1 bg-section border border-main rounded-full">
+                    <button data-theme="light" class="p-2 rounded-full focus:outline-none">
+                        <i data-lucide="sun" class="w-5 h-5"></i>
+                    </button>
+                    <button data-theme="dark" class="p-2 rounded-full focus:outline-none">
+                        <i data-lucide="moon" class="w-5 h-5"></i>
+                    </button>
+                    <button data-theme="system" class="p-2 rounded-full focus:outline-none">
+                        <i data-lucide="laptop" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-heading">Electronic Invoicing Migration Guide</h1>
+                <p class="text-2xl mt-2" style="color: var(--primary-color);">Version 4.3 to 4.4</p>
+                <p class="mt-4 text-main max-w-3xl mx-auto">A comprehensive guide for the development team to upgrade the full-stack application (Flutter, Node.js/TypeScript, Firebase) to comply with the latest electronic invoicing regulations.</p>
+            </div>
         </header>
 
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Sidebar Navigation -->
             <aside class="md:w-1/4 lg:w-1/5 md:sticky top-8 self-start">
-                <nav class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
-                    <h3 class="font-bold text-lg mb-4 text-slate-900">Contents</h3>
+                <nav class="bg-sidebar p-4 rounded-lg shadow-sm border border-main">
+                    <h3 class="font-bold text-lg mb-4 text-heading">Contents</h3>
                     <ul class="space-y-2">
-                        <li><a href="#overview" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="alert-circle" class="w-4 h-4"></i>Overview & Timeline</a></li>
-                        <li><a href="#setup" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="settings-2" class="w-4 h-4"></i>Project Setup</a></li>
-                        <li><a href="#header" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="file-text" class="w-4 h-4"></i>Header Changes</a></li>
-                        <li><a href="#line-items" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="list" class="w-4 h-4"></i>Line Item Changes</a></li>
-                        <li><a href="#summary" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="sigma" class="w-4 h-4"></i>Summary Changes</a></li>
-                        <li><a href="#reference" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="link" class="w-4 h-4"></i>Reference Info</a></li>
-                        <li><a href="#security" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="shield-check" class="w-4 h-4"></i>Security & Signature</a></li>
-                        <li><a href="#code-examples" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="code" class="w-4 h-4"></i>Code Examples</a></li>
-                        <li><a href="#action-plan" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="check-circle" class="w-4 h-4"></i>Action Plan</a></li>
+                        <li><a href="#overview" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="alert-circle" class="w-4 h-4"></i>Overview & Timeline</a></li>
+                        <li><a href="#setup" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="settings-2" class="w-4 h-4"></i>Project Setup</a></li>
+                        <li><a href="#header" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="file-text" class="w-4 h-4"></i>Header Changes</a></li>
+                        <li><a href="#line-items" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="list" class="w-4 h-4"></i>Line Item Changes</a></li>
+                        <li><a href="#summary" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="sigma" class="w-4 h-4"></i>Summary Changes</a></li>
+                        <li><a href="#reference" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="link" class="w-4 h-4"></i>Reference Info</a></li>
+                        <li><a href="#security" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="shield-check" class="w-4 h-4"></i>Security & Signature</a></li>
+                        <li><a href="#code-examples" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="code" class="w-4 h-4"></i>Code Examples</a></li>
+                        <li><a href="#action-plan" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="check-circle" class="w-4 h-4"></i>Action Plan</a></li>
                     </ul>
                 </nav>
             </aside>
@@ -80,9 +153,9 @@
 
                     <!-- Overview Section -->
                     <section id="overview" class="content-section">
-                        <h2 class="text-3xl font-bold mb-4 text-slate-900">Overview & Timeline</h2>
-                        <div class="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-6 rounded-r-lg shadow-sm">
-                            <h4 class="font-bold text-xl mb-2 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-6 h-6"></i>Effective Date: June 1, 2025</h4>
+                        <h2 class="text-3xl font-bold mb-4 text-heading">Overview & Timeline</h2>
+                        <div class="border-l-4 p-6 rounded-r-lg shadow-sm" style="border-color: var(--primary-color); background-color: color-mix(in srgb, var(--primary-color) 15%, transparent);">
+                            <h4 class="font-bold text-xl mb-2 flex items-center gap-2 text-heading"><i data-lucide="calendar-clock" class="w-6 h-6"></i>Effective Date: September 1, 2025</h4>
                             <p>All new electronic invoices must conform to the v4.4 structure starting on this date. Version 4.3 will only be valid for generating credit and debit notes that adjust documents originally issued under v4.3.</p>
                         </div>
                         <p class="mt-6 text-lg">This migration involves significant changes across the entire stack. The goal is to update our system to be fully compliant with the new regulations, ensuring seamless operation for our users. This guide details every new, modified, and removed field, providing specific implementation guidance for both the backend and frontend.</p>
@@ -90,20 +163,20 @@
 
                     <!-- Project Setup Section -->
                     <section id="setup" class="content-section">
-                        <h2 class="text-3xl font-bold mb-4 text-slate-900">General Changes & Project Setup</h2>
+                        <h2 class="text-3xl font-bold mb-4 text-heading">General Changes & Project Setup</h2>
                         <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                                <h3 class="font-bold text-xl mb-3 flex items-center gap-2"><i data-lucide="server" class="w-5 h-5 text-indigo-500"></i>Backend (Node.js/TypeScript)</h3>
-                                <ul class="list-disc list-inside space-y-2 text-slate-700">
+                            <div class="bg-section p-6 rounded-lg shadow-sm border border-main">
+                                <h3 class="font-bold text-xl mb-3 flex items-center gap-2 text-heading"><i data-lucide="server" class="w-5 h-5" style="color: var(--brand-blue)"></i>Backend (Node.js/TypeScript)</h3>
+                                <ul class="list-disc list-inside space-y-2">
                                     <li><strong>Update Data Models:</strong> Create new TypeScript interfaces for v4.4 (e.g., `InvoiceV44`). Retain v4.3 interfaces for backward compatibility.</li>
                                     <li><strong>Versioning Logic:</strong> Implement a versioning strategy. Use an environment variable or a configuration flag to switch between generating v4.3 and v4.4 XMLs.</li>
                                     <li><strong>Firebase Schema:</strong> Update Firestore documents to include a `version: '4.4'` field. Plan a migration script for existing data if necessary.</li>
                                     <li><strong>Cloud Functions:</strong> Refactor all Cloud Functions related to invoice creation, processing, and validation to handle the new v4.4 structure and logic.</li>
                                 </ul>
                             </div>
-                            <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                                <h3 class="font-bold text-xl mb-3 flex items-center gap-2"><i data-lucide="smartphone" class="w-5 h-5 text-sky-500"></i>Frontend (Flutter)</h3>
-                                <ul class="list-disc list-inside space-y-2 text-slate-700">
+                            <div class="bg-section p-6 rounded-lg shadow-sm border border-main">
+                                <h3 class="font-bold text-xl mb-3 flex items-center gap-2 text-heading"><i data-lucide="smartphone" class="w-5 h-5" style="color: var(--primary-color)"></i>Frontend (Flutter)</h3>
+                                <ul class="list-disc list-inside space-y-2">
                                     <li><strong>Update Data Models:</strong> Create new Dart models to mirror the backend's v4.4 interfaces.</li>
                                     <li><strong>UI/UX Enhancements:</strong> Design and implement new UI components for the added fields. Ensure forms are intuitive and handle conditional logic gracefully.</li>
                                     <li><strong>State Management:</strong> Update your state management layer (BLoC/Riverpod/Provider) to manage the state of new fields, validation rules, and conditional UI visibility.</li>
@@ -115,17 +188,17 @@
 
                     <!-- Header Changes Section -->
                     <section id="header" class="content-section">
-                        <h2 class="text-3xl font-bold mb-6 text-slate-900">Header ("Encabezado") Changes</h2>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-sm border border-slate-200">
+                        <h2 class="text-3xl font-bold mb-6 text-heading">Header ("Encabezado") Changes</h2>
+                        <div class="overflow-x-auto bg-section rounded-lg shadow-sm border border-main">
                             <table class="w-full text-sm">
-                                <thead class="bg-slate-100">
+                                <thead>
                                     <tr>
                                         <th class="p-4 font-semibold">Field</th>
                                         <th class="p-4 font-semibold">Change</th>
                                         <th class="p-4 font-semibold">Details & Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-slate-200">
+                                <tbody class="divide-y divide-main">
                                     <tr>
                                         <td class="p-4 font-semibold">ProveedorSistemas</td>
                                         <td class="p-4"><span class="tag tag-new">New</span></td>
@@ -189,17 +262,17 @@
 
                     <!-- Line Items Section -->
                     <section id="line-items" class="content-section">
-                        <h2 class="text-3xl font-bold mb-6 text-slate-900">Line Item ("Detalle") Changes</h2>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-sm border border-slate-200">
+                        <h2 class="text-3xl font-bold mb-6 text-heading">Line Item ("Detalle") Changes</h2>
+                        <div class="overflow-x-auto bg-section rounded-lg shadow-sm border border-main">
                              <table class="w-full text-sm">
-                                <thead class="bg-slate-100">
+                                <thead>
                                     <tr>
                                         <th class="p-4 font-semibold">Field / Node</th>
                                         <th class="p-4 font-semibold">Change</th>
                                         <th class="p-4 font-semibold">Details & Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-slate-200">
+                                <tbody class="divide-y divide-main">
                                     <tr>
                                         <td class="p-4 font-semibold">DetalleSurtido</td>
                                         <td class="p-4"><span class="tag tag-new">New</span></td>
@@ -245,17 +318,17 @@
                     
                     <!-- Summary Section -->
                     <section id="summary" class="content-section">
-                        <h2 class="text-3xl font-bold mb-6 text-slate-900">Summary ("Resumen") Changes</h2>
-                        <div class="overflow-x-auto bg-white rounded-lg shadow-sm border border-slate-200">
+                        <h2 class="text-3xl font-bold mb-6 text-heading">Summary ("Resumen") Changes</h2>
+                        <div class="overflow-x-auto bg-section rounded-lg shadow-sm border border-main">
                              <table class="w-full text-sm">
-                                <thead class="bg-slate-100">
+                                <thead>
                                     <tr>
                                         <th class="p-4 font-semibold">Field / Node</th>
                                         <th class="p-4 font-semibold">Change</th>
                                         <th class="p-4 font-semibold">Details & Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-slate-200">
+                                <tbody class="divide-y divide-main">
                                     <tr>
                                         <td class="p-4 font-semibold">MedioDePago</td>
                                         <td class="p-4"><span class="tag tag-modified">Modified</span></td>
@@ -290,15 +363,15 @@
 
                     <!-- Reference Info Section -->
                     <section id="reference" class="content-section">
-                        <h2 class="text-3xl font-bold mb-4 text-slate-900">Reference Information Changes</h2>
+                        <h2 class="text-3xl font-bold mb-4 text-heading">Reference Information Changes</h2>
                         <p class="mb-4">The `InformacionReferencia` section has been updated with new codes to handle more scenarios.</p>
-                        <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                            <h3 class="font-bold text-xl mb-3">New Reference Codes (Note 9)</h3>
-                            <ul class="list-disc list-inside space-y-2 text-slate-700">
-                                <li><span class="font-mono bg-slate-100 px-2 py-1 rounded">06:</span> Devolución de mercancía (Merchandise return)</li>
-                                <li><span class="font-mono bg-slate-100 px-2 py-1 rounded">07:</span> Sustituye Comprobante electrónico (Substitutes electronic document)</li>
-                                <li><span class="font-mono bg-slate-100 px-2 py-1 rounded">08:</span> Factura Endosada (Endorsed invoice)</li>
-                                <li><span class="font-mono bg-slate-100 px-2 py-1 rounded">11:</span> Proveedor No Domiciliado (Non-domiciled provider)</li>
+                        <div class="bg-section p-6 rounded-lg shadow-sm border border-main">
+                            <h3 class="font-bold text-xl mb-3 text-heading">New Reference Codes (Note 9)</h3>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li><span class="font-mono bg-main px-2 py-1 rounded">06:</span> Devolución de mercancía (Merchandise return)</li>
+                                <li><span class="font-mono bg-main px-2 py-1 rounded">07:</span> Sustituye Comprobante electrónico (Substitutes electronic document)</li>
+                                <li><span class="font-mono bg-main px-2 py-1 rounded">08:</span> Factura Endosada (Endorsed invoice)</li>
+                                <li><span class="font-mono bg-main px-2 py-1 rounded">11:</span> Proveedor No Domiciliado (Non-domiciled provider)</li>
                             </ul>
                             <p class="mt-4"><strong>Action:</strong> Update enums/constants for these codes in both backend and frontend applications.</p>
                         </div>
@@ -306,16 +379,16 @@
 
                     <!-- Security Section -->
                     <section id="security" class="content-section">
-                        <h2 class="text-3xl font-bold mb-4 text-slate-900">Security & Signature Changes</h2>
-                        <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                            <h3 class="font-bold text-xl mb-3">Enhanced Signature Capabilities</h3>
+                        <h2 class="text-3xl font-bold mb-4 text-heading">Security & Signature Changes</h2>
+                        <div class="bg-section p-6 rounded-lg shadow-sm border border-main">
+                            <h3 class="font-bold text-xl mb-3 text-heading">Enhanced Signature Capabilities</h3>
                             <p>The `ds:Signature` node now officially supports multiple signatures for different roles using the `<xades:ClaimedRole>` attribute. This is crucial for commercial processes like credit acceptance and invoice endorsement.</p>
-                            <ul class="list-disc list-inside space-y-2 text-slate-700 mt-4">
+                            <ul class="list-disc list-inside space-y-2 mt-4">
                                 <li><strong>Receptor Signature:</strong> A recipient can now counter-sign a credit invoice by adding a signature with `<xades:ClaimedRole>Receptor</xades:ClaimedRole>`.</li>
                                 <li><strong>Endorsement:</strong> For invoice endorsement, sequential signatures can be added with roles like `<xades:ClaimedRole>Endosante1</xades:ClaimedRole>` and `<xades:ClaimedRole>Endosatario1</xades:ClaimedRole>`.</li>
                             </ul>
-                            <div class="mt-4 bg-amber-50 border-l-4 border-amber-500 text-amber-800 p-4 rounded-r-lg">
-                                <p><span class="font-bold">Important:</span> Counter-signed documents are for commercial purposes only and should <span class="font-bold">not</span> be re-submitted to the tax authority. The initially validated XML is the only one valid for tax purposes.</p>
+                            <div class="mt-4 border-l-4 p-4 rounded-r-lg" style="border-color: var(--brand-blue); background-color: color-mix(in srgb, var(--brand-blue) 10%, transparent);">
+                                <p><strong class="text-heading">Important:</strong> Counter-signed documents are for commercial purposes only and should <strong class="text-heading">not</strong> be re-submitted to the tax authority. The initially validated XML is the only one valid for tax purposes.</p>
                             </div>
                             <p class="mt-4"><strong>Action:</strong> If your application needs to support these features, the backend's XML signing library must be updated to handle the injection of these specific XAdES attributes.</p>
                         </div>
@@ -323,11 +396,11 @@
 
                     <!-- Code Examples Section -->
                     <section id="code-examples" class="content-section">
-                        <h2 class="text-3xl font-bold mb-4 text-slate-900">Code Implementation Examples</h2>
+                        <h2 class="text-3xl font-bold mb-4 text-heading">Code Implementation Examples</h2>
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <h3 class="font-semibold text-lg mb-2">Backend: TypeScript Interface (v4.4)</h3>
-                                <pre class="bg-slate-800 text-white p-4 rounded-lg text-xs overflow-x-auto"><code class="language-typescript">
+                                <h3 class="font-semibold text-lg mb-2 text-heading">Backend: TypeScript Interface (v4.4)</h3>
+                                <pre class="p-4 rounded-lg text-xs overflow-x-auto" style="background-color: #255B6A; color: #E8E8E8;"><code class="language-typescript">
 export interface InvoiceV44 {
   clave: string;
   proveedorSistemas: string; // New
@@ -365,8 +438,8 @@ export interface ResumenFacturaV44 {
                                 </code></pre>
                             </div>
                              <div>
-                                <h3 class="font-semibold text-lg mb-2">Frontend: Flutter Model (v4.4)</h3>
-                                <pre class="bg-slate-800 text-white p-4 rounded-lg text-xs overflow-x-auto"><code class="language-dart">
+                                <h3 class="font-semibold text-lg mb-2 text-heading">Frontend: Flutter Model (v4.4)</h3>
+                                <pre class="p-4 rounded-lg text-xs overflow-x-auto" style="background-color: #255B6A; color: #E8E8E8;"><code class="language-dart">
 class InvoiceV44 {
   final String clave;
   final String proveedorSistemas; // New
@@ -410,20 +483,20 @@ class ResumenFacturaV44 {
 
                     <!-- Action Plan Section -->
                     <section id="action-plan" class="content-section">
-                        <h2 class="text-3xl font-bold mb-4 text-slate-900">Action Plan & Checklist</h2>
+                        <h2 class="text-3xl font-bold mb-4 text-heading">Action Plan & Checklist</h2>
                         <div class="space-y-4">
-                            <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
-                                <h3 class="font-semibold text-lg">Phase 1: Analysis & Planning</h3>
-                                <ul class="list-disc list-inside mt-2 pl-4 text-slate-700">
+                            <div class="bg-section p-4 rounded-lg shadow-sm border border-main">
+                                <h3 class="font-semibold text-lg text-heading">Phase 1: Analysis & Planning</h3>
+                                <ul class="list-disc list-inside mt-2 pl-4">
                                     <li>[ ] Thoroughly review the official v4.4 specification document.</li>
                                     <li>[ ] Map all v4.3 fields to v4.4 fields and identify all changes.</li>
                                     <li>[ ] Design the new UI/UX for the Flutter application.</li>
                                     <li>[ ] Plan the database schema changes and migration strategy.</li>
                                 </ul>
                             </div>
-                             <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
-                                <h3 class="font-semibold text-lg">Phase 2: Backend Implementation</h3>
-                                <ul class="list-disc list-inside mt-2 pl-4 text-slate-700">
+                             <div class="bg-section p-4 rounded-lg shadow-sm border border-main">
+                                <h3 class="font-semibold text-lg text-heading">Phase 2: Backend Implementation</h3>
+                                <ul class="list-disc list-inside mt-2 pl-4">
                                     <li>[ ] Create new TypeScript interfaces for v4.4.</li>
                                     <li>[ ] Update Cloud Functions for XML generation with v4.4 logic.</li>
                                     <li>[ ] Implement all new validation rules.</li>
@@ -431,9 +504,9 @@ class ResumenFacturaV44 {
                                     <li>[ ] Write unit and integration tests for the new logic.</li>
                                 </ul>
                             </div>
-                             <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
-                                <h3 class="font-semibold text-lg">Phase 3: Frontend Implementation</h3>
-                                <ul class="list-disc list-inside mt-2 pl-4 text-slate-700">
+                             <div class="bg-section p-4 rounded-lg shadow-sm border border-main">
+                                <h3 class="font-semibold text-lg text-heading">Phase 3: Frontend Implementation</h3>
+                                <ul class="list-disc list-inside mt-2 pl-4">
                                     <li>[ ] Create new Dart models for v4.4.</li>
                                     <li>[ ] Build the new UI components for added fields.</li>
                                     <li>[ ] Implement the complex UI for the `DetalleSurtido` node.</li>
@@ -441,9 +514,9 @@ class ResumenFacturaV44 {
                                     <li>[ ] Connect UI to new/updated backend endpoints.</li>
                                 </ul>
                             </div>
-                             <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
-                                <h3 class="font-semibold text-lg">Phase 4: Testing & Deployment</h3>
-                                <ul class="list-disc list-inside mt-2 pl-4 text-slate-700">
+                             <div class="bg-section p-4 rounded-lg shadow-sm border border-main">
+                                <h3 class="font-semibold text-lg text-heading">Phase 4: Testing & Deployment</h3>
+                                <ul class="list-disc list-inside mt-2 pl-4">
                                     <li>[ ] Perform end-to-end testing in the sandbox environment.</li>
                                     <li>[ ] Test backward compatibility for v4.3 credit/debit notes.</li>
                                     <li>[ ] Prepare deployment scripts.</li>
@@ -458,6 +531,75 @@ class ResumenFacturaV44 {
     </div>
     <script>
         lucide.createIcons();
+
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const html = document.documentElement;
+
+        const applyTheme = (theme) => {
+            themeSwitcher.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('text-white', 'bg-blue-500');
+                btn.style.color = 'var(--text-light)';
+                if (btn.dataset.theme === theme) {
+                    btn.style.color = 'white';
+                    btn.style.backgroundColor = 'var(--primary-color)';
+                } else {
+                     btn.style.backgroundColor = 'transparent';
+                }
+            });
+
+            if (theme === 'dark') {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+        };
+
+        const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+        const handleThemeSelection = (selectedTheme) => {
+            if (selectedTheme === 'system') {
+                localStorage.removeItem('theme');
+                const systemTheme = getSystemTheme();
+                applyTheme(systemTheme);
+            } else {
+                localStorage.setItem('theme', selectedTheme);
+                applyTheme(selectedTheme);
+            }
+            
+            // Re-apply active button style for system
+            themeSwitcher.querySelectorAll('button').forEach(btn => {
+                 btn.style.color = 'var(--text-light)';
+                 btn.style.backgroundColor = 'transparent';
+            });
+            const activeButton = themeSwitcher.querySelector(`button[data-theme="${selectedTheme}"]`);
+            if(activeButton) {
+                activeButton.style.color = 'white';
+                activeButton.style.backgroundColor = 'var(--primary-color)';
+            }
+        };
+
+        themeSwitcher.addEventListener('click', (e) => {
+            const button = e.target.closest('button');
+            if (button) {
+                handleThemeSelection(button.dataset.theme);
+            }
+        });
+
+        // On page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            handleThemeSelection(savedTheme);
+        } else {
+            handleThemeSelection('system');
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                 handleThemeSelection('system');
+            }
+        });
+
     </script>
 </body>
 </html>
