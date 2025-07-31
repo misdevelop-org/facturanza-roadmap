@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migration Guide: Electronic Invoicing v4.3 to v4.4</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .content-section {
+            border-left: 3px solid transparent;
+            padding-left: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .content-section:target {
+           border-left-color: #3b82f6;
+           background-color: #eff6ff;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        th, td {
+            vertical-align: top;
+            text-align: left;
+        }
+        thead th {
+            position: sticky;
+            top: 0;
+            background-color: #f1f5f9;
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+        .tag-new { background-color: #dcfce7; color: #166534; }
+        .tag-modified { background-color: #ffedd5; color: #9a3412; }
+        .tag-removed { background-color: #fee2e2; color: #991b1b; }
+        .tag-info { background-color: #e0e7ff; color: #3730a3; }
+    </style>
+</head>
+<body class="text-slate-800">
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="mb-12 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Electronic Invoicing Migration Guide</h1>
+            <p class="text-2xl text-blue-600 mt-2">Version 4.3 to 4.4</p>
+            <p class="mt-4 text-slate-500 max-w-3xl mx-auto">A comprehensive guide for the development team to upgrade the full-stack application (Flutter, Node.js/TypeScript, Firebase) to comply with the latest electronic invoicing regulations.</p>
+        </header>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Sidebar Navigation -->
+            <aside class="md:w-1/4 lg:w-1/5 md:sticky top-8 self-start">
+                <nav class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-lg mb-4 text-slate-900">Contents</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#overview" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="alert-circle" class="w-4 h-4"></i>Overview & Timeline</a></li>
+                        <li><a href="#setup" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="settings-2" class="w-4 h-4"></i>Project Setup</a></li>
+                        <li><a href="#header" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="file-text" class="w-4 h-4"></i>Header Changes</a></li>
+                        <li><a href="#line-items" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="list" class="w-4 h-4"></i>Line Item Changes</a></li>
+                        <li><a href="#summary" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="sigma" class="w-4 h-4"></i>Summary Changes</a></li>
+                        <li><a href="#reference" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="link" class="w-4 h-4"></i>Reference Info</a></li>
+                        <li><a href="#security" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="shield-check" class="w-4 h-4"></i>Security & Signature</a></li>
+                        <li><a href="#code-examples" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="code" class="w-4 h-4"></i>Code Examples</a></li>
+                        <li><a href="#action-plan" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium"><i data-lucide="check-circle" class="w-4 h-4"></i>Action Plan</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="md:w-3/4 lg:w-4/5">
+                <div class="space-y-16">
+
+                    <!-- Overview Section -->
+                    <section id="overview" class="content-section">
+                        <h2 class="text-3xl font-bold mb-4 text-slate-900">Overview & Timeline</h2>
+                        <div class="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-6 rounded-r-lg shadow-sm">
+                            <h4 class="font-bold text-xl mb-2 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-6 h-6"></i>Effective Date: June 1, 2025</h4>
+                            <p>All new electronic invoices must conform to the v4.4 structure starting on this date. Version 4.3 will only be valid for generating credit and debit notes that adjust documents originally issued under v4.3.</p>
+                        </div>
+                        <p class="mt-6 text-lg">This migration involves significant changes across the entire stack. The goal is to update our system to be fully compliant with the new regulations, ensuring seamless operation for our users. This guide details every new, modified, and removed field, providing specific implementation guidance for both the backend and frontend.</p>
+                    </section>
+
+                    <!-- Project Setup Section -->
+                    <section id="setup" class="content-section">
+                        <h2 class="text-3xl font-bold mb-4 text-slate-900">General Changes & Project Setup</h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                                <h3 class="font-bold text-xl mb-3 flex items-center gap-2"><i data-lucide="server" class="w-5 h-5 text-indigo-500"></i>Backend (Node.js/TypeScript)</h3>
+                                <ul class="list-disc list-inside space-y-2 text-slate-700">
+                                    <li><strong>Update Data Models:</strong> Create new TypeScript interfaces for v4.4 (e.g., `InvoiceV44`). Retain v4.3 interfaces for backward compatibility.</li>
+                                    <li><strong>Versioning Logic:</strong> Implement a versioning strategy. Use an environment variable or a configuration flag to switch between generating v4.3 and v4.4 XMLs.</li>
+                                    <li><strong>Firebase Schema:</strong> Update Firestore documents to include a `version: '4.4'` field. Plan a migration script for existing data if necessary.</li>
+                                    <li><strong>Cloud Functions:</strong> Refactor all Cloud Functions related to invoice creation, processing, and validation to handle the new v4.4 structure and logic.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                                <h3 class="font-bold text-xl mb-3 flex items-center gap-2"><i data-lucide="smartphone" class="w-5 h-5 text-sky-500"></i>Frontend (Flutter)</h3>
+                                <ul class="list-disc list-inside space-y-2 text-slate-700">
+                                    <li><strong>Update Data Models:</strong> Create new Dart models to mirror the backend's v4.4 interfaces.</li>
+                                    <li><strong>UI/UX Enhancements:</strong> Design and implement new UI components for the added fields. Ensure forms are intuitive and handle conditional logic gracefully.</li>
+                                    <li><strong>State Management:</strong> Update your state management layer (BLoC/Riverpod/Provider) to manage the state of new fields, validation rules, and conditional UI visibility.</li>
+                                    <li><strong>User Guidance:</strong> Add tooltips or info icons to explain new fields to the user, such as the "Transaction Type" or the new ID types.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Header Changes Section -->
+                    <section id="header" class="content-section">
+                        <h2 class="text-3xl font-bold mb-6 text-slate-900">Header ("Encabezado") Changes</h2>
+                        <div class="overflow-x-auto bg-white rounded-lg shadow-sm border border-slate-200">
+                            <table class="w-full text-sm">
+                                <thead class="bg-slate-100">
+                                    <tr>
+                                        <th class="p-4 font-semibold">Field</th>
+                                        <th class="p-4 font-semibold">Change</th>
+                                        <th class="p-4 font-semibold">Details & Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+                                    <tr>
+                                        <td class="p-4 font-semibold">ProveedorSistemas</td>
+                                        <td class="p-4"><span class="tag tag-new">New</span></td>
+                                        <td class="p-4">
+                                            <p class="font-medium">Identifies the invoicing system provider.</p>
+                                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                                <li><strong>Backend:</strong> Add `proveedorSistemas` (String, 20) to the main invoice model. Validate it's a correct ID.</li>
+                                                <li><strong>Frontend:</strong> Add a new field in the company settings page. This can be pre-filled from config.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-semibold">CodigoActividadReceptor</td>
+                                        <td class="p-4"><span class="tag tag-new">New</span></td>
+                                        <td class="p-4">
+                                            <p class="font-medium">Recipient's economic activity code.</p>
+                                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                                <li><strong>Backend:</strong> Add `codigoActividadReceptor` (String, 6) to the Receptor model. Initially conditional.</li>
+                                                <li><strong>Frontend:</strong> Add a new text field in the recipient details form.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-semibold">TipoIdentificacion</td>
+                                        <td class="p-4"><span class="tag tag-modified">Modified</span></td>
+                                        <td class="p-4">
+                                            <p class="font-medium">New ID types added.</p>
+                                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                                <li>Adds `05: Extranjero No Domiciliado` and `06: No Contribuyente`.</li>
+                                                <li><strong>Backend:</strong> Update ID type enums and validation logic for their specific use cases (e.g., `05` is only for `Factura de Compra` emitter).</li>
+                                                <li><strong>Frontend:</strong> Update the ID Type dropdown menu with the new options.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-semibold">Numero (ID)</td>
+                                        <td class="p-4"><span class="tag tag-modified">Modified</span></td>
+                                        <td class="p-4">
+                                            <p class="font-medium">Field length increased for new ID types.</p>
+                                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                                <li>Size increased to **20 characters** for ID types `05` and `06`.</li>
+                                                <li><strong>Backend/Frontend:</strong> Update validation and input field max length.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td class="p-4 font-semibold">Fax</td>
+                                        <td class="p-4"><span class="tag tag-removed">Removed</span></td>
+                                        <td class="p-4">
+                                            <p class="font-medium">The Fax node for both emitter and recipient has been removed.</p>
+                                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                                <li><strong>Backend:</strong> Remove the `fax` property from Emisor and Receptor models.</li>
+                                                <li><strong>Frontend:</strong> Remove the Fax input fields from the UI.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Line Items Section -->
+                    <section id="line-items" class="content-section">
+                        <h2 class="text-3xl font-bold mb-6 text-slate-900">Line Item ("Detalle") Changes</h2>
+                        <div class="overflow-x-auto bg-white rounded-lg shadow-sm border border-slate-200">
+                             <table class="w-full text-sm">
+                                <thead class="bg-slate-100">
+                                    <tr>
+                                        <th class="p-4 font-semibold">Field / Node</th>
+                                        <th class="p-4 font-semibold">Change</th>
+                                        <th class="p-4 font-semibold">Details & Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+                                    <tr>
+                                        <td class="p-4 font-semibold">DetalleSurtido</td>
+                                        <td class="p-4"><span class="tag tag-new">New</span></td>
+                                        <td class="p-4">
+                                            <p class="font-medium">A new node to detail the components of a bundled product (combo/package).</p>
+                                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                                <li><strong>Backend:</strong> This is a major structural change. Create models for `DetalleSurtido` and `LineaDetalleSurtido`. The main line item's totals must be calculated from the sum of its components.</li>
+                                                <li><strong>Frontend:</strong> Implement a sub-form or modal that appears when a user selects a "combo" CAByS code, allowing them to add and detail the individual products within the bundle.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-semibold">Descuento</td>
+                                        <td class="p-4"><span class="tag tag-modified">Modified</span></td>
+                                        <td class="p-4">
+                                            <p class="font-medium">Discount identification is now mandatory.</p>
+                                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                                <li>New mandatory field `CodigoDescuento` (String, 2) to specify the discount type (from Note 20).</li>
+                                                <li>New conditional field `CodigoDescuentoOTRO` if code `99` is used.</li>
+                                                <li><strong>Backend:</strong> Add fields to the Discount model and update validation.</li>
+                                                <li><strong>Frontend:</strong> Add a dropdown for "Discount Type" next to the discount amount field.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-semibold">Impuesto</td>
+                                        <td class="p-4"><span class="tag tag-modified">Modified</span></td>
+                                        <td class="p-4">
+                                            <p class="font-medium">Significant changes to tax calculation and structure.</p>
+                                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                                <li>`BaseImponible` is now mandatory for taxed items.</li>
+                                                <li>New `IVAcobradoFabrica` field for special tax cases.</li>
+                                                <li>New `DatosImpuestoEspecifico` node for non-tariff based taxes.</li>
+                                                <li><strong>Backend:</strong> This requires a thorough review of all tax calculation logic. Update the Impuesto model with new fields and nodes.</li>
+                                                <li><strong>Frontend:</strong> The tax section of the line item form may need to be redesigned for clarity and to accommodate the new fields and logic.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    
+                    <!-- Summary Section -->
+                    <section id="summary" class="content-section">
+                        <h2 class="text-3xl font-bold mb-6 text-slate-900">Summary ("Resumen") Changes</h2>
+                        <div class="overflow-x-auto bg-white rounded-lg shadow-sm border border-slate-200">
+                             <table class="w-full text-sm">
+                                <thead class="bg-slate-100">
+                                    <tr>
+                                        <th class="p-4 font-semibold">Field / Node</th>
+                                        <th class="p-4 font-semibold">Change</th>
+                                        <th class="p-4 font-semibold">Details & Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+                                    <tr>
+                                        <td class="p-4 font-semibold">MedioDePago</td>
+                                        <td class="p-4"><span class="tag tag-modified">Modified</span></td>
+                                        <td class="p-4">
+                                            <p class="font-medium">Node moved from Line Item to Summary. New payment methods added.</p>
+                                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                                <li>New codes: `06: SINPE MOVIL`, `07: Plataforma Digital`.</li>
+                                                <li><strong>Backend:</strong> Relocate the `MedioDePago` model from the main structure to within the `ResumenFactura` model. Update enums.</li>
+                                                <li><strong>Frontend:</strong> Ensure payment method selection is part of the final summary section. Update the payment method dropdown.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-semibold">New Total Fields</td>
+                                        <td class="p-4"><span class="tag tag-new">New</span></td>
+                                        <td class="p-4">
+                                            <p class="font-medium">New fields for more granular totals.</p>
+                                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                                <li>`TotalServNoSujetos`</li>
+                                                <li>`TotalMercNoSujetas`</li>
+                                                <li>`TotalNoSujeto`</li>
+                                                <li>`TotalDesgloselmpuesto` (new node for breakdown by tax type)</li>
+                                                <li><strong>Backend:</strong> Add these fields to the `ResumenFactura` model and implement the corresponding calculation logic.</li>
+                                                <li><strong>Frontend:</strong> Display these new totals in the invoice summary view.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Reference Info Section -->
+                    <section id="reference" class="content-section">
+                        <h2 class="text-3xl font-bold mb-4 text-slate-900">Reference Information Changes</h2>
+                        <p class="mb-4">The `InformacionReferencia` section has been updated with new codes to handle more scenarios.</p>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-xl mb-3">New Reference Codes (Note 9)</h3>
+                            <ul class="list-disc list-inside space-y-2 text-slate-700">
+                                <li><span class="font-mono bg-slate-100 px-2 py-1 rounded">06:</span> Devolución de mercancía (Merchandise return)</li>
+                                <li><span class="font-mono bg-slate-100 px-2 py-1 rounded">07:</span> Sustituye Comprobante electrónico (Substitutes electronic document)</li>
+                                <li><span class="font-mono bg-slate-100 px-2 py-1 rounded">08:</span> Factura Endosada (Endorsed invoice)</li>
+                                <li><span class="font-mono bg-slate-100 px-2 py-1 rounded">11:</span> Proveedor No Domiciliado (Non-domiciled provider)</li>
+                            </ul>
+                            <p class="mt-4"><strong>Action:</strong> Update enums/constants for these codes in both backend and frontend applications.</p>
+                        </div>
+                    </section>
+
+                    <!-- Security Section -->
+                    <section id="security" class="content-section">
+                        <h2 class="text-3xl font-bold mb-4 text-slate-900">Security & Signature Changes</h2>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-xl mb-3">Enhanced Signature Capabilities</h3>
+                            <p>The `ds:Signature` node now officially supports multiple signatures for different roles using the `<xades:ClaimedRole>` attribute. This is crucial for commercial processes like credit acceptance and invoice endorsement.</p>
+                            <ul class="list-disc list-inside space-y-2 text-slate-700 mt-4">
+                                <li><strong>Receptor Signature:</strong> A recipient can now counter-sign a credit invoice by adding a signature with `<xades:ClaimedRole>Receptor</xades:ClaimedRole>`.</li>
+                                <li><strong>Endorsement:</strong> For invoice endorsement, sequential signatures can be added with roles like `<xades:ClaimedRole>Endosante1</xades:ClaimedRole>` and `<xades:ClaimedRole>Endosatario1</xades:ClaimedRole>`.</li>
+                            </ul>
+                            <div class="mt-4 bg-amber-50 border-l-4 border-amber-500 text-amber-800 p-4 rounded-r-lg">
+                                <p><span class="font-bold">Important:</span> Counter-signed documents are for commercial purposes only and should <span class="font-bold">not</span> be re-submitted to the tax authority. The initially validated XML is the only one valid for tax purposes.</p>
+                            </div>
+                            <p class="mt-4"><strong>Action:</strong> If your application needs to support these features, the backend's XML signing library must be updated to handle the injection of these specific XAdES attributes.</p>
+                        </div>
+                    </section>
+
+                    <!-- Code Examples Section -->
+                    <section id="code-examples" class="content-section">
+                        <h2 class="text-3xl font-bold mb-4 text-slate-900">Code Implementation Examples</h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">Backend: TypeScript Interface (v4.4)</h3>
+                                <pre class="bg-slate-800 text-white p-4 rounded-lg text-xs overflow-x-auto"><code class="language-typescript">
+export interface InvoiceV44 {
+  clave: string;
+  proveedorSistemas: string; // New
+  numeroConsecutivo: string;
+  // ... other header fields
+  emisor: EmisorV44;
+  receptor: ReceptorV44;
+  detalleServicio: LineaDetalleV44[];
+  resumenFactura: ResumenFacturaV44;
+}
+
+export interface LineaDetalleV44 {
+  numeroLinea: number;
+  codigoCABYS: string;
+  tipoTransaccion?: string; // New
+  numeroVINoSerie?: string; // New
+  // ...
+  descuentos?: DescuentoV44[];
+  impuestos?: ImpuestoV44[];
+  detalleSurtido?: DetalleSurtidoV44[]; // New
+}
+
+export interface DescuentoV44 {
+    montoDescuento: number;
+    naturalezaDescuento: string;
+    codigoDescuento: string; // New
+}
+
+export interface ResumenFacturaV44 {
+    // ...
+    totalServNoSujetos: number; // New
+    totalMercNoSujetas: number; // New
+    medioPago: MedioPagoV44[]; // Moved here
+}
+                                </code></pre>
+                            </div>
+                             <div>
+                                <h3 class="font-semibold text-lg mb-2">Frontend: Flutter Model (v4.4)</h3>
+                                <pre class="bg-slate-800 text-white p-4 rounded-lg text-xs overflow-x-auto"><code class="language-dart">
+class InvoiceV44 {
+  final String clave;
+  final String proveedorSistemas; // New
+  final String numeroConsecutivo;
+  // ... other header fields
+  final EmisorV44 emisor;
+  final ReceptorV44 receptor;
+  final List<LineaDetalleV44> detalleServicio;
+  final ResumenFacturaV44 resumenFactura;
+
+  InvoiceV44({ required this.clave, required this.proveedorSistemas, ... });
+}
+
+class LineaDetalleV44 {
+  final int numeroLinea;
+  final String codigoCABYS;
+  final String? tipoTransaccion; // New
+  final String? numeroVINoSerie; // New
+  // ...
+  final List<DescuentoV44>? descuentos;
+  final List<ImpuestoV44>? impuestos;
+  final List<DetalleSurtidoV44>? detalleSurtido; // New
+}
+
+class DescuentoV44 {
+  final double montoDescuento;
+  final String naturalezaDescuento;
+  final String codigoDescuento; // New
+}
+
+class ResumenFacturaV44 {
+  // ...
+  final double totalServNoSujetos; // New
+  final double totalMercNoSujetas; // New
+  final List<MedioPagoV44> medioPago; // Moved here
+}
+                                </code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Action Plan Section -->
+                    <section id="action-plan" class="content-section">
+                        <h2 class="text-3xl font-bold mb-4 text-slate-900">Action Plan & Checklist</h2>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                                <h3 class="font-semibold text-lg">Phase 1: Analysis & Planning</h3>
+                                <ul class="list-disc list-inside mt-2 pl-4 text-slate-700">
+                                    <li>[ ] Thoroughly review the official v4.4 specification document.</li>
+                                    <li>[ ] Map all v4.3 fields to v4.4 fields and identify all changes.</li>
+                                    <li>[ ] Design the new UI/UX for the Flutter application.</li>
+                                    <li>[ ] Plan the database schema changes and migration strategy.</li>
+                                </ul>
+                            </div>
+                             <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                                <h3 class="font-semibold text-lg">Phase 2: Backend Implementation</h3>
+                                <ul class="list-disc list-inside mt-2 pl-4 text-slate-700">
+                                    <li>[ ] Create new TypeScript interfaces for v4.4.</li>
+                                    <li>[ ] Update Cloud Functions for XML generation with v4.4 logic.</li>
+                                    <li>[ ] Implement all new validation rules.</li>
+                                    <li>[ ] Update Firestore security rules if necessary.</li>
+                                    <li>[ ] Write unit and integration tests for the new logic.</li>
+                                </ul>
+                            </div>
+                             <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                                <h3 class="font-semibold text-lg">Phase 3: Frontend Implementation</h3>
+                                <ul class="list-disc list-inside mt-2 pl-4 text-slate-700">
+                                    <li>[ ] Create new Dart models for v4.4.</li>
+                                    <li>[ ] Build the new UI components for added fields.</li>
+                                    <li>[ ] Implement the complex UI for the `DetalleSurtido` node.</li>
+                                    <li>[ ] Update state management to handle the new data structure.</li>
+                                    <li>[ ] Connect UI to new/updated backend endpoints.</li>
+                                </ul>
+                            </div>
+                             <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                                <h3 class="font-semibold text-lg">Phase 4: Testing & Deployment</h3>
+                                <ul class="list-disc list-inside mt-2 pl-4 text-slate-700">
+                                    <li>[ ] Perform end-to-end testing in the sandbox environment.</li>
+                                    <li>[ ] Test backward compatibility for v4.3 credit/debit notes.</li>
+                                    <li>[ ] Prepare deployment scripts.</li>
+                                    <li>[ ] Schedule and execute the production deployment.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
