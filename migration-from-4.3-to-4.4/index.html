@@ -142,7 +142,7 @@
                         <li><a href="#reference" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="link" class="w-4 h-4"></i>Reference Info</a></li>
                         <li><a href="#security" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="shield-check" class="w-4 h-4"></i>Security & Signature</a></li>
                         <li><a href="#code-examples" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="code" class="w-4 h-4"></i>Code Examples</a></li>
-                        <li><a href="#action-plan" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="check-circle" class="w-4 h-4"></i>Action Plan</a></li>
+                        <li><a href="#team-tasks" class="flex items-center gap-2 text-sidebar hover-sidebar-text font-medium"><i data-lucide="users" class="w-4 h-4"></i>Team Tasks</a></li>
                     </ul>
                 </nav>
             </aside>
@@ -155,7 +155,7 @@
                     <section id="overview" class="content-section">
                         <h2 class="text-3xl font-bold mb-4 text-heading">Overview & Timeline</h2>
                         <div class="border-l-4 p-6 rounded-r-lg shadow-sm" style="border-color: var(--primary-color); background-color: color-mix(in srgb, var(--primary-color) 15%, transparent);">
-                            <h4 class="font-bold text-xl mb-2 flex items-center gap-2 text-heading"><i data-lucide="calendar-clock" class="w-6 h-6"></i>Effective Date: September 1, 2025</h4>
+                            <h4 class="font-bold text-xl mb-2 flex items-center gap-2 text-heading"><i data-lucide="calendar-clock" class="w-6 h-6"></i>Effective Date: June 1, 2025</h4>
                             <p>All new electronic invoices must conform to the v4.4 structure starting on this date. Version 4.3 will only be valid for generating credit and debit notes that adjust documents originally issued under v4.3.</p>
                         </div>
                         <p class="mt-6 text-lg">This migration involves significant changes across the entire stack. The goal is to update our system to be fully compliant with the new regulations, ensuring seamless operation for our users. This guide details every new, modified, and removed field, providing specific implementation guidance for both the backend and frontend.</p>
@@ -480,48 +480,86 @@ class ResumenFacturaV44 {
                             </div>
                         </div>
                     </section>
+                    
+                    <!-- Team Tasks Section -->
+                    <section id="team-tasks" class="content-section">
+                        <h2 class="text-3xl font-bold mb-6 text-heading">Team-Specific Tasks & Tickets</h2>
+                        
+                        <!-- Design Team -->
+                        <div class="mb-12">
+                            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3 text-heading"><i data-lucide="figma" class="w-6 h-6" style="color: var(--brand-green)"></i>Design Team</h3>
+                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="bg-section p-6 rounded-lg shadow-sm border border-main flex flex-col">
+                                    <h4 class="font-bold text-lg text-heading task-title">UI Mockups for New Invoice Fields</h4>
+                                    <p class="mt-2 flex-grow task-description">Create high-fidelity mockups for the invoice creation form, incorporating new fields like `ProveedorSistemas`, `CodigoActividadReceptor`, `TipoTransaccion`, and `NumeroVINoSerie`. Ensure the UI remains intuitive.</p>
+                                    <button class="copy-btn mt-4 self-start text-sm font-medium py-2 px-4 rounded-full flex items-center gap-2" style="background-color: var(--primary-color); color: white;"><i data-lucide="copy" class="w-4 h-4"></i>Copy for Issue</button>
+                                </div>
+                                <div class="bg-section p-6 rounded-lg shadow-sm border border-main flex flex-col">
+                                    <h4 class="font-bold text-lg text-heading task-title">Design UX for "Detalle Surtido" (Bundled Products)</h4>
+                                    <p class="mt-2 flex-grow task-description">Design an intuitive user flow for adding and managing bundled products (`DetalleSurtido`). This should likely involve a modal or an expandable sub-form within a line item to detail the components of a package/combo.</p>
+                                    <button class="copy-btn mt-4 self-start text-sm font-medium py-2 px-4 rounded-full flex items-center gap-2" style="background-color: var(--primary-color); color: white;"><i data-lucide="copy" class="w-4 h-4"></i>Copy for Issue</button>
+                                </div>
+                            </div>
+                        </div>
 
-                    <!-- Action Plan Section -->
-                    <section id="action-plan" class="content-section">
-                        <h2 class="text-3xl font-bold mb-4 text-heading">Action Plan & Checklist</h2>
-                        <div class="space-y-4">
-                            <div class="bg-section p-4 rounded-lg shadow-sm border border-main">
-                                <h3 class="font-semibold text-lg text-heading">Phase 1: Analysis & Planning</h3>
-                                <ul class="list-disc list-inside mt-2 pl-4">
-                                    <li>[ ] Thoroughly review the official v4.4 specification document.</li>
-                                    <li>[ ] Map all v4.3 fields to v4.4 fields and identify all changes.</li>
-                                    <li>[ ] Design the new UI/UX for the Flutter application.</li>
-                                    <li>[ ] Plan the database schema changes and migration strategy.</li>
-                                </ul>
+                        <!-- Backend Team -->
+                        <div class="mb-12">
+                            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3 text-heading"><i data-lucide="server-cog" class="w-6 h-6" style="color: var(--brand-blue)"></i>Backend Team</h3>
+                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="bg-section p-6 rounded-lg shadow-sm border border-main flex flex-col">
+                                    <h4 class="font-bold text-lg text-heading task-title">[BE] Update Header Data Models & Logic</h4>
+                                    <p class="mt-2 flex-grow task-description">Update TypeScript interfaces for the invoice header. Add `proveedorSistemas`, `codigoActividadReceptor`. Modify `TipoIdentificacion` enum and expand `Numero` field to 20 chars. Remove `Fax` node. Update validation logic accordingly.</p>
+                                    <button class="copy-btn mt-4 self-start text-sm font-medium py-2 px-4 rounded-full flex items-center gap-2" style="background-color: var(--primary-color); color: white;"><i data-lucide="copy" class="w-4 h-4"></i>Copy for Issue</button>
+                                </div>
+                                <div class="bg-section p-6 rounded-lg shadow-sm border border-main flex flex-col">
+                                    <h4 class="font-bold text-lg text-heading task-title">[BE] Implement Line Item Models & Logic</h4>
+                                    <p class="mt-2 flex-grow task-description">Implement the new `DetalleSurtido` node and its sub-items. Add `TipoTransaccion` and `NumeroVINoSerie`. Update the `Descuento` model to include `CodigoDescuento`. Refactor `Impuesto` model for `BaseImponible`, `IVAcobradoFabrica`, and `DatosImpuestoEspecifico`.</p>
+                                    <button class="copy-btn mt-4 self-start text-sm font-medium py-2 px-4 rounded-full flex items-center gap-2" style="background-color: var(--primary-color); color: white;"><i data-lucide="copy" class="w-4 h-4"></i>Copy for Issue</button>
+                                </div>
+                                <div class="bg-section p-6 rounded-lg shadow-sm border border-main flex flex-col">
+                                    <h4 class="font-bold text-lg text-heading task-title">[BE] Refactor Summary & Reference Logic</h4>
+                                    <p class="mt-2 flex-grow task-description">Move the `MedioDePago` node to the Summary section and update its enum. Add new total fields (`TotalServNoSujetos`, etc.) and their calculation logic. Update `InformacionReferencia` enums to include new codes from Note 9 and 10.</p>
+                                    <button class="copy-btn mt-4 self-start text-sm font-medium py-2 px-4 rounded-full flex items-center gap-2" style="background-color: var(--primary-color); color: white;"><i data-lucide="copy" class="w-4 h-4"></i>Copy for Issue</button>
+                                </div>
                             </div>
-                             <div class="bg-section p-4 rounded-lg shadow-sm border border-main">
-                                <h3 class="font-semibold text-lg text-heading">Phase 2: Backend Implementation</h3>
-                                <ul class="list-disc list-inside mt-2 pl-4">
-                                    <li>[ ] Create new TypeScript interfaces for v4.4.</li>
-                                    <li>[ ] Update Cloud Functions for XML generation with v4.4 logic.</li>
-                                    <li>[ ] Implement all new validation rules.</li>
-                                    <li>[ ] Update Firestore security rules if necessary.</li>
-                                    <li>[ ] Write unit and integration tests for the new logic.</li>
-                                </ul>
+                        </div>
+
+                        <!-- Frontend Team -->
+                        <div class="mb-12">
+                            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3 text-heading"><i data-lucide="smartphone-cog" class="w-6 h-6" style="color: var(--primary-color)"></i>Frontend Team</h3>
+                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                               <div class="bg-section p-6 rounded-lg shadow-sm border border-main flex flex-col">
+                                    <h4 class="font-bold text-lg text-heading task-title">[FE] Implement UI for Header Changes</h4>
+                                    <p class="mt-2 flex-grow task-description">Update the Flutter UI to include new fields: `ProveedorSistemas` (in settings), `CodigoActividadReceptor`. Update the `TipoIdentificacion` dropdown and expand the `Numero` field's max length. Remove the `Fax` field from all forms.</p>
+                                    <button class="copy-btn mt-4 self-start text-sm font-medium py-2 px-4 rounded-full flex items-center gap-2" style="background-color: var(--primary-color); color: white;"><i data-lucide="copy" class="w-4 h-4"></i>Copy for Issue</button>
+                                </div>
+                                <div class="bg-section p-6 rounded-lg shadow-sm border border-main flex flex-col">
+                                    <h4 class="font-bold text-lg text-heading task-title">[FE] Build UI for Line Item Changes</h4>
+                                    <p class="mt-2 flex-grow task-description">Implement UI for new line item fields: `TipoTransaccion`, `NumeroVINoSerie`. Add a dropdown for `CodigoDescuento`. Redesign the tax input section to accommodate new fields and logic. This includes the complex UI for `DetalleSurtido`.</p>
+                                    <button class="copy-btn mt-4 self-start text-sm font-medium py-2 px-4 rounded-full flex items-center gap-2" style="background-color: var(--primary-color); color: white;"><i data-lucide="copy" class="w-4 h-4"></i>Copy for Issue</button>
+                                </div>
+                                <div class="bg-section p-6 rounded-lg shadow-sm border border-main flex flex-col">
+                                    <h4 class="font-bold text-lg text-heading task-title">[FE] Update Summary and Reference UI</h4>
+                                    <p class="mt-2 flex-grow task-description">Update the invoice summary view to display the new total fields (`TotalServNoSujetos`, etc.). Update the `MedioDePago` dropdown with new options. Ensure the UI for adding document references includes the new reference types.</p>
+                                    <button class="copy-btn mt-4 self-start text-sm font-medium py-2 px-4 rounded-full flex items-center gap-2" style="background-color: var(--primary-color); color: white;"><i data-lucide="copy" class="w-4 h-4"></i>Copy for Issue</button>
+                                </div>
                             </div>
-                             <div class="bg-section p-4 rounded-lg shadow-sm border border-main">
-                                <h3 class="font-semibold text-lg text-heading">Phase 3: Frontend Implementation</h3>
-                                <ul class="list-disc list-inside mt-2 pl-4">
-                                    <li>[ ] Create new Dart models for v4.4.</li>
-                                    <li>[ ] Build the new UI components for added fields.</li>
-                                    <li>[ ] Implement the complex UI for the `DetalleSurtido` node.</li>
-                                    <li>[ ] Update state management to handle the new data structure.</li>
-                                    <li>[ ] Connect UI to new/updated backend endpoints.</li>
-                                </ul>
-                            </div>
-                             <div class="bg-section p-4 rounded-lg shadow-sm border border-main">
-                                <h3 class="font-semibold text-lg text-heading">Phase 4: Testing & Deployment</h3>
-                                <ul class="list-disc list-inside mt-2 pl-4">
-                                    <li>[ ] Perform end-to-end testing in the sandbox environment.</li>
-                                    <li>[ ] Test backward compatibility for v4.3 credit/debit notes.</li>
-                                    <li>[ ] Prepare deployment scripts.</li>
-                                    <li>[ ] Schedule and execute the production deployment.</li>
-                                </ul>
+                        </div>
+
+                         <!-- Marketing Team -->
+                        <div class="mb-12">
+                            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3 text-heading"><i data-lucide="megaphone" class="w-6 h-6" style="color: var(--brand-green)"></i>Marketing Team</h3>
+                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="bg-section p-6 rounded-lg shadow-sm border border-main flex flex-col">
+                                    <h4 class="font-bold text-lg text-heading task-title">Prepare User Communication Strategy</h4>
+                                    <p class="mt-2 flex-grow task-description">Develop a communication plan to inform existing users about the upcoming changes. This should include email announcements, in-app notifications, and a blog post explaining the benefits and new features.</p>
+                                    <button class="copy-btn mt-4 self-start text-sm font-medium py-2 px-4 rounded-full flex items-center gap-2" style="background-color: var(--primary-color); color: white;"><i data-lucide="copy" class="w-4 h-4"></i>Copy for Issue</button>
+                                </div>
+                                <div class="bg-section p-6 rounded-lg shadow-sm border border-main flex flex-col">
+                                    <h4 class="font-bold text-lg text-heading task-title">Update Help Documentation and Tutorials</h4>
+                                    <p class="mt-2 flex-grow task-description">Review and update all user-facing documentation, FAQs, and video tutorials to reflect the new v4.4 features and UI changes. Pay special attention to complex new features like "Detalle Surtido".</p>
+                                    <button class="copy-btn mt-4 self-start text-sm font-medium py-2 px-4 rounded-full flex items-center gap-2" style="background-color: var(--primary-color); color: white;"><i data-lucide="copy" class="w-4 h-4"></i>Copy for Issue</button>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -532,50 +570,43 @@ class ResumenFacturaV44 {
     <script>
         lucide.createIcons();
 
+        // --- THEME SWITCHER LOGIC ---
         const themeSwitcher = document.getElementById('theme-switcher');
         const html = document.documentElement;
 
         const applyTheme = (theme) => {
-            themeSwitcher.querySelectorAll('button').forEach(btn => {
-                btn.classList.remove('text-white', 'bg-blue-500');
-                btn.style.color = 'var(--text-light)';
-                if (btn.dataset.theme === theme) {
-                    btn.style.color = 'white';
-                    btn.style.backgroundColor = 'var(--primary-color)';
-                } else {
-                     btn.style.backgroundColor = 'transparent';
-                }
-            });
-
             if (theme === 'dark') {
                 html.classList.add('dark');
             } else {
                 html.classList.remove('dark');
             }
         };
-
-        const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
-        const handleThemeSelection = (selectedTheme) => {
-            if (selectedTheme === 'system') {
-                localStorage.removeItem('theme');
-                const systemTheme = getSystemTheme();
-                applyTheme(systemTheme);
-            } else {
-                localStorage.setItem('theme', selectedTheme);
-                applyTheme(selectedTheme);
-            }
-            
-            // Re-apply active button style for system
-            themeSwitcher.querySelectorAll('button').forEach(btn => {
-                 btn.style.color = 'var(--text-light)';
-                 btn.style.backgroundColor = 'transparent';
+        
+        const setActiveButton = (theme) => {
+             themeSwitcher.querySelectorAll('button').forEach(btn => {
+                btn.style.color = 'var(--text-light)';
+                btn.style.backgroundColor = 'transparent';
             });
-            const activeButton = themeSwitcher.querySelector(`button[data-theme="${selectedTheme}"]`);
+            const activeButton = themeSwitcher.querySelector(`button[data-theme="${theme}"]`);
             if(activeButton) {
                 activeButton.style.color = 'white';
                 activeButton.style.backgroundColor = 'var(--primary-color)';
             }
+        }
+
+        const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+        const handleThemeSelection = (selectedTheme) => {
+            let themeToApply;
+            if (selectedTheme === 'system') {
+                localStorage.removeItem('theme');
+                themeToApply = getSystemTheme();
+            } else {
+                localStorage.setItem('theme', selectedTheme);
+                themeToApply = selectedTheme;
+            }
+            applyTheme(themeToApply);
+            setActiveButton(selectedTheme);
         };
 
         themeSwitcher.addEventListener('click', (e) => {
@@ -585,19 +616,42 @@ class ResumenFacturaV44 {
             }
         });
 
-        // On page load
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            handleThemeSelection(savedTheme);
-        } else {
-            handleThemeSelection('system');
-        }
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        handleThemeSelection(savedTheme);
         
-        // Listen for system theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
             if (!localStorage.getItem('theme')) {
                  handleThemeSelection('system');
             }
+        });
+
+        // --- COPY TO CLIPBOARD LOGIC ---
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const card = button.closest('.bg-section');
+                const title = card.querySelector('.task-title').textContent.trim();
+                const description = card.querySelector('.task-description').textContent.trim();
+                
+                const issueText = `### ${title}\n\n**Description:**\n${description}`;
+                
+                const textarea = document.createElement('textarea');
+                textarea.value = issueText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Copied!';
+                    lucide.createIcons();
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        lucide.createIcons();
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                }
+                document.body.removeChild(textarea);
+            });
         });
 
     </script>
