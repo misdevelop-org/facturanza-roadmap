@@ -186,19 +186,40 @@
             category: "General",
             items: [
                 {
-                    title: "Mejoras est\u00e9ticas en la p\u00e1gina de pago",
-                    description: "\u00a1Hemos renovado la apariencia de nuestra p\u00e1gina de pago para que tu experiencia sea a\u00fan m\u00e1s agradable y sencilla!",
-                    image: "https://placehold.co/800x500.png"
+                    title: "Mejoras estéticas del menú lateral",
+                    description: "Hemos renovado la apariencia del menú lateral para que tu experiencia sea aún más intuitiva y visualmente atractiva.",
+                    image: "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.4.1%2FMejoras-est%C3%A9ticas-del-men%C3%BA-lateral%2Fmenu%20empresas.png?alt=media&token=4ddcd241-40f7-4ccd-b2b6-e4e1767724c1"
                 },
             ],
         },
         {
-            category: "Facturaci\u00f3n",
+            category: "Facturación",
             items: [
                 {
-                    title: "Automatizaci\u00f3n para facturas de compras",
-                    description: "Automatizamos el proceso de facturas de compras para ahorrarte tiempo y esfuerzo.",
-                    image: "https://placehold.co/800x500.png"
+                    title: "Organización de facturas por rango de fechas",
+                    description: "Ahora las facturas se muestran por rango de fecha, siendo el mes actual el predeterminado. Además, se incluyó un botón para seleccionar el rango de fechas de las facturas que se están mostrando.",
+                    images: [
+                        "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.4.1%2FOrganizaci%C3%B3n-de-facturas-por-rango-de-fechas%2FScreenshot%202025-07-24%20at%209.19.16%E2%80%AFAM.png?alt=media&token=5a7f7ca8-7c8a-416b-818c-15226b507d2a",
+                        "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.4.1%2FOrganizaci%C3%B3n-de-facturas-por-rango-de-fechas%2FScreenshot%202025-07-31%20at%2011.17.08%E2%80%AFAM.png?alt=media&token=0433c4ad-026e-4358-9abb-dafdfc7328a7",
+                    ]
+                                    },
+            ],
+        },
+        {
+            category: "Creación empresas",
+            items: [
+                {
+                    title: "Mejoras estéticas en la creación de empresa",
+                    description: "Renovamos la apariencia visual de las páginas para crear empresa.",
+                    images: [
+                        "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.4.1%2FMejoras-est%C3%A9ticas-en-la-creaci%C3%B3n-de-empresa%2FScreenshot%202025-07-31%20at%2011.29.46%E2%80%AFAM.png?alt=media&token=06f7c37c-4123-4bcd-a8a0-aa084bf7b51e",
+                        "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.4.1%2FMejoras-est%C3%A9ticas-en-la-creaci%C3%B3n-de-empresa%2FScreenshot%202025-07-31%20at%2011.33.21%E2%80%AFAM.png?alt=media&token=8d566f94-1d09-4330-8d91-f063f75b69e1",
+                    ]
+                                    },
+                {
+                    title: "Nombre del dominio personalizable",
+                    description: "Te damos la opcion de que elijas el nombre de dominio que mejor se adapte a tu marca. ",
+                    image: "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.4.1%2FMejoras-est%C3%A9ticas-en-la-creaci%C3%B3n-de-empresa%2FScreenshot%202025-07-31%20at%2011.33.21%E2%80%AFAM.png?alt=media&token=8d566f94-1d09-4330-8d91-f063f75b69e1"
                 },
             ],
         },
@@ -233,8 +254,8 @@
         contentHTML += `
             <section id="${welcomeId}" class="scroll-mt-24 page-section text-center min-h-[40vh] flex flex-col justify-center items-center py-6">
                 <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-16 brand-logo mb-6">
-                <h2 class="title-color text-4xl font-bold mb-2">\u00a1Bienvenido a las nuevas actualizaciones!</h2>
-                <p class="text-2xl font-semibold text-[var(--brand-primary)] mb-4">versi\u00f3n 1.4.1</p>
+                <h2 class="title-color text-4xl font-bold mb-2">¡Bienvenido a las nuevas actualizaciones!</h2>
+                <p class="text-2xl font-semibold text-[var(--brand-primary)] mb-4">versión 1.4.1</p>
                 <p class="text-xl text-subtle max-w-2xl mb-8">Hemos trabajado en nuevas funciones y mejoras para potenciar tu negocio. Navega para ver los detalles.</p>
                 <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer"
                    class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl">
@@ -281,7 +302,7 @@
             if (categoryIndex === featuresData.length - 1) {
                 contentHTML += `
                     <section class="text-center py-12">
-                        <h3 class="text-3xl font-bold text-main mb-6">\u00bfListo para empezar?</h3>
+                        <h3 class="text-3xl font-bold text-main mb-6">¿Listo para empezar?</h3>
                         <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                             <a href="https://facturanza.com" target="_blank" rel="noopener noreferrer"
                                class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl w-full sm:w-auto">
