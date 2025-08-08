@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Roadmap de Producto - Facturanza</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon Link -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <!-- Chosen Palette: Warm Neutral Harmony -->
     <!-- Application Structure Plan: This SPA serves as the main project dashboard, visualizing a product roadmap. The structure is a vertical timeline, chosen for its intuitive and chronological representation of project phases (Alpha, Beta, Release). This linear flow is ideal for communicating progress over time. Each phase is a distinct section containing cards for individual features, allowing for at-a-glance status checks (Pending/Complete). A separate section for "User Suggestions" is included at the end to capture ongoing feedback outside the main timeline. Finally, a clear call-to-action links to the detailed sub-project for "Advanced User Role Access", making this page a central hub. -->
     <!-- Visualization & Content Choices: 
@@ -16,161 +22,296 @@
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        body { 
-            font-family: 'Inter', sans-serif;
-            background-color: #F5F5F4; /* bg-warm-neutral */
-            color: #292524; /* text-warm-neutral-dark */
-        }
-        .accent-color { color: #1e40af; }
-        .accent-bg { background-color: #1e40af; }
-        
-        .timeline-item .timeline-content {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .timeline-item:hover .timeline-content {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f5f5f4; /* bg-warm-neutral */
+        color: #292524; /* text-warm-neutral-dark */
+      }
+      .accent-color {
+        color: #1e40af;
+      }
+      .accent-bg {
+        background-color: #1e40af;
+      }
+
+      .timeline-item .timeline-content {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .timeline-item:hover .timeline-content {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
     </style>
-</head>
-<body class="antialiased">
-
+  </head>
+  <body class="antialiased">
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
-        <!-- Header -->
-        <header class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-bold accent-color mb-4">Roadmap de Lanzamiento de Facturanza</h1>
-            <p class="text-lg text-stone-600 max-w-3xl mx-auto">Una vista general de las fases de desarrollo, funcionalidades clave y el progreso hacia el lanzamiento de la V1.</p>
-        </header>
+      <!-- Header -->
+      <header class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold accent-color mb-4">
+          Roadmap de Lanzamiento de Facturanza
+        </h1>
+        <p class="text-lg text-stone-600 max-w-3xl mx-auto">
+          Una vista general de las fases de desarrollo, funcionalidades clave y
+          el progreso hacia el lanzamiento de la V1.
+        </p>
+      </header>
 
-        <!-- Timeline -->
-        <div class="relative max-w-4xl mx-auto">
-            <!-- The vertical line -->
-            <div class="absolute left-4 sm:left-1/2 top-0 h-full w-0.5 bg-stone-300 transform -translate-x-1/2 z-0"></div>
+      <!-- Timeline -->
+      <div class="relative max-w-4xl mx-auto">
+        <!-- The vertical line -->
+        <div
+          class="absolute left-4 sm:left-1/2 top-0 h-full w-0.5 bg-stone-300 transform -translate-x-1/2 z-0"
+        ></div>
 
-            <!-- Timeline Item: Alpha Testing -->
-            <div class="timeline-item mb-16 flex">
-                <div class="hidden sm:flex w-1/2"></div>
-                <div class="w-4 sm:w-auto flex-shrink-0 flex justify-center relative z-10">
-                    <div class="w-8 h-8 rounded-full accent-bg text-white flex items-center justify-center ring-8 ring-white">1</div>
-                </div>
-                <div class="w-full sm:w-1/2 sm:pl-8">
-                    <div class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200">
-                        <p class="text-sm font-semibold accent-color">FASE 1: PRUEBAS ALFA</p>
-                        <h3 class="text-xl font-bold text-stone-800 mt-1">Funcionalidad Principal y Estabilidad</h3>
-                        <time class="text-xs text-stone-500">1 de Mayo, 2025 - 22 de Junio, 2025</time>
-                        
-                        <div class="mt-4">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm font-medium text-stone-700">Progreso Actual de la Fase</span>
-                                <span id="progress-text" class="text-sm font-medium text-stone-700"></span>
-                            </div>
-                            <div class="w-full bg-stone-200 rounded-full h-2.5">
-                                <div id="progress-bar" class="accent-bg h-2.5 rounded-full" style="width: 0%;"></div>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 space-y-3 text-sm">
-                            <div class="flex items-center"><span class="mr-2 text-lg">✅</span> Historial de pagos (verificación manual)</div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> <a href="./advanced-user-role-access/index.html" class="accent-color hover:underline font-semibold">Control de acceso avanzado para usuarios</a></div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">✅</span> Verificación diaria de pagos (backend)</div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">✅</span> Funcionalidad de duplicar productos</div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">✅</span> Editar descripción de productos en el formulario de factura</div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Duplicar Factura desde opciones</div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">✅</span> Contrato para testers sobre uso de credenciales de Hacienda</div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Timeline Item: Alpha Testing -->
+        <div class="timeline-item mb-16 flex">
+          <div class="hidden sm:flex w-1/2"></div>
+          <div
+            class="w-4 sm:w-auto flex-shrink-0 flex justify-center relative z-10"
+          >
+            <div
+              class="w-8 h-8 rounded-full accent-bg text-white flex items-center justify-center ring-8 ring-white"
+            >
+              1
             </div>
+          </div>
+          <div class="w-full sm:w-1/2 sm:pl-8">
+            <div
+              class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200"
+            >
+              <p class="text-sm font-semibold accent-color">
+                FASE 1: PRUEBAS ALFA
+              </p>
+              <h3 class="text-xl font-bold text-stone-800 mt-1">
+                Funcionalidad Principal y Estabilidad
+              </h3>
+              <time class="text-xs text-stone-500"
+                >1 de Mayo, 2025 - 22 de Junio, 2025</time
+              >
 
-            <!-- Timeline Item: Beta Testing -->
-            <div class="timeline-item mb-16 flex">
-                 <div class="w-full sm:w-1/2 sm:pr-8 text-right">
-                     <div class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200">
-                        <p class="text-sm font-semibold accent-color">FASE 2: PRUEBAS BETA</p>
-                        <h3 class="text-xl font-bold text-stone-800 mt-1">Pulido de UI/UX y Nuevas Funciones</h3>
-                        <time class="text-xs text-stone-500">23 de Junio, 2025 - 27 de Julio, 2025</time>
-                        <div class="mt-4 space-y-3 text-sm text-left">
-                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Migración al esquema 4.4 de Hacienda</div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Rediseño del Login y notificaciones (Push y Email)</div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Límites de creación de empresas por ID y actividad</div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Visión general de la empresa (Enterprise overview)</div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Cuenta organizacional de Apple Developer</div>
-                            <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> Sitio web, marketing y términos y condiciones</div>
-                             <div class="flex items-center"><span class="mr-2 text-lg">⚙️</span> KYC para contadores a través de formulario web</div>
-                        </div>
-                    </div>
-                 </div>
-                <div class="w-4 sm:w-auto flex-shrink-0 flex justify-center relative z-10">
-                    <div class="w-8 h-8 rounded-full bg-stone-700 text-white flex items-center justify-center ring-8 ring-white">2</div>
+              <div class="mt-4">
+                <div class="flex justify-between mb-1">
+                  <span class="text-sm font-medium text-stone-700"
+                    >Progreso Actual de la Fase</span
+                  >
+                  <span
+                    id="progress-text"
+                    class="text-sm font-medium text-stone-700"
+                  ></span>
                 </div>
-                <div class="hidden sm:flex w-1/2"></div>
-            </div>
+                <div class="w-full bg-stone-200 rounded-full h-2.5">
+                  <div
+                    id="progress-bar"
+                    class="accent-bg h-2.5 rounded-full"
+                    style="width: 0%"
+                  ></div>
+                </div>
+              </div>
 
-            <!-- Timeline Item: Production Release -->
-            <div class="timeline-item mb-16 flex">
-                <div class="hidden sm:flex w-1/2"></div>
-                <div class="w-4 sm:w-auto flex-shrink-0 flex justify-center relative z-10">
-                    <div class="w-8 h-8 rounded-full bg-stone-700 text-white flex items-center justify-center ring-8 ring-white">3</div>
+              <div class="mt-4 space-y-3 text-sm">
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">✅</span> Historial de pagos
+                  (verificación manual)
                 </div>
-                <div class="w-full sm:w-1/2 sm:pl-8">
-                    <div class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200">
-                        <p class="text-sm font-semibold accent-color">LANZAMIENTO</p>
-                        <h3 class="text-xl font-bold text-stone-800 mt-1">Producción V1</h3>
-                        <time class="text-xs text-stone-500">28 de Julio, 2025</time>
-                        <p class="mt-4 text-sm text-stone-600">Lanzamiento oficial de la primera versión de Facturanza, incorporando todas las funcionalidades probadas y listas para el público.</p>
-                    </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">⚙️</span>
+                  <a
+                    href="./advanced-user-role-access/index.html"
+                    class="accent-color hover:underline font-semibold"
+                    >Control de acceso avanzado para usuarios</a
+                  >
                 </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">✅</span> Verificación diaria de
+                  pagos (backend)
+                </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">✅</span> Funcionalidad de duplicar
+                  productos
+                </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">✅</span> Editar descripción de
+                  productos en el formulario de factura
+                </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">⚙️</span> Duplicar Factura desde
+                  opciones
+                </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">✅</span> Contrato para testers
+                  sobre uso de credenciales de Hacienda
+                </div>
+              </div>
             </div>
-
-             <!-- Timeline Item: User Suggestions -->
-            <div class="timeline-item flex">
-                 <div class="w-full sm:w-1/2 sm:pr-8 text-right">
-                     <div class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200">
-                        <h3 class="text-xl font-bold text-stone-800 mt-1">Sugerencias de Usuarios</h3>
-                        <time class="text-xs text-stone-500">Feedback Continuo</time>
-                        <div class="mt-4 space-y-3 text-sm text-left">
-                            <div class="flex items-start"><span class="mr-2 text-lg">💡</span> Historial/Log de acciones de usuarios</div>
-                            <div class="flex items-start"><span class="mr-2 text-lg">💡</span> Habilitar la selección de texto en campos de montos totales</div>
-                            <div class="flex items-start"><span class="mr-2 text-lg">💡</span> Personalización de temas de PDF (clásico, moderno)</div>
-                            <div class="flex items-start"><span class="mr-2 text-lg">💡</span> Diálogo de aviso sobre la necesidad de ID de Hacienda</div>
-                            <div class="flex items-start"><span class="mr-2 text-lg">💡</span> Visualizar el IVA devuelto en facturas de servicios médicos/agrícolas</div>
-                        </div>
-                    </div>
-                 </div>
-                <div class="w-4 sm:w-auto flex-shrink-0 flex justify-center relative z-10">
-                    <div class="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center ring-8 ring-white">✔</div>
-                </div>
-                <div class="hidden sm:flex w-1/2"></div>
-            </div>
+          </div>
         </div>
+
+        <!-- Timeline Item: Beta Testing -->
+        <div class="timeline-item mb-16 flex">
+          <div class="w-full sm:w-1/2 sm:pr-8 text-right">
+            <div
+              class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200"
+            >
+              <p class="text-sm font-semibold accent-color">
+                FASE 2: PRUEBAS BETA
+              </p>
+              <h3 class="text-xl font-bold text-stone-800 mt-1">
+                Pulido de UI/UX y Nuevas Funciones
+              </h3>
+              <time class="text-xs text-stone-500"
+                >23 de Junio, 2025 - 27 de Julio, 2025</time
+              >
+              <div class="mt-4 space-y-3 text-sm text-left">
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">⚙️</span> Migración al esquema 4.4
+                  de Hacienda
+                </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">⚙️</span> Rediseño del Login y
+                  notificaciones (Push y Email)
+                </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">⚙️</span> Límites de creación de
+                  empresas por ID y actividad
+                </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">⚙️</span> Visión general de la
+                  empresa (Enterprise overview)
+                </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">⚙️</span> Cuenta organizacional de
+                  Apple Developer
+                </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">⚙️</span> Sitio web, marketing y
+                  términos y condiciones
+                </div>
+                <div class="flex items-center">
+                  <span class="mr-2 text-lg">⚙️</span> KYC para contadores a
+                  través de formulario web
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="w-4 sm:w-auto flex-shrink-0 flex justify-center relative z-10"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-stone-700 text-white flex items-center justify-center ring-8 ring-white"
+            >
+              2
+            </div>
+          </div>
+          <div class="hidden sm:flex w-1/2"></div>
+        </div>
+
+        <!-- Timeline Item: Production Release -->
+        <div class="timeline-item mb-16 flex">
+          <div class="hidden sm:flex w-1/2"></div>
+          <div
+            class="w-4 sm:w-auto flex-shrink-0 flex justify-center relative z-10"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-stone-700 text-white flex items-center justify-center ring-8 ring-white"
+            >
+              3
+            </div>
+          </div>
+          <div class="w-full sm:w-1/2 sm:pl-8">
+            <div
+              class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200"
+            >
+              <p class="text-sm font-semibold accent-color">LANZAMIENTO</p>
+              <h3 class="text-xl font-bold text-stone-800 mt-1">
+                Producción V1
+              </h3>
+              <time class="text-xs text-stone-500">28 de Julio, 2025</time>
+              <p class="mt-4 text-sm text-stone-600">
+                Lanzamiento oficial de la primera versión de Facturanza,
+                incorporando todas las funcionalidades probadas y listas para el
+                público.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item: User Suggestions -->
+        <div class="timeline-item flex">
+          <div class="w-full sm:w-1/2 sm:pr-8 text-right">
+            <div
+              class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200"
+            >
+              <h3 class="text-xl font-bold text-stone-800 mt-1">
+                Sugerencias de Usuarios
+              </h3>
+              <time class="text-xs text-stone-500">Feedback Continuo</time>
+              <div class="mt-4 space-y-3 text-sm text-left">
+                <div class="flex items-start">
+                  <span class="mr-2 text-lg">💡</span> Historial/Log de acciones
+                  de usuarios
+                </div>
+                <div class="flex items-start">
+                  <span class="mr-2 text-lg">💡</span> Habilitar la selección de
+                  texto en campos de montos totales
+                </div>
+                <div class="flex items-start">
+                  <span class="mr-2 text-lg">💡</span> Personalización de temas
+                  de PDF (clásico, moderno)
+                </div>
+                <div class="flex items-start">
+                  <span class="mr-2 text-lg">💡</span> Diálogo de aviso sobre la
+                  necesidad de ID de Hacienda
+                </div>
+                <div class="flex items-start">
+                  <span class="mr-2 text-lg">💡</span> Visualizar el IVA
+                  devuelto en facturas de servicios médicos/agrícolas
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="w-4 sm:w-auto flex-shrink-0 flex justify-center relative z-10"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center ring-8 ring-white"
+            >
+              ✔
+            </div>
+          </div>
+          <div class="hidden sm:flex w-1/2"></div>
+        </div>
+      </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Progress Bar Calculation ---
-            const startDate = new Date('2025-05-01T00:00:00-06:00'); // CST
-            const endDate = new Date('2025-06-22T23:59:59-06:00'); // CST
-            const today = new Date();
+      document.addEventListener("DOMContentLoaded", function () {
+        // --- Progress Bar Calculation ---
+        const startDate = new Date("2025-05-01T00:00:00-06:00"); // CST
+        const endDate = new Date("2025-06-22T23:59:59-06:00"); // CST
+        const today = new Date();
 
-            // Clamp today's date within the phase range for calculation
-            const clampedToday = new Date(Math.max(startDate, Math.min(today, endDate)));
+        // Clamp today's date within the phase range for calculation
+        const clampedToday = new Date(
+          Math.max(startDate, Math.min(today, endDate))
+        );
 
-            const totalDuration = endDate.getTime() - startDate.getTime();
-            const elapsedDuration = clampedToday.getTime() - startDate.getTime();
-            
-            let progressPercentage = 0;
-            if (totalDuration > 0) {
-                 progressPercentage = (elapsedDuration / totalDuration) * 100;
-            }
+        const totalDuration = endDate.getTime() - startDate.getTime();
+        const elapsedDuration = clampedToday.getTime() - startDate.getTime();
 
-            const progressBar = document.getElementById('progress-bar');
-            const progressText = document.getElementById('progress-text');
+        let progressPercentage = 0;
+        if (totalDuration > 0) {
+          progressPercentage = (elapsedDuration / totalDuration) * 100;
+        }
 
-            if (progressBar && progressText) {
-                progressBar.style.width = `${progressPercentage.toFixed(2)}%`;
-                progressText.textContent = `${progressPercentage.toFixed(0)}%`;
-            }
-        });
+        const progressBar = document.getElementById("progress-bar");
+        const progressText = document.getElementById("progress-text");
+
+        if (progressBar && progressText) {
+          progressBar.style.width = `${progressPercentage.toFixed(2)}%`;
+          progressText.textContent = `${progressPercentage.toFixed(0)}%`;
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
