@@ -22,40 +22,153 @@
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
+      :root {
+        --bg-primary: #f5f5f5;
+        --bg-secondary: #ffffff;
+        --text-primary: #414141;
+        --text-secondary: #6f6f6f;
+        --brand-primary: #5eb0c7;
+        --brand-secondary: #005973;
+        --brand-light-green: #63d389;
+        --cta-text-color: #005973;
+        --logo-filter: none;
+      }
+
+      .dark {
+        --bg-primary: #414141;
+        --bg-secondary: #6f6f6f;
+        --text-primary: #e8e8e8;
+        --text-secondary: #a0aec0;
+        --brand-primary: #5eb0c7;
+        --brand-secondary: #a4d2df;
+        --brand-light-green: #63d389;
+      }
+
       body {
         font-family: "Inter", sans-serif;
-        background-color: #f5f5f4; /* bg-warm-neutral */
-        color: #292524; /* text-warm-neutral-dark */
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
       .accent-color {
-        color: #1e40af;
+        color: var(--brand-secondary);
       }
       .accent-bg {
-        background-color: #1e40af;
+        background-color: var(--brand-secondary);
       }
 
       .timeline-item .timeline-content {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: var(--bg-secondary);
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          background-color 0.3s ease;
       }
       .timeline-item:hover .timeline-content {
         transform: translateY(-5px);
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
           0 4px 6px -2px rgba(0, 0, 0, 0.05);
       }
+      .text-subtle {
+        color: var(--text-secondary);
+      }
+      .brand-logo {
+        filter: var(--logo-filter);
+        transition: filter 0.3s ease;
+      }
+      .cta-button {
+        background-color: var(--brand-light-green);
+        color: var(--cta-text-color);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .cta-button svg {
+        color: var(--cta-text-color);
+      }
     </style>
   </head>
   <body class="antialiased">
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Header -->
-      <header class="text-center mb-16">
+      <header class="flex justify-between items-center mb-8">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c"
+          alt="Facturanza Logo"
+          class="h-10 brand-logo"
+        />
+        <!-- Dark Mode Toggle -->
+        <div class="flex items-center space-x-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-subtle"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            ></path>
+          </svg>
+          <button
+            id="theme-toggle"
+            class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-gray-300 dark:bg-brand-secondary"
+          >
+            <span
+              id="theme-toggle-indicator"
+              class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 ease-in-out"
+            ></span>
+          </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-subtle"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+            ></path>
+          </svg>
+        </div>
+      </header>
+      <div class="text-center mb-16">
         <h1 class="text-4xl md:text-5xl font-bold accent-color mb-4">
           Roadmap de Lanzamiento de Facturanza
         </h1>
-        <p class="text-lg text-stone-600 max-w-3xl mx-auto">
+        <p class="text-lg text-subtle max-w-3xl mx-auto">
           Una vista general de las fases de desarrollo, funcionalidades clave y
           el progreso hacia el lanzamiento de la V1.
         </p>
-      </header>
+        <div class="mt-8">
+          <a
+            href="https://app.facturanza.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl"
+          >
+            <span>Ir al facturador</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
 
       <!-- Timeline -->
       <div class="relative max-w-4xl mx-auto">
@@ -93,18 +206,14 @@
               <div class="mt-4">
                 <div class="flex justify-between mb-1">
                   <span class="text-sm font-medium text-stone-700"
-                    >Progreso Actual de la Fase</span
+                    >Progreso de la Fase</span
                   >
-                  <span
-                    id="progress-text"
-                    class="text-sm font-medium text-stone-700"
-                  ></span>
+                  <span class="text-sm font-medium text-stone-700">100%</span>
                 </div>
                 <div class="w-full bg-stone-200 rounded-full h-2.5">
                   <div
-                    id="progress-bar"
                     class="accent-bg h-2.5 rounded-full"
-                    style="width: 0%"
+                    style="width: 100%"
                   ></div>
                 </div>
               </div>
@@ -115,7 +224,7 @@
                   (verificación manual)
                 </div>
                 <div class="flex items-center">
-                  <span class="mr-2 text-lg">⚙️</span>
+                  <span class="mr-2 text-lg">✅</span>
                   <a
                     href="./advanced-user-role-access/index.html"
                     class="accent-color hover:underline font-semibold"
@@ -135,7 +244,7 @@
                   productos en el formulario de factura
                 </div>
                 <div class="flex items-center">
-                  <span class="mr-2 text-lg">⚙️</span> Duplicar Factura desde
+                  <span class="mr-2 text-lg">✅</span> Duplicar Factura desde
                   opciones
                 </div>
                 <div class="flex items-center">
@@ -160,8 +269,26 @@
                 Pulido de UI/UX y Nuevas Funciones
               </h3>
               <time class="text-xs text-stone-500"
-                >23 de Junio, 2025 - 27 de Julio, 2025</time
+                >23 de Junio, 2025 - 31 de Agosto, 2025</time
               >
+              <div class="mt-4">
+                <div class="flex justify-between mb-1">
+                  <span class="text-sm font-medium text-stone-700"
+                    >Progreso Actual de la Fase</span
+                  >
+                  <span
+                    id="progress-text"
+                    class="text-sm font-medium text-stone-700"
+                  ></span>
+                </div>
+                <div class="w-full bg-stone-200 rounded-full h-2.5">
+                  <div
+                    id="progress-bar"
+                    class="accent-bg h-2.5 rounded-full"
+                    style="width: 0%"
+                  ></div>
+                </div>
+              </div>
               <div class="mt-4 space-y-3 text-sm text-left">
                 <div class="flex items-center">
                   <span class="mr-2 text-lg">⚙️</span> Migración al esquema 4.4
@@ -172,19 +299,15 @@
                   notificaciones (Push y Email)
                 </div>
                 <div class="flex items-center">
-                  <span class="mr-2 text-lg">⚙️</span> Límites de creación de
+                  <span class="mr-2 text-lg">✅</span> Límites de creación de
                   empresas por ID y actividad
                 </div>
                 <div class="flex items-center">
-                  <span class="mr-2 text-lg">⚙️</span> Visión general de la
+                  <span class="mr-2 text-lg">✅</span> Visión general de la
                   empresa (Enterprise overview)
                 </div>
                 <div class="flex items-center">
-                  <span class="mr-2 text-lg">⚙️</span> Cuenta organizacional de
-                  Apple Developer
-                </div>
-                <div class="flex items-center">
-                  <span class="mr-2 text-lg">⚙️</span> Sitio web, marketing y
+                  <span class="mr-2 text-lg">✅</span> Sitio web, marketing y
                   términos y condiciones
                 </div>
                 <div class="flex items-center">
@@ -198,7 +321,7 @@
             class="w-4 sm:w-auto flex-shrink-0 flex justify-center relative z-10"
           >
             <div
-              class="w-8 h-8 rounded-full bg-stone-700 text-white flex items-center justify-center ring-8 ring-white"
+              class="w-8 h-8 rounded-full accent-bg text-white flex items-center justify-center ring-8 ring-white"
             >
               2
             </div>
@@ -226,7 +349,7 @@
               <h3 class="text-xl font-bold text-stone-800 mt-1">
                 Producción V1
               </h3>
-              <time class="text-xs text-stone-500">28 de Julio, 2025</time>
+              <time class="text-xs text-stone-500">1 de Septiembre, 2025</time>
               <p class="mt-4 text-sm text-stone-600">
                 Lanzamiento oficial de la primera versión de Facturanza,
                 incorporando todas las funcionalidades probadas y listas para el
@@ -235,60 +358,62 @@
             </div>
           </div>
         </div>
-
-        <!-- Timeline Item: User Suggestions -->
-        <div class="timeline-item flex">
-          <div class="w-full sm:w-1/2 sm:pr-8 text-right">
-            <div
-              class="timeline-content bg-white p-6 rounded-lg shadow-md border border-stone-200"
-            >
-              <h3 class="text-xl font-bold text-stone-800 mt-1">
-                Sugerencias de Usuarios
-              </h3>
-              <time class="text-xs text-stone-500">Feedback Continuo</time>
-              <div class="mt-4 space-y-3 text-sm text-left">
-                <div class="flex items-start">
-                  <span class="mr-2 text-lg">💡</span> Historial/Log de acciones
-                  de usuarios
-                </div>
-                <div class="flex items-start">
-                  <span class="mr-2 text-lg">💡</span> Habilitar la selección de
-                  texto en campos de montos totales
-                </div>
-                <div class="flex items-start">
-                  <span class="mr-2 text-lg">💡</span> Personalización de temas
-                  de PDF (clásico, moderno)
-                </div>
-                <div class="flex items-start">
-                  <span class="mr-2 text-lg">💡</span> Diálogo de aviso sobre la
-                  necesidad de ID de Hacienda
-                </div>
-                <div class="flex items-start">
-                  <span class="mr-2 text-lg">💡</span> Visualizar el IVA
-                  devuelto en facturas de servicios médicos/agrícolas
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="w-4 sm:w-auto flex-shrink-0 flex justify-center relative z-10"
-          >
-            <div
-              class="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center ring-8 ring-white"
-            >
-              ✔
-            </div>
-          </div>
-          <div class="hidden sm:flex w-1/2"></div>
-        </div>
       </div>
     </div>
+    <!-- Footer -->
+    <footer class="text-center my-12 text-subtle">
+      <p>&copy; 2025 Facturanza. Gracias por tu valiosa contribución.</p>
+      <a
+        href="https://roadmap.facturanza.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-subtle hover:text-[var(--brand-primary)] underline transition-colors"
+      >
+        Ver Roadmap
+      </a>
+    </footer>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // --- Progress Bar Calculation ---
-        const startDate = new Date("2025-05-01T00:00:00-06:00"); // CST
-        const endDate = new Date("2025-06-22T23:59:59-06:00"); // CST
+        const themeToggle = document.getElementById("theme-toggle");
+        const themeToggleIndicator = document.getElementById(
+          "theme-toggle-indicator"
+        );
+        const body = document.body;
+
+        function toggleTheme() {
+          body.classList.toggle("dark");
+          const isDarkMode = body.classList.contains("dark");
+          localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+          updateToggleIndicator(isDarkMode);
+        }
+
+        function updateToggleIndicator(isDarkMode) {
+          if (themeToggleIndicator) {
+            themeToggleIndicator.classList.toggle("translate-x-5", isDarkMode);
+            themeToggleIndicator.classList.toggle("translate-x-1", !isDarkMode);
+          }
+        }
+
+        function initializeTheme() {
+          const useDarkMode =
+            localStorage.getItem("theme") === "dark" ||
+            (!("theme" in localStorage) &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+          if (useDarkMode) body.classList.add("dark");
+          updateToggleIndicator(useDarkMode);
+        }
+
+        if (themeToggle) {
+          themeToggle.addEventListener("click", toggleTheme);
+        }
+
+        initializeTheme();
+
+        // --- Progress Bar Calculation for Beta Phase ---
+        const startDate = new Date("2025-06-23T00:00:00-06:00"); // CST
+        const endDate = new Date("2025-08-31T23:59:59-06:00"); // CST
         const today = new Date();
 
         // Clamp today's date within the phase range for calculation
