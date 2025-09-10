@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturanza: Pruebas Abiertas y Colaboración</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F5F5F5;
+            --text-color: #6F6F6F;
+            --section-color: #FFFFFF;
+            --heading-color: #005973;
+            --primary-color: #5EB0C7;
+            --primary-hover: #3A8FA6;
+            --light-green: #63D389;
+            --light-blue: #C5D0F9;
+            --success-color: #63D389;
+            --error-color: #B7260C;
+        }
+
+        .dark {
+            --bg-color: #414141;
+            --text-color: #E8E8E8;
+            --section-color: #6F6F6F;
+            --heading-color: #E8E8E8;
+            --primary-color: #5EB0C7;
+            --primary-hover: #86C4D5;
+            --light-blue: #a3b2e8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .bg-custom-bg { background-color: var(--bg-color); }
+        .text-custom-text { color: var(--text-color); }
+        .bg-custom-section { background-color: var(--section-color); }
+        .text-custom-heading { color: var(--heading-color); }
+        .text-custom-primary { color: var(--primary-color); }
+        .bg-custom-primary { background-color: var(--primary-color); }
+        .hover\:bg-custom-primary-hover:hover { background-color: var(--primary-hover); }
+        .border-custom-primary { border-color: var(--primary-color); }
+        .ring-custom-primary { ring-color: var(--primary-color); }
+        .accent-custom-primary { accent-color: var(--primary-color); }
+        .text-custom-light-green { color: var(--light-green); }
+        .text-custom-light-blue { color: var(--light-blue); }
+
+        .brand-logo {
+            filter: brightness(1);
+        }
+        .dark .brand-logo {
+             filter: brightness(1.5) grayscale(0.2);
+        }
+    </style>
+</head>
+<body class="bg-custom-bg text-custom-text">
+
+    <!-- Header -->
+    <header class="bg-custom-section/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-10 brand-logo"/>
+            <div class="flex items-center space-x-4">
+                 <a href="#contacto" class="hidden sm:inline bg-custom-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-custom-primary-hover transition-colors">
+                    Registrarse
+                </a>
+                <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 ring-offset-2 ring-offset-custom-bg ring-custom-primary">
+                    <!-- Icons will be dynamically inserted here -->
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+        
+        <!-- Hero Section -->
+        <section class="text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-custom-heading mb-4 leading-tight">Pruebas Abiertas y Colaboración</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8">
+                ¡La primera versión de <span class="text-custom-primary font-bold">Facturanza</span> ya está aquí! Buscamos colaboradores para unirse a nuestras pruebas abiertas y ayudarnos a construir el mejor facturador electrónico.
+            </p>
+            <a href="#contacto" class="bg-custom-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-custom-primary-hover transition-transform transform hover:scale-105 inline-block">
+                ¡Quiero ser colaborador!
+            </a>
+        </section>
+
+        <!-- About Facturanza Section -->
+        <section id="about" class="my-20 md:my-32">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-custom-heading mb-4">Acerca de Facturanza</h2>
+                    <p class="mb-6">
+                        Facturanza es una aplicación de facturación electrónica diseñada para simplificar sus procesos tributarios. Con esta primera versión oficial, sentamos las bases para una herramienta robusta, eficiente y fácil de usar.
+                    </p>
+                </div>
+                <div class="bg-custom-section p-8 rounded-2xl shadow-lg">
+                    <h3 class="text-xl font-bold text-custom-primary mb-3">Visión a Futuro</h3>
+                    <p>
+                        Nos comprometemos a la mejora continua. En futuras versiones, implementaremos nuevas funcionalidades, optimizaremos las existentes y daremos soporte a una gama más amplia de casos de uso para satisfacer sus necesidades cambiantes.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ideal Collaborator Section -->
+        <section id="collaborators" class="my-20 md:my-32">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-custom-heading mb-4">Buscamos Colaboradores Clave</h2>
+                <p class="max-w-2xl mx-auto">Su contribución es vital para el éxito y la evolución de Facturanza. Buscamos individuos con las siguientes cualidades:</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
+                <!-- Profile Items -->
+                <div class="flex flex-col items-center">
+                    <div class="bg-custom-section rounded-full p-4 mb-3 shadow">
+                        <svg class="w-8 h-8 text-custom-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h3 class="font-semibold">Responsabilidad</h3>
+                </div>
+                <div class="flex flex-col items-center">
+                     <div class="bg-custom-section rounded-full p-4 mb-3 shadow">
+                        <svg class="w-8 h-8 text-custom-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h3 class="font-semibold">Colaboración</h3>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-custom-section rounded-full p-4 mb-3 shadow">
+                        <svg class="w-8 h-8 text-custom-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                    </div>
+                    <h3 class="font-semibold">Comunicación</h3>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-custom-section rounded-full p-4 mb-3 shadow">
+                       <svg class="w-8 h-8 text-custom-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="font-semibold">Resiliencia</h3>
+                </div>
+                <div class="flex flex-col items-center">
+                     <div class="bg-custom-section rounded-full p-4 mb-3 shadow">
+                        <svg class="w-8 h-8 text-custom-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    </div>
+                    <h3 class="font-semibold">Proactividad</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testing Process Section -->
+        <section id="process" class="my-20 md:my-32 bg-custom-section p-8 md:p-12 rounded-2xl shadow-lg">
+             <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h2 class="text-3xl font-bold text-custom-heading mb-4">Dinámica del Proceso de Pruebas</h2>
+                    <p class="mb-6">Su participación activa es clave. Se espera que los usuarios realicen pruebas exhaustivas y mantengan una comunicación constante con nuestro equipo.</p>
+                     <div class="mt-8 bg-custom-bg p-6 rounded-xl">
+                        <h3 class="font-bold text-custom-heading text-lg mb-3">Comunicación Activa</h3>
+                        <p class="text-sm">Al informar un problema, es crucial detallar las acciones que llevaron al error, el dispositivo y el navegador utilizados. ¡Todas las sugerencias de mejora son bienvenidas!</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-custom-heading mb-4">Pruebas Exhaustivas</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-custom-light-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Probar <span class="font-semibold">todas las funciones</span> disponibles en cada página.</span>
+                        </li>
+                        <li class="flex items-start">
+                             <svg class="w-6 h-6 text-custom-light-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Realizar pruebas en <span class="font-semibold">diferentes dispositivos</span> (móvil, tablet, escritorio).</span>
+                        </li>
+                        <li class="flex items-start">
+                             <svg class="w-6 h-6 text-custom-light-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                           <span>Evaluar en distintos <span class="font-semibold">sistemas operativos y navegadores</span>.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-custom-light-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Verificar la visualización en <span class="font-semibold">varias resoluciones</span> de pantalla.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Requirements & Benefits -->
+        <section class="my-20 md:my-32">
+            <div class="grid md:grid-cols-5 gap-8 lg:gap-12">
+                <div class="md:col-span-2 bg-custom-section p-8 rounded-2xl shadow-lg">
+                    <h2 class="text-2xl font-bold text-custom-heading mb-4">Requisitos</h2>
+                    <p>Para participar, solo necesitas un requisito técnico y tributario:</p>
+                    <div class="flex items-start mt-6">
+                        <svg class="w-8 h-8 text-custom-primary mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        <div>
+                            <h3 class="font-bold">Identificación Tributaria</h3>
+                            <p class="text-sm">Contar con una identificación registrada en el sistema de Hacienda para poder crear una empresa y emitir facturas en la app.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-3 bg-custom-primary/10 dark:bg-custom-primary/20 p-8 rounded-2xl">
+                    <h2 class="text-2xl font-bold text-custom-heading mb-4">Beneficios para Colaboradores</h2>
+                    <p>Agradecemos su valiosa contribución con beneficios exclusivos:</p>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-custom-light-green mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01"></path></svg>
+                            <span class="font-medium">Emisión de facturas sin costo.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-custom-light-green mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-12v4m-2-2h4m6 4v4m-2-2h4M17 3l4 4M5 21l4-4M17 21l-4-4M5 3l14 18"></path></svg>
+                            <span class="font-medium">Acceso a inteligencia de creación de productos.</span>
+                        </li>
+                         <li class="flex items-center">
+                           <svg class="w-6 h-6 text-custom-light-green mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
+                            <span class="font-medium">Cupón de descuento en un desarrollo personalizado.</span>
+                        </li>
+                         <li class="flex items-center">
+                            <svg class="w-6 h-6 text-custom-light-green mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V7a2 2 0 012-2h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V8z"></path></svg>
+                            <span class="font-medium">Contacto directo con el equipo de Facturanza.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+         <!-- Dates & CTA Section -->
+        <section id="contacto" class="my-20 md:my-32 text-center">
+             <h2 class="text-3xl font-bold text-custom-heading mb-12">¡Participe Ahora!</h2>
+             <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                 <div class="bg-custom-section p-8 rounded-2xl shadow-lg">
+                    <h3 class="text-xl font-bold text-custom-heading mb-4">Fechas Importantes</h3>
+                    <div class="space-y-3 text-left">
+                        <p><span class="font-semibold">Inicio de Pruebas:</span> Próximamente</p>
+                        <p><span class="font-semibold">Cierre de Pruebas:</span> Por definir</p>
+                        <p><span class="font-semibold">Reunión de Cierre:</span> Se agendará</p>
+                    </div>
+                </div>
+                 <div class="bg-custom-section p-8 rounded-2xl shadow-lg">
+                    <h3 class="text-xl font-bold text-custom-heading mb-4">Contacto</h3>
+                    <p>Para registrarse o para más información, contacte a Arianna Baltodano.</p>
+                    <a href="mailto:Person@facturanza.com" class="mt-4 inline-block font-bold text-custom-primary hover:underline">
+                        Person@facturanza.com
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-custom-section border-t border-custom-primary/20">
+        <div class="container mx-auto px-6 py-8 text-center">
+             <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-8 brand-logo mx-auto mb-4"/>
+            <p>&copy; 2024 Facturanza. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+
+    const sunIcon = `<svg class="w-6 h-6 text-custom-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>`;
+    const moonIcon = `<svg class="w-6 h-6 text-custom-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>`;
+    const systemIcon = `<svg class="w-6 h-6 text-custom-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`;
+
+    let currentMode = localStorage.getItem('theme_mode') || 'system';
+
+    function applyTheme(mode) {
+        if (mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        switch (mode) {
+            case 'light':
+                themeToggle.innerHTML = sunIcon;
+                break;
+            case 'dark':
+                themeToggle.innerHTML = moonIcon;
+                break;
+            default:
+                themeToggle.innerHTML = systemIcon;
+                break;
+        }
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        const modes = ['system', 'light', 'dark'];
+        const nextIndex = (modes.indexOf(currentMode) + 1) % modes.length;
+        currentMode = modes[nextIndex];
+        localStorage.setItem('theme_mode', currentMode);
+        applyTheme(currentMode);
+    });
+
+    // Listen for system changes if in system mode
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (currentMode === 'system') {
+            applyTheme('system');
+        }
+    });
+
+    // Initial theme setup
+    applyTheme(currentMode);
+</script>
+
+</body>
+</html>
