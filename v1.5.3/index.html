@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Facturanza - Novedades</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <!-- Favicon Link -->
+        <link rel="icon" type="image/png" href="favicon.png" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --bg-primary: #f5f5f5;
+                --bg-secondary: #ffffff;
+                --text-primary: #414141;
+                --text-secondary: #6f6f6f;
+                --brand-primary: #5eb0c7;
+                --brand-secondary: #005973;
+                --brand-light-green: #63d389;
+                --cta-text-color: #005973; /* Consistent blue for CTA buttons */
+                --logo-filter: none;
+            }
+
+            .dark {
+                --bg-primary: #2d3748;
+                --bg-secondary: #4a5568;
+                --text-primary: #e8e8e8;
+                --text-secondary: #a0aec0;
+                --brand-primary: #5eb0c7;
+                --brand-secondary: #a4d2df;
+                --brand-light-green: #63d389;
+                --logo-filter: none;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background-color: var(--bg-primary);
+                color: var(--text-primary);
+                font-family: "Inter", sans-serif;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .card {
+                background-color: var(--bg-secondary);
+                transition: background-color 0.3s ease;
+            }
+
+            .text-main {
+                color: var(--text-primary);
+            }
+            .text-subtle {
+                color: var(--text-secondary);
+            }
+
+            .brand-logo {
+                filter: var(--logo-filter);
+                transition: filter 0.3s ease;
+            }
+
+            .title-color {
+                color: var(--brand-secondary);
+            }
+
+            .dark .title-color {
+                color: var(--text-primary);
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .fade-in {
+                animation: fadeIn 0.5s ease-out forwards;
+            }
+
+            /* Sticky Nav Styles */
+            .top-nav {
+                background-color: var(--bg-secondary);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .dark .top-nav {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            }
+
+            .nav-link {
+                color: var(--text-secondary);
+                border-bottom: 2px solid transparent;
+            }
+
+            .nav-link.active {
+                color: var(--brand-primary);
+                border-bottom-color: var(--brand-primary);
+                font-weight: 600;
+            }
+
+            /* CTA Button Styles */
+            .cta-button {
+                background-color: var(--brand-light-green);
+                color: var(--cta-text-color);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .cta-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .cta-button svg {
+                color: var(--cta-text-color);
+            }
+
+            /* Hide scrollbar for the nav */
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .no-scrollbar {
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container mx-auto p-4 md:p-8">
+            <header class="flex justify-between items-center mb-8">
+                <img
+                    src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c"
+                    alt="Facturanza Logo"
+                    class="h-10 brand-logo"
+                />
+                <div class="flex items-center space-x-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-subtle"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                        ></path>
+                    </svg>
+                    <button
+                        id="theme-toggle"
+                        class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-gray-300 dark:bg-brand-secondary"
+                    >
+                        <span
+                            id="theme-toggle-indicator"
+                            class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 ease-in-out"
+                        ></span>
+                    </button>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-subtle"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                        ></path>
+                    </svg>
+                </div>
+            </header>
+        </div>
+
+        <nav id="top-nav-bar" class="top-nav sticky top-0 z-20">
+            <div id="nav-container" class="container mx-auto px-4 overflow-x-auto no-scrollbar">
+                <div id="nav-links" class="flex space-x-6 whitespace-nowrap py-3"></div>
+            </div>
+        </nav>
+
+        <main id="feature-content" class="container mx-auto p-4 md:p-8"></main>
+
+        <footer class="text-center my-12 text-subtle">
+            <p>&copy; 2025 Facturanza. Gracias por tu valiosa contribución.</p>
+            <a
+                href="https://roadmap.facturanza.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-subtle hover:text-[var(--brand-primary)] underline transition-colors"
+            >
+                Ver Roadmap
+            </a>
+        </footer>
+
+        <script>
+            // --- UTILITY FUNCTIONS ---
+            function slugify(text) {
+                const a = "àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;";
+                const b = "aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------";
+                const p = new RegExp(a.split("").join("|"), "g");
+
+                return text
+                    .toString()
+                    .toLowerCase()
+                    .replace(/\s+/g, "-") // Replace spaces with -
+                    .replace(p, (c) => b.charAt(a.indexOf(c))) // Replace special characters
+                    .replace(/&/g, "-and-") // Replace & with 'and'
+                    .replace(/[^\w\-]+/g, "") // Remove all non-word chars
+                    .replace(/\-\-+/g, "-") // Replace multiple - with single -
+                    .replace(/^\-+/, "") // Trim - from start of text
+                    .replace(/\-+$/, ""); // Trim - from end of text
+            }
+
+            // ===================================================================
+            // === STEP 1: UPDATE YOUR FEATURE DATA HERE =========================
+            // ===================================================================
+            const featuresData = [
+                {
+                    category: "General",
+                    items: [
+                        {
+                            title: "Mejoras estéticas y de estabilidad ",
+                            description:
+                                "Implementamos mejoras estéticas y de estabilidad para una mejor experiencia visualmente y un rendimiento confiable.",
+                            image: "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.5.1%2FMejoras-est%C3%A9ticas-y-de-estabilidad-%2FScreenshot%202025-10-07%20at%202.00.12%E2%80%AFPM.png?alt=media&token=5e69db7a-f55f-4074-b749-9b32038c9220",
+                        },
+                        {
+                            title: "Modificaciones para el nuevo esquema de facturación",
+                            description:
+                                'Ahora es necesario incluir el dato "dirección" para crear clientes y empresas, según los requisitos de la versión 4.4 del Ministerio de Hacienda.',
+                            image: "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.5.1%2FModificaciones-para-el-nuevo-esquema-de-facturaci%C3%B3n%2FScreenshot%202025-10-07%20at%205.17.03%E2%80%AFPM.png?alt=media&token=f65d6df8-3b3c-4dde-abeb-ad273f50fcf9",
+                        },
+                    ],
+                },
+                {
+                    category: "Configuraciones de facturación",
+                    items: [
+                        {
+                            title: "Mejoras al subir la llave criptográfica",
+                            description:
+                                "Realizamos mejoras estéticas al subir la llave criptográfica para brindar una experiencia más cómoda e intuitiva.",
+                            images: [
+                                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.5.3%2FMejoras-al-subir-la-llave-criptogr%C3%A1fica%2FScreenshot%202025-10-07%20at%201.18.40%E2%80%AFPM.png?alt=media&token=73d3065a-23d3-4e39-93c3-022b6f3e096f",
+                                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.5.3%2FMejoras-al-subir-la-llave-criptogr%C3%A1fica%2FScreenshot%202025-10-07%20at%201.21.31%E2%80%AFPM.png?alt=media&token=8305ef45-7d6e-47da-8a42-64a9d5a648c4",
+                                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.5.3%2FMejoras-al-subir-la-llave-criptogr%C3%A1fica%2FScreenshot%202025-10-07%20at%201.22.32%E2%80%AFPM.png?alt=media&token=a54a3cb0-8f53-4b03-b479-6d04d49cb9d0",
+                            ],
+                        },
+                    ],
+                },
+            ].map((category) => ({
+                ...category,
+                id: slugify(category.category),
+                items: category.items.map((item) => ({
+                    ...item,
+                    id: slugify(category.category) + "." + slugify(item.title),
+                })),
+            }));
+
+            // --- DOM Elements ---
+            const navLinksContainer = document.getElementById("nav-links");
+            const featureContent = document.getElementById("feature-content");
+            const themeToggle = document.getElementById("theme-toggle");
+            const themeToggleIndicator = document.getElementById("theme-toggle-indicator");
+            const body = document.body;
+
+            // --- CORE FUNCTIONS (No changes needed below this line) ---
+
+            function renderPage() {
+                let navHTML = "";
+                let contentHTML = "";
+
+                const welcomeId = "bienvenido";
+                navHTML += `<a href="#${welcomeId}" class="nav-link transition-all duration-200 py-1" data-target="${welcomeId}">Bienvenido</a>`;
+
+                // ===============================================================
+                // === STEP 2: UPDATE VERSION NUMBER HERE ========================
+                // ===============================================================
+                contentHTML += `
+            <section id="${welcomeId}" class="scroll-mt-24 page-section text-center min-h-[40vh] flex flex-col justify-center items-center py-6">
+                <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-16 brand-logo mb-6">
+                <h2 class="title-color text-4xl font-bold mb-2">¡Bienvenido a las nuevas actualizaciones!</h2>
+                <p class="text-2xl font-semibold text-[var(--brand-primary)] mb-4">versión 1.5.3</p>
+                <p class="text-xl text-subtle max-w-2xl mb-8">Hemos trabajado en nuevas funciones y mejoras para potenciar tu negocio. Navega para ver los detalles.</p>
+                <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer"
+                   class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl">
+                    <span>Ir al facturador</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </section>
+        `;
+
+                featuresData.forEach((category, categoryIndex) => {
+                    navHTML += `<a href="#${category.id}" class="nav-link transition-all duration-200 py-1" data-target="${category.id}">${category.category}</a>`;
+
+                    contentHTML += `
+                <section id="${category.id}" class="page-section scroll-mt-24 text-center pt-16 pb-8">
+                    <h2 class="text-5xl font-bold title-color">${category.category}</h2>
+                </section>
+            `;
+
+                    category.items.forEach((item) => {
+                        let imagesHTML = "";
+                        if (item.images && item.images.length > 0) {
+                            imagesHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">`;
+                            item.images.forEach((imgUrl) => {
+                                imagesHTML += `<img src="${imgUrl}" alt="${item.title}" class="w-full rounded-xl shadow-lg border-4 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">`;
+                            });
+                            imagesHTML += `</div>`;
+                        } else if (item.image) {
+                            imagesHTML = `<img src="${item.image}" alt="${item.title}" class="w-full rounded-xl shadow-2xl border-4 border-[var(--bg-secondary)] mt-6" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Imagen+no+disponible';">`;
+                        }
+
+                        contentHTML += `
+                    <section id="${item.id}" class="page-section card rounded-2xl p-8 mb-8 scroll-mt-24">
+                        <h3 class="title-color text-3xl md:text-4xl font-bold mb-4">${item.title}</h3>
+                        <p class="text-lg text-subtle">${item.description}</p>
+                        ${imagesHTML}
+                    </section>
+                `;
+                    });
+
+                    if (categoryIndex === featuresData.length - 1) {
+                        contentHTML += `
+                    <section class="text-center py-12">
+                        <h3 class="text-3xl font-bold text-main mb-6">¿Listo para empezar?</h3>
+                        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                            <a href="https://facturanza.com" target="_blank" rel="noopener noreferrer"
+                               class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl w-full sm:w-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                                <span>Visitar sitio web</span>
+                            </a>
+                            <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer"
+                               class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl w-full sm:w-auto">
+                                <span>Ir al facturador</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </section>
+                `;
+                    }
+                });
+
+                navLinksContainer.innerHTML = navHTML;
+                featureContent.innerHTML = contentHTML;
+            }
+
+            function toggleTheme() {
+                body.classList.toggle("dark");
+                const isDarkMode = body.classList.contains("dark");
+                localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+                updateToggleIndicator(isDarkMode);
+            }
+
+            function updateToggleIndicator(isDarkMode) {
+                themeToggleIndicator.classList.toggle("translate-x-5", isDarkMode);
+                themeToggleIndicator.classList.toggle("translate-x-1", !isDarkMode);
+            }
+
+            function initializeTheme() {
+                const useDarkMode =
+                    localStorage.getItem("theme") === "dark" ||
+                    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+                if (useDarkMode) body.classList.add("dark");
+                updateToggleIndicator(useDarkMode);
+            }
+
+            function setupScrollspy() {
+                const sections = document.querySelectorAll(".page-section");
+                const navLinks = document.querySelectorAll(".nav-link");
+
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        let bestEntry = null;
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
+                                    bestEntry = entry;
+                                }
+                            }
+                        });
+
+                        if (bestEntry) {
+                            const fullId = bestEntry.target.getAttribute("id");
+                            const categoryId = fullId.includes(".") ? fullId.split(".")[0] : fullId;
+                            const activeNavLink = document.querySelector(`.nav-link[data-target='${categoryId}']`);
+
+                            if (activeNavLink) {
+                                navLinks.forEach((link) => link.classList.remove("active"));
+                                activeNavLink.classList.add("active");
+                            }
+                            history.replaceState(null, null, `#${fullId}`);
+                        }
+                    },
+                    {
+                        threshold: 0.1,
+                        rootMargin: "-88px 0px -50% 0px",
+                    }
+                );
+
+                sections.forEach((section) => observer.observe(section));
+            }
+
+            document.addEventListener("DOMContentLoaded", () => {
+                initializeTheme();
+                renderPage();
+                setupScrollspy();
+
+                if (window.location.hash) {
+                    const targetId = window.location.hash.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        setTimeout(() => {
+                            targetElement.scrollIntoView({ behavior: "auto" });
+                        }, 100);
+                    }
+                }
+            });
+
+            themeToggle.addEventListener("click", toggleTheme);
+        </script>
+    </body>
+</html>
