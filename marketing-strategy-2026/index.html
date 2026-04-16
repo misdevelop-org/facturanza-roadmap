@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrategia de Crecimiento: Facturanza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#C5D0F9',
+                            DEFAULT: '#5EB0C7',
+                            dark: '#005973',
+                        },
+                        accent: {
+                            green: '#00A791',
+                            lightgreen: '#63D389',
+                            orange: '#D3853C',
+                            brown: '#B05704',
+                        },
+                        base: {
+                            bg: '#F5F5F5',
+                            text: '#414141',
+                            lighttext: '#6F6F6F',
+                            section: '#E4E4E4',
+                            white: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base Styling */
+        body {
+            background-color: #F5F5F5;
+            color: #414141;
+        }
+        
+        /* Chart Container Requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5F5F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5EB0C7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #005973;
+        }
+
+        /* Tab Animations */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Chosen Palette: Facturanza Brand Palette (style.dart) -->
+    <!-- Application Structure Plan: Dashboard/Report hybrid structure. 
+         - A clear executive hero section sets the urgency (0 to 100 clients).
+         - Navigation sidebar/top bar for easy jumping.
+         - Section 1: Audience Definition (Doughnut chart for visual segmenting).
+         - Section 2: Channel Strategy & Ads (Interactive tabs for Meta/Google/LinkedIn logistics, avoiding clutter).
+         - Section 3: Budget & Projections (Bar and Line charts showing spend vs expected growth to manage expectations).
+         - Section 4: 90-Day Roadmap (HTML grid timeline to give a step-by-step actionable plan).
+         This structure is chosen because a founder needs actionable, segmented data. Hiding logistics behind tabs keeps the UI clean while providing deep dives when clicked. -->
+    <!-- Visualization & Content Choices: 
+         - Goal: Show Target Audiences -> Viz: Doughnut Chart (Chart.js) -> Interactivity: Hover for percentages -> Justification: Shows market focus split clearly.
+         - Goal: Detail Social/Ads Strategy -> Viz: Interactive Tabs (HTML/JS) -> Interactivity: Click to change content -> Justification: Organizes heavy text (budgets, formats, logic) per channel without overwhelming.
+         - Goal: Show Budget Allocation -> Viz: Horizontal Bar Chart (Chart.js) -> Interactivity: Hover for exact $ -> Justification: Easy comparison of channel spend.
+         - Goal: Project Growth -> Viz: Line Chart (Chart.js) -> Interactivity: Tooltips on data points -> Justification: Visualizes the "survival to growth" trajectory over 12 weeks.
+         - NO SVG/Mermaid used. Emoticons and HTML shapes used for icons. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-brand-dark text-base-white z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-brand rounded flex items-center justify-center font-bold text-base-white text-xl">F</div>
+                    <span class="font-bold text-xl tracking-wide">FACTURANZA <span class="text-brand text-sm font-normal">Go-to-Market</span></span>
+                </div>
+                <div class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#estrategia" class="hover:text-brand transition-colors">La Estrategia</a>
+                    <a href="#audiencias" class="hover:text-brand transition-colors">Audiencias</a>
+                    <a href="#canales" class="hover:text-brand transition-colors">Canales & Ads</a>
+                    <a href="#roadmap" class="hover:text-brand transition-colors">Roadmap 90 Días</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="pt-20 pb-12">
+        
+        <!-- Hero Section -->
+        <header id="estrategia" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="bg-base-white rounded-xl shadow-sm border border-base-section p-8 md:p-12 text-center">
+                <div class="inline-block px-3 py-1 bg-accent-lightgreen/20 text-accent-green font-semibold rounded-full text-sm mb-4">
+                    Fase: Lanzamiento a Producción
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold text-brand-dark mb-4">Estrategia de Adquisición Agresiva</h1>
+                <p class="text-xl text-base-lighttext max-w-3xl mx-auto mb-8">
+                    El producto está listo. El reto actual no es tecnológico, es de distribución. Esta estrategia está diseñada para llevar a Facturanza de <strong>0 a 100 clientes activos</strong> en los próximos 3 meses, optimizando el presupuesto y enfocándonos en los nichos de mayor conversión en Costa Rica.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="bg-base-bg p-4 rounded-lg border border-base-section w-48">
+                        <p class="text-sm text-base-lighttext">Objetivo Mes 1</p>
+                        <p class="text-2xl font-bold text-brand-dark">Primeros 20</p>
+                        <p class="text-xs text-accent-orange">Early Adopters</p>
+                    </div>
+                    <div class="bg-base-bg p-4 rounded-lg border border-base-section w-48">
+                        <p class="text-sm text-base-lighttext">Presupuesto Sugerido</p>
+                        <p class="text-2xl font-bold text-brand-dark">$300 - $500</p>
+                        <p class="text-xs text-brand">Mensual Inicial</p>
+                    </div>
+                    <div class="bg-base-bg p-4 rounded-lg border border-base-section w-48">
+                        <p class="text-sm text-base-lighttext">Modelo de Venta</p>
+                        <p class="text-2xl font-bold text-brand-dark">PLG + Ads</p>
+                        <p class="text-xs text-accent-green">Prueba Gratis 14 días</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Audiences Section -->
+        <section id="audiencias" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-brand-dark mb-2">Público Objetivo (Leads & Clientes)</h2>
+                <p class="text-base-lighttext max-w-4xl">
+                    Para competir en un mercado saturado de sistemas contables complejos, Facturanza debe posicionarse como la alternativa ágil. No le vendemos a contadores, le vendemos al dueño del negocio y al profesional independiente que odia hacer facturas de Hacienda.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <!-- Chart -->
+                <div class="bg-base-white p-6 rounded-xl shadow-sm border border-base-section">
+                    <h3 class="text-lg font-bold text-center text-brand-dark mb-4">Foco de Adquisición Inicial</h3>
+                    <div class="chart-container">
+                        <canvas id="audiencesChart"></canvas>
+                    </div>
+                    <p class="text-sm text-center text-base-lighttext mt-4">Distribución recomendada del presupuesto y esfuerzo de marketing.</p>
+                </div>
+                
+                <!-- Personas Description -->
+                <div class="space-y-4">
+                    <div class="bg-base-white p-5 rounded-xl border-l-4 border-brand shadow-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">👨‍💻</span>
+                            <h4 class="font-bold text-lg text-brand-dark">Profesionales Independientes (45%)</h4>
+                        </div>
+                        <p class="text-sm text-base-text mb-2">Abogados, médicos, consultores, freelancers en CR.</p>
+                        <ul class="text-sm text-base-lighttext list-disc list-inside">
+                            <li><strong>Dolor:</strong> Sistemas caros, interfaces viejas, no pueden facturar rápido desde el celular tras una cita.</li>
+                            <li><strong>Gancho:</strong> "Factura aprobada por Hacienda en 3 clics desde donde estés".</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-base-white p-5 rounded-xl border-l-4 border-accent-green shadow-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">🏪</span>
+                            <h4 class="font-bold text-lg text-brand-dark">Micro y Pequeñas Empresas - PYMES (40%)</h4>
+                        </div>
+                        <p class="text-sm text-base-text mb-2">Tiendas de barrio, salones de belleza, talleres.</p>
+                        <ul class="text-sm text-base-lighttext list-disc list-inside">
+                            <li><strong>Dolor:</strong> Miedo a multas de Hacienda, control de caja básico, altos costos fijos.</li>
+                            <li><strong>Gancho:</strong> "Sistema de facturación fácil, económico y sin contratos amarrados".</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-base-white p-5 rounded-xl border-l-4 border-accent-orange shadow-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">🤝</span>
+                            <h4 class="font-bold text-lg text-brand-dark">Aliados: Contadores Independientes (15%)</h4>
+                        </div>
+                        <p class="text-sm text-base-text mb-2">Contadores con 5-20 clientes pequeños.</p>
+                        <ul class="text-sm text-base-lighttext list-disc list-inside">
+                            <li><strong>Dolor:</strong> Sus clientes hacen un desorden con las facturas.</li>
+                            <li><strong>Gancho:</strong> Programa de referidos. "Recomienda Facturanza, tus clientes facturan fácil y tú descargas todo ordenado".</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Channels & Ads Strategy Section -->
+        <section id="canales" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-base-section/30 rounded-3xl">
+            <div class="mb-8 text-center">
+                <h2 class="text-3xl font-bold text-brand-dark mb-2">Logística de Redes y Ads</h2>
+                <p class="text-base-lighttext max-w-3xl mx-auto">
+                    Selecciona una plataforma para ver la estrategia recomendada, costos de Ads (CPC/CPM estimado para Costa Rica) y el tipo de contenido que generará conversiones.
+                </p>
+            </div>
+
+            <!-- Interactive Tabs Navigation -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button onclick="openTab('meta')" id="btn-meta" class="px-6 py-2 rounded-full font-bold transition-all bg-brand-dark text-base-white shadow-md">
+                    Meta (Facebook/IG)
+                </button>
+                <button onclick="openTab('google')" id="btn-google" class="px-6 py-2 rounded-full font-bold transition-all bg-base-white text-base-lighttext border border-base-section hover:bg-brand-light/30">
+                    Google Ads & SEO
+                </button>
+                <button onclick="openTab('tiktok')" id="btn-tiktok" class="px-6 py-2 rounded-full font-bold transition-all bg-base-white text-base-lighttext border border-base-section hover:bg-brand-light/30">
+                    TikTok
+                </button>
+                <button onclick="openTab('linkedin')" id="btn-linkedin" class="px-6 py-2 rounded-full font-bold transition-all bg-base-white text-base-lighttext border border-base-section hover:bg-brand-light/30">
+                    LinkedIn
+                </button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="bg-base-white p-6 md:p-8 rounded-2xl shadow-sm border border-base-section min-h-[400px]">
+                
+                <!-- META TAB -->
+                <div id="tab-meta" class="tab-content active">
+                    <div class="flex items-center gap-3 mb-6 border-b border-base-section pb-4">
+                        <div class="w-10 h-10 bg-[#1877F2] text-base-white rounded-lg flex items-center justify-center font-bold text-xl">M</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-brand-dark">Meta Ads (Instagram & Facebook)</h3>
+                            <p class="text-sm text-base-lighttext">El canal principal para PYMES y alcance masivo en CR.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-brand mb-2">Estrategia Orgánica (Instagram)</h4>
+                            <ul class="list-disc list-inside text-sm text-base-text space-y-2 mb-6">
+                                <li><strong>Estética:</strong> Minimalista, colores de marca (Cian/Azul). Uso del logo de Facturanza.</li>
+                                <li><strong>Formato Rey:</strong> Reels formato tutorial de pantalla ("Mira cómo hago una factura en 10 segs").</li>
+                                <li><strong>Contenido de Valor:</strong> Carruseles explicando fechas de pago de Hacienda, dudas frecuentes del IVA.</li>
+                                <li><strong>Logística:</strong> 3 posts por semana. 2 Reels, 1 Carrusel. Historias diarias mostrando el "detrás de cámaras" de la app.</li>
+                            </ul>
+
+                            <h4 class="font-bold text-brand mb-2">Estrategia de Ads (Pago)</h4>
+                            <ul class="list-disc list-inside text-sm text-base-text space-y-2">
+                                <li><strong>Campaña:</strong> Generación de Clientes Potenciales (Lead Form) o Tráfico directo a Landing Page para registro de "Prueba Gratis".</li>
+                                <li><strong>Audiencia:</strong> "Administradores de páginas de Facebook", "Pequeños empresarios", Intereses: "Emprendimiento", CR (todo el país).</li>
+                                <li><strong>Creatividades:</strong> Videos cortos (UGC - User Generated Content) de alguien fingiendo ser un cliente aliviado.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-base-bg rounded-xl p-6 border border-base-section">
+                            <h4 class="font-bold text-brand-dark mb-4">Métricas y Presupuesto Meta</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-xs text-base-lighttext">Presupuesto Recomendado</p>
+                                    <p class="text-xl font-bold text-brand-dark">$150 - $200 / mes</p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-base-white p-3 rounded shadow-sm">
+                                        <p class="text-xs text-base-lighttext">CPM Promedio CR</p>
+                                        <p class="font-bold text-brand">$1.50 - $3.00</p>
+                                    </div>
+                                    <div class="bg-base-white p-3 rounded shadow-sm">
+                                        <p class="text-xs text-base-lighttext">Costo por Lead (CPL)</p>
+                                        <p class="font-bold text-brand">$2.00 - $5.00</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4 p-3 bg-accent-lightgreen/20 border border-accent-green rounded text-sm text-brand-dark">
+                                    <strong>Tip:</strong> Usa Retargeting. Quien visitó facturanza.com debe ver un ad ofreciendo un mes extra gratis.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GOOGLE TAB -->
+                <div id="tab-google" class="tab-content">
+                    <div class="flex items-center gap-3 mb-6 border-b border-base-section pb-4">
+                        <div class="w-10 h-10 bg-[#EA4335] text-base-white rounded-lg flex items-center justify-center font-bold text-xl">G</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-brand-dark">Google Ads & SEO</h3>
+                            <p class="text-sm text-base-lighttext">Captura demanda activa. Gente buscando solucionar su problema YA.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-brand mb-2">Estrategia SEO (Landing Page)</h4>
+                            <ul class="list-disc list-inside text-sm text-base-text space-y-2 mb-6">
+                                <li><strong>Palabras Clave:</strong> Integrar en la web "Sistema de facturación electrónica Costa Rica", "Facturador Hacienda", "App para facturar CR".</li>
+                                <li><strong>Blog Técnico:</strong> Crear 3-5 artículos fundacionales en facturanza.com (Ej: "Requisitos para facturar en Costa Rica 2026").</li>
+                            </ul>
+
+                            <h4 class="font-bold text-brand mb-2">Estrategia Google Search Ads</h4>
+                            <ul class="list-disc list-inside text-sm text-base-text space-y-2">
+                                <li><strong>Tipo:</strong> Campañas de Búsqueda (Search).</li>
+                                <li><strong>Keywords Exactas:</strong> [facturacion electronica costa rica], [sistema factura hacienda cr].</li>
+                                <li><strong>Anuncios:</strong> Destacar "Prueba Gratis", "Web y App Móvil", "Cumple Hacienda CR".</li>
+                            </ul>
+                        </div>
+                        <div class="bg-base-bg rounded-xl p-6 border border-base-section">
+                            <h4 class="font-bold text-brand-dark mb-4">Métricas y Presupuesto Google</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-xs text-base-lighttext">Presupuesto Recomendado</p>
+                                    <p class="text-xl font-bold text-brand-dark">$150 / mes</p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-base-white p-3 rounded shadow-sm">
+                                        <p class="text-xs text-base-lighttext">CPC Promedio CR</p>
+                                        <p class="font-bold text-brand">$0.20 - $0.60</p>
+                                    </div>
+                                    <div class="bg-base-white p-3 rounded shadow-sm">
+                                        <p class="text-xs text-base-lighttext">Conversión (Ctr a Trial)</p>
+                                        <p class="font-bold text-brand">5% - 10%</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4 p-3 bg-brand-light/30 border border-brand rounded text-sm text-brand-dark">
+                                    <strong>Alta Intención:</strong> El tráfico de Google es más caro por clic, pero convierte mejor porque la persona <em>necesita</em> facturar.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TIKTOK TAB -->
+                <div id="tab-tiktok" class="tab-content">
+                    <div class="flex items-center gap-3 mb-6 border-b border-base-section pb-4">
+                        <div class="w-10 h-10 bg-black text-base-white rounded-lg flex items-center justify-center font-bold text-xl">T</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-brand-dark">TikTok</h3>
+                            <p class="text-sm text-base-lighttext">Alcance orgánico explosivo mediante comedia y "relatability".</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-brand mb-2">Estrategia de Contenido Orgánico</h4>
+                            <ul class="list-disc list-inside text-sm text-base-text space-y-2">
+                                <li><strong>Tono:</strong> Humor, frustración con Hacienda, la vida del emprendedor tico.</li>
+                                <li><strong>Formatos:</strong>
+                                    <ul class="list-[circle] list-inside ml-4 mt-1">
+                                        <li>POV (Point of View): "Cuando el cliente te pide factura el viernes a las 5pm y el sistema no carga vs. usando Facturanza".</li>
+                                        <li>Sketches: El contador persiguiendo al emprendedor.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Frecuencia:</strong> 3-4 videos a la semana. Subirse a los "trends" musicales pero adaptados a negocios/emprendimiento.</li>
+                                <li><strong>Logística:</strong> Grabar en batch (1 día graba 10 videos). No requiere producción profesional, el celular basta.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-base-bg rounded-xl p-6 border border-base-section">
+                            <h4 class="font-bold text-brand-dark mb-4">Rol en el Embudo</h4>
+                            <p class="text-sm text-base-text mb-4">
+                                TikTok no generará ventas directas inmediatas, pero construye <strong>Conciencia de Marca (Awareness)</strong> a costo cero.
+                            </p>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-xs text-base-lighttext">Presupuesto Ads</p>
+                                    <p class="text-xl font-bold text-brand-dark">$0 (Solo Orgánico inicial)</p>
+                                </div>
+                                <div class="mt-4 p-3 bg-accent-orange/20 border border-accent-orange rounded text-sm text-brand-dark">
+                                    <strong>Call to Action:</strong> El enlace en la biografía debe ir directo a la descarga del App (cuando esté lista) o a la página de registro móvil.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LINKEDIN TAB -->
+                <div id="tab-linkedin" class="tab-content">
+                    <div class="flex items-center gap-3 mb-6 border-b border-base-section pb-4">
+                        <div class="w-10 h-10 bg-[#0A66C2] text-base-white rounded-lg flex items-center justify-center font-bold text-xl">in</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-brand-dark">LinkedIn</h3>
+                            <p class="text-sm text-base-lighttext">El canal B2B para Consultores, Abogados y Contadores.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-brand mb-2">Estrategia Orgánica B2B</h4>
+                            <ul class="list-disc list-inside text-sm text-base-text space-y-2">
+                                <li><strong>Perfil del Founder:</strong> El dueño de Facturanza debe ser la cara. Hablar sobre el proceso de crear software en CR, los retos tributarios, etc.</li>
+                                <li><strong>Networking:</strong> Conectar con Despachos Contables. Ofrecerles Facturanza como "marca blanca" o sistema para sus clientes.</li>
+                                <li><strong>Contenido:</strong> Infografías sobre impuestos, artículos cortos sobre eficiencia en facturación para profesionales ocupados.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-base-bg rounded-xl p-6 border border-base-section">
+                            <h4 class="font-bold text-brand-dark mb-4">Métricas y Enfoque</h4>
+                            <p class="text-sm text-base-text mb-4">
+                                Ads muy caros en LinkedIn. Usar exclusivamente para Outbound Sales (ventas directas) por mensajes privados a perfiles específicos.
+                            </p>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-xs text-base-lighttext">Estrategia de Contacto</p>
+                                    <p class="font-bold text-brand-dark">Mensaje Directo (InMail/Conexión)</p>
+                                </div>
+                                <div class="mt-4 p-3 bg-base-section/50 border border-base-section rounded text-sm text-brand-dark font-mono text-xs">
+                                    "Hola [Nombre], vi que eres Consultor Independiente. Sé que hacer facturas de Hacienda quita tiempo valioso. Desarrollamos Facturanza para hacer esto en 10 segs desde el cel. ¿Te doy 1 mes gratis para que lo pruebes?"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Presupuesto y Proyecciones Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-brand-dark mb-2">Presupuesto y Proyección de Crecimiento</h2>
+                <p class="text-base-lighttext max-w-4xl">
+                    Monitorear el CAC (Costo de Adquisición de Cliente) es vital. Inicialmente será alto mientras calibramos los anuncios, pero debe bajar a medida que la marca gana reconocimiento y referidos.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Budget Chart -->
+                <div class="bg-base-white p-6 rounded-xl shadow-sm border border-base-section">
+                    <h3 class="text-lg font-bold text-center text-brand-dark mb-4">Asignación Presupuesto Mes 1 & 2 ($400)</h3>
+                    <div class="chart-container">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Growth Projection Chart -->
+                <div class="bg-base-white p-6 rounded-xl shadow-sm border border-base-section">
+                    <h3 class="text-lg font-bold text-center text-brand-dark mb-4">Proyección: Usuarios Trial vs Pagos (12 Semanas)</h3>
+                    <div class="chart-container">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-base-lighttext mt-2">Basado en conversión estimada del 15% de Trial a Pago.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 90 Day Roadmap Section -->
+        <section id="roadmap" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-brand-dark text-base-white rounded-3xl mb-12">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-base-white mb-2">Plan de Acción: Roadmap 90 Días</h2>
+                <p class="text-brand-light max-w-2xl mx-auto">
+                    Pasos logísticos exactos para evitar que la aplicación "muera" por falta de tracción. Ejecución estructurada.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Month 1 -->
+                <div class="bg-base-white/10 p-6 rounded-xl border border-brand-light/20 relative">
+                    <div class="absolute -top-4 left-6 bg-accent-green text-base-white px-3 py-1 rounded font-bold text-sm shadow">
+                        MES 1: Prueba Social
+                    </div>
+                    <ul class="space-y-4 mt-4">
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Onboarding manual de primeros 10 usuarios (amigos, conocidos, red personal). <strong>GRATIS</strong> a cambio de feedback.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Optimizar Landing Page: Botones claros de CTA, asegurar que cargue rápido en móviles.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Crear perfiles sociales (IG, FB, LinkedIn). Diseño de 5 plantillas en Canva usando colores de marca.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Obtener 3 testimonios reales (videos cortos) de los primeros usuarios para usar en Ads.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Month 2 -->
+                <div class="bg-base-white/10 p-6 rounded-xl border border-brand-light/20 relative">
+                    <div class="absolute -top-4 left-6 bg-brand text-base-white px-3 py-1 rounded font-bold text-sm shadow">
+                        MES 2: Adquisición
+                    </div>
+                    <ul class="space-y-4 mt-4">
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Encender campañas: Google Search Ads ($150) y Meta Lead Gen ($150).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Lanzamiento App Móvil (iOS/Android): Comunicado de prensa a medios locales tech/pymes.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Ritmo de contenido: 3 Posts semanales en IG/FB, 1 artículo en el blog (SEO).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Configurar flujos de correos automáticos: "Bienvenido al Trial", "Tu trial expira en 3 días".</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Month 3 -->
+                <div class="bg-base-white/10 p-6 rounded-xl border border-brand-light/20 relative">
+                    <div class="absolute -top-4 left-6 bg-accent-orange text-base-white px-3 py-1 rounded font-bold text-sm shadow">
+                        MES 3: Retención & Expansión
+                    </div>
+                    <ul class="space-y-4 mt-4">
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Programa de Referidos: "Trae a un amigo y ambos tienen 1 mes gratis". Automatizar en la app.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Contactar Contadores por LinkedIn ofreciendo comisión por cliente traído.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-brand-light">✓</span>
+                            <span class="text-sm">Análisis de CAC y LTV preliminar. Reubicar presupuesto publicitario al canal que esté dando mejor costo por conversión.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-base-white border-t border-base-section py-6 text-center text-sm text-base-lighttext">
+        <p>Estrategia generada para <strong>Facturanza</strong>. Costa Rica, 2026.</p>
+    </footer>
+
+    <!-- Logic and Interactions -->
+    <script>
+        // Brand Colors from Tailwind Config for Chart.js
+        const colors = {
+            primary: '#5EB0C7',
+            darkBlue: '#005973',
+            green: '#00A791',
+            lightGreen: '#63D389',
+            orange: '#D3853C',
+            brown: '#B05704',
+            lightGray: '#E4E4E4'
+        };
+
+        // --- Tab Interaction Logic ---
+        function openTab(tabName) {
+            // Hide all contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Reset all buttons style
+            const buttons = [
+                document.getElementById('btn-meta'),
+                document.getElementById('btn-google'),
+                document.getElementById('btn-tiktok'),
+                document.getElementById('btn-linkedin')
+            ];
+            
+            buttons.forEach(btn => {
+                btn.className = "px-6 py-2 rounded-full font-bold transition-all bg-base-white text-base-lighttext border border-base-section hover:bg-brand-light/30";
+            });
+
+            // Show active content
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+
+            // Style active button
+            const activeBtn = document.getElementById(`btn-${tabName}`);
+            activeBtn.className = "px-6 py-2 rounded-full font-bold transition-all bg-brand-dark text-base-white shadow-md";
+        }
+
+        // --- Chart.js Initializations ---
+        window.addEventListener('DOMContentLoaded', (event) => {
+            
+            // Common Chart Options for Responsiveness
+            const commonOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { family: "'Inter', sans-serif" } }
+                    }
+                }
+            };
+
+            // 1. Audiences Doughnut Chart
+            const ctxAudience = document.getElementById('audiencesChart').getContext('2d');
+            new Chart(ctxAudience, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Prof. Independientes', 'PYMES / Comercios', 'Contadores (Canal)', 'Otros'],
+                    datasets: [{
+                        data: [45, 40, 10, 5],
+                        backgroundColor: [
+                            colors.primary,     // Independientes
+                            colors.green,       // PYMES
+                            colors.orange,      // Contadores
+                            colors.lightGray    // Otros
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    cutout: '65%',
+                    plugins: {
+                        ...commonOptions.plugins,
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ' ' + context.label + ': ' + context.parsed + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 2. Budget Allocation Bar Chart
+            const ctxBudget = document.getElementById('budgetChart').getContext('2d');
+            new Chart(ctxBudget, {
+                type: 'bar',
+                data: {
+                    labels: ['Google Ads', 'Meta Ads', 'Herramientas (Canva/Mailing)', 'Reserva/Tests'],
+                    datasets: [{
+                        label: 'Inversión ($ USD)',
+                        data: [150, 150, 50, 50],
+                        backgroundColor: colors.darkBlue,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    indexAxis: 'y', // Horizontal bar
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: { display: false }
+                        },
+                        y: {
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // 3. Growth Projection Line Chart
+            const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+            new Chart(ctxGrowth, {
+                type: 'line',
+                data: {
+                    labels: ['Sem 1', 'Sem 2', 'Sem 4', 'Sem 6', 'Sem 8', 'Sem 10', 'Sem 12'],
+                    datasets: [
+                        {
+                            label: 'Usuarios Trial (Gratis)',
+                            data: [5, 15, 40, 80, 150, 250, 400],
+                            borderColor: colors.primary,
+                            backgroundColor: 'rgba(94, 176, 199, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Clientes Pagos (Activos)',
+                            data: [0, 2, 8, 15, 30, 55, 100],
+                            borderColor: colors.green,
+                            backgroundColor: colors.green,
+                            borderWidth: 2,
+                            pointRadius: 4,
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    ...commonOptions,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: colors.lightGray }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    },
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                }
+            });
+        });
+    </script>
+</body>
+</html>
