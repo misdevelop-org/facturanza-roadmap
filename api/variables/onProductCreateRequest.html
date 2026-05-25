@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onCreateBill API - Facturanza</title>
+    <title>onProductCreateRequest API - Facturanza</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,14 +27,14 @@
       }
       body {
         margin: 0;
-        font-family: "Inter", sans-serif;
         color: var(--text);
-        line-height: 1.55;
         background: radial-gradient(
           circle at 15% 5%,
           #eaf4f7 0%,
           var(--bg) 45%
         );
+        font-family: "Inter", sans-serif;
+        line-height: 1.55;
       }
       .page {
         width: min(980px, calc(100% - 2rem));
@@ -59,49 +59,27 @@
         text-underline-offset: 2px;
       }
       .panel {
+        margin-top: 0.85rem;
         background: var(--panel);
         border: 1px solid var(--line);
         border-radius: 12px;
         padding: 0.95rem;
-        margin-top: 0.85rem;
       }
       h2 {
         margin: 0 0 0.4rem;
         color: var(--heading);
         font-size: 1.08rem;
       }
-      h3 {
-        margin: 0.8rem 0 0.35rem;
-        font-size: 1rem;
-      }
-      .mono,
-      code,
-      pre {
-        font-family: "IBM Plex Mono", monospace;
-      }
       .path {
         display: block;
         width: 100%;
         overflow-wrap: anywhere;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 0.16rem 0.46rem;
-        background: #eef7fa;
+        font-family: "IBM Plex Mono", monospace;
         font-size: 0.85rem;
-      }
-      ul {
-        margin: 0.35rem 0;
-        padding-left: 1.2rem;
-      }
-      pre {
-        margin: 0.35rem 0 0;
-        background: #0c2c36;
-        color: #e6fbff;
-        border: 1px solid #1f5160;
-        border-radius: 10px;
-        padding: 0.85rem;
-        overflow-x: auto;
-        font-size: 0.83rem;
+        border: 1px solid var(--line);
+        background: #eef7fa;
+        border-radius: 8px;
+        padding: 0.16rem 0.45rem;
       }
       .status {
         display: flex;
@@ -129,6 +107,21 @@
         border-color: #e7a39a;
         background: #fff3f1;
       }
+      pre {
+        margin: 0.35rem 0 0;
+        padding: 0.85rem;
+        overflow-x: auto;
+        border-radius: 10px;
+        border: 1px solid #1f5160;
+        background: #0c2c36;
+        color: #e6fbff;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.83rem;
+      }
+      ul {
+        margin: 0.3rem 0;
+        padding-left: 1.2rem;
+      }
       .small {
         font-size: 0.92rem;
       }
@@ -137,90 +130,73 @@
   <body>
     <main class="page">
       <section class="hero">
-        <h1>onCreateBill</h1>
+        <h1>onProductCreateRequest</h1>
         <p>
-          Main billing orchestration trigger for electronic invoice generation,
-          signature, Hacienda submission, and delivery.
+          AI product creation trigger with quota validation, image generation,
+          and CABYS recommendation.
         </p>
         <p><a href="../index.html">Back to API index</a></p>
       </section>
 
       <section class="panel">
         <h2>Trigger Contract</h2>
-        <p class="path">/enterprises/{enterpriseId}/bills/{billId}</p>
+        <p class="path">
+          /enterprises/{enterpriseID}/product_requests/{productID}
+        </p>
         <p class="small">
           Event type: Firestore onDocumentCreated (Functions v2)
         </p>
       </section>
 
       <section class="panel">
-        <h2>What This Function Does</h2>
+        <h2>Flow Summary</h2>
         <ul>
+          <li>Sets request status to processing.</li>
           <li>
-            Validates enterprise subscription and billing terminal availability.
+            Loads enterprise config info and checks aiProductCreatorAttempts.
           </li>
-          <li>
-            Generates XML from bill data and signs it with configured
-            certificate.
-          </li>
-          <li>Submits XML to Hacienda and waits for acceptance/rejection.</li>
-          <li>Stores sent/response XML plus PDF in Cloud Storage.</li>
-          <li>Sends final email with artifacts to recipients.</li>
-          <li>Updates subscription consumption counters.</li>
+          <li>Generates product sheet base fields from prompt.</li>
+          <li>Runs image generation and CABYS recommendation in parallel.</li>
+          <li>Writes final productSheet JSON and completion status.</li>
+          <li>Decrements aiProductCreatorAttempts when successful.</li>
         </ul>
       </section>
 
       <section class="panel">
-        <h2>Status Reference</h2>
+        <h2>Status Model</h2>
         <div class="status">
           <span class="badge ok">processing</span>
-          <span class="badge ok">signedXml</span>
-          <span class="badge ok">storedSentSignedXml</span>
-          <span class="badge ok">hacienda-accepted</span>
+          <span class="badge ok">generatingProductInfo</span>
+          <span class="badge ok">generatingImage</span>
           <span class="badge ok">completed</span>
-          <span class="badge warn">hacienda-rejected</span>
-          <span class="badge err">invalidCredentials</span>
-          <span class="badge err">invalidSignature</span>
-          <span class="badge err">terminalNotFound</span>
-          <span class="badge err">subscriptionLimitReached</span>
-          <span class="badge err">rejectedBillsLimitReached</span>
+          <span class="badge warn">completedWithPlaceholderImage</span>
+          <span class="badge err">errorNoProductCreatorAttempts</span>
+          <span class="badge err">errorFetchingEnterpriseDetails</span>
+          <span class="badge err">errorGeneratingProductSheet</span>
+          <span class="badge err">errorFetchingCabys</span>
         </div>
       </section>
 
       <section class="panel">
-        <h2>Example Bill Request</h2>
-        <p class="path">/enterprises/acme-cr/bills/BILL-2026-00023</p>
+        <h2>Request Example</h2>
+        <p class="path">
+          /enterprises/acme-cr/product_requests/PRD-REQ-2026-0041
+        </p>
         <pre>
 {
-	"documentType": "FE",
-	"version": "4.4",
-	"sucursal": "1",
-	"terminal": "1",
-	"extraRecipients": ["billing@acme.cr"],
-	"data": {
-		"client": {
-			"name": "Cliente Demo",
-			"email": "cliente@example.com"
-		},
-		"items": [
-			{
-				"description": "Servicio de soporte",
-				"quantity": 1,
-				"unitPrice": 25000
-			}
-		]
-	}
+  "prompt": "Shampoo organico de 500 ml para mascotas, sin sulfatos"
 }</pre
         >
       </section>
 
       <section class="panel">
-        <h2>Artifacts Written by the Flow</h2>
+        <h2>Response Fields Written to Request Doc</h2>
         <ul>
-          <li>xmlSentFileUrl</li>
-          <li>xmlResponseFileUrl</li>
-          <li>pdfFileUrl</li>
-          <li>accepted_data, linkedDocumentStatus, and status transitions</li>
+          <li>status</li>
+          <li>loadingValue</li>
+          <li>productSheet (JSON string)</li>
+          <li>error (if applicable)</li>
+          <li>warning_image (only when placeholder image is used)</li>
         </ul>
       </section>
     </main>
