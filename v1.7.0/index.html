@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facturanza - Novedades</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-primary: #f5f5f5;
+        --bg-secondary: #ffffff;
+        --text-primary: #414141;
+        --text-secondary: #6f6f6f;
+        --brand-primary: #5eb0c7;
+        --brand-secondary: #005973;
+        --brand-light-green: #63d389;
+        --cta-text-color: #005973; /* Consistent blue for CTA buttons */
+        --logo-filter: none;
+      }
+
+      .dark {
+        --bg-primary: #2d3748;
+        --bg-secondary: #4a5568;
+        --text-primary: #e8e8e8;
+        --text-secondary: #a0aec0;
+        --brand-primary: #5eb0c7;
+        --brand-secondary: #a4d2df;
+        --brand-light-green: #63d389;
+        --logo-filter: none;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: "Inter", sans-serif;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+
+      .card {
+        background-color: var(--bg-secondary);
+        transition: background-color 0.3s ease;
+      }
+
+      .text-main {
+        color: var(--text-primary);
+      }
+      .text-subtle {
+        color: var(--text-secondary);
+      }
+
+      .brand-logo {
+        filter: var(--logo-filter);
+        transition: filter 0.3s ease;
+      }
+
+      .title-color {
+        color: var(--brand-secondary);
+      }
+
+      .dark .title-color {
+        color: var(--text-primary);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      /* Sticky Nav Styles */
+      .top-nav {
+        background-color: var(--bg-secondary);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .dark .top-nav {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      }
+
+      .nav-link {
+        color: var(--text-secondary);
+        border-bottom: 2px solid transparent;
+      }
+
+      .nav-link.active {
+        color: var(--brand-primary);
+        border-bottom-color: var(--brand-primary);
+        font-weight: 600;
+      }
+
+      /* CTA Button Styles */
+      .cta-button {
+        background-color: var(--brand-light-green);
+        color: var(--cta-text-color);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .cta-button svg {
+        color: var(--cta-text-color);
+      }
+
+      /* Hide scrollbar for the nav */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mx-auto p-4 md:p-8">
+      <header class="flex justify-between items-center mb-8">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c"
+          alt="Facturanza Logo"
+          class="h-10 brand-logo"
+        />
+        <div class="flex items-center space-x-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-subtle"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            ></path>
+          </svg>
+          <button
+            id="theme-toggle"
+            class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-gray-300 dark:bg-brand-secondary"
+          >
+            <span
+              id="theme-toggle-indicator"
+              class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 ease-in-out"
+            ></span>
+          </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-subtle"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+            ></path>
+          </svg>
+        </div>
+      </header>
+    </div>
+
+    <nav id="top-nav-bar" class="top-nav sticky top-0 z-20">
+      <div
+        id="nav-container"
+        class="container mx-auto px-4 overflow-x-auto no-scrollbar"
+      >
+        <div id="nav-links" class="flex space-x-6 whitespace-nowrap py-3"></div>
+      </div>
+    </nav>
+
+    <main id="feature-content" class="container mx-auto p-4 md:p-8"></main>
+
+    <footer class="text-center my-12 text-subtle">
+      <p>&copy; 2025 Facturanza. Gracias por tu valiosa contribución.</p>
+      <a
+        href="https://roadmap.facturanza.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-subtle hover:text-[var(--brand-primary)] underline transition-colors"
+      >
+        Ver Roadmap
+      </a>
+    </footer>
+
+    <script>
+      // --- UTILITY FUNCTIONS ---
+      function slugify(text) {
+        const a =
+          "àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;";
+        const b =
+          "aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------";
+        const p = new RegExp(a.split("").join("|"), "g");
+
+        return text
+          .toString()
+          .toLowerCase()
+          .replace(/\s+/g, "-") // Replace spaces with -
+          .replace(p, (c) => b.charAt(a.indexOf(c))) // Replace special characters
+          .replace(/&/g, "-and-") // Replace & with 'and'
+          .replace(/[^\w\-]+/g, "") // Remove all non-word chars
+          .replace(/\-\-+/g, "-") // Replace multiple - with single -
+          .replace(/^\-+/, "") // Trim - from start of text
+          .replace(/\-+$/, ""); // Trim - from end of text
+      }
+
+      // ===================================================================
+      // === FEATURE DATA INJECTED PROGRAMMATICALLY ========================
+      // ===================================================================
+      const rawFeaturesData = [
+        {
+          category: "General",
+          items: [
+            {
+              title: "Planes de suscripción",
+              description:
+                "Hemos optimizado la página de planes de suscripción para que usted pueda visualizar la información de manera más clara.",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FPlanes-de-suscripci%C3%B3n%2FScreenshot%202026-05-27%20at%2012.47.00%E2%80%AFPM.png?alt=media&token=437178fe-0dc4-421d-969b-df258ba1539e",
+            },
+            {
+              title: "Gestión de credenciales de facturación",
+              description:
+                "Se ha mejorado el diseño, así como el flujo de edición de las credenciales de facturación, brindando mayor facilidad al realizar cambios en los datos.",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FGesti%C3%B3n-de-credenciales-de-facturaci%C3%B3n%2FImage%205-27-26%20at%2012.53%E2%80%AFPM.png?alt=media&token=4d23558f-975e-4e32-984b-1d4498baec35",
+            },
+          ],
+        },
+        {
+          category: "Reportes y registro de egresos",
+          items: [
+            {
+              title: "Exportación de reportes",
+              description:
+                "Se ha habilitado la descarga de los reportes de ingresos y egresos en formatos PDF y Excel.",
+              images: [
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FExportaci%C3%B3n-de-reportes%2FScreenshot%202026-05-27%20at%203.39.35%E2%80%AFPM.png?alt=media&token=e95a8f1a-3f38-4318-8f92-a261d0792064",
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FExportaci%C3%B3n-de-reportes%2FScreenshot%202026-05-27%20at%201.55.48%E2%80%AFPM.png?alt=media&token=09790202-6bcf-41b8-8786-43ae6d699e27",
+              ],
+            },
+            {
+              title: "Optimización de egresos",
+              description:
+                "Hemos refinado el proceso para el registro de facturas de gastos, brindando un ingreso de datos más fluido.",
+              images: [
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FOptimizaci%C3%B3n-de-egresos%2FScreenshot%202026-05-27%20at%203.40.16%E2%80%AFPM.png?alt=media&token=72a5a976-1d0a-4a7f-bcd5-ef56310a922b",
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FOptimizaci%C3%B3n-de-egresos%2FScreenshot%202026-05-27%20at%202.05.13%E2%80%AFPM.png?alt=media&token=b9d60878-4563-497d-bd8e-96c3a572786a",
+              ],
+            },
+            {
+              title: "Página para visualización de egresos",
+              description:
+                "Se incorpora una nueva sección dedicada a la consulta de las facturas de egresos registradas en el sistema.",
+              images: [
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FP%C3%A1gina-para-visualizaci%C3%B3n-de-egresos%2FScreenshot%202026-05-27%20at%203.43.45%E2%80%AFPM.png?alt=media&token=c711b6e5-5462-4858-88c1-f8f9fef2d2b5",
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FP%C3%A1gina-para-visualizaci%C3%B3n-de-egresos%2FScreenshot%202026-05-27%20at%203.38.57%E2%80%AFPM.png?alt=media&token=025b65dc-3ae7-499d-922a-8793440b9506",
+              ],
+            },
+          ],
+        },
+        {
+          category: "Comprobantes eléctronicos",
+          items: [
+            {
+              title: "Botones para descargar archivos",
+              description:
+                "Desde la vista de un documento, usted ahora dispone de botones directos para descargar los archivos XML y PDF, así como una opción de visualización para el pdf.",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FBotones-para-descargar-archivos%2FScreenshot%202026-05-27%20at%203.51.42%E2%80%AFPM.png?alt=media&token=deb1f721-a4f5-4aad-8fae-61322fba28b3",
+            },
+            {
+              title: "Opción para eliminar documentos con error",
+              description:
+                "Se ha añadido una función para eliminar documentos que presenten errores por credenciales, firmas digitales o terminales inválidas, permitiéndole eliminar documentos que no han sido procesados por Hacienda en su historial.",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FOpci%C3%B3n-para-eliminar-documentos-con-error%2FScreenshot%202026-05-27%20at%203.56.23%E2%80%AFPM.png?alt=media&token=157f42aa-459f-4c5f-ad4b-f1460681de5b",
+            },
+            {
+              title: "Alertas visuales",
+              description:
+                "Para su comodidad, los documentos que presenten errores en su creación se resaltarán en color rojo, facilitando su identificación rápida.",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FAlertas-visuales%2FScreenshot%202026-05-27%20at%203.58.48%E2%80%AFPM.png?alt=media&token=fa5d641d-4c43-4135-bd32-eac9ef385155",
+            },
+            {
+              title: "Agilidad al crear un nuevo cliente",
+              description:
+                "Ahora puede registrar a un nuevo cliente directamente desde el selector en la página de creación de documentos, sin necesidad de abandonar el proceso actual.",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FAgilidad-al-crear-un-nuevo-cliente%2FScreenshot%202026-05-27%20at%204.17.58%E2%80%AFPM.png?alt=media&token=88a76e20-a933-4108-ade2-ee67b770fb6b",
+            },
+          ],
+        },
+        {
+          category: "Gestión de clientes",
+          items: [
+            {
+              title: "Registro de clientes sin cédula",
+              description:
+                "Se ha habilitado la opción de registrar clientes que no cuenten con cédula, correo electrónico o ubicación física.",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FRegistro-de-clientes-sin-c%C3%A9dula%2FScreenshot%202026-05-27%20at%201.08.57%E2%80%AFPM.png?alt=media&token=6d5ec0a9-587b-4fcb-923e-ea102dbff37e",
+            },
+            {
+              title: "Actividad económica predeterminada",
+              description:
+                "En la configuración del cliente, podrá seleccionar una actividad económica por defecto. Esto permitirá que, al momento de generar una factura, el sistema la preseleccione automáticamente.",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FActividad-econ%C3%B3mica-predeterminada%2FScreenshot%202026-05-27%20at%201.49.34%E2%80%AFPM.png?alt=media&token=33d1d449-7b8e-4f94-b40c-f937f3ef9863",
+            },
+            {
+              title: "Mejoras visuales en el menú de clientes",
+              description:
+                "Se han implementado mejoras visuales en la ficha de cliente, permitiéndole visualizar la información clave de forma estructurada.",
+              image:
+                "https://firebasestorage.googleapis.com/v0/b/versionflow-w591t.firebasestorage.app/o/1.7.0%2FMejoras-visuales-en-el-men%C3%BA-de-clientes%2FScreenshot%202026-05-27%20at%2010.10.31%E2%80%AFAM.png?alt=media&token=c0ed56bd-810b-4647-8537-f96d79f3dfb5",
+            },
+          ],
+        },
+      ];
+
+      const featuresData = rawFeaturesData.map((category) => ({
+        ...category,
+        id: slugify(category.category),
+        items: category.items.map((item) => ({
+          ...item,
+          id: slugify(category.category) + "." + slugify(item.title),
+        })),
+      }));
+
+      // --- DOM Elements ---
+      const navLinksContainer = document.getElementById("nav-links");
+      const featureContent = document.getElementById("feature-content");
+      const themeToggle = document.getElementById("theme-toggle");
+      const themeToggleIndicator = document.getElementById(
+        "theme-toggle-indicator",
+      );
+      const body = document.body;
+
+      // --- CORE FUNCTIONS ---
+
+      function renderPage() {
+        let navHTML = "";
+        let contentHTML = "";
+
+        const welcomeId = "bienvenido";
+        navHTML += `<a href="#${welcomeId}" class="nav-link transition-all duration-200 py-1" data-target="${welcomeId}">Bienvenido</a>`;
+
+        contentHTML += `
+            <section id="${welcomeId}" class="scroll-mt-24 page-section text-center min-h-[40vh] flex flex-col justify-center items-center py-6">
+                <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-16 brand-logo mb-6">
+                <h2 class="title-color text-4xl font-bold mb-2">¡Bienvenido a las nuevas actualizaciones!</h2>
+                <p class="text-2xl font-semibold text-[var(--brand-primary)] mb-4">versión 1.7.0</p>
+                <p class="text-xl text-subtle max-w-2xl mb-8">Hemos trabajado en nuevas funciones y mejoras para potenciar tu negocio. Navega para ver los detalles.</p>
+                <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer"
+                   class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl">
+                    <span>Ir al facturador</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </section>
+        `;
+
+        featuresData.forEach((category, categoryIndex) => {
+          navHTML += `<a href="#${category.id}" class="nav-link transition-all duration-200 py-1" data-target="${category.id}">${category.category}</a>`;
+
+          contentHTML += `
+                <section id="${category.id}" class="page-section scroll-mt-24 text-center pt-16 pb-8">
+                    <h2 class="text-5xl font-bold title-color">${category.category}</h2>
+                </section>
+            `;
+
+          category.items.forEach((item) => {
+            let imagesHTML = "";
+            if (item.images && item.images.length > 0) {
+              imagesHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">`;
+              item.images.forEach((imgUrl) => {
+                imagesHTML += `<img src="${imgUrl}" alt="${item.title}" class="w-full rounded-xl shadow-lg border-4 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">`;
+              });
+              imagesHTML += `</div>`;
+            } else if (item.image) {
+              imagesHTML = `<img src="${item.image}" alt="${item.title}" class="w-full rounded-xl shadow-2xl border-4 border-[var(--bg-secondary)] mt-6" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Imagen+no+disponible';">`;
+            }
+
+            contentHTML += `
+                    <section id="${item.id}" class="page-section card rounded-2xl p-8 mb-8 scroll-mt-24">
+                        <h3 class="title-color text-3xl md:text-4xl font-bold mb-4">${item.title}</h3>
+                        <p class="text-lg text-subtle">${item.description}</p>
+                        ${imagesHTML}
+                    </section>
+                `;
+          });
+
+          if (categoryIndex === featuresData.length - 1) {
+            contentHTML += `
+                    <section class="text-center py-12">
+                        <h3 class="text-3xl font-bold text-main mb-6">¿Listo para empezar?</h3>
+                        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                            <a href="https://facturanza.com" target="_blank" rel="noopener noreferrer"
+                               class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl w-full sm:w-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5a2 2 0 11-2.828-2.828l3-3z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                                <span>Visitar sitio web</span>
+                            </a>
+                            <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer"
+                               class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl w-full sm:w-auto">
+                                <span>Ir al facturador</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                     fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </section>
+                `;
+          }
+        });
+
+        navLinksContainer.innerHTML = navHTML;
+        featureContent.innerHTML = contentHTML;
+      }
+
+      function toggleTheme() {
+        body.classList.toggle("dark");
+        const isDarkMode = body.classList.contains("dark");
+        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+        updateToggleIndicator(isDarkMode);
+      }
+
+      function updateToggleIndicator(isDarkMode) {
+        themeToggleIndicator.classList.toggle("translate-x-5", isDarkMode);
+        themeToggleIndicator.classList.toggle("translate-x-1", !isDarkMode);
+      }
+
+      function initializeTheme() {
+        const useDarkMode =
+          localStorage.getItem("theme") === "dark" ||
+          (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+        if (useDarkMode) body.classList.add("dark");
+        updateToggleIndicator(useDarkMode);
+      }
+
+      function setupScrollspy() {
+        const sections = document.querySelectorAll(".page-section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            let bestEntry = null;
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                if (
+                  !bestEntry ||
+                  entry.intersectionRatio > bestEntry.intersectionRatio
+                ) {
+                  bestEntry = entry;
+                }
+              }
+            });
+
+            if (bestEntry) {
+              const fullId = bestEntry.target.getAttribute("id");
+              const categoryId = fullId.includes(".")
+                ? fullId.split(".")[0]
+                : fullId;
+              const activeNavLink = document.querySelector(
+                `.nav-link[data-target='${categoryId}']`,
+              );
+
+              if (activeNavLink) {
+                navLinks.forEach((link) => link.classList.remove("active"));
+                activeNavLink.classList.add("active");
+              }
+              history.replaceState(null, null, `#${fullId}`);
+            }
+          },
+          {
+            threshold: 0.1,
+            rootMargin: "-88px 0px -50% 0px",
+          },
+        );
+
+        sections.forEach((section) => observer.observe(section));
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initializeTheme();
+        renderPage();
+        setupScrollspy();
+
+        if (window.location.hash) {
+          const targetId = window.location.hash.substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            setTimeout(() => {
+              targetElement.scrollIntoView({ behavior: "auto" });
+            }, 100);
+          }
+        }
+      });
+
+      themeToggle.addEventListener("click", toggleTheme);
+    </script>
+  </body>
+</html>
