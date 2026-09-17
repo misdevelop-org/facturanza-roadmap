@@ -12,7 +12,7 @@ Para asegurar que la plataforma sea escalable, segura y no represente un costo d
 1. **Capa de Presentación (`facturanza_common`):** Escucha en tiempo real los cambios en la base de datos de Firestore. 📱
 2. **Base de Datos (Firestore):** Almacena las conversaciones de forma segura en la ruta de la empresa. 🗄️
 3. **Capa de Orquestación (`facturanza_backend`):** Se activa mediante un trigger de escritura en Firestore y ejecuta la lógica de Genkit con el Quota Gate. 🤖
-4. **Validaciones e Integración (`facturanza_sdk`):** Valida límites de suscripción, inyecta el contexto de negocio y conecta de forma segura con el proveedor del LLM. 📦☁️
+4. **Validaciones e Integración (`facturanza_common`):** Valida límites de suscripción, inyecta el contexto de negocio y conecta de forma segura con el proveedor del LLM. 📦☁️
 
 ---
 
