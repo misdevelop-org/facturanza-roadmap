@@ -21,7 +21,7 @@
         --brand-primary: #5eb0c7;
         --brand-secondary: #005973;
         --brand-light-green: #63d389;
-        --cta-text-color: #005973; /* Consistent blue for CTA buttons */
+        --cta-text-color: #005973;
         --logo-filter: none;
       }
 
@@ -134,8 +134,8 @@
       }
 
       .no-scrollbar {
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
       }
     </style>
   </head>
@@ -224,17 +224,17 @@
         return text
           .toString()
           .toLowerCase()
-          .replace(/\s+/g, "-") // Replace spaces with -
-          .replace(p, (c) => b.charAt(a.indexOf(c))) // Replace special characters
-          .replace(/&/g, "-and-") // Replace & with 'and'
-          .replace(/[^\w\-]+/g, "") // Remove all non-word chars
-          .replace(/\-\-+/g, "-") // Replace multiple - with single -
-          .replace(/^\-+/, "") // Trim - from start of text
-          .replace(/\-+$/, ""); // Trim - from end of text
+          .replace(/\s+/g, "-")
+          .replace(p, (c) => b.charAt(a.indexOf(c)))
+          .replace(/&/g, "-and-")
+          .replace(/[^\w\-]+/g, "")
+          .replace(/\-\-+/g, "-")
+          .replace(/^\-+/, "")
+          .replace(/\-+$/, "");
       }
 
       // ===================================================================
-      // === FEATURE DATA INJECTED PROGRAMMATICALLY ========================
+      // === FEATURE DATA WITH DESKTOP, TABLET & MOBILE VIEWPORTS ==========
       // ===================================================================
       const rawFeaturesData = [
         {
@@ -243,9 +243,29 @@
             {
               "title": "Declaración TRIBU-CR Formulario 150 y Desglose Multitarifa de IVA",
               "description": "Cálculo automático de la liquidación del impuesto sobre el valor agregado (Débito Fiscal, Crédito Soportado y Saldo a Favor del Contribuyente) con desglose exacto de todas las tarifas de IVA (13%, 8%, 4%, 2%, 1%, 0.5% y exento) y unificación del símbolo oficial de colones (₡).",
+              "desktopImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Freporte_tributario_150_desktop.png?alt=media&token=63f92807-510f-4f18-9b4c-c0a4b27e2883",
+              "tabletImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Freporte_tributario_150_tablet.png?alt=media&token=2cee3341-f4fa-466e-b531-35997443d7d8",
+              "mobileImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Freporte_tributario_150_mobile.png?alt=media&token=777991db-39c4-4e67-b60f-780f78e4c1ae",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Freporte_tributario_150_desktop.png?alt=media&token=63f92807-510f-4f18-9b4c-c0a4b27e2883",
+                "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Freporte_tributario_150_tablet.png?alt=media&token=2cee3341-f4fa-466e-b531-35997443d7d8",
                 "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Freporte_tributario_150_mobile.png?alt=media&token=777991db-39c4-4e67-b60f-780f78e4c1ae"
+              ],
+              "bulletPoints": [
+                "Liquidación tributaria automática mensual con exportación de datos contables en PDF y Excel.",
+                "Visualización completa de Base Bruta, Notas de Crédito, Base Neta y Débito Fiscal discriminado por tarifa.",
+                "Identificación clara de créditos fiscales soportados y saldo favorable del contribuyente.",
+                "Acceso directo y validación de comprobantes asociados por cada tarifa del impuesto."
+              ]
+            },
+            {
+              "title": "Tipografía Unicode y Símbolo Oficial de Colones en Reportes PDF",
+              "description": "Estandarización de tipografía Unicode oficial (Noto Sans / Roboto) para la correcta visualización del símbolo de colones («₡») en todos los comprobantes, recibos y reportes generados en PDF, eliminando caracteres faltantes y cajas vacías.",
+              "images": [],
+              "bulletPoints": [
+                "Encabezados y tablas estilizadas en azul institucional (#005973) con fila de totales destacada.",
+                "Inclusión de barra de acento superior (#5EB0C7 de 3.5 pt) y pie de página institucional Facturanza.",
+                "Consistencia total entre reportes en pantalla y documentos descargables para contabilidad."
               ]
             }
           ]
@@ -256,9 +276,28 @@
             {
               "title": "Vinculación Multi-Proveedor y Gestión de Accesos",
               "description": "Permite asociar y gestionar múltiples métodos de autenticación (Google, Contraseña de Correo y Apple ID) directamente desde el perfil de usuario, integrando salvaguardas de seguridad que impiden desvincular el único método activo.",
+              "desktopImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmetodos_autenticacion_desktop.png?alt=media&token=d5711eb9-df09-485f-a275-ff0df46cd449",
+              "tabletImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmetodos_autenticacion_tablet.png?alt=media&token=d9ec2f3d-e694-4b65-8798-d69ebb097f56",
+              "mobileImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmetodos_autenticacion_mobile.png?alt=media&token=91e2ab43-71b3-4553-a219-8bab5944eaa8",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmetodos_autenticacion_desktop.png?alt=media&token=d5711eb9-df09-485f-a275-ff0df46cd449",
+                "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmetodos_autenticacion_tablet.png?alt=media&token=d9ec2f3d-e694-4b65-8798-d69ebb097f56",
                 "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmetodos_autenticacion_mobile.png?alt=media&token=91e2ab43-71b3-4553-a219-8bab5944eaa8"
+              ],
+              "bulletPoints": [
+                "Asociación independiente de Google Workspace, Sign in with Apple y Contraseña tradicional.",
+                "Protección activa que impide desvincular el último método de inicio de sesión activo para evitar bloqueos.",
+                "Modal interactivo asistido para asignar o cambiar contraseña en cuentas registradas inicialmente con OAuth."
+              ]
+            },
+            {
+              "title": "Autenticación Biométrica y Soporte Nativo de Apple Sign-In",
+              "description": "Incorporación de acceso biométrico mediante huella dactilar, Face ID y Touch ID en las aplicaciones móviles para iOS y Android, junto con soporte nativo de Sign in with Apple con almacenamiento seguro en Keychain y Keystore.",
+              "images": [],
+              "bulletPoints": [
+                "Acceso ultra-rápido y seguro mediante Face ID, Touch ID o sensor de huellas en dispositivos compatibles.",
+                "Indicadores de carga independientes por botón y manejo de errores contextuales en español.",
+                "Cumplimiento riguroso con los lineamientos de seguridad de Apple App Store y Google Play."
               ]
             }
           ]
@@ -269,9 +308,27 @@
             {
               "title": "Recepción y Registro Automático de Compras",
               "description": "Identificación visual con el distintivo ✨ Auto para los comprobantes electrónicos recibidos y procesados automáticamente vía compras@facturanza.com, con consulta directa de clave numérica y montos detallados.",
+              "desktopImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fcompras_automaticas_desktop.png?alt=media&token=61429b0e-f726-4344-8d51-ae290f31ff6a",
+              "tabletImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fcompras_automaticas_tablet.png?alt=media&token=8747b5d1-a911-48e1-bcc5-b594b79736bb",
+              "mobileImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fcompras_automaticas_mobile.png?alt=media&token=79139755-639c-401f-8a28-fda3ae0c8f0c",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fcompras_automaticas_desktop.png?alt=media&token=61429b0e-f726-4344-8d51-ae290f31ff6a",
+                "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fcompras_automaticas_tablet.png?alt=media&token=8747b5d1-a911-48e1-bcc5-b594b79736bb",
                 "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fcompras_automaticas_mobile.png?alt=media&token=79139755-639c-401f-8a28-fda3ae0c8f0c"
+              ],
+              "bulletPoints": [
+                "Badge ✨ Auto que resalta compras procesadas automáticamente por el motor de sincronización de correo.",
+                "Visualización inmediata de fecha, emisor comercial, clave numérica de 50 dígitos y monto en colones.",
+                "Filtro rápido por mes fiscal y navegación fluida entre comprobantes de gastos."
+              ]
+            },
+            {
+              "title": "Trazabilidad y Resiliencia en Historial de Pagos y Compras",
+              "description": "Optimización en el procesamiento de comprobantes de compras e historial de pagos empresariales, previniendo esperas innecesarias y agilizando la consulta contable de comprobantes de alto volumen.",
+              "images": [],
+              "bulletPoints": [
+                "Control defensivo en la lectura de estados de pago y documentos fiscales asociados.",
+                "Mayor velocidad de carga en empresas con alto volumen de gastos mensuales."
               ]
             }
           ]
@@ -282,9 +339,27 @@
             {
               "title": "Monitoreo de Cuotas de Plan y Facturanza Labs",
               "description": "Control en tiempo real de consumo de facturas emitidas, usuarios asignados en la empresa y usos del Asistente Facturito, junto con un panel para probar características experimentales (Labs).",
+              "desktopImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmembresia_y_experimentos_desktop.png?alt=media&token=922a42ff-1172-4b3b-8fea-8723b55013de",
+              "tabletImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmembresia_y_experimentos_tablet.png?alt=media&token=9fff754d-8202-4596-8f8a-ed383ca9bb1d",
+              "mobileImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmembresia_y_experimentos_mobile.png?alt=media&token=2fc1d20c-1376-459d-8cc4-f20287566c5f",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmembresia_y_experimentos_desktop.png?alt=media&token=922a42ff-1172-4b3b-8fea-8723b55013de",
+                "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmembresia_y_experimentos_tablet.png?alt=media&token=9fff754d-8202-4596-8f8a-ed383ca9bb1d",
                 "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.9.0%2Fmembresia_y_experimentos_mobile.png?alt=media&token=2fc1d20c-1376-459d-8cc4-f20287566c5f"
+              ],
+              "bulletPoints": [
+                "Barras de progreso en vivo para cuota de facturas disponibles y usuarios autorizados en la empresa.",
+                "Contador dinámico de consultas efectuadas con Facturito Asistente AI.",
+                "Sección de Facturanza Labs para activar y evaluar funciones antes de su despliegue general."
+              ]
+            },
+            {
+              "title": "Habilitación de Pagos en Android y Cumplimiento de Plataforma",
+              "description": "Activación de compras de facturas y mejoras de plan directamente desde la app en Android tras aprobación en Google Play, junto con avisos informativos guiados en iOS orientando a la administración en la web conforme a los lineamientos de Apple.",
+              "images": [],
+              "bulletPoints": [
+                "Flujo fluido de compra de paquetes de facturas y upgrade de planes en Android.",
+                "Pantalla informativa MobileSubscriptionNoticePage en iOS respetando las normas de App Store."
               ]
             }
           ]
@@ -346,22 +421,72 @@
             `;
 
           category.items.forEach((item) => {
-            let imagesHTML = "";
-            if (item.images && item.images.length > 0) {
-              imagesHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">`;
+            let mediaHTML = "";
+
+            const desktopImg = item.desktopImage || (item.images && item.images.length === 3 ? item.images[0] : null);
+            const tabletImg = item.tabletImage || (item.images && item.images.length === 3 ? item.images[1] : null);
+            const mobileImg = item.mobileImage || (item.images && item.images.length === 3 ? item.images[2] : null);
+
+            if (desktopImg && tabletImg && mobileImg) {
+              // 3-device responsive layout: Desktop and Tablet stacked on left, Mobile phone on right
+              mediaHTML = `
+                <div class="flex flex-col lg:flex-row gap-6 items-start mt-8">
+                  <!-- Columna izquierda: Desktop y Tablet -->
+                  <div class="w-full lg:w-[67%] flex flex-col gap-6">
+                    <div>
+                      <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">💻 Escritorio</span>
+                      </div>
+                      <img src="${desktopImg}" alt="${item.title} - Escritorio" class="w-full rounded-xl shadow-lg border-2 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Escritorio';">
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📱 Tablet</span>
+                      </div>
+                      <img src="${tabletImg}" alt="${item.title} - Tablet" class="w-full rounded-xl shadow-lg border-2 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/768x1024/cccccc/ffffff?text=Tablet';">
+                    </div>
+                  </div>
+                  <!-- Columna derecha: Teléfono Móvil con proporción natural -->
+                  <div class="w-full lg:w-[33%] flex flex-col items-center lg:items-center">
+                    <div class="w-full max-w-[280px] sm:max-w-[310px]">
+                      <div class="flex items-center justify-center gap-2 mb-2">
+                        <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📲 Móvil</span>
+                      </div>
+                      <img src="${mobileImg}" alt="${item.title} - Móvil" class="w-full rounded-2xl shadow-xl border-4 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/390x844/cccccc/ffffff?text=Móvil';">
+                    </div>
+                  </div>
+                </div>
+              `;
+            } else if (item.images && item.images.length > 0) {
+              mediaHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">`;
               item.images.forEach((imgUrl) => {
-                imagesHTML += `<img src="${imgUrl}" alt="${item.title}" class="w-full rounded-xl shadow-lg border-4 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">`;
+                mediaHTML += `<img src="${imgUrl}" alt="${item.title}" class="w-full rounded-xl shadow-lg border-4 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">`;
               });
-              imagesHTML += `</div>`;
+              mediaHTML += `</div>`;
             } else if (item.image) {
-              imagesHTML = `<img src="${item.image}" alt="${item.title}" class="w-full rounded-xl shadow-2xl border-4 border-[var(--bg-secondary)] mt-6" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Imagen+no+disponible';">`;
+              mediaHTML = `<img src="${item.image}" alt="${item.title}" class="w-full rounded-xl shadow-2xl border-4 border-[var(--bg-secondary)] mt-6" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Imagen+no+disponible';">`;
+            }
+
+            let bulletsHTML = "";
+            if (item.bulletPoints && item.bulletPoints.length > 0) {
+              bulletsHTML = `
+                <ul class="mt-4 space-y-2 text-subtle text-base list-none">
+                  ${item.bulletPoints.map((bp) => `
+                    <li class="flex items-start gap-2">
+                      <span class="text-[var(--brand-primary)] font-bold text-lg leading-tight mt-0.5">•</span>
+                      <span>${bp}</span>
+                    </li>
+                  `).join("")}
+                </ul>
+              `;
             }
 
             contentHTML += `
                     <section id="${item.id}" class="page-section card rounded-2xl p-8 mb-8 scroll-mt-24">
                         <h3 class="title-color text-3xl md:text-4xl font-bold mb-4">${item.title}</h3>
-                        <p class="text-lg text-subtle">${item.description}</p>
-                        ${imagesHTML}
+                        <p class="text-lg text-subtle leading-relaxed">${item.description}</p>
+                        ${bulletsHTML}
+                        ${mediaHTML}
                     </section>
                 `;
           });
@@ -382,7 +507,7 @@
                                 <span>Visitar sitio web</span>
                             </a>
                             <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer"
-                               class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl w-full sm:w-auto">
+                                class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl w-full sm:w-auto">
                                 <span>Ir al facturador</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                      fill="currentColor">
