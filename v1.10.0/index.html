@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facturanza - Novedades v1.10.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-primary: #f5f5f5;
+        --bg-secondary: #ffffff;
+        --text-primary: #414141;
+        --text-secondary: #6f6f6f;
+        --brand-primary: #5eb0c7;
+        --brand-secondary: #005973;
+        --brand-light-green: #63d389;
+        --cta-text-color: #005973;
+        --logo-filter: none;
+      }
+
+      .dark {
+        --bg-primary: #2d3748;
+        --bg-secondary: #4a5568;
+        --text-primary: #e8e8e8;
+        --text-secondary: #a0aec0;
+        --brand-primary: #5eb0c7;
+        --brand-secondary: #a4d2df;
+        --brand-light-green: #63d389;
+        --logo-filter: none;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: "Inter", sans-serif;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+
+      .brand-logo {
+        filter: var(--logo-filter);
+        transition: filter 0.3s ease;
+      }
+
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .top-nav {
+        background-color: var(--bg-primary);
+        border-bottom: 1px solid var(--bg-secondary);
+        transition:
+          background-color 0.3s ease,
+          border-color 0.3s ease;
+      }
+
+      .dark .top-nav {
+        border-bottom-color: #4a5568;
+      }
+
+      .nav-link {
+        color: var(--text-secondary);
+        font-weight: 500;
+        border-bottom: 2px solid transparent;
+      }
+
+      .nav-link:hover {
+        color: var(--brand-primary);
+      }
+
+      .nav-link.active {
+        color: var(--brand-primary);
+        border-bottom-color: var(--brand-primary);
+        font-weight: 600;
+      }
+
+      .cta-button {
+        background-color: var(--brand-light-green);
+        color: var(--cta-text-color);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .text-subtle {
+        color: var(--text-secondary);
+      }
+
+      .title-color {
+        color: var(--text-primary);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div id="sticky-header" class="sticky top-0 z-30 bg-[var(--bg-primary)]">
+      <header
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c"
+          alt="Facturanza Logo"
+          class="h-9 brand-logo"
+        />
+        <div class="flex items-center space-x-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-subtle"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            ></path>
+          </svg>
+          <button
+            id="theme-toggle"
+            class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-gray-300 dark:bg-brand-secondary"
+          >
+            <span
+              id="theme-toggle-indicator"
+              class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 ease-in-out"
+            ></span>
+          </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-subtle"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+            ></path>
+          </svg>
+        </div>
+      </header>
+    </div>
+
+    <nav id="top-nav-bar" class="top-nav sticky top-0 z-20">
+      <div
+        id="nav-container"
+        class="container mx-auto px-4 overflow-x-auto no-scrollbar"
+      >
+        <div id="nav-links" class="flex space-x-6 whitespace-nowrap py-3"></div>
+      </div>
+    </nav>
+
+    <main id="feature-content" class="container mx-auto p-4 md:p-8"></main>
+
+    <footer class="text-center my-12 text-subtle">
+      <p>&copy; 2026 Facturanza. Gracias por tu valiosa contribución.</p>
+      <a
+        href="https://roadmap.facturanza.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-subtle hover:text-[var(--brand-primary)] underline transition-colors"
+      >
+        Ver Roadmap
+      </a>
+    </footer>
+
+    <script>
+      // --- UTILITY FUNCTIONS ---
+      function slugify(text) {
+        const a =
+          "àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;";
+        const b =
+          "aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------";
+        const p = new RegExp(a.split("").join("|"), "g");
+
+        return text
+          .toString()
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(p, (c) => b.charAt(a.indexOf(c)))
+          .replace(/&/g, "-and-")
+          .replace(/[^\w\-]+/g, "")
+          .replace(/\-\-+/g, "-")
+          .replace(/^\-+/, "")
+          .replace(/\-+$/, "");
+      }
+
+      // ===================================================================
+      // === FEATURE DATA WITH DESKTOP, TABLET & MOBILE VIEWPORTS ==========
+      // ===================================================================
+      const rawFeaturesData = [
+        {
+          "category": "Facturación Electrónica y Documentos Fiscales",
+          "items": [
+            {
+              "title": "Factura Electrónica de Compra (FEC - Tipo 08) y Filtrado Inteligente",
+              "description": "Emisión y procesamiento de comprobantes electrónicos de compra para respaldar adquisiciones sin factura directa previa. Incorpora filtrado dinámico de clientes; Factura Electrónica exige receptores con cédula/identificación fiscal, mientras que Tiquete Electrónico admite venta rápida.",
+              "desktopImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_factura_compra_fec_desktop.png?alt=media",
+              "tabletImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_factura_compra_fec_tablet.png?alt=media",
+              "mobileImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_factura_compra_fec_mobile.png?alt=media",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_factura_compra_fec_desktop.png?alt=media",
+                "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_factura_compra_fec_tablet.png?alt=media",
+                "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_factura_compra_fec_mobile.png?alt=media"
+              ],
+              "bulletPoints": [
+                "Tipo de comprobante Factura Electrónica de Compra (FEC - 08) asignado a la empresa emisora.",
+                "Selección automática de la actividad económica predeterminada del cliente al seleccionarlo.",
+                "Duplicación inteligente de comprobantes manteniendo la divisa original (Colones ₡ o Dólares USD $) sin vinculación errónea a notas previas.",
+                "Modificación de fecha de emisión para usuarios SuperAdmin con recálculo automático de la Clave Numérica de 50 dígitos."
+              ]
+            }
+          ]
+        },
+        {
+          "category": "Gestión de Clientes y Filtros Rápidos",
+          "items": [
+            {
+              "title": "Navegación Directa 'Ver Facturas' y Consulta por Cliente",
+              "description": "Acceso instantáneo desde la ficha contextual de cualquier cliente hacia el historial completo de sus facturas emitidas, junto con un chip interactivo de filtro rápido.",
+              "desktopImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_ver_facturas_cliente_desktop.png?alt=media",
+              "tabletImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_ver_facturas_cliente_tablet.png?alt=media",
+              "mobileImage": "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_ver_facturas_cliente_mobile.png?alt=media",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_ver_facturas_cliente_desktop.png?alt=media",
+                "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_ver_facturas_cliente_tablet.png?alt=media",
+                "https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/v1.10.0%2Fv1.10.0_ver_facturas_cliente_mobile.png?alt=media"
+              ],
+              "bulletPoints": [
+                "Acción 'Ver facturas' en el menú de tarjeta de cliente para consultar comprobantes en un solo clic.",
+                "Filtro activo con remoción en un clic y expansión automática del rango de fechas en la lista de facturas."
+              ]
+            }
+          ]
+        },
+        {
+          "category": "Resiliencia y Rendimiento Fiscal",
+          "items": [
+            {
+              "title": "Deserialización Robusta de Precios, Impuestos y Pagos",
+              "description": "Procesamiento tolerante de montos numéricos decimales e impuestos en facturas e historial de pagos empresariales, evitando congelamientos en pantalla.",
+              "images": [],
+              "bulletPoints": [
+                "Manejo seguro de tipos de datos en pagos y facturas con alto volumen de ítems.",
+                "Prevención de espacios en blanco no deseados en campos de correo electrónico y sanitización de formularios."
+              ]
+            }
+          ]
+        },
+        {
+          "category": "Transparencia en Aplicación iOS",
+          "items": [
+            {
+              "title": "Avisos Informativos de Afiliación en iOS (Apple Guideline 3.1.1)",
+              "description": "Integración de pantallas informativas claras para la inscripción de empresas desde el portal web en dispositivos iOS, asegurando sincronización automática de cuentas.",
+              "images": [],
+              "bulletPoints": [
+                "Orientación fluida para usuarios iOS en el portal web desktop (app.facturanza.com).",
+                "Sincronización instantánea de organizaciones asociadas al iniciar sesión."
+              ]
+            }
+          ]
+        }
+      ];
+
+      const featuresData = rawFeaturesData.map((category) => ({
+        ...category,
+        id: slugify(category.category),
+        items: category.items.map((item) => ({
+          ...item,
+          id: slugify(category.category) + "." + slugify(item.title),
+        })),
+      }));
+
+      // --- DOM Elements ---
+      const navLinksContainer = document.getElementById("nav-links");
+      const featureContent = document.getElementById("feature-content");
+      const themeToggle = document.getElementById("theme-toggle");
+      const themeToggleIndicator = document.getElementById(
+        "theme-toggle-indicator",
+      );
+      const body = document.body;
+
+      // --- CORE FUNCTIONS ---
+
+      function renderPage() {
+        let navHTML = "";
+        let contentHTML = "";
+
+        const welcomeId = "bienvenido";
+        navHTML += `<a href="#${welcomeId}" class="nav-link transition-all duration-200 py-1" data-target="${welcomeId}">Bienvenido</a>`;
+
+        contentHTML += `
+            <section id="${welcomeId}" class="scroll-mt-24 page-section text-center min-h-[40vh] flex flex-col justify-center items-center py-6">
+                <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza Logo" class="h-16 brand-logo mb-6">
+                <h2 class="title-color text-4xl font-bold mb-2">¡Bienvenido a las nuevas actualizaciones!</h2>
+                <p class="text-2xl font-semibold text-[var(--brand-primary)] mb-4">versión 1.10.0</p>
+                <p class="text-xl text-subtle max-w-2xl mb-8">Hemos trabajado en nuevas funciones y mejoras para potenciar tu negocio. Navega para ver los detalles.</p>
+                <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer"
+                   class="cta-button inline-flex items-center gap-2 font-bold py-3 px-6 rounded-xl">
+                    <span>Ir al facturador</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </section>
+        `;
+
+        featuresData.forEach((category, categoryIndex) => {
+          navHTML += `<a href="#${category.id}" class="nav-link transition-all duration-200 py-1" data-target="${category.id}">${category.category}</a>`;
+
+          contentHTML += `
+                <section id="${category.id}" class="page-section scroll-mt-24 text-center pt-16 pb-8">
+                    <h2 class="text-5xl font-bold title-color">${category.category}</h2>
+                </section>
+            `;
+
+          category.items.forEach((item) => {
+            let mediaHTML = "";
+
+            const desktopImg = item.desktopImage || (item.images && item.images.length === 3 ? item.images[0] : null);
+            const tabletImg = item.tabletImage || (item.images && item.images.length === 3 ? item.images[1] : null);
+            const mobileImg = item.mobileImage || (item.images && item.images.length === 3 ? item.images[2] : null);
+
+            if (desktopImg && tabletImg && mobileImg) {
+              // Layout adaptativo: Fila 1 (Escritorio) y Fila 2 (Tablet + Móvil) alineadas 1:1, 1 fila en 2K+
+              mediaHTML = `
+                <div class="flex flex-col 2xl:flex-row items-center 2xl:items-end justify-center gap-6 2xl:gap-8 mt-8 mx-auto w-full max-w-[425px] sm:max-w-[496px] md:max-w-[618px] lg:max-w-[690px] 2xl:max-w-none transition-all duration-300">
+                  <!-- Fila 1: Escritorio -->
+                  <div class="w-full 2xl:w-auto flex flex-col items-start">
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">💻 ESCRITORIO</span>
+                    </div>
+                    <div class="w-full 2xl:w-auto h-auto 2xl:h-[480px] rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
+                      <img src="${desktopImg}" alt="${item.title} - Escritorio" class="w-full 2xl:w-auto 2xl:h-full h-auto object-cover 2xl:object-contain rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Escritorio';">
+                    </div>
+                  </div>
+
+                  <!-- Fila 2 (o continuación en 2K+): Tablet y Móvil lado a lado -->
+                  <div class="flex flex-row justify-between items-center gap-6 w-full 2xl:w-auto py-2">
+                    <!-- Tablet -->
+                    <div class="flex flex-col items-start">
+                      <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📱 TABLET</span>
+                      </div>
+                      <div class="h-[320px] sm:h-[380px] md:h-[480px] lg:h-[540px] 2xl:h-[480px] rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
+                        <img src="${tabletImg}" alt="${item.title} - Tablet" class="h-full w-auto object-contain rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/768x1024/cccccc/ffffff?text=Tablet';">
+                      </div>
+                    </div>
+
+                    <!-- Móvil -->
+                    <div class="flex flex-col items-start">
+                      <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📲 MÓVIL</span>
+                      </div>
+                      <div class="h-[320px] sm:h-[380px] md:h-[480px] lg:h-[540px] 2xl:h-[480px] rounded-2xl shadow-xl border-4 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
+                        <img src="${mobileImg}" alt="${item.title} - Móvil" class="h-full w-auto object-contain rounded-2xl" onerror="this.onerror=null;this.src='https://placehold.co/390x844/cccccc/ffffff?text=Móvil';">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            } else if (item.images && item.images.length > 0) {
+              mediaHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">`;
+              item.images.forEach((imgUrl) => {
+                mediaHTML += `<img src="${imgUrl}" alt="${item.title}" class="w-full rounded-xl shadow-lg border-4 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">`;
+              });
+              mediaHTML += `</div>`;
+            }
+
+            let bulletsHTML = "";
+            if (item.bulletPoints && item.bulletPoints.length > 0) {
+              bulletsHTML = `
+                <ul class="mt-4 space-y-2 text-subtle text-base list-none">
+                  ${item.bulletPoints.map((bp) => `<li class="flex items-start gap-2"><span class="text-[var(--brand-primary)] font-bold">•</span><span>${bp}</span></li>`).join("")}
+                </ul>
+              `;
+            }
+
+            contentHTML += `
+                    <div id="${item.id}" class="page-section scroll-mt-24 bg-[var(--bg-secondary)] p-6 md:p-8 rounded-2xl shadow-md my-8 border border-gray-100 dark:border-gray-700 transition-colors">
+                        <h3 class="text-2xl font-bold title-color mb-3">${item.title}</h3>
+                        <p class="text-subtle text-lg leading-relaxed">${item.description}</p>
+                        ${bulletsHTML}
+                        ${mediaHTML}
+                    </div>
+                `;
+          });
+        });
+
+        navLinksContainer.innerHTML = navHTML;
+        featureContent.innerHTML = contentHTML;
+
+        addNavEventListeners();
+        setupScrollSpy();
+      }
+
+      function addNavEventListeners() {
+        const links = document.querySelectorAll(".nav-link");
+        links.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute("data-target");
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+              history.pushState(null, null, `#${targetId}`);
+            }
+          });
+        });
+      }
+
+      function setupScrollSpy() {
+        const sections = document.querySelectorAll(".page-section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "-20% 0px -60% 0px",
+          threshold: 0,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const currentId = entry.target.id;
+
+              navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("data-target") === currentId) {
+                  link.classList.add("active");
+                  link.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "center",
+                  });
+                }
+              });
+            }
+          });
+        }, observerOptions);
+
+        sections.forEach((section) => observer.observe(section));
+      }
+
+      function initTheme() {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+          body.classList.add("dark");
+          themeToggleIndicator.classList.add("translate-x-5");
+        } else {
+          body.classList.remove("dark");
+          themeToggleIndicator.classList.remove("translate-x-5");
+        }
+      }
+
+      function toggleTheme() {
+        body.classList.toggle("dark");
+
+        if (body.classList.contains("dark")) {
+          localStorage.setItem("theme", "dark");
+          themeToggleIndicator.classList.add("translate-x-5");
+        } else {
+          localStorage.setItem("theme", "light");
+          themeToggleIndicator.classList.remove("translate-x-5");
+        }
+      }
+
+      // --- INITIALIZATION ---
+      document.addEventListener("DOMContentLoaded", () => {
+        initTheme();
+        renderPage();
+
+        themeToggle.addEventListener("click", toggleTheme);
+
+        if (window.location.hash) {
+          const initialId = window.location.hash.substring(1);
+          const initialElement = document.getElementById(initialId);
+          if (initialElement) {
+            setTimeout(() => {
+              initialElement.scrollIntoView({ behavior: "smooth" });
+            }, 100);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
