@@ -428,27 +428,29 @@
             const mobileImg = item.mobileImage || (item.images && item.images.length === 3 ? item.images[2] : null);
 
             if (desktopImg && tabletImg && mobileImg) {
-              // Layout con alineación exacta (max-w-[490px]): Fila 1 (Escritorio) coincide en ancho total con Fila 2 (Tablet + Móvil)
+              // Layout adaptativo:
+              // - Estándar: Fila 1 (Escritorio) y Fila 2 (Tablet + Móvil) alineadas a los bordes 1:1, escalando proporcionalmente en pantallas grandes.
+              // - Pantallas 2K+ (2xl: 1536px+): 3 imágenes en UNA SOLA FILA horizontal.
               mediaHTML = `
-                <div class="flex flex-col items-center justify-center gap-6 mt-8 mx-auto w-full max-w-[490px]">
-                  <!-- Fila 1: Escritorio (Ancho exacto igual al ancho combinado de Tablet + Gap + Móvil) -->
-                  <div class="w-full flex flex-col items-start">
+                <div class="flex flex-col 2xl:flex-row items-center 2xl:items-end justify-center gap-6 2xl:gap-8 mt-8 mx-auto w-full max-w-[425px] sm:max-w-[496px] md:max-w-[618px] lg:max-w-[690px] 2xl:max-w-none transition-all duration-300">
+                  <!-- Fila 1: Escritorio (Alineado 1:1 con Fila 2 en pantallas normales, 1er elemento de la fila en 2K+) -->
+                  <div class="w-full 2xl:w-auto flex flex-col items-start">
                     <div class="flex items-center gap-2 mb-2">
                       <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">💻 ESCRITORIO</span>
                     </div>
-                    <div class="w-full rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden">
-                      <img src="${desktopImg}" alt="${item.title} - Escritorio" class="w-full h-auto object-cover rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Escritorio';">
+                    <div class="w-full 2xl:w-auto h-auto 2xl:h-[480px] rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
+                      <img src="${desktopImg}" alt="${item.title} - Escritorio" class="w-full 2xl:w-auto 2xl:h-full h-auto object-cover 2xl:object-contain rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Escritorio';">
                     </div>
                   </div>
 
-                  <!-- Fila 2: Tablet y Móvil lado a lado (Alineación perfecta con los bordes de Fila 1) -->
-                  <div class="flex flex-row justify-between items-center gap-6 w-full py-2">
+                  <!-- Fila 2 (o continuación de fila en 2K+): Tablet y Móvil lado a lado -->
+                  <div class="flex flex-row justify-between items-center gap-6 w-full 2xl:w-auto py-2">
                     <!-- Tablet -->
                     <div class="flex flex-col items-start">
                       <div class="flex items-center gap-2 mb-2">
                         <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📱 TABLET</span>
                       </div>
-                      <div class="h-[320px] sm:h-[380px] rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
+                      <div class="h-[320px] sm:h-[380px] md:h-[480px] lg:h-[540px] 2xl:h-[480px] rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
                         <img src="${tabletImg}" alt="${item.title} - Tablet" class="h-full w-auto object-contain rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/768x1024/cccccc/ffffff?text=Tablet';">
                       </div>
                     </div>
@@ -458,7 +460,7 @@
                       <div class="flex items-center gap-2 mb-2">
                         <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📲 MÓVIL</span>
                       </div>
-                      <div class="h-[320px] sm:h-[380px] rounded-2xl shadow-xl border-4 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
+                      <div class="h-[320px] sm:h-[380px] md:h-[480px] lg:h-[540px] 2xl:h-[480px] rounded-2xl shadow-xl border-4 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
                         <img src="${mobileImg}" alt="${item.title} - Móvil" class="h-full w-auto object-contain rounded-2xl" onerror="this.onerror=null;this.src='https://placehold.co/390x844/cccccc/ffffff?text=Móvil';">
                       </div>
                     </div>
