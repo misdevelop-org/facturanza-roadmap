@@ -428,10 +428,10 @@
             const mobileImg = item.mobileImage || (item.images && item.images.length === 3 ? item.images[2] : null);
 
             if (desktopImg && tabletImg && mobileImg) {
-              // Layout fijo centrado (max-w-3xl): Fila 1 = Escritorio acotado | Fila 2 = Tablet y Móvil lado a lado (siempre flex-row)
+              // Layout con alineación exacta (max-w-[490px]): Fila 1 (Escritorio) coincide en ancho total con Fila 2 (Tablet + Móvil)
               mediaHTML = `
-                <div class="flex flex-col items-center justify-center gap-6 mt-8 w-full max-w-3xl mx-auto">
-                  <!-- Fila 1: Escritorio centrado acotado -->
+                <div class="flex flex-col items-center justify-center gap-6 mt-8 mx-auto w-full max-w-[490px]">
+                  <!-- Fila 1: Escritorio (Ancho exacto igual al ancho combinado de Tablet + Gap + Móvil) -->
                   <div class="w-full flex flex-col items-start">
                     <div class="flex items-center gap-2 mb-2">
                       <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">💻 ESCRITORIO</span>
@@ -441,14 +441,14 @@
                     </div>
                   </div>
 
-                  <!-- Fila 2: Tablet y Móvil lado a lado (SIEMPRE flex-row a la misma altura) -->
-                  <div class="flex flex-row justify-center items-center gap-6 w-full overflow-x-auto py-2">
+                  <!-- Fila 2: Tablet y Móvil lado a lado (Alineación perfecta con los bordes de Fila 1) -->
+                  <div class="flex flex-row justify-between items-center gap-6 w-full py-2">
                     <!-- Tablet -->
                     <div class="flex flex-col items-start">
                       <div class="flex items-center gap-2 mb-2">
                         <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📱 TABLET</span>
                       </div>
-                      <div class="h-[320px] sm:h-[360px] rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
+                      <div class="h-[320px] sm:h-[380px] rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
                         <img src="${tabletImg}" alt="${item.title} - Tablet" class="h-full w-auto object-contain rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/768x1024/cccccc/ffffff?text=Tablet';">
                       </div>
                     </div>
@@ -458,7 +458,7 @@
                       <div class="flex items-center gap-2 mb-2">
                         <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📲 MÓVIL</span>
                       </div>
-                      <div class="h-[320px] sm:h-[360px] rounded-2xl shadow-xl border-4 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
+                      <div class="h-[320px] sm:h-[380px] rounded-2xl shadow-xl border-4 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
                         <img src="${mobileImg}" alt="${item.title} - Móvil" class="h-full w-auto object-contain rounded-2xl" onerror="this.onerror=null;this.src='https://placehold.co/390x844/cccccc/ffffff?text=Móvil';">
                       </div>
                     </div>
