@@ -428,31 +428,39 @@
             const mobileImg = item.mobileImage || (item.images && item.images.length === 3 ? item.images[2] : null);
 
             if (desktopImg && tabletImg && mobileImg) {
-              // 3-device responsive layout: Desktop and Tablet stacked on left, Mobile phone on right
+              // Layout fijo centrado (max-w-3xl): Fila 1 = Escritorio acotado | Fila 2 = Tablet y Móvil lado a lado (siempre flex-row)
               mediaHTML = `
-                <div class="flex flex-col lg:flex-row gap-6 items-start mt-8">
-                  <!-- Columna izquierda: Desktop y Tablet -->
-                  <div class="w-full lg:w-[67%] flex flex-col gap-6">
-                    <div>
-                      <div class="flex items-center gap-2 mb-2">
-                        <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">💻 Escritorio</span>
-                      </div>
-                      <img src="${desktopImg}" alt="${item.title} - Escritorio" class="w-full rounded-xl shadow-lg border-2 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Escritorio';">
+                <div class="flex flex-col items-center justify-center gap-6 mt-8 w-full max-w-3xl mx-auto">
+                  <!-- Fila 1: Escritorio centrado acotado -->
+                  <div class="w-full flex flex-col items-start">
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">💻 ESCRITORIO</span>
                     </div>
-                    <div>
-                      <div class="flex items-center gap-2 mb-2">
-                        <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📱 Tablet</span>
-                      </div>
-                      <img src="${tabletImg}" alt="${item.title} - Tablet" class="w-full rounded-xl shadow-lg border-2 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/768x1024/cccccc/ffffff?text=Tablet';">
+                    <div class="w-full rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden">
+                      <img src="${desktopImg}" alt="${item.title} - Escritorio" class="w-full h-auto object-cover rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Escritorio';">
                     </div>
                   </div>
-                  <!-- Columna derecha: Teléfono Móvil con proporción natural -->
-                  <div class="w-full lg:w-[33%] flex flex-col items-center lg:items-center">
-                    <div class="w-full max-w-[280px] sm:max-w-[310px]">
-                      <div class="flex items-center justify-center gap-2 mb-2">
-                        <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📲 Móvil</span>
+
+                  <!-- Fila 2: Tablet y Móvil lado a lado (SIEMPRE flex-row a la misma altura) -->
+                  <div class="flex flex-row justify-center items-center gap-6 w-full overflow-x-auto py-2">
+                    <!-- Tablet -->
+                    <div class="flex flex-col items-start">
+                      <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📱 TABLET</span>
                       </div>
-                      <img src="${mobileImg}" alt="${item.title} - Móvil" class="w-full rounded-2xl shadow-xl border-4 border-[var(--bg-secondary)]" onerror="this.onerror=null;this.src='https://placehold.co/390x844/cccccc/ffffff?text=Móvil';">
+                      <div class="h-[320px] sm:h-[360px] rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
+                        <img src="${tabletImg}" alt="${item.title} - Tablet" class="h-full w-auto object-contain rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/768x1024/cccccc/ffffff?text=Tablet';">
+                      </div>
+                    </div>
+
+                    <!-- Móvil -->
+                    <div class="flex flex-col items-start">
+                      <div class="flex items-center gap-2 mb-2">
+                        <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📲 MÓVIL</span>
+                      </div>
+                      <div class="h-[320px] sm:h-[360px] rounded-2xl shadow-xl border-4 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
+                        <img src="${mobileImg}" alt="${item.title} - Móvil" class="h-full w-auto object-contain rounded-2xl" onerror="this.onerror=null;this.src='https://placehold.co/390x844/cccccc/ffffff?text=Móvil';">
+                      </div>
                     </div>
                   </div>
                 </div>
