@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facturas y Comprobantes: Emisión y Ciclo de Vida - Guía Facturanza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' };</script>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/guide.css" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Top Nav Header -->
+    <header class="sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm">
+      <div class="flex items-center space-x-3 sm:space-x-5">
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a href="index.html" class="flex items-center space-x-3">
+          <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza" class="h-8" />
+        </a>
+        <div class="hidden sm:flex items-center space-x-2 pl-3 border-l border-slate-200 dark:border-slate-700">
+          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">Enterprise Dashboard</span>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Ver Roadmap</a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 shadow-sm">
+          <span>Ir a la App</span>
+        </a>
+        <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
+          <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="container mx-auto px-4 lg:px-8 py-8 flex-grow flex gap-8">
+      <!-- Left Sidebar Nav -->
+      <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-30 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 lg:p-0 lg:bg-transparent lg:border-none flex flex-col shrink-0">
+        <div class="lg:hidden flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-700">
+          <span class="font-bold text-lg">Índice</span>
+          <button id="close-sidebar-btn" class="p-1 rounded text-slate-500">✕</button>
+        </div>
+        <div class="sticky top-20 overflow-y-auto max-h-[calc(100vh-6rem)] pr-2 custom-scrollbar">
+          <nav id="doc-sidebar-nav" class="space-y-4"></nav>
+        </div>
+      </aside>
+      <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden"></div>
+
+      <!-- Center Content Area -->
+      <main id="doc-main-content" class="flex-1 min-w-0 max-w-4xl pb-16">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center space-x-2 text-xs text-slate-400 mb-4">
+          <a href="index.html" class="hover:underline">Guía</a>
+          <span>/</span>
+          <span>Enterprise Dashboard</span>
+          <span>/</span>
+          <span class="text-blue-500 font-semibold">b. Facturas & Comprobantes</span>
+        </nav>
+
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Facturas y Comprobantes: Emisión, Consulta y Estados</h1>
+        <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+          El módulo central de Facturanza permite emitir todos los tipos de documentos tributarios autorizados por el Ministerio de Hacienda de Costa Rica (DGT), consultar su ciclo de vida en tiempo real, generar notas de crédito correctivas y programar facturas recurrentes.
+        </p>
+
+        <!-- 6-Screenshot Matrix Placeholder -->
+        <div data-matrix-title="Facturas Electrónicas: Búsqueda, Filtrado y Formulario de Emisión"></div>
+
+        <!-- Section 1: Tipos de Documentos DGT -->
+        <h2 id="tipos-documentos" class="text-2xl font-bold mt-12 mb-4">1. Tipos de Comprobantes Electrónicos Soportados</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          Facturanza implementa la estructura oficial de esquemas XML de la DGT para todos los comprobantes legales:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono font-extrabold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Tipo 01</span>
+              <span class="text-[11px] text-slate-400">Esquema v4.3</span>
+            </div>
+            <h3 class="font-bold text-sm mb-1">Factura Electrónica (FE)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Documento comercial estándar con receptor identificado para efectos de crédito fiscal y deducibilidad de gastos.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono font-extrabold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300">Tipo 04</span>
+              <span class="text-[11px] text-slate-400">Consumidor Final</span>
+            </div>
+            <h3 class="font-bold text-sm mb-1">Tiquete Electrónico (TE)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Emisión ágil para ventas minoristas y consumidor final donde el cliente no requiere crédito fiscal ni cédula.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono font-extrabold px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">Tipo 03</span>
+              <span class="text-[11px] text-slate-400">Anulación Total/Parcial</span>
+            </div>
+            <h3 class="font-bold text-sm mb-1">Nota de Crédito (NC)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Anula o disminuye montos de facturas previas con referencia obligatoria a la clave numérica de 50 dígitos.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono font-extrabold px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">Tipo 02</span>
+              <span class="text-[11px] text-slate-400">Recargos/Intereses</span>
+            </div>
+            <h3 class="font-bold text-sm mb-1">Nota de Débito (ND)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Aumenta el valor de una factura previa por cargos de mora, fletes o ajustes contables vinculados.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono font-extrabold px-2 py-0.5 rounded bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300">Tipo 08</span>
+              <span class="text-[11px] text-slate-400">Régimen Simplificado</span>
+            </div>
+            <h3 class="font-bold text-sm mb-1">Factura de Compra (FEC)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Emitida por el comprador cuando adquiere bienes o servicios a proveedores no obligados a facturar electrónicamente.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono font-extrabold px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300">Tipo 09</span>
+              <span class="text-[11px] text-slate-400">Exterior</span>
+            </div>
+            <h3 class="font-bold text-sm mb-1">Factura Exportación (FEE)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Para exportadores de bienes y servicios al extranjero con tarifas de IVA exentas y datos aduanales requeridos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 2: Formulario de Nueva Emisión -->
+        <h2 id="formulario-emision" class="text-2xl font-bold mt-12 mb-4">2. Anatomía del Formulario de Emisión</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          Diseñado para velocidad y precisión, el formulario valida en tiempo real los requisitos del Ministerio de Hacienda:
+        </p>
+
+        <div class="space-y-4 mb-8">
+          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <div class="flex items-center gap-2 mb-2 font-bold text-sm text-slate-800 dark:text-slate-100">
+              <span class="h-6 w-6 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center text-xs">1</span>
+              <span>Receptor y Condiciones Comerciales</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">
+              Autocompletado instantáneo con el Directorio de Clientes o búsqueda en vivo por número de cédula en el padrón nacional de la DGT.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <span class="font-semibold block text-slate-400 text-[10px]">MONEDA</span>
+                <span class="font-bold">Colones (CRC) o Dólares (USD)</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <span class="font-semibold block text-slate-400 text-[10px]">CONDICIÓN DE VENTA</span>
+                <span class="font-bold">Contado, Crédito (con plazo en días)</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <span class="font-semibold block text-slate-400 text-[10px]">MÉTODO DE PAGO</span>
+                <span class="font-bold">Transferencia (SINPE), Tarjeta, Efectivo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <div class="flex items-center gap-2 mb-2 font-bold text-sm text-slate-800 dark:text-slate-100">
+              <span class="h-6 w-6 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center text-xs">2</span>
+              <span>Líneas de Detalle y Catálogo CABYS</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">
+              Cada línea valida el código de 13 dígitos del Catálogo de Bienes y Servicios (CABYS). El IVA se calcula de forma automática según la tarifa legal correspondiente (13%, 8%, 4%, 2%, 1% o exento).
+            </p>
+            <div class="p-3 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 text-xs">
+              <span class="font-bold text-amber-800 dark:text-amber-300">💡 Soporte para Exoneraciones (EXO):</span>
+              <p class="text-slate-600 dark:text-slate-300 mt-1">
+                Puedes adjuntar exoneraciones autorizadas de la DGT ingresando el número de documento oficial, la institución emisora, fecha de vigencia y porcentaje exonerado. El sistema computa el impuesto neto y documenta el desglose en el XML legal.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <div class="flex items-center gap-2 mb-2 font-bold text-sm text-slate-800 dark:text-slate-100">
+              <span class="h-6 w-6 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center text-xs">3</span>
+              <span>Envío Multicorreo por Chips</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">
+              Agrega múltiples destinatarios mediante chips interactivos. Al confirmarse la aceptación de Hacienda, el backend despacha inmediatamente el correo electrónico corporativo adjuntando el XML firmado (XAdES-BES), el acuse de recibo de Hacienda y la representación gráfica en PDF.
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 3: Estados de Hacienda -->
+        <h2 id="estados-hacienda" class="text-2xl font-bold mt-12 mb-4">3. Ciclo de Vida y Estados de Hacienda</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          Facturanza gestiona de forma asíncrona la comunicación con los servidores IDP de la DGT mediante los siguientes estados:
+        </p>
+
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-xs text-left border border-[var(--border-color)] rounded-xl overflow-hidden">
+            <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold uppercase">
+              <tr>
+                <th class="p-3 border-b border-[var(--border-color)]">Estado</th>
+                <th class="p-3 border-b border-[var(--border-color)]">Significado</th>
+                <th class="p-3 border-b border-[var(--border-color)]">Acción Disponible</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--border-color)]">
+              <tr class="bg-[var(--card-bg)]">
+                <td class="p-3">
+                  <span class="px-2 py-0.5 rounded-full font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Aceptado</span>
+                </td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">El comprobante fue validado con éxito por Hacienda y tiene plena validez fiscal.</td>
+                <td class="p-3 font-semibold text-slate-700 dark:text-slate-200">Emitir Nota de Crédito / Descargar PDF / Reenviar correo</td>
+              </tr>
+              <tr class="bg-[var(--card-bg)]">
+                <td class="p-3">
+                  <span class="px-2 py-0.5 rounded-full font-bold bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">En Proceso</span>
+                </td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">El XML firmado fue entregado al buzón de Hacienda y se encuentra en cola de validación.</td>
+                <td class="p-3 font-semibold text-slate-700 dark:text-slate-200">Revisión automática en segundo plano (polling inteligente)</td>
+              </tr>
+              <tr class="bg-[var(--card-bg)]">
+                <td class="p-3">
+                  <span class="px-2 py-0.5 rounded-full font-bold bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300">Rechazado</span>
+                </td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Hacienda rechazó el documento debido a inconsistencia fiscal, clave duplicada o código CABYS inválido.</td>
+                <td class="p-3 font-semibold text-slate-700 dark:text-slate-200">Ver código de error en XML MensajeHacienda / Corregir y reemitir</td>
+              </tr>
+              <tr class="bg-[var(--card-bg)]">
+                <td class="p-3">
+                  <span class="px-2 py-0.5 rounded-full font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Borrador</span>
+                </td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Documento guardado localmente en la empresa, aún no firmado ni enviado a Hacienda.</td>
+                <td class="p-3 font-semibold text-slate-700 dark:text-slate-200">Editar / Eliminar / Emitir definitivamente</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Section 4: Facturación Recurrente Programada -->
+        <h2 id="facturacion-programada" class="text-2xl font-bold mt-12 mb-4">4. Facturación Recurrente Programada (Scheduled Bills)</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          Automatiza la facturación mensual para contratos recurrentes, mensualidades educativas, igualas legales o servicios SaaS:
+        </p>
+
+        <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm space-y-3 mb-8">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">⏰</span>
+            <div>
+              <h3 class="font-bold text-sm">Motor Automatizado en Cloud Functions v2</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                Un microservicio cron se ejecuta de forma segura cada día a las 06:00 AM (Costa Rica), evaluando las plantillas activas de tu empresa.
+              </p>
+            </div>
+          </div>
+          <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-disc pl-5 pt-2">
+            <li><strong>Frecuencias configurables:</strong> Semanal, quincenal, mensual o anual.</li>
+            <li><strong>Actualización cambiaria:</strong> Si la plantilla está definida en USD, el sistema aplica la cotización oficial del BCCR de ese día.</li>
+            <li><strong>Notificación al emisor:</strong> Recibes un reporte con el resumen de facturas emitidas y confirmadas por Hacienda de forma automática.</li>
+          </ul>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mt-16 pt-8 border-t border-[var(--border-color)] flex items-center justify-between">
+          <a href="dashboard.html" class="inline-flex items-center text-xs font-semibold text-slate-500 hover:text-[var(--brand-primary)]">
+            ← a. Overview
+          </a>
+          <a href="compras.html" class="inline-flex items-center text-xs font-bold text-[var(--brand-primary)] hover:underline">
+            Siguiente: c. Compras & Egresos →
+          </a>
+        </div>
+      </main>
+
+      <!-- Right Table of Contents (Auto-generated by guide.js) -->
+      <aside id="doc-toc-container" class="hidden xl:block w-56 shrink-0">
+        <div class="sticky top-20">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">En esta página</div>
+          <nav id="doc-toc" class="space-y-1.5 text-xs"></nav>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Shared Footer -->
+    <footer class="mt-auto border-t border-[var(--border-color)] bg-[var(--bg-secondary)] py-6 text-center text-xs text-slate-500">
+      <div class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span>© 2026 Facturanza Costa Rica. Todos los derechos reservados.</span>
+        <div class="flex items-center space-x-4">
+          <a href="../" class="hover:underline">Roadmap</a>
+          <a href="index.html" class="hover:underline">Guía</a>
+          <a href="https://app.facturanza.com" target="_blank" class="hover:underline">App Web</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/guide.js"></script>
+  </body>
+</html>

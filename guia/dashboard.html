@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enterprise Dashboard: Overview - Guía Facturanza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' };</script>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/guide.css" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Top Nav Header -->
+    <header class="sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm">
+      <div class="flex items-center space-x-3 sm:space-x-5">
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a href="index.html" class="flex items-center space-x-3">
+          <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza" class="h-8" />
+        </a>
+        <div class="hidden sm:flex items-center space-x-2 pl-3 border-l border-slate-200 dark:border-slate-700">
+          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">Enterprise Dashboard</span>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Ver Roadmap</a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 shadow-sm">
+          <span>Ir a la App</span>
+        </a>
+        <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
+          <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="container mx-auto px-4 lg:px-8 py-8 flex-grow flex gap-8">
+      <!-- Left Sidebar Nav -->
+      <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-30 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 lg:p-0 lg:bg-transparent lg:border-none flex flex-col shrink-0">
+        <div class="lg:hidden flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-700">
+          <span class="font-bold text-lg">Índice</span>
+          <button id="close-sidebar-btn" class="p-1 rounded text-slate-500">✕</button>
+        </div>
+        <div class="sticky top-20 overflow-y-auto max-h-[calc(100vh-6rem)] pr-2 custom-scrollbar">
+          <nav id="doc-sidebar-nav" class="space-y-4"></nav>
+        </div>
+      </aside>
+      <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden"></div>
+
+      <!-- Center Content Area -->
+      <main id="doc-main-content" class="flex-1 min-w-0 max-w-4xl pb-16">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center space-x-2 text-xs text-slate-400 mb-4">
+          <a href="index.html" class="hover:underline">Guía</a>
+          <span>/</span>
+          <span>Enterprise Dashboard</span>
+          <span>/</span>
+          <span class="text-blue-500 font-semibold">a. Overview</span>
+        </nav>
+
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Enterprise Dashboard: Visión Global y Centro de Mando</h1>
+        <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+          El panel principal de Facturanza consolida en una sola pantalla la salud financiera y el estado tributario en tiempo real de tu empresa: volumen de ventas en CRC y USD, créditos fiscales acumulados, cotización oficial del BCCR y acceso directo a tu asistente Facturito AI.
+        </p>
+
+        <!-- 6-Screenshot Matrix Placeholder -->
+        <div data-matrix-title="Enterprise Dashboard: Resumen Ejecutivo e Integración Facturito"></div>
+
+        <!-- Section 1: Barra de Métricas y KPIs Financieros -->
+        <h2 id="metricas-kpis" class="text-2xl font-bold mt-12 mb-4">1. Tarjetas de Métricas y Rendimiento Mensual</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          En la parte superior del Dashboard se presentan 4 tarjetas analíticas sincronizadas al instante con tus transacciones de Firestore, respetando la directiva de alto contraste financiero:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <span class="text-xs font-semibold text-slate-400 block mb-1">Total Facturado (Ventas)</span>
+            <div class="text-xl font-extrabold text-emerald-600 dark:text-emerald-400">₡ 12,450,800</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1">
+              <span class="text-emerald-500 font-bold">↑ +14.2%</span> vs mes anterior
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <span class="text-xs font-semibold text-slate-400 block mb-1">Gastos & Compras DGT</span>
+            <div class="text-xl font-extrabold text-slate-800 dark:text-slate-100">₡ 4,210,150</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1">
+              <span>XMLs aceptados con crédito</span>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <span class="text-xs font-semibold text-slate-400 block mb-1">Saldo IVA Estimado (D-104)</span>
+            <div class="text-xl font-extrabold text-amber-600 dark:text-amber-400">₡ 1,071,284</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1">
+              <span>IVA Cobrado - IVA Soportado</span>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <span class="text-xs font-semibold text-slate-400 block mb-1">Facturas Emitidas</span>
+            <div class="text-xl font-extrabold text-blue-600 dark:text-blue-400">148 docs</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1">
+              <span class="text-emerald-500 font-bold">146 Aceptadas</span> • 2 En Proceso
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Integración BCCR y Multidivisa -->
+        <h2 id="sincronizacion-bccr" class="text-2xl font-bold mt-12 mb-4">2. Ticker del Banco Central de Costa Rica (BCCR)</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          Para garantizar el cumplimiento con el Ministerio de Hacienda en transacciones en dólares (USD), el sistema consulta diariamente el web service oficial del BCCR y sincroniza automáticamente:
+        </p>
+
+        <div class="p-5 rounded-2xl border border-sky-200 dark:border-sky-900 bg-sky-50/50 dark:bg-sky-950/20 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-lg">
+              $
+            </div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-sky-800 dark:text-sky-300">Tipo de Cambio Oficial BCCR</div>
+              <div class="text-xs text-slate-500 dark:text-slate-400">Actualizado automáticamente cada medianoche (Hora Costa Rica)</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-6">
+            <div class="text-right">
+              <span class="text-[11px] font-semibold text-slate-400 block">Compra</span>
+              <span class="font-mono font-bold text-base text-slate-800 dark:text-slate-100">₡ 504.12</span>
+            </div>
+            <div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+            <div class="text-right">
+              <span class="text-[11px] font-semibold text-slate-400 block">Venta</span>
+              <span class="font-mono font-bold text-base text-slate-800 dark:text-slate-100">₡ 511.45</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Barra de Prompt Agéntico Facturito -->
+        <h2 id="prompt-bar" class="text-2xl font-bold mt-12 mb-4">3. Barra de Prompts y Acciones Rápidas con Facturito AI</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          En el centro superior del Dashboard se encuentra la barra interactiva de Facturito. Puedes teclear o dictar instrucciones directas sin salir del resumen operativo:
+        </p>
+
+        <div class="p-6 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm space-y-4 mb-8">
+          <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60">
+            <span class="text-amber-500 text-lg">✨</span>
+            <input type="text" disabled value="Pregúntale a Facturito: '¿Cuánto IVA debo declarar este mes?' o 'Emite factura para...'" class="bg-transparent text-xs w-full text-slate-500 dark:text-slate-400 focus:outline-none italic" />
+            <span class="text-[10px] font-mono px-2 py-1 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Ctrl + K</span>
+          </div>
+
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="font-bold text-slate-400 mr-1 self-center">Consultas frecuentes:</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 border border-transparent cursor-pointer">"¿Cuál fue el cliente que más compró?"</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 border border-transparent cursor-pointer">"Generar resumen de compras de febrero"</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 border border-transparent cursor-pointer">"Crear nuevo producto CABYS"</span>
+          </div>
+        </div>
+
+        <!-- Section 4: Alertas del Negocio y Hacienda -->
+        <h2 id="alertas-hacienda" class="text-2xl font-bold mt-12 mb-4">4. Monitor de Alertas Fiscales y Operativas</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          El Dashboard te advierte proactivamente sobre cualquier eventualidad crítica antes de que afecte la facturación del negocio:
+        </p>
+
+        <div class="space-y-3 mb-8">
+          <div class="p-4 rounded-xl border border-amber-300 dark:border-amber-800/60 bg-amber-50/50 dark:bg-amber-950/20 flex items-start gap-3">
+            <span class="text-amber-600 dark:text-amber-400 text-lg leading-none mt-0.5">⚠️</span>
+            <div class="text-xs">
+              <span class="font-bold text-amber-900 dark:text-amber-200">Vigencia de Llave Criptográfica ATV</span>
+              <p class="text-slate-600 dark:text-slate-300 mt-0.5">
+                Tu certificado .p12 emitido por Hacienda vence en 45 días (15 de Noviembre). Facturanza te notificará con antelación para renovarlo sin interrumpir las emisiones.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-emerald-300 dark:border-emerald-800/60 bg-emerald-50/50 dark:bg-emerald-950/20 flex items-start gap-3">
+            <span class="text-emerald-600 dark:text-emerald-400 text-lg leading-none mt-0.5">✅</span>
+            <div class="text-xs">
+              <span class="font-bold text-emerald-900 dark:text-emerald-200">Canal IDP Hacienda Operativo</span>
+              <p class="text-slate-600 dark:text-slate-300 mt-0.5">
+                La conexión con los servidores de recepción y validación de la DGT (Producción) responde con latencia promedio de 1.2 segundos.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mt-16 pt-8 border-t border-[var(--border-color)] flex items-center justify-between">
+          <a href="facturito.html" class="inline-flex items-center text-xs font-semibold text-slate-500 hover:text-[var(--brand-primary)]">
+            ← Facturito AI Agéntico
+          </a>
+          <a href="facturas.html" class="inline-flex items-center text-xs font-bold text-[var(--brand-primary)] hover:underline">
+            Siguiente: Facturas & Comprobantes →
+          </a>
+        </div>
+      </main>
+
+      <!-- Right Table of Contents (Auto-generated by guide.js) -->
+      <aside id="doc-toc-container" class="hidden xl:block w-56 shrink-0">
+        <div class="sticky top-20">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">En esta página</div>
+          <nav id="doc-toc" class="space-y-1.5 text-xs"></nav>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Shared Footer -->
+    <footer class="mt-auto border-t border-[var(--border-color)] bg-[var(--bg-secondary)] py-6 text-center text-xs text-slate-500">
+      <div class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span>© 2026 Facturanza Costa Rica. Todos los derechos reservados.</span>
+        <div class="flex items-center space-x-4">
+          <a href="../" class="hover:underline">Roadmap</a>
+          <a href="index.html" class="hover:underline">Guía</a>
+          <a href="https://app.facturanza.com" target="_blank" class="hover:underline">App Web</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/guide.js"></script>
+  </body>
+</html>

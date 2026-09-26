@@ -1,0 +1,108 @@
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --brand-primary: #0284c7;
+  --brand-secondary: #0369a1;
+  --brand-light-green: #10b981;
+  --brand-gold: #f59e0b;
+  --border-color: #e2e8f0;
+  --card-bg: #ffffff;
+  --card-hover: #f1f5f9;
+}
+
+.dark {
+  --bg-primary: #0b1120;
+  --bg-secondary: #131c31;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --brand-primary: #38bdf8;
+  --brand-secondary: #7dd3fc;
+  --brand-light-green: #34d399;
+  --brand-gold: #fbbf24;
+  --border-color: #1e293b;
+  --card-bg: #131c31;
+  --card-hover: #1e293b;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.code-font {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom Scrollbars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 4px;
+}
+
+/* Sidebar Nav Items */
+.nav-group-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  padding: 0.75rem 0.75rem 0.25rem 0.75rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+}
+
+.nav-item:hover {
+  color: var(--brand-primary);
+  background-color: rgba(56, 189, 248, 0.08);
+}
+
+.nav-item.active {
+  color: var(--brand-primary);
+  background-color: rgba(56, 189, 248, 0.12);
+  font-weight: 600;
+}
+
+/* Feature Grid Cards (Flutter Docs reference) */
+.doc-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  transition: all 0.2s ease;
+}
+
+.doc-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--brand-primary);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+}
+
+/* Placeholder device frame styles */
+.device-placeholder {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(148, 163, 184, 0.03),
+    rgba(148, 163, 184, 0.03) 10px,
+    rgba(148, 163, 184, 0.06) 10px,
+    rgba(148, 163, 184, 0.06) 20px
+  );
+}

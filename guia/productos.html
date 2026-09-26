@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productos y Servicios: Catálogo CABYS e IA - Guía Facturanza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' };</script>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/guide.css" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Top Nav Header -->
+    <header class="sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm">
+      <div class="flex items-center space-x-3 sm:space-x-5">
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a href="index.html" class="flex items-center space-x-3">
+          <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza" class="h-8" />
+        </a>
+        <div class="hidden sm:flex items-center space-x-2 pl-3 border-l border-slate-200 dark:border-slate-700">
+          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">Enterprise Dashboard</span>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Ver Roadmap</a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 shadow-sm">
+          <span>Ir a la App</span>
+        </a>
+        <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
+          <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="container mx-auto px-4 lg:px-8 py-8 flex-grow flex gap-8">
+      <!-- Left Sidebar Nav -->
+      <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-30 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 lg:p-0 lg:bg-transparent lg:border-none flex flex-col shrink-0">
+        <div class="lg:hidden flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-700">
+          <span class="font-bold text-lg">Índice</span>
+          <button id="close-sidebar-btn" class="p-1 rounded text-slate-500">✕</button>
+        </div>
+        <div class="sticky top-20 overflow-y-auto max-h-[calc(100vh-6rem)] pr-2 custom-scrollbar">
+          <nav id="doc-sidebar-nav" class="space-y-4"></nav>
+        </div>
+      </aside>
+      <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden"></div>
+
+      <!-- Center Content Area -->
+      <main id="doc-main-content" class="flex-1 min-w-0 max-w-4xl pb-16">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center space-x-2 text-xs text-slate-400 mb-4">
+          <a href="index.html" class="hover:underline">Guía</a>
+          <span>/</span>
+          <span>Enterprise Dashboard</span>
+          <span>/</span>
+          <span class="text-blue-500 font-semibold">e. Productos & CABYS</span>
+        </nav>
+
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Catálogo de Productos y Servicios: CABYS e Inteligencia Artificial</h1>
+        <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+          En Costa Rica todo bien o servicio facturado debe estar catalogado bajo el código CABYS de 13 dígitos. Facturanza integra un buscador semántico avanzado y un asistente de creación asistida con Facturito AI para que catalogar tus productos tome solo segundos.
+        </p>
+
+        <!-- 6-Screenshot Matrix Placeholder -->
+        <div data-matrix-title="Catálogo de Productos: Búsqueda CABYS y Generación con IA"></div>
+
+        <!-- Section 1: Buscador CABYS Oficial -->
+        <h2 id="buscador-cabys" class="text-2xl font-bold mt-12 mb-4">1. Buscador Oficial CABYS de 13 Dígitos</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          La base de datos oficial del BCCR y Ministerio de Hacienda cuenta con más de 20,000 códigos. El buscador integrado de Facturanza te permite filtrar al instante por término común o descripción técnica:
+        </p>
+
+        <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm space-y-4 mb-8">
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+            <span class="text-slate-400">🔍</span>
+            <span class="text-xs font-mono text-slate-500 dark:text-slate-400">Ejemplo: "servicios de asesoría legal en materia tributaria"</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+            <div class="p-3 rounded-xl bg-slate-100/60 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-mono font-bold text-sky-600 dark:text-sky-400">8311100000100</span>
+                <span class="px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold text-[10px]">IVA 13%</span>
+              </div>
+              <span class="font-semibold block">Servicios de asesoramiento jurídico en general</span>
+              <span class="text-[11px] text-slate-500">Unidad sugerida: Sp (Servicios Profesionales)</span>
+            </div>
+
+            <div class="p-3 rounded-xl bg-slate-100/60 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-mono font-bold text-sky-600 dark:text-sky-400">8314101000000</span>
+                <span class="px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold text-[10px]">IVA 13%</span>
+              </div>
+              <span class="font-semibold block">Servicios de diseño y desarrollo de software</span>
+              <span class="text-[11px] text-slate-500">Unidad sugerida: Os (Otro tipo de servicio)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Generación Asistida con IA -->
+        <h2 id="generar-con-ia" class="text-2xl font-bold mt-12 mb-4">2. Creación Asistida con Facturito AI ("Generar con IA")</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          ¿No conoces el código exacto ni la unidad de medida según Hacienda? Solo haz clic en <strong>"Generar con IA"</strong> y describe tu producto en lenguaje cotidiano:
+        </p>
+
+        <div class="p-5 rounded-2xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/40 dark:bg-amber-950/20 mb-8 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">✨</span>
+            <span class="font-bold text-sm text-amber-900 dark:text-amber-200">Diálogo Inteligente de Creación</span>
+          </div>
+          <div class="p-3 rounded-xl bg-white dark:bg-slate-900 border border-amber-200 dark:border-amber-800 text-xs font-mono text-slate-700 dark:text-slate-300">
+            "Clases particulares de inglés por videoconferencia, cobro 15 mil colones la sesión con IVA reducido para educación"
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300">
+            Facturito analiza la ley, identifica que la educación privada autorizada aplica la tarifa reducida del <strong>2% de IVA</strong>, localiza el código CABYS educativo correspondiente y rellena todos los campos del producto automáticamente.
+          </p>
+        </div>
+
+        <!-- Section 3: Precios Multidivisa y Unidades DGT -->
+        <h2 id="precios-unidades" class="text-2xl font-bold mt-12 mb-4">3. Moneda y Unidades de Medida Oficiales</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          Cada producto admite configuración multidivisa y cumple los estándares de unidades de medida exigidos en el XML v4.3:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <h3 class="font-bold text-sm mb-2">Precios en Dólares (USD) o Colones (CRC)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Puedes fijar el precio base de tus servicios en USD. Al momento de emitir la factura en colones, el sistema convierte el monto aplicando automáticamente la tasa de venta del BCCR de ese día.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <h3 class="font-bold text-sm mb-2">Unidades de Medida Homologadas</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Soporte nativo para <code>Sp</code> (Servicios profesionales), <code>Unid</code> (Unidades físicas), <code>Os</code> (Otros servicios), <code>h</code> (Horas), <code>kg</code>, <code>m</code> y más, evitando rechazos por nomenclatura errónea.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mt-16 pt-8 border-t border-[var(--border-color)] flex items-center justify-between">
+          <a href="clientes.html" class="inline-flex items-center text-xs font-semibold text-slate-500 hover:text-[var(--brand-primary)]">
+            ← d. Clientes & Receptores
+          </a>
+          <a href="sucursales.html" class="inline-flex items-center text-xs font-bold text-[var(--brand-primary)] hover:underline">
+            Siguiente: f. Sucursales & Cajas →
+          </a>
+        </div>
+      </main>
+
+      <!-- Right Table of Contents (Auto-generated by guide.js) -->
+      <aside id="doc-toc-container" class="hidden xl:block w-56 shrink-0">
+        <div class="sticky top-20">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">En esta página</div>
+          <nav id="doc-toc" class="space-y-1.5 text-xs"></nav>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Shared Footer -->
+    <footer class="mt-auto border-t border-[var(--border-color)] bg-[var(--bg-secondary)] py-6 text-center text-xs text-slate-500">
+      <div class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span>© 2026 Facturanza Costa Rica. Todos los derechos reservados.</span>
+        <div class="flex items-center space-x-4">
+          <a href="../" class="hover:underline">Roadmap</a>
+          <a href="index.html" class="hover:underline">Guía</a>
+          <a href="https://app.facturanza.com" target="_blank" class="hover:underline">App Web</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/guide.js"></script>
+  </body>
+</html>

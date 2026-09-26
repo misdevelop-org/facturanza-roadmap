@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configuración de Negocio: ATV, Roles y Membresías - Guía Facturanza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' };</script>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/guide.css" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Top Nav Header -->
+    <header class="sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm">
+      <div class="flex items-center space-x-3 sm:space-x-5">
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a href="index.html" class="flex items-center space-x-3">
+          <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza" class="h-8" />
+        </a>
+        <div class="hidden sm:flex items-center space-x-2 pl-3 border-l border-slate-200 dark:border-slate-700">
+          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300">Configuración & Cuenta</span>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Ver Roadmap</a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 shadow-sm">
+          <span>Ir a la App</span>
+        </a>
+        <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
+          <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="container mx-auto px-4 lg:px-8 py-8 flex-grow flex gap-8">
+      <!-- Left Sidebar Nav -->
+      <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-30 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 lg:p-0 lg:bg-transparent lg:border-none flex flex-col shrink-0">
+        <div class="lg:hidden flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-700">
+          <span class="font-bold text-lg">Índice</span>
+          <button id="close-sidebar-btn" class="p-1 rounded text-slate-500">✕</button>
+        </div>
+        <div class="sticky top-20 overflow-y-auto max-h-[calc(100vh-6rem)] pr-2 custom-scrollbar">
+          <nav id="doc-sidebar-nav" class="space-y-4"></nav>
+        </div>
+      </aside>
+      <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden"></div>
+
+      <!-- Center Content Area -->
+      <main id="doc-main-content" class="flex-1 min-w-0 max-w-4xl pb-16">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center space-x-2 text-xs text-slate-400 mb-4">
+          <a href="index.html" class="hover:underline">Guía</a>
+          <span>/</span>
+          <span>Configuración & Cuenta</span>
+          <span>/</span>
+          <span class="text-purple-500 font-semibold">h. Negocio & Facturación</span>
+        </nav>
+
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Configuración de Negocio: Empresa, Facturación ATV, Roles y Membresías</h1>
+        <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+          El módulo de Configuración de Negocio centraliza los cuatro pilares organizacionales de tu empresa en Facturanza: la identidad corporativa fiscal, la vinculación criptográfica con el Ministerio de Hacienda, el control de acceso de tu equipo de trabajo y la gestión de suscripciones SaaS.
+        </p>
+
+        <!-- 6-Screenshot Matrix Placeholder -->
+        <div data-matrix-title="Configuración de Negocio: Empresa, Facturación ATV, Roles y Membresías"></div>
+
+        <!-- Section 1: Datos de la Empresa (h.1) -->
+        <h2 id="datos-empresa" class="text-2xl font-bold mt-12 mb-4">1. Empresa: Identidad Corporativa y Actividades Económicas</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          En esta pestaña se configuran los datos formales que aparecerán impresos en el encabezado de tus facturas y en el nodo <code>&lt;Emisor&gt;</code> de cada XML:
+        </p>
+
+        <div class="p-6 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm space-y-4 mb-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <span class="text-xs font-bold text-slate-700 dark:text-slate-200 block mb-1">Razón Social y Nombre de Fantasía</span>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                El nombre legal inscrito ante el Registro Nacional y el nombre comercial visible para tus clientes en el PDF.
+              </p>
+            </div>
+            <div>
+              <span class="text-xs font-bold text-slate-700 dark:text-slate-200 block mb-1">Logotipo Corporativo</span>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                Sube tu logo en formato PNG o JPG con fondo transparente para las representaciones gráficas de comprobantes.
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-[var(--border-color)]">
+            <span class="text-xs font-bold text-slate-700 dark:text-slate-200 block mb-1">Actividad Económica Principal y Secundarias</span>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">
+              Selecciona el código de actividad económica de 6 dígitos inscrito en el RUT de Hacienda. Este código determina los comprobantes emitidos.
+            </p>
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-700 dark:text-slate-300">
+              620101 - Actividades de programación informática y desarrollo de software
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Facturación ATV y Llave Criptográfica (h.2) -->
+        <h2 id="facturacion-atv" class="text-2xl font-bold mt-12 mb-4">2. Facturación Electrónica: Llave Criptográfica ATV y Credenciales IDP</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          Para que Facturanza pueda firmar digitalmente y enviar comprobantes en tu nombre ante la DGT, debes cargar tu certificado criptográfico y tus credenciales de acceso:
+        </p>
+
+        <!-- Tutorial Paso a Paso ATV -->
+        <div class="space-y-4 mb-8">
+          <div class="p-5 rounded-2xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/30 dark:bg-emerald-950/20">
+            <h3 class="font-bold text-sm text-emerald-900 dark:text-emerald-200 mb-2 flex items-center gap-2">
+              <span class="h-6 w-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs">A</span>
+              Paso 1: Generar la Llave Criptográfica en el Portal ATV
+            </h3>
+            <ol class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-decimal pl-5">
+              <li>Ingresa al portal de <strong>Administración Tributaria Virtual (ATV)</strong> de Hacienda (<a href="https://atv.hacienda.go.cr" target="_blank" rel="noopener noreferrer" class="text-emerald-600 dark:text-emerald-400 underline font-semibold">atv.hacienda.go.cr</a>).</li>
+              <li>En el menú superior, selecciona <strong>Comprobantes Electrónicos</strong> → <strong>Llave Criptográfica de Producción</strong>.</li>
+              <li>Crea un <strong>PIN de 4 dígitos</strong> (memorízalo, es indispensable) y presiona <em>Generar</em>.</li>
+              <li>Descarga el archivo con extensión <code>.p12</code> en tu computadora.</li>
+            </ol>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-sky-200 dark:border-sky-900/60 bg-sky-50/30 dark:bg-sky-950/20">
+            <h3 class="font-bold text-sm text-sky-900 dark:text-sky-200 mb-2 flex items-center gap-2">
+              <span class="h-6 w-6 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs">B</span>
+              Paso 2: Generar Credenciales IDP (Usuario y Contraseña)
+            </h3>
+            <ol class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-decimal pl-5">
+              <li>En el mismo menú de ATV, selecciona <strong>Generar Contraseña en Producción</strong>.</li>
+              <li>El sistema mostrará un <strong>Usuario</strong> (inicia con <code>cpf-...</code>) y una <strong>Contraseña</strong> alfanumérica de alta seguridad.</li>
+              <li>Copia ambos datos con exactitud (o descárgalos en el archivo de texto generado).</li>
+            </ol>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-purple-200 dark:border-purple-900/60 bg-purple-50/30 dark:bg-purple-950/20">
+            <h3 class="font-bold text-sm text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+              <span class="h-6 w-6 rounded-full bg-purple-500 text-white flex items-center justify-center text-xs">C</span>
+              Paso 3: Cargar y Probar en Facturanza
+            </h3>
+            <ol class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-decimal pl-5">
+              <li>En la pestaña <em>Facturación</em> de Facturanza, arrastra tu archivo <code>.p12</code> y digita el PIN de 4 dígitos.</li>
+              <li>Ingresa el Usuario IDP y la Contraseña generada.</li>
+              <li>Selecciona el Ambiente: <strong>Producción</strong> (para emisión real ante Hacienda) o <strong>Staging</strong> (para pruebas sin valor fiscal).</li>
+              <li>Presiona <strong>"Verificar Conexión con Hacienda"</strong>. Facturanza ejecutará un ping de validación criptográfica en Cloud Functions v2 y confirmará el enlace con la DGT.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Section 3: Roles y Permisos (h.3) -->
+        <h2 id="roles-permisos" class="text-2xl font-bold mt-12 mb-4">3. Roles y Miembros: Matriz de Permisos del Equipo</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          Invita a tus colaboradores, contadores y cajeros asignándoles permisos específicos para proteger la información confidencial de tu empresa:
+        </p>
+
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-xs text-left border border-[var(--border-color)] rounded-xl overflow-hidden">
+            <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold uppercase">
+              <tr>
+                <th class="p-3 border-b border-[var(--border-color)]">Rol</th>
+                <th class="p-3 border-b border-[var(--border-color)]">Emisión</th>
+                <th class="p-3 border-b border-[var(--border-color)]">Compras & XML</th>
+                <th class="p-3 border-b border-[var(--border-color)]">Reportes D-104</th>
+                <th class="p-3 border-b border-[var(--border-color)]">Ajustes & ATV</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--border-color)]">
+              <tr class="bg-[var(--card-bg)]">
+                <td class="p-3 font-bold text-purple-600 dark:text-purple-400">Propietario (Owner)</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Total</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Total</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Total</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Total</td>
+              </tr>
+              <tr class="bg-[var(--card-bg)]">
+                <td class="p-3 font-bold text-sky-600 dark:text-sky-400">Administrador</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Total</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Total</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Total</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Limitado</td>
+              </tr>
+              <tr class="bg-[var(--card-bg)]">
+                <td class="p-3 font-bold text-amber-600 dark:text-amber-400">Contador Externo</td>
+                <td class="p-3 text-slate-400">✕ Sólo lectura</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Aceptación</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Exportación</td>
+                <td class="p-3 text-slate-400">✕ Sin acceso</td>
+              </tr>
+              <tr class="bg-[var(--card-bg)]">
+                <td class="p-3 font-bold text-emerald-600 dark:text-emerald-400">Facturador</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Emisión</td>
+                <td class="p-3 text-slate-400">✕ Sin acceso</td>
+                <td class="p-3 text-slate-400">✕ Sin acceso</td>
+                <td class="p-3 text-slate-400">✕ Sin acceso</td>
+              </tr>
+              <tr class="bg-[var(--card-bg)]">
+                <td class="p-3 font-bold text-slate-600 dark:text-slate-400">Cajero POS</td>
+                <td class="p-3 text-emerald-500 font-bold">✓ Caja Asignada</td>
+                <td class="p-3 text-slate-400">✕ Sin acceso</td>
+                <td class="p-3 text-slate-400">✕ Sin acceso</td>
+                <td class="p-3 text-slate-400">✕ Sin acceso</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Section 4: Membresías y Facturación SaaS (h.4) -->
+        <h2 id="membresias-saas" class="text-2xl font-bold mt-12 mb-4">4. Membresías y Facturación SaaS: TiloPay y SINPE Móvil</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
+          Facturanza opera bajo un modelo de suscripción escalable según el volumen de facturación electrónica que requiera tu negocio:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <span class="text-3xl mb-3 block">💳</span>
+            <h3 class="font-bold text-base mb-1">Pago Inmediato con Tarjeta (TiloPay / Stripe)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
+              Activa o renueva tu suscripción al instante mediante tarjeta de crédito o débito nacional o internacional con procesamiento seguro tokenizado.
+            </p>
+            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-300">
+              Redirección automática a la página de agradecimiento con emisión de la factura de compra de la suscripción y confirmación por correo electrónico.
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
+            <span class="text-3xl mb-3 block">📱</span>
+            <h3 class="font-bold text-base mb-1">Pago por SINPE Móvil</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
+              Realiza la transferencia desde la app de tu entidad bancaria al número oficial de Facturanza y sube la captura del comprobante dentro del panel.
+            </p>
+            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-300">
+              Aprobación ágil por parte del equipo administrativo con activación de cuota inmediata tras la verificación bancaria.
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mt-16 pt-8 border-t border-[var(--border-color)] flex items-center justify-between">
+          <a href="reportes.html" class="inline-flex items-center text-xs font-semibold text-slate-500 hover:text-[var(--brand-primary)]">
+            ← g. Reportes & IVA D-104
+          </a>
+          <a href="perfil.html" class="inline-flex items-center text-xs font-bold text-[var(--brand-primary)] hover:underline">
+            Siguiente: i. Perfil de Usuario →
+          </a>
+        </div>
+      </main>
+
+      <!-- Right Table of Contents (Auto-generated by guide.js) -->
+      <aside id="doc-toc-container" class="hidden xl:block w-56 shrink-0">
+        <div class="sticky top-20">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">En esta página</div>
+          <nav id="doc-toc" class="space-y-1.5 text-xs"></nav>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Shared Footer -->
+    <footer class="mt-auto border-t border-[var(--border-color)] bg-[var(--bg-secondary)] py-6 text-center text-xs text-slate-500">
+      <div class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span>© 2026 Facturanza Costa Rica. Todos los derechos reservados.</span>
+        <div class="flex items-center space-x-4">
+          <a href="../" class="hover:underline">Roadmap</a>
+          <a href="index.html" class="hover:underline">Guía</a>
+          <a href="https://app.facturanza.com" target="_blank" class="hover:underline">App Web</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/guide.js"></script>
+  </body>
+</html>
