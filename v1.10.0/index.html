@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Facturanza - Novedades v1.10.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class'
+      }
+    </script>
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -345,11 +350,16 @@
           category.items.forEach((item) => {
             let mediaHTML = "";
 
-            const desktopImg = item.desktopImage || (item.images && item.images.length === 3 ? item.images[0] : null);
-            const tabletImg = item.tabletImage || (item.images && item.images.length === 3 ? item.images[1] : null);
-            const mobileImg = item.mobileImage || (item.images && item.images.length === 3 ? item.images[2] : null);
+            const desktopLightImg = item.desktopImageLight || item.desktopImage || (item.images && item.images.length === 3 ? item.images[0] : null);
+            const desktopDarkImg = item.desktopImageDark || null;
 
-            if (desktopImg && tabletImg && mobileImg) {
+            const tabletLightImg = item.tabletImageLight || item.tabletImage || (item.images && item.images.length === 3 ? item.images[1] : null);
+            const tabletDarkImg = item.tabletImageDark || null;
+
+            const mobileLightImg = item.mobileImageLight || item.mobileImage || (item.images && item.images.length === 3 ? item.images[2] : null);
+            const mobileDarkImg = item.mobileImageDark || null;
+
+            if (desktopLightImg && tabletLightImg && mobileLightImg) {
               // Layout adaptativo: Fila 1 (Escritorio) y Fila 2 (Tablet + Móvil) alineadas 1:1, 1 fila en 2K+
               mediaHTML = `
                 <div class="flex flex-col 2xl:flex-row items-center 2xl:items-end justify-center gap-6 2xl:gap-8 mt-8 mx-auto w-full max-w-[425px] sm:max-w-[496px] md:max-w-[618px] lg:max-w-[690px] 2xl:max-w-none transition-all duration-300">
@@ -359,7 +369,8 @@
                       <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">💻 ESCRITORIO</span>
                     </div>
                     <div class="w-full 2xl:w-auto h-auto 2xl:h-[480px] rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
-                      <img src="${desktopImg}" alt="${item.title} - Escritorio" class="w-full 2xl:w-auto 2xl:h-full h-auto object-cover 2xl:object-contain rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Escritorio';">
+                      <img src="${desktopLightImg}" alt="${item.title} - Escritorio" class="w-full 2xl:w-auto 2xl:h-full h-auto object-cover 2xl:object-contain rounded-xl ${desktopDarkImg ? 'block dark:hidden' : ''}" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Escritorio';">
+                      ${desktopDarkImg ? `<img src="${desktopDarkImg}" alt="${item.title} - Escritorio (Oscuro)" class="w-full 2xl:w-auto 2xl:h-full h-auto object-cover 2xl:object-contain rounded-xl hidden dark:block" onerror="this.onerror=null;this.src='https://placehold.co/800x500/cccccc/ffffff?text=Escritorio';">` : ''}
                     </div>
                   </div>
 
@@ -371,7 +382,8 @@
                         <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📱 TABLET</span>
                       </div>
                       <div class="h-[320px] sm:h-[380px] md:h-[480px] lg:h-[540px] 2xl:h-[480px] rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
-                        <img src="${tabletImg}" alt="${item.title} - Tablet" class="h-full w-auto object-contain rounded-xl" onerror="this.onerror=null;this.src='https://placehold.co/768x1024/cccccc/ffffff?text=Tablet';">
+                        <img src="${tabletLightImg}" alt="${item.title} - Tablet" class="h-full w-auto object-contain rounded-xl ${tabletDarkImg ? 'block dark:hidden' : ''}" onerror="this.onerror=null;this.src='https://placehold.co/768x1024/cccccc/ffffff?text=Tablet';">
+                        ${tabletDarkImg ? `<img src="${tabletDarkImg}" alt="${item.title} - Tablet (Oscuro)" class="h-full w-auto object-contain rounded-xl hidden dark:block" onerror="this.onerror=null;this.src='https://placehold.co/768x1024/cccccc/ffffff?text=Tablet';">` : ''}
                       </div>
                     </div>
 
@@ -381,7 +393,8 @@
                         <span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 dark:text-[var(--brand-primary)]">📲 MÓVIL</span>
                       </div>
                       <div class="h-[320px] sm:h-[380px] md:h-[480px] lg:h-[540px] 2xl:h-[480px] rounded-2xl shadow-xl border-4 border-[var(--bg-secondary)] overflow-hidden flex items-center justify-center">
-                        <img src="${mobileImg}" alt="${item.title} - Móvil" class="h-full w-auto object-contain rounded-2xl" onerror="this.onerror=null;this.src='https://placehold.co/390x844/cccccc/ffffff?text=Móvil';">
+                        <img src="${mobileLightImg}" alt="${item.title} - Móvil" class="h-full w-auto object-contain rounded-2xl ${mobileDarkImg ? 'block dark:hidden' : ''}" onerror="this.onerror=null;this.src='https://placehold.co/390x844/cccccc/ffffff?text=Móvil';">
+                        ${mobileDarkImg ? `<img src="${mobileDarkImg}" alt="${item.title} - Móvil (Oscuro)" class="h-full w-auto object-contain rounded-2xl hidden dark:block" onerror="this.onerror=null;this.src='https://placehold.co/390x844/cccccc/ffffff?text=Móvil';">` : ''}
                       </div>
                     </div>
                   </div>
