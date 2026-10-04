@@ -48,10 +48,10 @@ PAGES["get-started.html"] = dict(
     ])
     + p("Luego completas el formulario:")
     + ol([
-        "<strong>Ubicación</strong> del negocio.",
-        "<strong>Cédula</strong>: Facturanza consulta a Hacienda y trae el <strong>nombre legal</strong> y las <strong>actividades económicas</strong>. Elige la actividad principal.",
-        "<strong>Datos de contacto</strong>: nombre comercial, correo* y teléfono*.",
-        "<strong>Nombre de dominio (opcional)</strong>: es el nombre corto que aparece en el enlace directo de tu empresa. Solo letras, números, guion y guion bajo. No lo podrás confundir con un subdominio; no existe <em>tumarca.facturanza.com</em>.",
+        "<strong>Cédula</strong>: Facturanza consulta a Hacienda y trae el <strong>nombre legal</strong> (bloqueado) y las <strong>actividades económicas</strong>. Elige la actividad principal.",
+        "<strong>Información del negocio</strong>: nombre comercial, correo* y teléfono* (con código de país).",
+        "<strong>Nombre de dominio (opcional)</strong>: es el nombre corto que aparece en el enlace directo de tu empresa. Solo letras, números, guion y guion bajo. No existe un subdominio tipo <em>tumarca.facturanza.com</em>.",
+        "<strong>Ubicación</strong>: provincia, cantón, distrito y dirección exacta*.",
     ])
     + call("warn", "Una empresa por cédula", "Si ya existe un negocio con esa cédula, Facturanza no te deja crear otro. Pide al propietario que te agregue desde <strong>Negocio › Roles</strong>.")
     + table(["Cédula", "Dígitos"], [
