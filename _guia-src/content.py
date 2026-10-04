@@ -1,6 +1,7 @@
 from content_start import PAGES as A
 from content_ops import PAGES as B
 from content_admin import PAGES as C
+from content_support import PAGES as D
 
 REVIEW_DATE = "4 de octubre de 2026"
 
@@ -34,11 +35,12 @@ NAV = [
     ]),
     ("Ayuda", [
         ("ayuda.html", "Ayuda", "Preguntas frecuentes, tarifas de IVA, glosario y alcance."),
+        ("soporte.html", "Soporte", "Cómo contactarnos y qué datos enviar."),
     ]),
 ]
 
 PAGES = {}
-PAGES.update(A); PAGES.update(B); PAGES.update(C)
+PAGES.update(A); PAGES.update(B); PAGES.update(C); PAGES.update(D)
 
 cards = ""
 for group, items in NAV:
@@ -60,12 +62,12 @@ PAGES["index.html"] = dict(
     nav="Catálogo",
     desc="Guía oficial para facturar con Facturanza: configura Hacienda, emite, registra compras y prepara tu IVA.",
     body=(
-        '<div class="bg-gradient-to-br from-slate-900 via-sky-950 to-slate-900 text-white rounded-3xl p-6 sm:p-10 mb-4 shadow-xl border border-sky-900/40">'
-        '<div class="max-w-2xl"><span class="inline-block px-3 py-1 rounded-full bg-sky-500/20 text-sky-200 text-xs font-bold tracking-wider uppercase mb-3 border border-sky-400/20">Guía oficial</span>'
+        '<div class="bg-gradient-to-br from-sky-50 via-white to-sky-100 text-slate-900 dark:from-slate-900 dark:via-sky-950 dark:to-slate-900 dark:text-white rounded-3xl p-6 sm:p-10 mb-4 shadow-xl border border-sky-200 dark:border-sky-900/40">'
+        '<div class="max-w-2xl"><span class="inline-block px-3 py-1 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-500/20 dark:text-sky-200 text-xs font-bold tracking-wider uppercase mb-3 border border-sky-400/20">Guía oficial</span>'
         '<h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Guía de uso de Facturanza</h1>'
-        '<p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-6">Todo lo que necesitas para facturar electrónicamente en Costa Rica: pasos claros, tal como los ves en la app.</p>'
-        '<div class="flex flex-wrap items-center gap-3"><a href="empieza.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 hover:bg-sky-400 transition-colors">Empieza en 5 pasos &rarr;</a>'
-        '<a href="ayuda.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-white/10 text-white hover:bg-white/20 transition-colors">Ayuda y solución de problemas</a></div></div></div>'
+        '<p class="text-slate-700 dark:text-slate-200 text-sm sm:text-base leading-relaxed mb-6">Todo lo que necesitas para facturar electrónicamente en Costa Rica: pasos claros, tal como los ves en la app.</p>'
+        '<div class="flex flex-wrap items-center gap-3"><a href="empieza.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-sky-600 text-white hover:bg-sky-500 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400 transition-colors">Empieza en 5 pasos &rarr;</a>'
+        '<a href="ayuda.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900/10 text-slate-900 hover:bg-slate-900/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 transition-colors">Ayuda y solución de problemas</a></div></div></div>'
         + cards
         + f'<p class="mt-10 text-xs text-slate-500 dark:text-slate-400">Última revisión: {REVIEW_DATE}.</p>'
     ),
