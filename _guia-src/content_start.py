@@ -54,7 +54,7 @@ PAGES["get-started.html"] = dict(
     + shots("cuenta_roles", "Elige cómo te registras")
     + p("Luego completas el formulario:")
     + ol([
-        "<strong>Cédula</strong>: Facturanza consulta a Hacienda y trae el <strong>nombre legal</strong> (bloqueado) y las <strong>actividades económicas</strong>. Elige la actividad principal.",
+        "<strong>Cédula</strong>: Facturanza consulta a Hacienda y trae el <strong>nombre legal</strong> (bloqueado) y las <strong>actividades económicas</strong>. Elige la <strong>actividad principal</strong> (la predeterminada para facturar); las demás se guardan solas.",
         "<strong>Información del negocio</strong>: nombre comercial, correo* y teléfono* (con código de país).",
         "<strong>Nombre de dominio (opcional)</strong>: es el nombre corto que aparece en el enlace directo de tu empresa. Solo letras, números, guion y guion bajo. No existe un subdominio tipo <em>tumarca.facturanza.com</em>.",
         "<strong>Ubicación</strong>: provincia, cantón, distrito y dirección exacta*.",

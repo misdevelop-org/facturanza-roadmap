@@ -107,7 +107,19 @@ def head_scripts():
       })();
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { darkMode: 'class' };</script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: { extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          borderRadius: { xl: '15px', '2xl': '20px' },
+          colors: {
+            slate: { 50: '#F5F5F5', 100: '#EBEBEB', 200: '#E4E4E4', 300: '#D0D0D0', 400: '#B0B0B0', 500: '#6B6B6B', 600: '#616161', 700: '#545454', 800: '#4D4D4D', 900: '#414141', 950: '#2E2E2E' },
+            sky: { 50: '#EEF7FA', 100: '#C3E1EA', 200: '#A4D2DF', 300: '#86C4D5', 400: '#63B9CF', 500: '#4AA6BF', 600: '#3A8FA6', 700: '#307588', 800: '#255B6A', 900: '#1B414B', 950: '#12303A' },
+          },
+        } },
+      };
+    </script>
 """
 
 
@@ -126,7 +138,7 @@ def header_html():
       </div>
       <div class="flex items-center space-x-3">
         <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Novedades</a>
-        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-700 text-white hover:bg-emerald-600 shadow-sm"><span>Ir a la app</span></a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-sky-700 text-white hover:bg-sky-600 shadow-sm"><span>Ir a la app</span></a>
         <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
           <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
         </button>

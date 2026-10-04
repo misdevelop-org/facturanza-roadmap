@@ -58,6 +58,7 @@ PAGES["compras.html"] = dict(
     body=matrix("Compras: carga de XML y buzón")
     + who("Propietario, Administrador y Contador")
     + call("danger", "Importante: la aceptación se hace en TRIBU-CR", "Facturanza <strong>registra</strong> tus compras, pero <strong>no envía el Mensaje Receptor</strong> (Aceptación total, parcial o Rechazo) a Hacienda. Debes enviarlo en <strong>TRIBU-CR (Tico Factura)</strong> o con otro software certificado, dentro de los <strong>primeros 8 días hábiles del mes siguiente</strong>. Si no lo haces a tiempo, el comprobante pierde su condición de respaldo del crédito fiscal de IVA.")
+    + call("info", "Mensaje Receptor en el correo de compra", "Cuando una compra entra por el buzón, Facturanza guarda el <strong>XML enviado</strong>, el <strong>XML recibido</strong> (Mensaje Receptor de Hacienda), el <strong>PDF</strong> y el <strong>cuerpo del correo</strong>. Facturanza no envía el Mensaje Receptor; no necesitas enviarlo por TRIBU-CR para registrar la compra. <strong>Próximamente:</strong> al subir una compra a mano también cargarás el XML recibido, y se creará una compra con ambos XML.")
     + h2("subir", "1. Subir facturas de proveedores")
     + ol([
         "En <strong>Compras</strong> (o desde Inicio) toca <strong>Subir compra</strong>.",
@@ -99,7 +100,7 @@ PAGES["facturito.html"] = dict(
     + p("El uso de Facturito se mide en <strong>FacturiTokens</strong> (verás <em>⚡ usados / disponibles</em>). En el plan gratuito es una prueba hasta agotar los tokens; después se necesita un plan de pago. También puedes adjuntar archivos en el chat.")
     + h2("limites", "4. Qué no hace")
     + ul([
-        "No envía el Mensaje Receptor ni acepta compras ante Hacienda.",
+        "No envía el Mensaje Receptor a Hacienda (solo guarda el que viene en el correo de compra).",
         "No emite Notas de Débito ni Facturas de Exportación (no existen aún en Facturanza).",
         "No lleva cuentas por cobrar.",
         "Es una IA: puede equivocarse. Verifica montos, cédulas y tarifas antes de confirmar y consulta a tu contador en temas fiscales complejos.",

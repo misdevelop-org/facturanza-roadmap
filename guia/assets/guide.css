@@ -1,29 +1,33 @@
 :root {
-  --bg-primary: #f8fafc;
-  --bg-secondary: #ffffff;
-  --text-primary: #0f172a;
-  --text-secondary: #64748b;
-  --brand-primary: #0284c7;
-  --brand-secondary: #0369a1;
-  --brand-light-green: #10b981;
-  --brand-gold: #f59e0b;
-  --border-color: #e2e8f0;
+  /* Tokens de facturanza_common/lib/src/ui/style/style.dart (tema claro) */
+  --bg-primary: #f5f5f5;      /* lightBackground */
+  --bg-secondary: #ffffff;    /* lightSectionEditable */
+  --text-primary: #3a3a3a;
+  --text-secondary: #616161;  /* mutedTextColor */
+  --brand-primary: #255b6a;   /* primarySwatch.shade800 */
+  --brand-secondary: #307588; /* actionFill */
+  --brand-light-green: #00a791;
+  --brand-gold: #d3853c;
+  --border-color: rgba(0, 0, 0, 0.10);
   --card-bg: #ffffff;
-  --card-hover: #f1f5f9;
+  --card-hover: #e4e4e4;      /* lightSection */
+  --nav-tint: 48, 117, 136;
 }
 
 .dark {
-  --bg-primary: #0b1120;
-  --bg-secondary: #131c31;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --brand-primary: #38bdf8;
-  --brand-secondary: #7dd3fc;
-  --brand-light-green: #34d399;
-  --brand-gold: #fbbf24;
-  --border-color: #1e293b;
-  --card-bg: #131c31;
-  --card-hover: #1e293b;
+  /* tema oscuro */
+  --bg-primary: #414141;      /* darkBackground */
+  --bg-secondary: #4a4a4a;
+  --text-primary: #e8e8e8;    /* darkText */
+  --text-secondary: #d0d0d0;
+  --brand-primary: #86c4d5;   /* linkTextColor dark */
+  --brand-secondary: #a4d2df;
+  --brand-light-green: #63d389;
+  --brand-gold: #ffc14d;
+  --border-color: rgba(255, 255, 255, 0.14);
+  --card-bg: #545454;         /* darkSectionEditable */
+  --card-hover: #5c5c5c;
+  --nav-tint: 94, 176, 199;
 }
 
 body {
@@ -73,12 +77,12 @@ body {
 
 .nav-item:hover {
   color: var(--brand-primary);
-  background-color: rgba(56, 189, 248, 0.08);
+  background-color: rgba(var(--nav-tint), 0.10);
 }
 
 .nav-item.active {
   color: var(--brand-primary);
-  background-color: rgba(56, 189, 248, 0.12);
+  background-color: rgba(var(--nav-tint), 0.18);
   font-weight: 600;
 }
 
@@ -86,7 +90,7 @@ body {
 .doc-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: 1rem;
+  border-radius: 20px;
   transition: all 0.2s ease;
 }
 

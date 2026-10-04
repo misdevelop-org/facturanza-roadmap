@@ -205,10 +205,10 @@ function initMobileMenu() {
 
 // 6-Screenshot Matrix Component Helper
 function renderDevicePlaceholder(title, deviceType, isDark) {
-  const bg = isDark ? "#131c31" : "#f8fafc";
-  const border = isDark ? "#1e293b" : "#cbd5e1";
-  const text = isDark ? "#94a3b8" : "#64748b";
-  const badgeColor = isDark ? "#38bdf8" : "#0284c7";
+  const bg = isDark ? "#4a4a4a" : "#f5f5f5";
+  const border = isDark ? "#6f6f6f" : "#d0d0d0";
+  const text = isDark ? "#e0e0e0" : "#616161";
+  const badgeColor = isDark ? "#86c4d5" : "#255b6a";
 
   let dimension = "";
   if (deviceType === "desktop") dimension = "💻 ESCRITORIO (1440 × 900)";

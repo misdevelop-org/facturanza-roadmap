@@ -44,7 +44,7 @@ PAGES["negocio.html"] = dict(
         "En <strong>Pin de la llave criptográfica</strong> toca editar, escribe el PIN y guarda.",
         "Vuelve a <strong>Inicio</strong>: debe decir <strong>Facturación habilitada</strong>. La facturación se habilita sola cuando usuario, contraseña, PIN y llave están completos.",
     ])
-    + p("Si cambiaste actividades económicas en Hacienda, toca el ícono de actualizar junto a <strong>Actividades</strong> para traerlas. En <strong>Sucursal y terminal predeterminada</strong> verás con cuál se emite por defecto (se administran en <a class='underline' href='sucursales.html'>Sucursales</a>).")
+    + p("Aquí ves y puedes cambiar la <strong>actividad económica predeterminada</strong>. Las actividades <strong>no se pueden eliminar</strong>: solo se actualizan con el ícono de actualizar junto a <strong>Actividades</strong>, que las consulta de nuevo en Hacienda. Con otra actividad puedes facturar eligiéndola en el formulario de la factura (todas las empresas) o con una <a class='underline' href='marcas.html'>marca</a> (plan de pago). En <strong>Sucursal y terminal predeterminada</strong> verás con cuál se emite por defecto (se administran en <a class='underline' href='sucursales.html'>Sucursales</a>).")
     + call("danger", "Protege tus credenciales", "Estos datos permiten emitir comprobantes a nombre de tu empresa. Solo compártelos con personas de confianza y dales el rol adecuado. Si sospechas que se filtraron, genera nuevas en TRIBU-CR."),
 )
 
@@ -115,7 +115,7 @@ PAGES["marcas.html"] = dict(
     desc="Factura con distinto nombre, logo y datos de contacto dentro de una misma empresa.",
     body=matrix("Marcas de la empresa")
     + who("planes de pago · crear y editar: Propietario, Administrador y Contador")
-    + p("Una <strong>marca</strong> te permite emitir documentos con un nombre comercial, logo, correo y teléfono propios, por <strong>actividad económica</strong>, sin crear otra empresa.")
+    + p("Una <strong>marca</strong> te permite emitir documentos con un nombre comercial, logo, correo y teléfono propios, por <strong>actividad económica</strong>, sin crear otra empresa. Es la forma de manejar varias actividades con distinta imagen. No es obligatoria: en el plan gratuito también puedes elegir otra actividad directamente en el formulario de la factura.")
     + h2("crear", "1. Crear una marca")
     + ol([
         "Ve a <strong>Negocio</strong> y, junto a los datos de la empresa, toca el <strong>+</strong> de las marcas.",
