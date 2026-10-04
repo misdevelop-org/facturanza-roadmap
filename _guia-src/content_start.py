@@ -14,11 +14,13 @@ PAGES["empieza.html"] = dict(
     + h2("paso-2", "2. Registra tu empresa")
     + p("En <strong>Mis Empresas</strong> toca el botón <strong>+</strong>, escribe la cédula y Facturanza trae el nombre legal y las actividades desde Hacienda. Completa nombre comercial, correo y teléfono. Tu empresa empieza en el <strong>plan gratuito</strong>.")
     + shots("cuenta_roles", "Registre su empresa: elige cómo te registras")
+    + shots("cuenta_formulario", "Formulario Nueva empresa")
     + h2("paso-3", "3. Genera tus credenciales en TRIBU-CR")
     + p("Necesitas tres datos de Hacienda: <strong>usuario</strong>, <strong>contraseña</strong> y la <strong>llave criptográfica (.p12)</strong> con su PIN. Se generan en TRIBU-CR → <em>Tico Factura</em>. Sigue los pasos en <a class='underline' href='negocio.html#credenciales'>Negocio y credenciales</a>.")
+    + shots("inicio_inhabilitada", "Sin credenciales, Inicio muestra Facturación inhabilitada")
     + h2("paso-4", "4. Cárgalas en Facturanza")
     + p("Ve a <strong>Negocio › Facturación</strong>, usa <strong>Pegar desde Hacienda</strong>, sube la llave y guarda el PIN. Cuando todo está completo, en <strong>Inicio</strong> verás la etiqueta <strong>Facturación habilitada</strong>.")
-    + shots("inicio_inhabilitada", "Inicio con la facturación inhabilitada: faltan las credenciales")
+    + shots("negocio_facturacion", "Negocio › Facturación con las credenciales cargadas")
     + shots("inicio_habilitada", "Inicio con la facturación habilitada")
     + h2("paso-5", "5. Crea un cliente, un producto y emite")
     + ol([
@@ -79,9 +81,9 @@ PAGES["lobby.html"] = dict(
     title="Mis Empresas",
     nav="Mis Empresas",
     desc="Administra varias empresas con un solo usuario y cambia entre ellas sin volver a iniciar sesión.",
-    body=h2("lobby", "1. La pantalla Mis Empresas")
+    body=matrix("Mis Empresas y selector de empresa")
+    + h2("lobby", "1. La pantalla Mis Empresas")
     + p("Después de iniciar sesión ves una tarjeta por cada empresa a la que tienes acceso (logo y nombre) y una tarjeta <strong>+</strong> para registrar otra. Toca una tarjeta para entrar a su <strong>Inicio</strong>.")
-    + shots("lobby", "Mis Empresas")
     + h2("como-aparecen", "2. Cómo llega una empresa a tu lista")
     + ul([
         "<strong>Tú la registras</strong> con el botón + (ver <a class='underline' href='get-started.html#registro-empresa'>Registrar tu empresa</a>).",
@@ -99,8 +101,7 @@ PAGES["dashboard.html"] = dict(
     title="Inicio",
     nav="Inicio",
     desc="La pantalla principal de tu empresa: estado de facturación, facturas disponibles, ingresos, egresos y Facturito.",
-    body=shots("inicio_inhabilitada", "Inicio de una empresa sin credenciales de Hacienda")
-    + shots("inicio_habilitada", "Inicio con facturación habilitada, gráficos y Facturito")
+    body=matrix("Inicio de la empresa")
     + h2("que-ves", "1. Qué encuentras en Inicio")
     + cards([
         ("Estado de facturación", "Etiqueta <strong>Facturación habilitada</strong> o <strong>inhabilitada</strong>. Si está inhabilitada, tócala para ir a Negocio y completar las credenciales de Hacienda."),

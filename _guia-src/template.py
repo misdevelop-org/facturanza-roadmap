@@ -218,32 +218,56 @@ def render_page(fname, page, nav, prev_, next_, review_date):
 """
 
 
-def _pair(key, dev, alt):
-    lf, df = f"{key}_{dev}_light.png", f"{key}_{dev}_dark.png"
-    if not (os.path.exists(os.path.join(IMG_DIR, lf)) and os.path.exists(os.path.join(IMG_DIR, df))):
-        return ""
-    a = _h.escape(alt)
-    return (
-        f'<img src="assets/img/{lf}" alt="{a}" loading="lazy" class="block dark:hidden w-full h-auto rounded-xl" />'
-        f'<img src="assets/img/{df}" alt="{a} (tema oscuro)" loading="lazy" class="hidden dark:block w-full h-auto rounded-xl" />'
-    )
+def _pair(key, devs, alt, cls):
+    """Devuelve el par claro/oscuro del primer dispositivo (de `devs`) que tenga ambas imágenes."""
+    for dev in devs:
+        lf, df = f"{key}_{dev}_light.png", f"{key}_{dev}_dark.png"
+        if os.path.exists(os.path.join(IMG_DIR, lf)) and os.path.exists(os.path.join(IMG_DIR, df)):
+            a = _h.escape(alt)
+            return (
+                f'<img src="assets/img/{lf}" alt="{a}" loading="lazy" class="{cls} block dark:hidden" />'
+                f'<img src="assets/img/{df}" alt="{a} (tema oscuro)" loading="lazy" class="{cls} hidden dark:block" />'
+            )
+    return ""
+
+
+_BADGE = (
+    '<span class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md '
+    'bg-[var(--brand-secondary)]/15 text-[var(--brand-secondary)] dark:bg-[var(--brand-primary)]/20 '
+    'dark:text-[var(--brand-primary)]">{}</span>'
+)
 
 
 def shots(key, caption):
-    """Captura real (Chrome + Fold + iPhone) con cambio claro/oscuro. Omite los dispositivos sin imagen."""
-    desk = _pair(key, "chrome", caption + " - Escritorio")
-    fold = _pair(key, "fold", caption + " - Tablet")
-    phone = _pair(key, "iphone", caption + " - Móvil")
-    box = "rounded-xl border border-[var(--border-color)] shadow-sm overflow-hidden"
-    out = '<figure class="my-8 space-y-4">'
+    """Matriz real (Escritorio arriba; Tablet y Móvil debajo, mismo alto y bordes alineados), claro/oscuro.
+
+    Móvil usa iphone y, si la función no existe en iOS, `phone` (Chrome/Android a tamaño teléfono).
+    """
+    desk = _pair(key, ["chrome"], caption + " - Escritorio", "w-full h-auto rounded-xl")
+    h = "h-[300px] sm:h-[360px] md:h-[440px] lg:h-[480px]"
+    tab = _pair(key, ["fold"], caption + " - Tablet", "h-full w-auto object-contain rounded-xl")
+    mob = _pair(key, ["iphone", "phone"], caption + " - Móvil", "h-full w-auto object-contain rounded-2xl")
+    if not (desk or tab or mob):
+        return ""
+    frame = "rounded-xl shadow-lg border-2 border-[var(--bg-secondary)] overflow-hidden"
+    out = (
+        '<figure class="my-8 mx-auto w-full max-w-[425px] sm:max-w-[496px] md:max-w-[618px] lg:max-w-[690px] '
+        'flex flex-col items-center gap-6">'
+    )
     if desk:
-        out += f'<div class="{box}">{desk}</div>'
-    row = ""
-    if fold:
-        row += f'<div class="{box} w-full sm:w-1/2 max-w-md">{fold}</div>'
-    if phone:
-        row += f'<div class="{box} w-2/3 sm:w-[30%] max-w-[260px]">{phone}</div>'
-    if row:
-        out += f'<div class="flex flex-wrap items-start gap-4">{row}</div>'
-    out += f'<figcaption class="text-xs text-slate-500 dark:text-slate-400">{caption}</figcaption></figure>\n'
-    return out if (desk or row) else ""
+        out += (
+            '<div class="w-full flex flex-col items-start"><div class="mb-2">'
+            + _BADGE.format("💻 Escritorio")
+            + f'</div><div class="w-full {frame}">{desk}</div></div>'
+        )
+    if tab or mob:
+        out += '<div class="flex flex-row justify-between items-end gap-6 w-full">'
+        for badge, img, extra in (("📱 Tablet", tab, ""), ("📲 Móvil", mob, "")):
+            if img:
+                out += (
+                    f'<div class="flex flex-col items-start"><div class="mb-2">{_BADGE.format(badge)}</div>'
+                    f'<div class="{h} {frame} flex items-center justify-center">{img}</div></div>'
+                )
+        out += "</div>"
+    out += f'<figcaption class="text-xs text-slate-500 dark:text-slate-400 self-start">{caption}</figcaption></figure>\n'
+    return out
