@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Facturito AI: Asistente Agéntico - Guía Facturanza</title>
+    <title>Facturito, tu asistente con IA - Guía Facturanza</title>
+    <meta name="description" content="Pídele a Facturito que prepare facturas, registre clientes y productos, busque códigos CABYS, resuma ventas y responda dudas tributarias." />
+    <link rel="canonical" href="https://roadmap.facturanza.com/guia/facturito.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Facturito, tu asistente con IA - Guía Facturanza" />
+    <meta property="og:description" content="Pídele a Facturito que prepare facturas, registre clientes y productos, busque códigos CABYS, resuma ventas y responda dudas tributarias." />
+    <meta property="og:url" content="https://roadmap.facturanza.com/guia/facturito.html" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' };</script>
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -13,27 +29,21 @@
     <link rel="stylesheet" href="assets/guide.css" />
   </head>
   <body class="min-h-screen flex flex-col">
-    <!-- Top Nav Header -->
     <header class="sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm">
       <div class="flex items-center space-x-3 sm:space-x-5">
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+        <button id="mobile-menu-btn" aria-label="Abrir índice" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
         <a href="index.html" class="flex items-center space-x-3">
-          <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza" class="h-8" />
+          <img src="https://storage.googleapis.com/facturanza-cr-public/logo_horizontal.png" alt="Facturanza" class="h-8" />
         </a>
-        <div class="hidden sm:flex items-center space-x-2 pl-3 border-l border-slate-200 dark:border-slate-700">
-          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">Inteligencia Artificial</span>
+        <div class="hidden sm:flex items-center pl-3 border-l border-slate-200 dark:border-slate-700">
+          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-900/60 dark:text-sky-300">Guía de uso</span>
         </div>
       </div>
-
       <div class="flex items-center space-x-3">
-        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Ver Roadmap</a>
-        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 shadow-sm">
-          <span>Ir a la App</span>
-        </a>
+        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Novedades</a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-700 text-white hover:bg-emerald-600 shadow-sm"><span>Ir a la app</span></a>
         <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
           <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
         </button>
@@ -44,7 +54,7 @@
       <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-30 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 lg:p-0 lg:bg-transparent lg:border-none flex flex-col shrink-0">
         <div class="lg:hidden flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-700">
           <span class="font-bold text-lg">Índice</span>
-          <button id="close-sidebar-btn" class="p-1 rounded text-slate-500">✕</button>
+          <button id="close-sidebar-btn" aria-label="Cerrar índice" class="p-1 rounded text-slate-500">✕</button>
         </div>
         <div class="sticky top-20 overflow-y-auto max-h-[calc(100vh-6rem)] pr-2 custom-scrollbar">
           <nav id="doc-sidebar-nav" class="space-y-4"></nav>
@@ -52,128 +62,18 @@
       </aside>
       <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden"></div>
 
-      <!-- Center Content Area -->
       <main id="doc-main-content" class="flex-1 min-w-0 max-w-4xl pb-16">
-        <!-- Breadcrumbs -->
-        <nav class="flex items-center space-x-2 text-xs text-slate-400 mb-4">
-          <a href="index.html" class="hover:underline">Guía</a>
-          <span>/</span>
-          <span>Inteligencia Artificial</span>
-          <span>/</span>
-          <span class="text-amber-500 font-semibold">Facturito AI</span>
-        </nav>
-
-        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Facturito AI: Asistente Fiscal Agéntico Inteligente</h1>
-        <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
-          Potenciado por Google Genkit y la familia de modelos Gemini, Facturito cuenta con recuperación aumentada con generación (RAG) sobre la legislación tributaria de Costa Rica y herramientas activas para automatizar tu facturación.
-        </p>
-
-        <!-- 6-Screenshot Matrix Placeholder -->
-        <div data-matrix-title="Facturito AI: Barra de Prompts y Chat Agéntico"></div>
-
-        <!-- Section 1: Capacidades Agénticas -->
-        <h2 id="capacidades-agenticas" class="text-2xl font-bold mt-12 mb-4">1. Capacidades de Razonamiento y Ejecución (Tool Calling)</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          A diferencia de un chatbot convencional, Facturito puede ejecutar acciones reales en la base de datos de tu empresa previa autorización tuya:
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-2xl mb-2 block">🧾</span>
-            <h3 class="font-bold text-sm mb-1">Emisión de Facturas</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
-              "Emite una factura para Juan Pérez por 50,000 colones por asesoría contable con IVA al 13%."
-            </p>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold">createBillTool</span>
-          </div>
-
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-2xl mb-2 block">👤</span>
-            <h3 class="font-bold text-sm mb-1">Creación de Clientes</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
-              "Registra a la empresa Soluciones Digitales con cédula 3-101-998877 y correo info@soluciones.com."
-            </p>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 font-bold">createClientTool</span>
-          </div>
-
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-2xl mb-2 block">🏷️</span>
-            <h3 class="font-bold text-sm mb-1">Catálogo de Productos</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
-              "Agrega un servicio de diseño gráfico a 20,000 colones con el código CABYS correspondiente."
-            </p>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 font-bold">createProductTool</span>
-          </div>
-        </div>
-
-        <!-- Section 2: Consultas Fiscales RAG -->
-        <h2 id="consultas-fiscales" class="text-2xl font-bold mt-12 mb-4">2. Búsqueda RAG sobre la Normativa de Costa Rica</h2>
-        <div class="p-6 rounded-2xl border border-amber-200 dark:border-amber-900 bg-amber-50/40 dark:bg-amber-950/20 mb-8 space-y-3">
-          <h3 class="text-base font-bold text-amber-900 dark:text-amber-300">Base Vectorial Especializada en la Ley 9635</h3>
-          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            Facturito cuenta con una base de conocimiento indexada mediante embeddings vectoriales (<code class="code-font text-xs">text-embedding-004</code>) que incluye:
-          </p>
-          <ul class="text-xs sm:text-sm space-y-1.5 text-slate-600 dark:text-slate-300">
-            <li>• Catálogo oficial CABYS (Catálogo de Bienes y Servicios) del Banco Central y Tributación.</li>
-            <li>• Reglamento de la Ley de Fortalecimiento de las Finanzas Públicas (Ley 9635).</li>
-            <li>• Tarifas reducidas de IVA (8% para boletos aéreos y salud privada, 4%, 2% para medicamentos y educación, 1% canasta básica, 0% exento).</li>
-            <li>• Reglas de aceptación y rechazo de comprobantes electrónicos del Ministerio de Hacienda.</li>
-          </ul>
-        </div>
-
-        <!-- Section 3: Balances y Análisis en Lenguaje Natural -->
-        <h2 id="analisis-financiero" class="text-2xl font-bold mt-12 mb-4">3. Balances y Reportes en Lenguaje Natural</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Puedes consultar el desempeño de tu negocio sin necesidad de navegar múltiples pantallas o generar tablas complejas:
-        </p>
-        <div class="space-y-3 mb-8">
-          <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 flex items-start gap-3">
-            <span class="text-amber-500 font-bold text-sm shrink-0">💬</span>
-            <div>
-              <p class="text-xs font-bold text-[var(--text-primary)]">"¿Cuánto he facturado en lo que va del mes?"</p>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Facturito consulta tus comprobantes aceptados y te entrega el total neto en Colones y Dólares con el IVA desglosado.</p>
-            </div>
-          </div>
-          <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 flex items-start gap-3">
-            <span class="text-amber-500 font-bold text-sm shrink-0">💬</span>
-            <div>
-              <p class="text-xs font-bold text-[var(--text-primary)]">"¿Cuáles clientes tienen facturas pendientes de pago a crédito?"</p>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Extrae un listado con los nombres de los clientes, fechas de vencimiento y montos adeudados.</p>
-            </div>
-          </div>
-          <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 flex items-start gap-3">
-            <span class="text-amber-500 font-bold text-sm shrink-0">💬</span>
-            <div>
-              <p class="text-xs font-bold text-[var(--text-primary)]">"¿Cuánto crédito fiscal acumulé en compras de este período?"</p>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Calcula el IVA soportado en los XMLs de compras procesados para estimar tu declaración D-104.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Section 4: Puntos de Entrada -->
-        <h2 id="puntos-entrada" class="text-2xl font-bold mt-12 mb-4">4. Dónde Encontrar a Facturito</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <h3 class="font-bold text-sm text-[var(--text-primary)] mb-1">Barra de Prompts en el Dashboard</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Ubicada en la parte superior del Dashboard de tu empresa con sugerencias inteligentes clicables para consultas rápidas.
-            </p>
-          </div>
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <h3 class="font-bold text-sm text-[var(--text-primary)] mb-1">Drawer Lateral de Chat Persistente</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Botón flotante con el icono de Facturito disponible en cualquier pantalla para mantener una conversación continua sin perder tu contexto.
-            </p>
-          </div>
-        </div>
-
-        <!-- Callout: Human in the loop -->
-        <div class="p-5 rounded-2xl border-l-4 border-sky-500 bg-sky-50 dark:bg-sky-950/20 text-slate-700 dark:text-slate-300">
-          <h3 class="font-bold text-sm text-sky-900 dark:text-sky-300 mb-1">Control Humano Garantizado (Human-in-the-Loop)</h3>
-          <p class="text-xs leading-relaxed">
-            Facturito nunca emite un comprobante a Hacienda de forma invisible. Cuando le pides crear una factura, prepara la transacción y despliega un diálogo de confirmación para que verifiques los datos y apruebes la firma digital con un clic.
-          </p>
-        </div>
+<nav class="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400 mb-4" aria-label="Ruta"><a href="index.html" class="hover:underline">Guía</a><span>/</span><span>Operación diaria</span><span>/</span><span class="text-[var(--brand-primary)] font-semibold">Facturito (IA)</span></nav><h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Facturito, tu asistente con IA</h1><p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">Pídele a Facturito que prepare facturas, registre clientes y productos, busque códigos CABYS, resuma ventas y responda dudas tributarias.</p><div data-matrix-title="Facturito: chat y tarjeta de factura"></div>
+<h2 id="donde" class="text-2xl font-bold mt-12 mb-4">1. Dónde está</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">En <strong>Inicio</strong>, como una barra en la parte inferior. Tócala para abrir el chat en pantalla completa. Si no la ves, actívala en <strong>Negocio › Membresía › Experimentos › Habilitar interfaz de chat Facturito</strong> (depende de tu plan).</p>
+<h2 id="hace" class="text-2xl font-bold mt-12 mb-4">2. Qué puede hacer</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"><div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm"><h3 class="font-bold text-sm mb-1">Preparar una factura</h3><p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">“Facturar ₡45,000 a Juan Pérez por consultoría con 13% de IVA”. Facturito arma un <strong>borrador</strong> (FE o TE) con el IVA calculado.</p></div><div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm"><h3 class="font-bold text-sm mb-1">Registrar clientes</h3><p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Valida la cédula y consulta el padrón de Hacienda.</p></div><div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm"><h3 class="font-bold text-sm mb-1">Registrar productos y buscar CABYS</h3><p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">“¿Cuál es el código CABYS para servicios de programación web?”</p></div><div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm"><h3 class="font-bold text-sm mb-1">Resumir ventas y gastos</h3><p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">“¿Cuáles han sido mis ventas de este mes?” o “Generar reporte de gastos de este mes” (PDF).</p></div><div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm"><h3 class="font-bold text-sm mb-1">Buscar tus facturas</h3><p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Consulta y analiza documentos emitidos.</p></div><div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm"><h3 class="font-bold text-sm mb-1">Resolver dudas tributarias</h3><p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">IVA, notas de crédito, Formulario 150, datáfonos, regímenes y más.</p></div></div>
+<div class="my-6 p-5 rounded-2xl border-l-4 border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20 text-slate-700 dark:text-slate-300"><h3 class="font-bold text-sm mb-1 text-emerald-900 dark:text-emerald-300">Tú confirmas siempre</h3><p class="text-xs sm:text-sm leading-relaxed">Facturito <strong>nunca emite por su cuenta</strong>. Muestra una tarjeta con los datos y dos botones: <strong>Revisar en formulario</strong> o <strong>Emitir factura</strong>; al emitir te pide una confirmación (<em>¿Emitir Factura?</em> › <em>Confirmar y Emitir</em>).</p></div>
+<h2 id="tokens" class="text-2xl font-bold mt-12 mb-4">3. FacturiTokens y planes</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">El uso de Facturito se mide en <strong>FacturiTokens</strong> (verás <em>⚡ usados / disponibles</em>). En el plan gratuito es una prueba hasta agotar los tokens; después se necesita un plan de pago. También puedes adjuntar archivos en el chat.</p>
+<h2 id="limites" class="text-2xl font-bold mt-12 mb-4">4. Qué no hace</h2>
+<ul class="list-disc pl-5 space-y-1.5 text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed"><li>No envía el Mensaje Receptor ni acepta compras ante Hacienda.</li><li>No emite Notas de Débito ni Facturas de Exportación (no existen aún en Facturanza).</li><li>No lleva cuentas por cobrar.</li><li>Es una IA: puede equivocarse. Verifica montos, cédulas y tarifas antes de confirmar y consulta a tu contador en temas fiscales complejos.</li></ul>
+<div class="mt-16 pt-6 border-t border-[var(--border-color)] flex flex-col sm:flex-row gap-3 sm:justify-between"><a href="compras.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)]">&larr; Compras</a><a href="reportes.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)] text-right">Siguiente: Reportes e IVA &rarr;</a></div><p class="mt-8 text-xs text-slate-500 dark:text-slate-400">Última revisión: 4 de octubre de 2026. ¿Algo no coincide con lo que ves en la app? Revisa <a class="underline" href="ayuda.html">Ayuda</a>.</p>
       </main>
 
       <aside class="hidden xl:block w-56 shrink-0">

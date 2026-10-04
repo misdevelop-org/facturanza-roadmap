@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Compras y Egresos: Aceptación de Gastos DGT - Guía Facturanza</title>
+    <title>Compras - Guía Facturanza</title>
+    <meta name="description" content="Registra las facturas de tus proveedores para tu reporte de IVA. La aceptación ante Hacienda se hace fuera de Facturanza." />
+    <link rel="canonical" href="https://roadmap.facturanza.com/guia/compras.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Compras - Guía Facturanza" />
+    <meta property="og:description" content="Registra las facturas de tus proveedores para tu reporte de IVA. La aceptación ante Hacienda se hace fuera de Facturanza." />
+    <meta property="og:url" content="https://roadmap.facturanza.com/guia/compras.html" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' };</script>
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -13,27 +29,21 @@
     <link rel="stylesheet" href="assets/guide.css" />
   </head>
   <body class="min-h-screen flex flex-col">
-    <!-- Top Nav Header -->
     <header class="sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm">
       <div class="flex items-center space-x-3 sm:space-x-5">
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+        <button id="mobile-menu-btn" aria-label="Abrir índice" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
         <a href="index.html" class="flex items-center space-x-3">
-          <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza" class="h-8" />
+          <img src="https://storage.googleapis.com/facturanza-cr-public/logo_horizontal.png" alt="Facturanza" class="h-8" />
         </a>
-        <div class="hidden sm:flex items-center space-x-2 pl-3 border-l border-slate-200 dark:border-slate-700">
-          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">Enterprise Dashboard</span>
+        <div class="hidden sm:flex items-center pl-3 border-l border-slate-200 dark:border-slate-700">
+          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-900/60 dark:text-sky-300">Guía de uso</span>
         </div>
       </div>
-
       <div class="flex items-center space-x-3">
-        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Ver Roadmap</a>
-        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 shadow-sm">
-          <span>Ir a la App</span>
-        </a>
+        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Novedades</a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-700 text-white hover:bg-emerald-600 shadow-sm"><span>Ir a la app</span></a>
         <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
           <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
         </button>
@@ -41,11 +51,10 @@
     </header>
 
     <div class="container mx-auto px-4 lg:px-8 py-8 flex-grow flex gap-8">
-      <!-- Left Sidebar Nav -->
       <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-30 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 lg:p-0 lg:bg-transparent lg:border-none flex flex-col shrink-0">
         <div class="lg:hidden flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-700">
           <span class="font-bold text-lg">Índice</span>
-          <button id="close-sidebar-btn" class="p-1 rounded text-slate-500">✕</button>
+          <button id="close-sidebar-btn" aria-label="Cerrar índice" class="p-1 rounded text-slate-500">✕</button>
         </div>
         <div class="sticky top-20 overflow-y-auto max-h-[calc(100vh-6rem)] pr-2 custom-scrollbar">
           <nav id="doc-sidebar-nav" class="space-y-4"></nav>
@@ -53,153 +62,26 @@
       </aside>
       <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden"></div>
 
-      <!-- Center Content Area -->
       <main id="doc-main-content" class="flex-1 min-w-0 max-w-4xl pb-16">
-        <!-- Breadcrumbs -->
-        <nav class="flex items-center space-x-2 text-xs text-slate-400 mb-4">
-          <a href="index.html" class="hover:underline">Guía</a>
-          <span>/</span>
-          <span>Enterprise Dashboard</span>
-          <span>/</span>
-          <span class="text-blue-500 font-semibold">c. Compras & Egresos</span>
-        </nav>
-
-        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Compras y Egresos: Carga XML y Aceptación ante Hacienda</h1>
-        <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
-          La deducibilidad de gastos para el Impuesto sobre la Renta y el aprovechamiento de crédito fiscal en el IVA requieren emitir la Confirmación de Aceptación (Mensaje Receptor) ante el Ministerio de Hacienda dentro de los primeros 8 días del mes siguiente.
-        </p>
-
-        <!-- 6-Screenshot Matrix Placeholder -->
-        <div data-matrix-title="Compras y Egresos: Carga de XML, Buzón y Aceptación de Gastos"></div>
-
-        <!-- Section 1: Ingesta de Facturas de Proveedores -->
-        <h2 id="metodos-ingesta" class="text-2xl font-bold mt-12 mb-4">1. Dos Métodos de Carga de Comprobantes</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Facturanza simplifica la recopilación de comprobantes de tus proveedores mediante dos vías complementarias:
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-3xl mb-3 block">📂</span>
-            <h3 class="font-bold text-base mb-1">Carga Manual de Archivos XML</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
-              Arrastra y suelta el archivo XML de la Factura Electrónica emitido por tu proveedor. Facturanza extrae instantáneamente el emisor, fecha, clave numérica, líneas de detalle, subtotal e impuestos soportados.
-            </p>
-            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-300">
-              ✓ Soporta subida por lotes (múltiples XMLs simultáneos).<br />
-              ✓ Validación criptográfica de firma XAdES-BES en el cliente.
-            </div>
-          </div>
-
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-3xl mb-3 block">📬</span>
-            <h3 class="font-bold text-base mb-1">Buzón Automático de Recepción</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
-              Cada empresa en Facturanza tiene un buzón electrónico único. Solo debes pedirle a tus proveedores que envíen sus facturas a tu dirección asignada o configurar una regla de reenvío automático desde tu correo:
-            </p>
-            <div class="p-2.5 rounded-xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-900 font-mono text-xs text-sky-800 dark:text-sky-300 flex items-center justify-between">
-              <span>compras+empresa@facturanza.com</span>
-              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Buzón Único</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Section 2: Confirmación ante Hacienda (Mensaje Receptor) -->
-        <h2 id="mensaje-receptor" class="text-2xl font-bold mt-12 mb-4">2. Emisión de Mensaje Receptor ante la DGT</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Según la resolución DGT-R-48-2016, todo receptor contribuyente debe manifestar la aceptación o rechazo de los comprobantes que respalden sus costos y gastos:
-        </p>
-
-        <div class="space-y-4 mb-8">
-          <div class="p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/40 dark:bg-emerald-950/20">
-            <div class="flex items-center justify-between mb-1">
-              <span class="text-xs font-mono font-extrabold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200">Mensaje 05</span>
-              <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">Aceptación Total</span>
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-300">
-              Confirmas que recibiste a conformidad los bienes o servicios facturados. El IVA desglosado se imputa 100% como crédito fiscal en tu declaración D-104.
-            </p>
-          </div>
-
-          <div class="p-4 rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/40 dark:bg-amber-950/20">
-            <div class="flex items-center justify-between mb-1">
-              <span class="text-xs font-mono font-extrabold px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200">Mensaje 06</span>
-              <span class="text-xs font-bold text-amber-600 dark:text-amber-400">Aceptación Parcial</span>
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-300">
-              Se aprueba una porción del documento debido a devoluciones o discrepancia de precios pactados. Exige indicar el monto aceptado y la justificación.
-            </p>
-          </div>
-
-          <div class="p-4 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50/40 dark:bg-rose-950/20">
-            <div class="flex items-center justify-between mb-1">
-              <span class="text-xs font-mono font-extrabold px-2 py-0.5 rounded bg-rose-100 dark:bg-rose-900 text-rose-800 dark:text-rose-200">Mensaje 07</span>
-              <span class="text-xs font-bold text-rose-600 dark:text-rose-400">Rechazo Total</span>
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-300">
-              El comprobante no corresponde a tu actividad, contiene errores en el receptor o no fue solicitado. Notifica al proveedor para que proceda a anular con Nota de Crédito.
-            </p>
-          </div>
-        </div>
-
-        <!-- Section 3: Condición de Impuesto y Crédito Fiscal -->
-        <h2 id="condicion-credito-fiscal" class="text-2xl font-bold mt-12 mb-4">3. Clasificación del Crédito Fiscal IVA</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Al confirmar la compra, Facturanza te permite elegir el tratamiento contable del impuesto según la Ley 9635:
-        </p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 text-xs">
-          <div class="p-3.5 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="font-bold text-slate-800 dark:text-slate-100 block mb-1">Crédito Pleno (100%)</span>
-            <p class="text-slate-500 dark:text-slate-400 leading-relaxed">
-              Para adquisiciones directamente vinculadas a operaciones gravadas con tarifa general del 13%.
-            </p>
-          </div>
-          <div class="p-3.5 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="font-bold text-slate-800 dark:text-slate-100 block mb-1">Crédito Proporcional</span>
-            <p class="text-slate-500 dark:text-slate-400 leading-relaxed">
-              Aplica la regla de prorrata cuando tus ventas combinan tarifas diferenciadas (4%, 2%, 1%) o exentas.
-            </p>
-          </div>
-          <div class="p-3.5 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="font-bold text-slate-800 dark:text-slate-100 block mb-1">Costo o Gasto</span>
-            <p class="text-slate-500 dark:text-slate-400 leading-relaxed">
-              El IVA no se compensa contra débitos, sino que se incorpora íntegramente al costo deducible del Impuesto sobre la Renta.
-            </p>
-          </div>
-        </div>
-
-        <!-- Bottom Navigation -->
-        <div class="mt-16 pt-8 border-t border-[var(--border-color)] flex items-center justify-between">
-          <a href="facturas.html" class="inline-flex items-center text-xs font-semibold text-slate-500 hover:text-[var(--brand-primary)]">
-            ← b. Facturas & Comprobantes
-          </a>
-          <a href="clientes.html" class="inline-flex items-center text-xs font-bold text-[var(--brand-primary)] hover:underline">
-            Siguiente: d. Clientes & Receptores →
-          </a>
-        </div>
+<nav class="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400 mb-4" aria-label="Ruta"><a href="index.html" class="hover:underline">Guía</a><span>/</span><span>Operación diaria</span><span>/</span><span class="text-[var(--brand-primary)] font-semibold">Compras</span></nav><h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Compras</h1><p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">Registra las facturas de tus proveedores para tu reporte de IVA. La aceptación ante Hacienda se hace fuera de Facturanza.</p><div data-matrix-title="Compras: carga de XML y buzón"></div>
+<p class="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-5 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">Quién puede: Propietario, Administrador y Contador</p>
+<div class="my-6 p-5 rounded-2xl border-l-4 border-rose-500 bg-rose-50 dark:bg-rose-950/20 text-slate-700 dark:text-slate-300"><h3 class="font-bold text-sm mb-1 text-rose-900 dark:text-rose-300">Importante: la aceptación se hace en TRIBU-CR</h3><p class="text-xs sm:text-sm leading-relaxed">Facturanza <strong>registra</strong> tus compras, pero <strong>no envía el Mensaje Receptor</strong> (Aceptación total, parcial o Rechazo) a Hacienda. Debes enviarlo en <strong>TRIBU-CR (Tico Factura)</strong> o con otro software certificado, dentro de los <strong>primeros 8 días hábiles del mes siguiente</strong>. Si no lo haces a tiempo, el comprobante pierde su condición de respaldo del crédito fiscal de IVA.</p></div>
+<h2 id="subir" class="text-2xl font-bold mt-12 mb-4">1. Subir facturas de proveedores</h2>
+<ol class="list-decimal pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed"><li>En <strong>Compras</strong> (o desde Inicio) toca <strong>Subir compra</strong>.</li><li>Toca <strong>Seleccionar archivos</strong> y elige uno o varios XML de <strong>Factura Electrónica</strong>.</li><li>Toca <strong>Subir archivos</strong>. Facturanza lee emisor, fecha, clave, líneas e impuestos.</li></ol>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">Mensajes que puedes ver: <em>no es un XML de factura válido</em> (solo se aceptan Facturas Electrónicas), <em>el receptor no coincide con la identificación de la empresa</em> y <em>ya existe una factura con la clave …</em> (duplicada).</p>
+<h2 id="buzon" class="text-2xl font-bold mt-12 mb-4">2. Buzón automático</h2>
+<p class="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-5 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">Quién puede: planes de pago</p>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">Pide a tus proveedores que envíen sus facturas (XML) a <strong>compras@facturanza.com</strong>. El correo es único para todos; Facturanza asigna cada factura a tu empresa por la <strong>cédula del receptor</strong> que aparece en el XML. La compra aparece en la lista con la leyenda <em>Ingresado automáticamente desde compras@facturanza.com</em>.</p>
+<ul class="list-disc pl-5 space-y-1.5 text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed"><li>En el plan gratuito el buzón no procesa tus correos.</li><li>Los tiquetes electrónicos sin receptor identificado se descartan.</li><li>Si un proveedor te emite una Factura Electrónica de Compra (FEC), también se registra.</li></ul>
+<h2 id="lista" class="text-2xl font-bold mt-12 mb-4">3. Consultar y usar tus compras</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">La lista muestra el mes actual; filtra por fecha y busca por proveedor o clave. Las compras registradas alimentan la sección de compras del <a class='underline' href='reportes.html'>reporte de IVA</a> y el gráfico de Egresos de Inicio; también puedes exportarlas a Excel o PDF.</p>
+<div class="mt-16 pt-6 border-t border-[var(--border-color)] flex flex-col sm:flex-row gap-3 sm:justify-between"><a href="productos.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)]">&larr; Productos y CABYS</a><a href="facturito.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)] text-right">Siguiente: Facturito (IA) &rarr;</a></div><p class="mt-8 text-xs text-slate-500 dark:text-slate-400">Última revisión: 4 de octubre de 2026. ¿Algo no coincide con lo que ves en la app? Revisa <a class="underline" href="ayuda.html">Ayuda</a>.</p>
       </main>
 
-      <!-- Right Table of Contents (Auto-generated by guide.js) -->
-      <aside id="doc-toc-container" class="hidden xl:block w-56 shrink-0">
-        <div class="sticky top-20">
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">En esta página</div>
-          <nav id="doc-toc" class="space-y-1.5 text-xs"></nav>
-        </div>
+      <aside class="hidden xl:block w-56 shrink-0">
+        <div class="sticky top-20" id="right-toc-nav"></div>
       </aside>
     </div>
-
-    <!-- Shared Footer -->
-    <footer class="mt-auto border-t border-[var(--border-color)] bg-[var(--bg-secondary)] py-6 text-center text-xs text-slate-500">
-      <div class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <span>© 2026 Facturanza Costa Rica. Todos los derechos reservados.</span>
-        <div class="flex items-center space-x-4">
-          <a href="../" class="hover:underline">Roadmap</a>
-          <a href="index.html" class="hover:underline">Guía</a>
-          <a href="https://app.facturanza.com" target="_blank" class="hover:underline">App Web</a>
-        </div>
-      </div>
-    </footer>
 
     <script src="assets/guide.js"></script>
   </body>

@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lobby Multiorganización - Guía Facturanza</title>
+    <title>Mis Empresas - Guía Facturanza</title>
+    <meta name="description" content="Administra varias empresas con un solo usuario y cambia entre ellas sin volver a iniciar sesión." />
+    <link rel="canonical" href="https://roadmap.facturanza.com/guia/lobby.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Mis Empresas - Guía Facturanza" />
+    <meta property="og:description" content="Administra varias empresas con un solo usuario y cambia entre ellas sin volver a iniciar sesión." />
+    <meta property="og:url" content="https://roadmap.facturanza.com/guia/lobby.html" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' };</script>
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -13,27 +29,21 @@
     <link rel="stylesheet" href="assets/guide.css" />
   </head>
   <body class="min-h-screen flex flex-col">
-    <!-- Top Nav Header -->
     <header class="sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm">
       <div class="flex items-center space-x-3 sm:space-x-5">
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+        <button id="mobile-menu-btn" aria-label="Abrir índice" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
         <a href="index.html" class="flex items-center space-x-3">
-          <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza" class="h-8" />
+          <img src="https://storage.googleapis.com/facturanza-cr-public/logo_horizontal.png" alt="Facturanza" class="h-8" />
         </a>
-        <div class="hidden sm:flex items-center space-x-2 pl-3 border-l border-slate-200 dark:border-slate-700">
-          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-900/60 dark:text-sky-300">Documentación</span>
+        <div class="hidden sm:flex items-center pl-3 border-l border-slate-200 dark:border-slate-700">
+          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-900/60 dark:text-sky-300">Guía de uso</span>
         </div>
       </div>
-
       <div class="flex items-center space-x-3">
-        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Ver Roadmap</a>
-        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 shadow-sm">
-          <span>Ir a la App</span>
-        </a>
+        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Novedades</a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-700 text-white hover:bg-emerald-600 shadow-sm"><span>Ir a la app</span></a>
         <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
           <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
         </button>
@@ -44,7 +54,7 @@
       <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-30 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 lg:p-0 lg:bg-transparent lg:border-none flex flex-col shrink-0">
         <div class="lg:hidden flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-700">
           <span class="font-bold text-lg">Índice</span>
-          <button id="close-sidebar-btn" class="p-1 rounded text-slate-500">✕</button>
+          <button id="close-sidebar-btn" aria-label="Cerrar índice" class="p-1 rounded text-slate-500">✕</button>
         </div>
         <div class="sticky top-20 overflow-y-auto max-h-[calc(100vh-6rem)] pr-2 custom-scrollbar">
           <nav id="doc-sidebar-nav" class="space-y-4"></nav>
@@ -52,97 +62,18 @@
       </aside>
       <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden"></div>
 
-      <!-- Center Content Area -->
       <main id="doc-main-content" class="flex-1 min-w-0 max-w-4xl pb-16">
-        <!-- Breadcrumbs -->
-        <nav class="flex items-center space-x-2 text-xs text-slate-400 mb-4">
-          <a href="index.html" class="hover:underline">Guía</a>
-          <span>/</span>
-          <span>Primeros Pasos</span>
-          <span>/</span>
-          <span class="text-[var(--brand-primary)] font-semibold">Lobby Multiorganización</span>
-        </nav>
-
-        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Lobby Multiorganización: Múltiples Empresas en un Perfil</h1>
-        <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
-          Diseñado para empresarios con varios negocios, contadores independientes y firmas que requieren administrar la facturación de múltiples personerías jurídicas con un solo inicio de sesión.
-        </p>
-
-        <!-- 6-Screenshot Matrix Placeholder -->
-        <div data-matrix-title="Lobby y Selector de Empresas"></div>
-
-        <!-- Subsection 1: Características del Lobby -->
-        <h2 id="vista-centralizada" class="text-2xl font-bold mt-12 mb-4">1. Vista Centralizada de Empresas</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Al iniciar sesión en Facturanza, el Lobby presenta una cuadrícula visual con cada organización autorizada para tu usuario:
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-xl mb-2 block">🏢</span>
-            <h3 class="font-bold text-sm mb-1">Identidad de Marca</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Muestra el logotipo de la empresa, su nombre comercial y el número de cédula jurídica oficial para rápida identificación visual.
-            </p>
-          </div>
-
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-xl mb-2 block">🛡️</span>
-            <h3 class="font-bold text-sm mb-1">Rol Asignado</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Indica claramente si actúas como Propietario, Administrador, Gerente, Contador o Empleado en esa empresa específica.
-            </p>
-          </div>
-
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-xl mb-2 block">💳</span>
-            <h3 class="font-bold text-sm mb-1">Estado de Membresía</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Badges de estado que avisan si la empresa se encuentra activa, en período de prueba o con paquetes de facturas disponibles.
-            </p>
-          </div>
-        </div>
-
-        <!-- Subsection 2: Conmutación Instantánea -->
-        <h2 id="conmutacion-instantanea" class="text-2xl font-bold mt-12 mb-4">2. Conmutación Instantánea (Zero-Friction)</h2>
-        <div class="space-y-4 text-sm text-slate-600 dark:text-slate-300 mb-8">
-          <p>
-            Al hacer clic en cualquier tarjeta del Lobby, la aplicación carga inmediatamente el contexto de esa empresa en la ruta <code class="code-font bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded text-sky-600 dark:text-sky-400 font-semibold">/enterprise/:id/dashboard</code>.
-          </p>
-          <p>
-            No requieres reautenticarte ni introducir códigos de verificación. El menú lateral y el cajón de empresas te permiten saltar a otra compañía en cualquier momento con un solo toque.
-          </p>
-        </div>
-
-        <!-- Subsection 3: Invitaciones y Múltiples Negocios -->
-        <h2 id="invitaciones-roles" class="text-2xl font-bold mt-12 mb-4">3. Cómo Aparecen Nuevas Empresas en tu Lobby</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Hay dos formas en las que una empresa se asocia a tu perfil:
-        </p>
-
-        <div class="space-y-4">
-          <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40">
-            <h3 class="font-bold text-sm text-[var(--text-primary)] mb-1">A. Creando una nueva empresa</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Presiona el botón <strong class="text-sky-600 dark:text-sky-400">+ Nueva Empresa</strong> en el Lobby. El sistema te guiará para registrar la cédula ante Hacienda y automáticamente serás configurado como el <strong>Propietario</strong> absoluto del negocio.
-            </p>
-          </div>
-
-          <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40">
-            <h3 class="font-bold text-sm text-[var(--text-primary)] mb-1">B. Siendo invitado por un tercero</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Si un cliente, socio o tu empleador te agrega desde la pestaña de <em>Roles</em> de su empresa usando tu correo electrónico, esa empresa aparecerá automáticamente en tu Lobby en tu siguiente inicio de sesión con los permisos concedidos.
-            </p>
-          </div>
-        </div>
-
-        <!-- Callout: Aislamiento de datos -->
-        <div class="mt-8 p-5 rounded-2xl border-l-4 border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20 text-slate-700 dark:text-slate-300">
-          <h3 class="font-bold text-sm text-emerald-900 dark:text-emerald-400 mb-1">Aislamiento Total de Datos por Inquilino</h3>
-          <p class="text-xs leading-relaxed">
-            Cada organización posee colecciones de datos independientes en Cloud Firestore. Los clientes, productos, facturas y reportes de la Empresa A jamás son visibles para los usuarios o cajeros de la Empresa B, garantizando cumplimiento estricto de confidencialidad y secreto fiscal.
-          </p>
-        </div>
+<nav class="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400 mb-4" aria-label="Ruta"><a href="index.html" class="hover:underline">Guía</a><span>/</span><span>Primeros pasos</span><span>/</span><span class="text-[var(--brand-primary)] font-semibold">Mis Empresas</span></nav><h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Mis Empresas</h1><p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">Administra varias empresas con un solo usuario y cambia entre ellas sin volver a iniciar sesión.</p><div data-matrix-title="Mis Empresas y selector de empresa"></div>
+<h2 id="lobby" class="text-2xl font-bold mt-12 mb-4">1. La pantalla Mis Empresas</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">Después de iniciar sesión ves una tarjeta por cada empresa a la que tienes acceso (logo y nombre) y una tarjeta <strong>+</strong> para registrar otra. Toca una tarjeta para entrar a su <strong>Inicio</strong>.</p>
+<h2 id="como-aparecen" class="text-2xl font-bold mt-12 mb-4">2. Cómo llega una empresa a tu lista</h2>
+<ul class="list-disc pl-5 space-y-1.5 text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed"><li><strong>Tú la registras</strong> con el botón + (ver <a class='underline' href='get-started.html#registro-empresa'>Registrar tu empresa</a>).</li><li><strong>Te agregan</strong> desde <strong>Negocio › Roles</strong> usando tu correo. Aparece en tu lista con el rol que te dieron.</li></ul>
+<h2 id="cambiar-empresa" class="text-2xl font-bold mt-12 mb-4">3. Cambiar de empresa</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">Dentro de una empresa, toca el <strong>logo (arriba a la derecha)</strong> para abrir el panel de empresas y elegir otra. No necesitas volver a iniciar sesión.</p>
+<h2 id="menu" class="text-2xl font-bold mt-12 mb-4">4. El menú de cada empresa</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">El menú lateral (o el botón de menú en celular) tiene: <strong>Perfil, Inicio, Facturas, Compras, Clientes, Productos, Sucursales, Reportes y Negocio</strong>. Cada usuario ve solo lo que su rol permite (ver <a class='underline' href='roles.html'>Roles y acceso</a>).</p>
+<div class="my-6 p-5 rounded-2xl border-l-4 border-sky-500 bg-sky-50 dark:bg-sky-950/20 text-slate-700 dark:text-slate-300"><h3 class="font-bold text-sm mb-1 text-sky-900 dark:text-sky-300">Datos separados por empresa</h3><p class="text-xs sm:text-sm leading-relaxed">La información de cada empresa (clientes, productos, facturas, reportes) es independiente. Los usuarios de una empresa no ven los datos de otra.</p></div>
+<div class="mt-16 pt-6 border-t border-[var(--border-color)] flex flex-col sm:flex-row gap-3 sm:justify-between"><a href="get-started.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)]">&larr; Cuenta e inicio de sesión</a><a href="dashboard.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)] text-right">Siguiente: Inicio &rarr;</a></div><p class="mt-8 text-xs text-slate-500 dark:text-slate-400">Última revisión: 4 de octubre de 2026. ¿Algo no coincide con lo que ves en la app? Revisa <a class="underline" href="ayuda.html">Ayuda</a>.</p>
       </main>
 
       <aside class="hidden xl:block w-56 shrink-0">

@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sucursales y Cajas: Consecutivos y Clave DGT - Guía Facturanza</title>
+    <title>Sucursales y terminales - Guía Facturanza</title>
+    <meta name="description" content="Cómo se numeran tus documentos: sucursales, terminales y consecutivos." />
+    <link rel="canonical" href="https://roadmap.facturanza.com/guia/sucursales.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Sucursales y terminales - Guía Facturanza" />
+    <meta property="og:description" content="Cómo se numeran tus documentos: sucursales, terminales y consecutivos." />
+    <meta property="og:url" content="https://roadmap.facturanza.com/guia/sucursales.html" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' };</script>
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -13,27 +29,21 @@
     <link rel="stylesheet" href="assets/guide.css" />
   </head>
   <body class="min-h-screen flex flex-col">
-    <!-- Top Nav Header -->
     <header class="sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm">
       <div class="flex items-center space-x-3 sm:space-x-5">
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+        <button id="mobile-menu-btn" aria-label="Abrir índice" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
         <a href="index.html" class="flex items-center space-x-3">
-          <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza" class="h-8" />
+          <img src="https://storage.googleapis.com/facturanza-cr-public/logo_horizontal.png" alt="Facturanza" class="h-8" />
         </a>
-        <div class="hidden sm:flex items-center space-x-2 pl-3 border-l border-slate-200 dark:border-slate-700">
-          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">Enterprise Dashboard</span>
+        <div class="hidden sm:flex items-center pl-3 border-l border-slate-200 dark:border-slate-700">
+          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-900/60 dark:text-sky-300">Guía de uso</span>
         </div>
       </div>
-
       <div class="flex items-center space-x-3">
-        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Ver Roadmap</a>
-        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 shadow-sm">
-          <span>Ir a la App</span>
-        </a>
+        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Novedades</a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-700 text-white hover:bg-emerald-600 shadow-sm"><span>Ir a la app</span></a>
         <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
           <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
         </button>
@@ -41,11 +51,10 @@
     </header>
 
     <div class="container mx-auto px-4 lg:px-8 py-8 flex-grow flex gap-8">
-      <!-- Left Sidebar Nav -->
       <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-30 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 lg:p-0 lg:bg-transparent lg:border-none flex flex-col shrink-0">
         <div class="lg:hidden flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-700">
           <span class="font-bold text-lg">Índice</span>
-          <button id="close-sidebar-btn" class="p-1 rounded text-slate-500">✕</button>
+          <button id="close-sidebar-btn" aria-label="Cerrar índice" class="p-1 rounded text-slate-500">✕</button>
         </div>
         <div class="sticky top-20 overflow-y-auto max-h-[calc(100vh-6rem)] pr-2 custom-scrollbar">
           <nav id="doc-sidebar-nav" class="space-y-4"></nav>
@@ -53,135 +62,23 @@
       </aside>
       <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden"></div>
 
-      <!-- Center Content Area -->
       <main id="doc-main-content" class="flex-1 min-w-0 max-w-4xl pb-16">
-        <!-- Breadcrumbs -->
-        <nav class="flex items-center space-x-2 text-xs text-slate-400 mb-4">
-          <a href="index.html" class="hover:underline">Guía</a>
-          <span>/</span>
-          <span>Enterprise Dashboard</span>
-          <span>/</span>
-          <span class="text-blue-500 font-semibold">f. Sucursales & Cajas</span>
-        </nav>
-
-        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Sucursales y Cajas: Consecutivos y Clave Numérica de 50 Dígitos</h1>
-        <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
-          La Dirección General de Tributación exige que cada comprobante emitido posea un número consecutivo de 20 dígitos y una clave única de 50 dígitos determinada por la sucursal física y la terminal (caja) de expedición. Facturanza administra esta jerarquía de forma autónoma.
-        </p>
-
-        <!-- 6-Screenshot Matrix Placeholder -->
-        <div data-matrix-title="Sucursales y Cajas: Estructura de Terminales y Consecutivos DGT"></div>
-
-        <!-- Section 1: Jerarquía Sucursal y Terminal -->
-        <h2 id="jerarquia-sucursales" class="text-2xl font-bold mt-12 mb-4">1. Estructura de Puntos de Emisión DGT</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Cada empresa cuenta por defecto con la sucursal <code>001</code> (Casa Matriz) y la caja <code>00001</code> (Terminal Principal). Puedes expandir tu negocio añadiendo múltiples sedes y puntos de cobro:
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-xl">🏬</span>
-              <h3 class="font-bold text-sm">Sucursal (3 Dígitos)</h3>
-            </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
-              Identifica el establecimiento físico o sede de la empresa (ej. <code>001</code> San José Centro, <code>002</code> Escazú, <code>003</code> Tienda Virtual). Cada sucursal tiene su dirección exacta y teléfono.
-            </p>
-            <span class="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">Rango: 001 hasta 999</span>
-          </div>
-
-          <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-xl">🖥️</span>
-              <h3 class="font-bold text-sm">Terminal o Caja (5 Dígitos)</h3>
-            </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
-              Identifica el punto específico de emisión o cajero (ej. <code>00001</code> Caja Rápida, <code>00002</code> POS Mostrador). Mantiene su propio correlativo independiente sin riesgo de saltos ni colisiones de numeración.
-            </p>
-            <span class="text-xs font-mono font-bold text-sky-600 dark:text-sky-400">Rango: 00001 hasta 99999</span>
-          </div>
-        </div>
-
-        <!-- Section 2: Anatomía de la Clave de 50 Dígitos -->
-        <h2 id="clave-50-digitos" class="text-2xl font-bold mt-12 mb-4">2. Anatomía de la Clave Numérica de 50 Dígitos</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Cada factura electrónica emitida en Costa Rica lleva en su encabezado una clave única e irrepetible generada de acuerdo con la resolución DGT-R-48-2016:
-        </p>
-
-        <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm space-y-4 mb-8">
-          <div class="p-3.5 rounded-xl bg-slate-900 text-emerald-400 font-mono text-xs break-all leading-relaxed tracking-wider shadow-inner">
-            506 250926 0003101123456 001 00001 01 0000000148 1 84920183
-          </div>
-
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
-              <span class="text-slate-400 font-mono text-[10px] block">506 (3 Dígitos)</span>
-              <span class="font-bold">País (Costa Rica)</span>
-            </div>
-            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
-              <span class="text-slate-400 font-mono text-[10px] block">250926 (6 Dígitos)</span>
-              <span class="font-bold">Día, Mes, Año</span>
-            </div>
-            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
-              <span class="text-slate-400 font-mono text-[10px] block">0003101123456 (12 Dígitos)</span>
-              <span class="font-bold">Cédula del Emisor</span>
-            </div>
-            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
-              <span class="text-slate-400 font-mono text-[10px] block">0010000101... (20 Dígitos)</span>
-              <span class="font-bold">Consecutivo DGT</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Section 3: Asignación de Roles y Permisos por Terminal -->
-        <h2 id="roles-cajeros" class="text-2xl font-bold mt-12 mb-4">3. Vinculación de Cajeros y Puntos de Venta</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Puedes limitar el acceso de tus colaboradores para que solo facturen desde su caja asignada:
-        </p>
-
-        <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm space-y-3 mb-8 text-xs">
-          <div class="flex items-start gap-3">
-            <span class="text-lg">🔒</span>
-            <div>
-              <span class="font-bold text-slate-800 dark:text-slate-100">Restricción de Emisión por Terminal</span>
-              <p class="text-slate-500 dark:text-slate-400 mt-0.5">
-                Al invitar a un usuario con el rol de <em>Cajero</em>, puedes fijar su operación exclusivamente a la <strong>Sucursal 001 - Terminal 00002</strong>. No podrá consultar reportes generales ni alterar la configuración tributaria de la empresa.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom Navigation -->
-        <div class="mt-16 pt-8 border-t border-[var(--border-color)] flex items-center justify-between">
-          <a href="productos.html" class="inline-flex items-center text-xs font-semibold text-slate-500 hover:text-[var(--brand-primary)]">
-            ← e. Productos & CABYS
-          </a>
-          <a href="reportes.html" class="inline-flex items-center text-xs font-bold text-[var(--brand-primary)] hover:underline">
-            Siguiente: g. Reportes & IVA D-104 →
-          </a>
-        </div>
+<nav class="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400 mb-4" aria-label="Ruta"><a href="index.html" class="hover:underline">Guía</a><span>/</span><span>Administración</span><span>/</span><span class="text-[var(--brand-primary)] font-semibold">Sucursales y terminales</span></nav><h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Sucursales y terminales</h1><p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">Cómo se numeran tus documentos: sucursales, terminales y consecutivos.</p><div data-matrix-title="Sucursales y terminales"></div>
+<p class="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-5 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">Quién puede: Propietario, Administrador y Contador</p>
+<h2 id="estructura" class="text-2xl font-bold mt-12 mb-4">1. Cómo funciona</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">Cada documento lleva un <strong>consecutivo de 20 dígitos</strong> compuesto por <strong>sucursal (3) + terminal (5) + tipo de documento (2) + número (10)</strong>. Facturanza lo administra por ti.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"><div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm"><h3 class="font-bold text-sm mb-1">Sucursal</h3><p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Un establecimiento o sede. Tu empresa nace con la sucursal 001, llamada <strong>Principal</strong>. Tiene solo un nombre.</p></div><div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm"><h3 class="font-bold text-sm mb-1">Terminal</h3><p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Un punto de emisión (caja). Cada sucursal nace con la terminal 00001, llamada <strong>Principal</strong>. Cada terminal lleva su propio consecutivo.</p></div></div>
+<h2 id="administrar" class="text-2xl font-bold mt-12 mb-4">2. Crear y administrar</h2>
+<ul class="list-disc pl-5 space-y-1.5 text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed"><li><strong>Crear sucursal</strong>: escribe el nombre. Se crea con la siguiente numeración (002, 003…) y una terminal Principal.</li><li>Dentro de una sucursal, <strong>Crear terminal</strong>.</li><li>En una terminal ves el <strong>Consecutivo</strong> actual y puedes <strong>Actualizar consecutivo</strong> (útil si vienes de otro facturador y debes continuar la numeración). Úsalo con cuidado: un número repetido genera rechazos.</li><li>En <strong>Usuarios</strong> ves quiénes están <em>Asignados</em> y quiénes tienen <em>Acceso</em> (ver <a class='underline' href='roles.html'>Roles y acceso</a>).</li></ul>
+<h2 id="clave" class="text-2xl font-bold mt-12 mb-4">3. La clave numérica de 50 dígitos</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">Además del consecutivo, cada comprobante tiene una <strong>clave única de 50 dígitos</strong>: país (3) + fecha DDMMAA (6) + cédula del emisor (12) + consecutivo (20) + situación (1) + código de seguridad (8). Aparece en el XML y sirve para consultar el documento. En una nota de crédito, referencia la clave del documento original.</p>
+<div class="mt-16 pt-6 border-t border-[var(--border-color)] flex flex-col sm:flex-row gap-3 sm:justify-between"><a href="roles.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)]">&larr; Roles y acceso</a><a href="marcas.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)] text-right">Siguiente: Marcas &rarr;</a></div><p class="mt-8 text-xs text-slate-500 dark:text-slate-400">Última revisión: 4 de octubre de 2026. ¿Algo no coincide con lo que ves en la app? Revisa <a class="underline" href="ayuda.html">Ayuda</a>.</p>
       </main>
 
-      <!-- Right Table of Contents (Auto-generated by guide.js) -->
-      <aside id="doc-toc-container" class="hidden xl:block w-56 shrink-0">
-        <div class="sticky top-20">
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">En esta página</div>
-          <nav id="doc-toc" class="space-y-1.5 text-xs"></nav>
-        </div>
+      <aside class="hidden xl:block w-56 shrink-0">
+        <div class="sticky top-20" id="right-toc-nav"></div>
       </aside>
     </div>
-
-    <!-- Shared Footer -->
-    <footer class="mt-auto border-t border-[var(--border-color)] bg-[var(--bg-secondary)] py-6 text-center text-xs text-slate-500">
-      <div class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <span>© 2026 Facturanza Costa Rica. Todos los derechos reservados.</span>
-        <div class="flex items-center space-x-4">
-          <a href="../" class="hover:underline">Roadmap</a>
-          <a href="index.html" class="hover:underline">Guía</a>
-          <a href="https://app.facturanza.com" target="_blank" class="hover:underline">App Web</a>
-        </div>
-      </div>
-    </footer>
 
     <script src="assets/guide.js"></script>
   </body>

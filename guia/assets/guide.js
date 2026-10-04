@@ -5,36 +5,47 @@
 
 const NAV_STRUCTURE = [
   {
-    group: "Primeros Pasos",
+    group: "Primeros pasos",
     items: [
-      { title: "Catálogo de la Guía", file: "index.html", icon: "book-open" },
-      { title: "Get Started (Registro)", file: "get-started.html", icon: "user-plus" },
-      { title: "Lobby Multiorganización", file: "lobby.html", icon: "grid" }
+      { title: "Catálogo de la guía", file: "index.html", icon: "book-open" },
+      { title: "Empieza en 5 pasos", file: "empieza.html", icon: "user-plus" },
+      { title: "Cuenta e inicio de sesión", file: "get-started.html", icon: "user" },
+      { title: "Mis Empresas", file: "lobby.html", icon: "grid" }
     ]
   },
   {
-    group: "Inteligencia Artificial",
+    group: "Operación diaria",
     items: [
-      { title: "Facturito AI Agéntico", file: "facturito.html", icon: "sparkles" }
+      { title: "Inicio", file: "dashboard.html", icon: "layout-dashboard" },
+      { title: "Facturas", file: "facturas.html", icon: "receipt" },
+      { title: "Notas de crédito", file: "notas-credito.html", icon: "receipt" },
+      { title: "Clientes", file: "clientes.html", icon: "users" },
+      { title: "Productos y CABYS", file: "productos.html", icon: "tag" },
+      { title: "Compras", file: "compras.html", icon: "shopping-bag" },
+      { title: "Facturito (IA)", file: "facturito.html", icon: "sparkles" }
     ]
   },
   {
-    group: "Enterprise Dashboard",
+    group: "Cierre fiscal",
     items: [
-      { title: "a. Overview (Resumen)", file: "dashboard.html", icon: "layout-dashboard" },
-      { title: "b. Facturas & Comprobantes", file: "facturas.html", icon: "receipt" },
-      { title: "c. Compras & Egresos", file: "compras.html", icon: "shopping-bag" },
-      { title: "d. Clientes & Receptores", file: "clientes.html", icon: "users" },
-      { title: "e. Productos & CABYS", file: "productos.html", icon: "tag" },
-      { title: "f. Sucursales & Cajas", file: "sucursales.html", icon: "store" },
-      { title: "g. Reportes & IVA D-104", file: "reportes.html", icon: "bar-chart" }
+      { title: "Reportes e IVA", file: "reportes.html", icon: "bar-chart" }
     ]
   },
   {
-    group: "Configuración & Cuenta",
+    group: "Administración",
     items: [
-      { title: "h. Negocio & Facturación", file: "negocio.html", icon: "briefcase" },
-      { title: "i. Perfil de Usuario", file: "perfil.html", icon: "user" }
+      { title: "Negocio y credenciales", file: "negocio.html", icon: "briefcase" },
+      { title: "Roles y acceso", file: "roles.html", icon: "users" },
+      { title: "Sucursales y terminales", file: "sucursales.html", icon: "store" },
+      { title: "Marcas", file: "marcas.html", icon: "tag" },
+      { title: "Planes y pagos", file: "planes.html", icon: "briefcase" },
+      { title: "Perfil", file: "perfil.html", icon: "user" }
+    ]
+  },
+  {
+    group: "Ayuda",
+    items: [
+      { title: "Ayuda", file: "ayuda.html", icon: "book-open" }
     ]
   }
 ];
@@ -141,7 +152,7 @@ function initTableOfContents() {
 function initTheme() {
   const themeToggle = document.getElementById("theme-toggle");
   const indicator = document.getElementById("theme-toggle-indicator");
-  const body = document.body;
+  const body = document.documentElement;
 
   function updateIndicator(isDark) {
     if (indicator) {

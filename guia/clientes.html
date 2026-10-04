@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clientes y Receptores: Directorio y Padrón DGT - Guía Facturanza</title>
+    <title>Clientes - Guía Facturanza</title>
+    <meta name="description" content="Registra a tus clientes con datos oficiales de Hacienda para facturar sin errores." />
+    <link rel="canonical" href="https://roadmap.facturanza.com/guia/clientes.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Clientes - Guía Facturanza" />
+    <meta property="og:description" content="Registra a tus clientes con datos oficiales de Hacienda para facturar sin errores." />
+    <meta property="og:url" content="https://roadmap.facturanza.com/guia/clientes.html" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' };</script>
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -13,27 +29,21 @@
     <link rel="stylesheet" href="assets/guide.css" />
   </head>
   <body class="min-h-screen flex flex-col">
-    <!-- Top Nav Header -->
     <header class="sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm">
       <div class="flex items-center space-x-3 sm:space-x-5">
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+        <button id="mobile-menu-btn" aria-label="Abrir índice" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
         <a href="index.html" class="flex items-center space-x-3">
-          <img src="https://firebasestorage.googleapis.com/v0/b/facturanza-cr-public/o/logo_horizontal.png?alt=media&token=f4c8a97c-6c11-4c51-a164-4020c0ea131c" alt="Facturanza" class="h-8" />
+          <img src="https://storage.googleapis.com/facturanza-cr-public/logo_horizontal.png" alt="Facturanza" class="h-8" />
         </a>
-        <div class="hidden sm:flex items-center space-x-2 pl-3 border-l border-slate-200 dark:border-slate-700">
-          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">Enterprise Dashboard</span>
+        <div class="hidden sm:flex items-center pl-3 border-l border-slate-200 dark:border-slate-700">
+          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-900/60 dark:text-sky-300">Guía de uso</span>
         </div>
       </div>
-
       <div class="flex items-center space-x-3">
-        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Ver Roadmap</a>
-        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 shadow-sm">
-          <span>Ir a la App</span>
-        </a>
+        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Novedades</a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-700 text-white hover:bg-emerald-600 shadow-sm"><span>Ir a la app</span></a>
         <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
           <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
         </button>
@@ -41,11 +51,10 @@
     </header>
 
     <div class="container mx-auto px-4 lg:px-8 py-8 flex-grow flex gap-8">
-      <!-- Left Sidebar Nav -->
       <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-30 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 lg:p-0 lg:bg-transparent lg:border-none flex flex-col shrink-0">
         <div class="lg:hidden flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-700">
           <span class="font-bold text-lg">Índice</span>
-          <button id="close-sidebar-btn" class="p-1 rounded text-slate-500">✕</button>
+          <button id="close-sidebar-btn" aria-label="Cerrar índice" class="p-1 rounded text-slate-500">✕</button>
         </div>
         <div class="sticky top-20 overflow-y-auto max-h-[calc(100vh-6rem)] pr-2 custom-scrollbar">
           <nav id="doc-sidebar-nav" class="space-y-4"></nav>
@@ -53,158 +62,23 @@
       </aside>
       <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden"></div>
 
-      <!-- Center Content Area -->
       <main id="doc-main-content" class="flex-1 min-w-0 max-w-4xl pb-16">
-        <!-- Breadcrumbs -->
-        <nav class="flex items-center space-x-2 text-xs text-slate-400 mb-4">
-          <a href="index.html" class="hover:underline">Guía</a>
-          <span>/</span>
-          <span>Enterprise Dashboard</span>
-          <span>/</span>
-          <span class="text-blue-500 font-semibold">d. Clientes & Receptores</span>
-        </nav>
-
-        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Directorio de Clientes: Validación en Padrón DGT y Gestión Fiscal</h1>
-        <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
-          Gestiona los receptores de tu negocio con validación instantánea contra el Padrón de Contribuyentes del Ministerio de Hacienda, asegurando nombres oficiales, cédulas válidas y términos comerciales personalizados.
-        </p>
-
-        <!-- 6-Screenshot Matrix Placeholder -->
-        <div data-matrix-title="Directorio de Clientes: Búsqueda en Padrón DGT y Ficha de Receptor"></div>
-
-        <!-- Section 1: Integración con el Padrón Nacional -->
-        <h2 id="validacion-padron" class="text-2xl font-bold mt-12 mb-4">1. Autocompletado con el Padrón de Contribuyentes DGT</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Al digitar el número de identificación, Facturanza contacta el servicio oficial de la DGT para rellenar la ficha sin errores ortográficos que causen rechazos en Hacienda:
-        </p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-xs font-mono font-bold text-sky-600 dark:text-sky-400 block mb-1">9 Dígitos</span>
-            <h3 class="font-bold text-sm mb-1">Cédula Física</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">
-              Ciudadanos costarricenses. Ejemplo: 1-1234-0567.
-            </p>
-          </div>
-
-          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-xs font-mono font-bold text-sky-600 dark:text-sky-400 block mb-1">10 Dígitos</span>
-            <h3 class="font-bold text-sm mb-1">Cédula Jurídica</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">
-              Sociedades Anónimas, SRL, asociaciones. Ejemplo: 3-101-123456.
-            </p>
-          </div>
-
-          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-xs font-mono font-bold text-sky-600 dark:text-sky-400 block mb-1">11 ó 12 Dígitos</span>
-            <h3 class="font-bold text-sm mb-1">DIMEX</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">
-              Extranjeros residentes con estatus migratorio formal.
-            </p>
-          </div>
-
-          <div class="p-4 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm">
-            <span class="text-xs font-mono font-bold text-sky-600 dark:text-sky-400 block mb-1">10 Dígitos</span>
-            <h3 class="font-bold text-sm mb-1">NITE</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">
-              Identificación tributaria especial otorgada por Hacienda.
-            </p>
-          </div>
-        </div>
-
-        <!-- Section 2: Ficha del Cliente -->
-        <h2 id="ficha-cliente" class="text-2xl font-bold mt-12 mb-4">2. Configuración de Términos Comerciales</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Cada cliente almacena sus condiciones habituales de compra para agilizar la facturación diaria:
-        </p>
-
-        <div class="p-6 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm space-y-4 mb-8">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <span class="text-xs font-bold text-slate-700 dark:text-slate-200 block mb-1">Correos Electrónicos de Recepción</span>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">
-                Permite registrar varios correos (ej. contabilidad@cliente.com y recepcion@cliente.com) usando chips.
-              </p>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[11px] font-mono">pagos@empresa.com</span>
-                <span class="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[11px] font-mono">facturas@empresa.com</span>
-              </div>
-            </div>
-
-            <div>
-              <span class="text-xs font-bold text-slate-700 dark:text-slate-200 block mb-1">Plazo de Crédito Predeterminado</span>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">
-                Define si el cliente compra habitualmente de contado o a crédito con días de gracia predefinidos (15, 30, 60 días).
-              </p>
-              <span class="text-xs font-semibold px-2.5 py-1 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                Crédito a 30 Días
-              </span>
-            </div>
-          </div>
-
-          <div class="pt-4 border-t border-[var(--border-color)]">
-            <span class="text-xs font-bold text-slate-700 dark:text-slate-200 block mb-1">Clientes Internacionales (Sin Cédula CR)</span>
-            <p class="text-xs text-slate-500 dark:text-slate-400">
-              Para empresas o clientes fuera de Costa Rica, Facturanza permite activar el modo <em>"Receptor Extranjero"</em>, habilitando el campo de identificación tributaria internacional o pasaporte para la emisión de Facturas Electrónicas de Exportación (FEE - Tipo 09).
-            </p>
-          </div>
-        </div>
-
-        <!-- Section 3: Historial y Saldos Pendientes -->
-        <h2 id="historial-saldos" class="text-2xl font-bold mt-12 mb-4">3. Visor de Cuenta y Cuentas por Cobrar</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-6">
-          Al abrir el perfil de cualquier cliente, Facturanza resume su relación comercial:
-        </p>
-
-        <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
-          <div>
-            <div class="font-bold text-sm">Corporación del Pacífico S.A.</div>
-            <div class="text-xs text-slate-500">Cédula: 3-101-445566 • 24 facturas emitidas este año</div>
-          </div>
-          <div class="flex items-center gap-6">
-            <div class="text-right">
-              <span class="text-[10px] uppercase font-bold text-slate-400 block">Total Facturado</span>
-              <span class="font-extrabold text-sm text-slate-800 dark:text-slate-100">₡ 18,340,000</span>
-            </div>
-            <div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
-            <div class="text-right">
-              <span class="text-[10px] uppercase font-bold text-slate-400 block">Saldo Pendiente</span>
-              <span class="font-extrabold text-sm text-rose-600 dark:text-rose-400">₡ 1,200,000</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom Navigation -->
-        <div class="mt-16 pt-8 border-t border-[var(--border-color)] flex items-center justify-between">
-          <a href="compras.html" class="inline-flex items-center text-xs font-semibold text-slate-500 hover:text-[var(--brand-primary)]">
-            ← c. Compras & Egresos
-          </a>
-          <a href="productos.html" class="inline-flex items-center text-xs font-bold text-[var(--brand-primary)] hover:underline">
-            Siguiente: e. Productos & CABYS →
-          </a>
-        </div>
+<nav class="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400 mb-4" aria-label="Ruta"><a href="index.html" class="hover:underline">Guía</a><span>/</span><span>Operación diaria</span><span>/</span><span class="text-[var(--brand-primary)] font-semibold">Clientes</span></nav><h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Clientes</h1><p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">Registra a tus clientes con datos oficiales de Hacienda para facturar sin errores.</p><div data-matrix-title="Clientes: búsqueda por cédula y ficha"></div>
+<p class="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-5 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">Quién puede: ver: todos los roles · crear y editar: Propietario, Administrador y Gerente</p>
+<h2 id="crear" class="text-2xl font-bold mt-12 mb-4">1. Agregar un cliente</h2>
+<ol class="list-decimal pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed"><li>Ve a <strong>Clientes › Agregar</strong>.</li><li>Escribe la <strong>cédula</strong>. Al llegar a 9 dígitos, Facturanza consulta a Hacienda y completa el nombre, el tipo de identificación y las actividades económicas. Se muestran también el <strong>régimen</strong> y la <strong>situación tributaria</strong> (solo lectura).</li><li>Si el cliente tiene varias actividades, elige la <strong>actividad económica prioritaria al facturar</strong>.</li><li>Agrega <strong>correo</strong> y <strong>teléfono</strong> (con código de país).</li></ol>
+<div class="my-6 p-5 rounded-2xl border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-950/20 text-slate-700 dark:text-slate-300"><h3 class="font-bold text-sm mb-1 text-amber-900 dark:text-amber-400">Cliente sin cédula</h3><p class="text-xs sm:text-sm leading-relaxed">Marca <strong>El cliente no cuenta con cédula</strong> y escribe el <strong>nombre de la empresa</strong>. Estos clientes solo se pueden usar en <strong>Tiquetes</strong>; una Factura requiere cédula.</p></div>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">No puedes registrar dos clientes con la misma cédula. Cada cliente guarda <strong>un correo</strong>; para enviar un documento a más personas, agrégalas como destinatarios al crear la factura o al reenviarla.</p>
+<h2 id="cedulas" class="text-2xl font-bold mt-12 mb-4">2. Tipos de identificación</h2>
+<div class="overflow-x-auto rounded-2xl border border-[var(--border-color)] bg-[var(--card-bg)] mb-8"><table class="w-full"><thead class="bg-slate-50 dark:bg-slate-800/60"><tr><th class="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Tipo</th><th class="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Dígitos</th><th class="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Ejemplo</th></tr></thead><tbody><tr class="border-t border-[var(--border-color)]"><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">Cédula física</td><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">9</td><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">1-1234-0567</td></tr><tr class="border-t border-[var(--border-color)]"><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">Cédula jurídica</td><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">10</td><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">3-101-123456</td></tr><tr class="border-t border-[var(--border-color)]"><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">DIMEX (extranjeros residentes)</td><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">11 o 12</td><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">—</td></tr><tr class="border-t border-[var(--border-color)]"><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">NITE</td><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">10</td><td class="px-4 py-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 align-top">—</td></tr></tbody></table></div>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">Ver las facturas de un cliente: filtra la lista de Facturas por ese cliente. Facturanza no maneja cuentas por cobrar ni saldos por cliente.</p>
+<div class="mt-16 pt-6 border-t border-[var(--border-color)] flex flex-col sm:flex-row gap-3 sm:justify-between"><a href="notas-credito.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)]">&larr; Notas de crédito</a><a href="productos.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)] text-right">Siguiente: Productos y CABYS &rarr;</a></div><p class="mt-8 text-xs text-slate-500 dark:text-slate-400">Última revisión: 4 de octubre de 2026. ¿Algo no coincide con lo que ves en la app? Revisa <a class="underline" href="ayuda.html">Ayuda</a>.</p>
       </main>
 
-      <!-- Right Table of Contents (Auto-generated by guide.js) -->
-      <aside id="doc-toc-container" class="hidden xl:block w-56 shrink-0">
-        <div class="sticky top-20">
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">En esta página</div>
-          <nav id="doc-toc" class="space-y-1.5 text-xs"></nav>
-        </div>
+      <aside class="hidden xl:block w-56 shrink-0">
+        <div class="sticky top-20" id="right-toc-nav"></div>
       </aside>
     </div>
-
-    <!-- Shared Footer -->
-    <footer class="mt-auto border-t border-[var(--border-color)] bg-[var(--bg-secondary)] py-6 text-center text-xs text-slate-500">
-      <div class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <span>© 2026 Facturanza Costa Rica. Todos los derechos reservados.</span>
-        <div class="flex items-center space-x-4">
-          <a href="../" class="hover:underline">Roadmap</a>
-          <a href="index.html" class="hover:underline">Guía</a>
-          <a href="https://app.facturanza.com" target="_blank" class="hover:underline">App Web</a>
-        </div>
-      </div>
-    </footer>
 
     <script src="assets/guide.js"></script>
   </body>

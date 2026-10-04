@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Empieza en 5 pasos - Guía Facturanza</title>
+    <meta name="description" content="De cero a tu primera factura electrónica: cuenta, empresa, credenciales de Hacienda, cliente, producto y emisión." />
+    <link rel="canonical" href="https://roadmap.facturanza.com/guia/empieza.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Empieza en 5 pasos - Guía Facturanza" />
+    <meta property="og:description" content="De cero a tu primera factura electrónica: cuenta, empresa, credenciales de Hacienda, cliente, producto y emisión." />
+    <meta property="og:url" content="https://roadmap.facturanza.com/guia/empieza.html" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' };</script>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/guide.css" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between border-b border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm">
+      <div class="flex items-center space-x-3 sm:space-x-5">
+        <button id="mobile-menu-btn" aria-label="Abrir índice" class="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
+        <a href="index.html" class="flex items-center space-x-3">
+          <img src="https://storage.googleapis.com/facturanza-cr-public/logo_horizontal.png" alt="Facturanza" class="h-8" />
+        </a>
+        <div class="hidden sm:flex items-center pl-3 border-l border-slate-200 dark:border-slate-700">
+          <span class="text-xs uppercase font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-900/60 dark:text-sky-300">Guía de uso</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-3">
+        <a href="../" class="hidden sm:inline-flex items-center text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[var(--brand-primary)]">Novedades</a>
+        <a href="https://app.facturanza.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-700 text-white hover:bg-emerald-600 shadow-sm"><span>Ir a la app</span></a>
+        <button id="theme-toggle" aria-label="Cambiar tema" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-slate-300 dark:bg-sky-900">
+          <span id="theme-toggle-indicator" class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 translate-x-1"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="container mx-auto px-4 lg:px-8 py-8 flex-grow flex gap-8">
+      <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-30 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 transform -translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-64 lg:p-0 lg:bg-transparent lg:border-none flex flex-col shrink-0">
+        <div class="lg:hidden flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-700">
+          <span class="font-bold text-lg">Índice</span>
+          <button id="close-sidebar-btn" aria-label="Cerrar índice" class="p-1 rounded text-slate-500">✕</button>
+        </div>
+        <div class="sticky top-20 overflow-y-auto max-h-[calc(100vh-6rem)] pr-2 custom-scrollbar">
+          <nav id="doc-sidebar-nav" class="space-y-4"></nav>
+        </div>
+      </aside>
+      <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden"></div>
+
+      <main id="doc-main-content" class="flex-1 min-w-0 max-w-4xl pb-16">
+<nav class="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400 mb-4" aria-label="Ruta"><a href="index.html" class="hover:underline">Guía</a><span>/</span><span>Primeros pasos</span><span>/</span><span class="text-[var(--brand-primary)] font-semibold">Empieza en 5 pasos</span></nav><h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Empieza en 5 pasos</h1><p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">De cero a tu primera factura electrónica: cuenta, empresa, credenciales de Hacienda, cliente, producto y emisión.</p><div data-matrix-title="Empieza en 5 pasos"></div>
+<div class="my-6 p-5 rounded-2xl border-l-4 border-sky-500 bg-sky-50 dark:bg-sky-950/20 text-slate-700 dark:text-slate-300"><h3 class="font-bold text-sm mb-1 text-sky-900 dark:text-sky-300">Antes de empezar</h3><p class="text-xs sm:text-sm leading-relaxed">Para emitir comprobantes necesitas estar <strong>inscrito en el RUT de Hacienda con al menos una actividad económica lucrativa</strong>. Sin eso, Hacienda no te permite generar las credenciales.</p></div>
+<h2 id="paso-1" class="text-2xl font-bold mt-12 mb-4">1. Crea tu cuenta e inicia sesión</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">Entra a <a class='underline' href='https://app.facturanza.com'>app.facturanza.com</a> (o a la app de Android) y continúa con Google, Apple (iPhone/Mac) o tu correo y contraseña. Si usas correo, verifica tu dirección con el enlace que recibirás. <a class='underline' href='get-started.html'>Más detalles</a>.</p>
+<h2 id="paso-2" class="text-2xl font-bold mt-12 mb-4">2. Registra tu empresa</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">En <strong>Mis Empresas</strong> toca el botón <strong>+</strong>, escribe la cédula y Facturanza trae el nombre legal y las actividades desde Hacienda. Completa nombre comercial, correo y teléfono. Tu empresa empieza en el <strong>plan gratuito</strong>.</p>
+<h2 id="paso-3" class="text-2xl font-bold mt-12 mb-4">3. Genera tus credenciales en TRIBU-CR</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">Necesitas tres datos de Hacienda: <strong>usuario</strong>, <strong>contraseña</strong> y la <strong>llave criptográfica (.p12)</strong> con su PIN. Se generan en TRIBU-CR → <em>Tico Factura</em>. Sigue los pasos en <a class='underline' href='negocio.html#credenciales'>Negocio y credenciales</a>.</p>
+<h2 id="paso-4" class="text-2xl font-bold mt-12 mb-4">4. Cárgalas en Facturanza</h2>
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">Ve a <strong>Negocio › Facturación</strong>, usa <strong>Pegar desde Hacienda</strong>, sube la llave y guarda el PIN. Cuando todo está completo, en <strong>Inicio</strong> verás la etiqueta <strong>Facturación habilitada</strong>.</p>
+<h2 id="paso-5" class="text-2xl font-bold mt-12 mb-4">5. Crea un cliente, un producto y emite</h2>
+<ol class="list-decimal pl-5 space-y-2 text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed"><li><strong>Productos › Agregar</strong>: nombre, código CABYS (13 dígitos, con el buscador), precio y unidad.</li><li><strong>Clientes › Agregar</strong>: escribe la cédula y se completan los datos desde Hacienda. Si el cliente no tiene cédula, marca <em>El cliente no cuenta con cédula</em> (se emite Tiquete).</li><li><strong>Facturas › Crear factura</strong>: elige receptor, productos y correos; revisa el total y toca el botón de generar.</li></ol>
+<div class="my-6 p-5 rounded-2xl border-l-4 border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20 text-slate-700 dark:text-slate-300"><h3 class="font-bold text-sm mb-1 text-emerald-900 dark:text-emerald-300">¿Listo?</h3><p class="text-xs sm:text-sm leading-relaxed">Cuando el estado llegue a <strong>Completado</strong>, el cliente recibe el PDF y el XML por correo. Si algo falla, revisa <a class='underline' href='ayuda.html'>Ayuda y solución de problemas</a>.</p></div>
+<div class="mt-16 pt-6 border-t border-[var(--border-color)] flex flex-col sm:flex-row gap-3 sm:justify-between"><span></span><a href="get-started.html" class="px-4 py-3 rounded-xl border border-[var(--border-color)] text-xs font-semibold hover:border-[var(--brand-primary)] text-right">Siguiente: Cuenta e inicio de sesión &rarr;</a></div><p class="mt-8 text-xs text-slate-500 dark:text-slate-400">Última revisión: 4 de octubre de 2026. ¿Algo no coincide con lo que ves en la app? Revisa <a class="underline" href="ayuda.html">Ayuda</a>.</p>
+      </main>
+
+      <aside class="hidden xl:block w-56 shrink-0">
+        <div class="sticky top-20" id="right-toc-nav"></div>
+      </aside>
+    </div>
+
+    <script src="assets/guide.js"></script>
+  </body>
+</html>
