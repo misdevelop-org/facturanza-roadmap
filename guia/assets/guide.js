@@ -45,7 +45,8 @@ const NAV_STRUCTURE = [
   {
     group: "Ayuda",
     items: [
-      { title: "Ayuda", file: "ayuda.html", icon: "book-open" }
+      { title: "Ayuda", file: "ayuda.html", icon: "book-open" },
+      { title: "Soporte", file: "soporte.html", icon: "user" }
     ]
   }
 ];

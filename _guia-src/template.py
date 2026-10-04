@@ -1,5 +1,8 @@
 """Plantilla común + componentes HTML de la guía."""
 import html as _h
+import os
+
+IMG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "guia", "assets", "img")
 
 BASE_URL = "https://roadmap.facturanza.com/guia/"
 LOGO = "https://storage.googleapis.com/facturanza-cr-public/logo_horizontal.png"
@@ -213,3 +216,34 @@ def render_page(fname, page, nav, prev_, next_, review_date):
   </body>
 </html>
 """
+
+
+def _pair(key, dev, alt):
+    lf, df = f"{key}_{dev}_light.png", f"{key}_{dev}_dark.png"
+    if not (os.path.exists(os.path.join(IMG_DIR, lf)) and os.path.exists(os.path.join(IMG_DIR, df))):
+        return ""
+    a = _h.escape(alt)
+    return (
+        f'<img src="assets/img/{lf}" alt="{a}" loading="lazy" class="block dark:hidden w-full h-auto rounded-xl" />'
+        f'<img src="assets/img/{df}" alt="{a} (tema oscuro)" loading="lazy" class="hidden dark:block w-full h-auto rounded-xl" />'
+    )
+
+
+def shots(key, caption):
+    """Captura real (Chrome + Fold + iPhone) con cambio claro/oscuro. Omite los dispositivos sin imagen."""
+    desk = _pair(key, "chrome", caption + " - Escritorio")
+    fold = _pair(key, "fold", caption + " - Tablet")
+    phone = _pair(key, "iphone", caption + " - Móvil")
+    box = "rounded-xl border border-[var(--border-color)] shadow-sm overflow-hidden"
+    out = '<figure class="my-8 space-y-4">'
+    if desk:
+        out += f'<div class="{box}">{desk}</div>'
+    row = ""
+    if fold:
+        row += f'<div class="{box} w-full sm:w-1/2 max-w-md">{fold}</div>'
+    if phone:
+        row += f'<div class="{box} w-2/3 sm:w-[30%] max-w-[260px]">{phone}</div>'
+    if row:
+        out += f'<div class="flex flex-wrap items-start gap-4">{row}</div>'
+    out += f'<figcaption class="text-xs text-slate-500 dark:text-slate-400">{caption}</figcaption></figure>\n'
+    return out if (desk or row) else ""
