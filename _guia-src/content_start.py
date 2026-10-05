@@ -81,9 +81,10 @@ PAGES["lobby.html"] = dict(
     title="Mis Empresas",
     nav="Mis Empresas",
     desc="Administra varias empresas con un solo usuario y cambia entre ellas sin volver a iniciar sesión.",
-    body=matrix("Mis Empresas y selector de empresa")
+    body=shots("lobby", "Mis Empresas")
     + h2("lobby", "1. La pantalla Mis Empresas")
     + p("Después de iniciar sesión ves una tarjeta por cada empresa a la que tienes acceso (logo y nombre) y una tarjeta <strong>+</strong> para registrar otra. Toca una tarjeta para entrar a su <strong>Inicio</strong>.")
+    + call("info", "En iPhone y iPad", "La tarjeta <strong>+</strong> no aparece en la app de iOS. Para registrar una empresa nueva usa la web (app.facturanza.com) o la app de Android; luego la verás en tu lista en todos tus dispositivos.")
     + h2("como-aparecen", "2. Cómo llega una empresa a tu lista")
     + ul([
         "<strong>Tú la registras</strong> con el botón + (ver <a class='underline' href='get-started.html#registro-empresa'>Registrar tu empresa</a>).",
