@@ -110,3 +110,17 @@ body {
     rgba(148, 163, 184, 0.06) 20px
   );
 }
+
+/* Tarjetas del catálogo: color por función, gradiente Premium y de IA (premium_avatar_ring.dart / ai_button.dart) */
+.doc-card { position: relative; }
+.card-plain { border-top: 3px solid var(--accent); }
+.card-plain:hover { border-color: var(--accent); }
+.card-icon { display: inline-flex; align-items: center; justify-content: center; height: 2.5rem; width: 2.5rem; border-radius: 12px; color: #fff; }
+.grad-premium { background: linear-gradient(135deg, #FFC83D, #10B981, #3B82F6, #8B5CF6); color: #0e1b4d; }
+.grad-ai { background: linear-gradient(135deg, #5EB0C7, #63D389 50%, #C5D0F9); color: #0e1b4d; }
+.card-premium, .card-ai { border: 2px solid transparent; }
+.card-premium { background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box, linear-gradient(135deg, #FFC83D, #10B981, #3B82F6, #8B5CF6, #FFC83D) border-box; }
+.card-ai { background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box, linear-gradient(135deg, #5EB0C7, #63D389 50%, #C5D0F9) border-box; }
+.chip-premium, .chip-ai { font-size: 0.625rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; color: #0e1b4d; }
+.chip-premium { background: linear-gradient(90deg, #FFC83D, #10B981, #3B82F6, #8B5CF6); }
+.chip-ai { background: linear-gradient(90deg, #5EB0C7, #63D389 50%, #C5D0F9); }
