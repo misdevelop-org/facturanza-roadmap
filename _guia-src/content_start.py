@@ -102,7 +102,7 @@ PAGES["dashboard.html"] = dict(
     title="Inicio",
     nav="Inicio",
     desc="La pantalla principal de tu empresa: estado de facturación, facturas disponibles, ingresos, egresos y Facturito.",
-    body=matrix("Inicio de la empresa")
+    body=shots("inicio_habilitada", "Inicio de MIS Develop")
     + h2("que-ves", "1. Qué encuentras en Inicio")
     + cards([
         ("Estado de facturación", "Etiqueta <strong>Facturación habilitada</strong> o <strong>inhabilitada</strong>. Si está inhabilitada, tócala para ir a Negocio y completar las credenciales de Hacienda."),
