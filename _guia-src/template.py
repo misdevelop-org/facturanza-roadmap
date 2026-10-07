@@ -230,6 +230,14 @@ def render_page(fname, page, nav, prev_, next_, review_date):
 """
 
 
+def _v(fname):
+    """Cache-buster: la fecha del archivo, para que los navegadores recarguen una captura reemplazada."""
+    try:
+        return int(os.path.getmtime(os.path.join(IMG_DIR, fname)))
+    except OSError:
+        return 0
+
+
 def _pair(key, devs, alt, cls):
     """Devuelve el par claro/oscuro del primer dispositivo (de `devs`) que tenga ambas imágenes."""
     for dev in devs:
@@ -237,8 +245,8 @@ def _pair(key, devs, alt, cls):
         if os.path.exists(os.path.join(IMG_DIR, lf)) and os.path.exists(os.path.join(IMG_DIR, df)):
             a = _h.escape(alt)
             return (
-                f'<img src="assets/img/{lf}" alt="{a}" loading="lazy" class="{cls} block dark:hidden" />'
-                f'<img src="assets/img/{df}" alt="{a} (tema oscuro)" loading="lazy" class="{cls} hidden dark:block" />'
+                f'<img src="assets/img/{lf}?v={_v(lf)}" alt="{a}" loading="lazy" class="{cls} block dark:hidden" />'
+                f'<img src="assets/img/{df}?v={_v(df)}" alt="{a} (tema oscuro)" loading="lazy" class="{cls} hidden dark:block" />'
             )
     return ""
 
@@ -293,7 +301,7 @@ def single(key, caption, width="max-w-[230px]"):
     a = _h.escape(caption)
     return (
         f'<figure class="my-8 mx-auto {width}">'
-        f'<img src="assets/img/{lf}" alt="{a}" loading="lazy" class="w-full h-auto rounded-xl shadow-lg block dark:hidden" />'
-        f'<img src="assets/img/{df}" alt="{a} (tema oscuro)" loading="lazy" class="w-full h-auto rounded-xl shadow-lg hidden dark:block" />'
+        f'<img src="assets/img/{lf}?v={_v(lf)}" alt="{a}" loading="lazy" class="w-full h-auto rounded-xl shadow-lg block dark:hidden" />'
+        f'<img src="assets/img/{df}?v={_v(df)}" alt="{a} (tema oscuro)" loading="lazy" class="w-full h-auto rounded-xl shadow-lg hidden dark:block" />'
         f'<figcaption class="mt-2 text-xs text-slate-500 dark:text-slate-400">{caption}</figcaption></figure>\n'
     )
