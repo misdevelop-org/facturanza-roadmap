@@ -194,7 +194,7 @@ PAGES["notas-credito.html"] = dict(
     + ol(["Toca <strong>Generar documento</strong>. La nota se envía a Hacienda igual que cualquier documento."], start=4)
     + ol(["Verifica el resultado: en la lista, la factura original muestra la pestaña <strong>Nota de crédito</strong>; al abrirla, el detalle muestra el número de la nota."], start=5)
     + single("nc_tarjeta", "En la lista, la factura muestra la pestaña Nota de crédito", width="max-w-[580px]")
-    + call("ok", "Sin costo de cupo", "Las notas de crédito <strong>no descuentan</strong> facturas de tu plan.")
     + shots("nc_adjunta", "La nota de crédito queda enlazada a la factura original")
+    + call("ok", "Sin costo de cupo", "Las notas de crédito <strong>no descuentan</strong> facturas de tu plan.")
     + p("La factura original y su nota quedan enlazadas (pestaña <em>Nota de crédito</em> / <em>Referencia</em>). En el reporte de IVA, la nota reduce el débito fiscal del período. Si necesitas <em>aumentar</em> un monto ya facturado, consulta con tu contador: la Nota de Débito aún no está disponible en Facturanza."),
 )
