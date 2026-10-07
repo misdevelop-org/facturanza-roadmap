@@ -125,6 +125,7 @@ PAGES["reportes.html"] = dict(
     nav="Declaraciones",
     desc="Un borrador mensual de tu declaración de IVA, calculado con tus ventas y compras registradas, listo para exportar.",
     body=who("Propietario, Administrador, Contador y Gerente")
+    + call("premium", "👑 Función de planes de pago", "Las <strong>Declaraciones</strong> (reporte mensual de IVA, historial y envío por correo) están incluidas en los <strong>planes de pago</strong>. En el plan gratuito la opción aparece marcada con una estrella en el menú y bloqueada. Ver <a class='underline' href='planes.html'>Planes y pagos</a>.")
     + call("warn", "Es un apoyo, no la declaración", "El reporte <strong>no presenta nada ante Hacienda</strong>. Úsalo para llenar el <strong>Formulario 150 en TRIBU-CR</strong> (reemplazó al antiguo D-104 en octubre de 2025). El plazo es dentro de los <strong>primeros 15 días naturales</strong> del mes siguiente (si cae en feriado o fin de semana, pasa al siguiente día hábil).")
     + h2("declaracion", "1. Pestaña Declaración")
     + shots("declaraciones_declaracion", "Pestaña Declaración")

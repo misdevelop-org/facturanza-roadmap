@@ -53,13 +53,15 @@ PAGES["get-started.html"] = dict(
     ])
     + shots("cuenta_roles", "Elige cómo te registras")
     + p("Luego completas el formulario:")
-    + ol([
-        "<strong>Cédula</strong>: Facturanza consulta a Hacienda y trae el <strong>nombre legal</strong> (bloqueado) y las <strong>actividades económicas</strong>. Elige la <strong>actividad principal</strong> (la predeterminada para facturar); las demás se guardan solas.",
-        "<strong>Información del negocio</strong>: nombre comercial, correo* y teléfono* (con código de país).",
-        "<strong>Nombre de dominio (opcional)</strong>: es el nombre corto que aparece en el enlace directo de tu empresa. Solo letras, números, guion y guion bajo. No existe un subdominio tipo <em>tumarca.facturanza.com</em>.",
-        "<strong>Ubicación</strong>: provincia, cantón, distrito y dirección exacta*.",
-    ])
     + shots("cuenta_formulario", "Formulario Nueva empresa")
+    + ol(["<strong>Cédula</strong>: Facturanza consulta a Hacienda y trae el <strong>nombre legal</strong> (bloqueado) y las <strong>actividades económicas</strong>. Elige la <strong>actividad principal</strong> (la predeterminada para facturar); las demás se guardan solas."])
+    + single("cuenta_cedula", "Cédula: nombre legal y actividad principal", width="max-w-[560px]")
+    + ol(["<strong>Información del negocio</strong>: nombre comercial, correo* y teléfono* (con código de país)."], start=2)
+    + single("cuenta_info", "Nombre comercial, correo y teléfono", width="max-w-[560px]")
+    + ol(["<strong>Nombre de dominio (opcional)</strong>: es el nombre corto que aparece en el enlace directo de tu empresa. Solo letras, números, guion y guion bajo. Tu enlace se verá así: <strong>facturanza.com/enterprise/tumarca</strong>."], start=3)
+    + single("cuenta_dominio", "Nombre de dominio", width="max-w-[560px]")
+    + ol(["<strong>Ubicación</strong>: provincia, cantón, distrito y dirección exacta*."], start=4)
+    + single("cuenta_ubicacion", "Ubicación del negocio", width="max-w-[560px]")
     + call("warn", "Una empresa por cédula", "Si ya existe un negocio con esa cédula, Facturanza no te deja crear otro. Pide al propietario que te agregue desde <strong>Negocio › Roles</strong>.")
     + table(["Cédula", "Dígitos"], [
         ["Cédula física", "9"], ["Cédula jurídica", "10"], ["DIMEX", "11 o 12"], ["NITE", "10"],
@@ -133,17 +135,23 @@ PAGES["facturas.html"] = dict(
     + h2("crear", "2. Crear una factura paso a paso")
     + who("todos los roles (según tu nivel de acceso a sucursales y terminales)")
     + shots("facturas_crear", "Formulario Crear factura")
-    + ol([
-        "Toca <strong>Crear factura</strong> en Inicio o en Facturas. Si ves un aviso de configuración, completa primero <a class='underline' href='negocio.html#credenciales'>las credenciales de Hacienda</a>.",
-        "<strong>Tipo de documento</strong>: Factura o Tiquete.",
-        "<strong>Actividad económica de mi empresa</strong> (si tienes varias).",
-        "<strong>Receptor</strong>: elige un cliente o toca <em>Nuevo cliente</em>. Para Factura el cliente debe tener cédula. Si el cliente tiene varias actividades, elige la <strong>actividad económica del cliente</strong>.",
-        "<strong>Correos de envío</strong>: agrega los destinatarios (puedes escribir varios, uno por uno). Recibirán el PDF y el XML.",
-        "<strong>Condición de venta</strong> (Contado, Crédito y otras que define Hacienda) y <strong>Método de pago</strong>: Efectivo, Tarjeta, Cheque, Transferencia o depósito bancario, Recaudado por terceros, SINPE Móvil, Plataforma digital u Otro.",
-        "<strong>Tipo de moneda</strong>: Colones o Dólares. En dólares, revisa el <strong>Tipo de cambio</strong> (se llena solo).",
-        "<strong>Productos</strong>: agrega uno o más desde tu catálogo; puedes ajustar descuento y, si aplica, cargar una exoneración (abajo).",
-        "Revisa <strong>Subtotal, Impuesto, Exonerado y Total</strong> y toca el botón verde para generar el documento. Puedes agregar notas.",
-    ])
+    + ol(["Toca <strong>Crear factura</strong> en Inicio o en Facturas. Si ves un aviso de configuración, completa primero <a class='underline' href='negocio.html#credenciales'>las credenciales de Hacienda</a>."])
+    + ol(["<strong>Tipo de documento</strong>: Factura o Tiquete."], start=2)
+    + single("facturas_paso2", "Tipo de documento", width="max-w-[560px]")
+    + ol(["<strong>Actividad económica de mi empresa</strong> (si tienes varias)."], start=3)
+    + single("facturas_paso3", "Actividad económica de mi empresa", width="max-w-[560px]")
+    + ol(["<strong>Receptor</strong>: elige un cliente o toca <em>Nuevo cliente</em>. Para Factura el cliente debe tener cédula. Si el cliente tiene varias actividades, elige la <strong>actividad económica del cliente</strong>."], start=4)
+    + single("facturas_paso4", "Receptor", width="max-w-[560px]")
+    + ol(["<strong>Correos de envío</strong>: agrega los destinatarios (puedes escribir varios, uno por uno). Recibirán el PDF y el XML."], start=5)
+    + single("facturas_paso5", "Correos de envío", width="max-w-[560px]")
+    + ol(["<strong>Condición de venta</strong> (Contado, Crédito y otras que define Hacienda) y <strong>Método de pago</strong>: Efectivo, Tarjeta, Cheque, Transferencia o depósito bancario, Recaudado por terceros, SINPE Móvil, Plataforma digital u Otro."], start=6)
+    + single("facturas_paso6", "Condición de venta y método de pago", width="max-w-[560px]")
+    + ol(["<strong>Tipo de moneda</strong>: Colones o Dólares. En dólares, revisa el <strong>Tipo de cambio</strong> (se llena solo)."], start=7)
+    + single("facturas_paso7", "Moneda y tipo de cambio", width="max-w-[560px]")
+    + ol(["<strong>Productos</strong>: agrega uno o más desde tu catálogo; puedes ajustar descuento y, si aplica, cargar una exoneración (abajo)."], start=8)
+    + single("facturas_paso8", "Productos", width="max-w-[690px]")
+    + ol(["Revisa <strong>Subtotal, Impuesto, Exonerado y Total</strong> y toca el botón verde para generar el documento. Puedes agregar notas."], start=9)
+    + single("facturas_paso9", "Totales y botón Generar documento", width="max-w-[690px]")
     + h3("Exoneraciones")
     + p("En la línea del producto activa la exoneración e ingresa el <strong>código de autorización</strong>. Facturanza lo consulta en Hacienda y muestra institución, porcentaje y vigencia. Se aplica por línea.")
     + h2("estados", "3. Estados de un documento")

@@ -124,3 +124,7 @@ body {
 .chip-premium, .chip-ai { font-size: 0.625rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; color: #0e1b4d; }
 .chip-premium { background: linear-gradient(90deg, #FFC83D, #10B981, #3B82F6, #8B5CF6); }
 .chip-ai { background: linear-gradient(90deg, #5EB0C7, #63D389 50%, #C5D0F9); }
+
+/* Aviso de función de pago: borde con el gradiente Premium */
+.call-premium { border: 2px solid transparent; border-left-width: 2px; border-radius: 20px;
+  background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box, linear-gradient(135deg, #FFC83D, #10B981, #3B82F6, #8B5CF6, #FFC83D) border-box; }
