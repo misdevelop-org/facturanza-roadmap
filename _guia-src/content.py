@@ -24,7 +24,7 @@ NAV = [
         ("facturito.html", "Facturito (IA)", "Tu asistente para facturar y consultar."),
     ]),
     ("Cierre fiscal", [
-        ("reportes.html", "Reportes e IVA", "Borrador del Formulario 150 y reportes mensuales."),
+        ("reportes.html", "Declaraciones", "Borrador del Formulario 150 y reportes mensuales."),
     ]),
     ("Administración", [
         ("negocio.html", "Negocio y credenciales", "Datos de empresa y conexión con Hacienda."),

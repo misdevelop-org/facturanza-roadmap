@@ -93,7 +93,7 @@ PAGES["lobby.html"] = dict(
     + h2("cambiar-empresa", "3. Cambiar de empresa")
     + p("Dentro de una empresa, toca el <strong>logo (arriba a la derecha)</strong> para abrir el panel de empresas y elegir otra. No necesitas volver a iniciar sesión.")
     + h2("menu", "4. El menú de cada empresa")
-    + p("El menú lateral (o el botón de menú en celular) tiene: <strong>Perfil, Inicio, Facturas, Compras, Clientes, Productos, Sucursales, Reportes y Negocio</strong>. Cada usuario ve solo lo que su rol permite (ver <a class='underline' href='roles.html'>Roles y acceso</a>).")
+    + p("El menú lateral (o el botón de menú en celular) tiene: <strong>Perfil, Inicio, Facturas, Compras, Clientes, Productos, Sucursales, Declaraciones y Negocio</strong>. Cada usuario ve solo lo que su rol permite (ver <a class='underline' href='roles.html'>Roles y acceso</a>).")
     + call("info", "Datos separados por empresa", "La información de cada empresa (clientes, productos, facturas, reportes) es independiente. Los usuarios de una empresa no ven los datos de otra."),
 )
 

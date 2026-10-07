@@ -28,7 +28,7 @@ const NAV_STRUCTURE = [
   {
     group: "Cierre fiscal",
     items: [
-      { title: "Reportes e IVA", file: "reportes.html", icon: "bar-chart" }
+      { title: "Declaraciones", file: "reportes.html", icon: "bar-chart" }
     ]
   },
   {

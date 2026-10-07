@@ -1,4 +1,4 @@
-from template import h2, h3, p, ul, ol, code, who, call, cards, table, matrix
+from template import h2, h3, p, ul, ol, code, who, call, cards, table, matrix, shots, single
 
 PAGES = {}
 
@@ -7,15 +7,20 @@ PAGES["clientes.html"] = dict(
     title="Clientes",
     nav="Clientes",
     desc="Registra a tus clientes con datos oficiales de Hacienda para facturar sin errores.",
-    body=matrix("Clientes: búsqueda por cédula y ficha")
+    body=shots("clientes_menu", "Clientes")
     + who("ver: todos los roles · crear y editar: Propietario, Administrador y Gerente")
     + h2("crear", "1. Agregar un cliente")
-    + ol([
-        "Ve a <strong>Clientes › Agregar</strong>.",
-        "Escribe la <strong>cédula</strong>. Al llegar a 9 dígitos, Facturanza consulta a Hacienda y completa el nombre, el tipo de identificación y las actividades económicas. Se muestran también el <strong>régimen</strong> y la <strong>situación tributaria</strong> (solo lectura).",
-        "Si el cliente tiene varias actividades, elige la <strong>actividad económica prioritaria al facturar</strong>.",
-        "Agrega <strong>correo</strong> y <strong>teléfono</strong> (con código de país).",
-    ])
+    + ol(["Ve a <strong>Clientes</strong> y toca <strong>Crear cliente</strong>."])
+    + single("clientes_crear", "Botón Crear cliente en la pantalla Clientes", width="max-w-[690px]")
+    + shots("clientes_form", "Formulario Nuevo cliente")
+    + ol(["Escribe la <strong>cédula</strong>. Al llegar a 9 dígitos, Facturanza consulta a Hacienda y completa el nombre, el tipo de identificación y las actividades económicas. Se muestran también el <strong>régimen</strong> y la <strong>situación tributaria</strong> (solo lectura)."], start=2)
+    + single("clientes_cedula", "Al escribir la cédula, Facturanza consulta a Hacienda", width="max-w-[560px]")
+    + ol(["Si el cliente tiene varias actividades, elige la <strong>actividad económica prioritaria al facturar</strong>."], start=3)
+    + single("clientes_actividad", "Elige la actividad económica prioritaria al facturar", width="max-w-[560px]")
+    + ol(["Agrega <strong>correo</strong> y <strong>teléfono</strong> (con código de país)."], start=4)
+    + single("clientes_contacto", "Información de contacto", width="max-w-[560px]")
+    + ol(["Completa la <strong>ubicación</strong>: provincia, cantón, distrito y <strong>dirección exacta*</strong>. Toca <strong>Guardar</strong>."], start=5)
+    + single("clientes_ubicacion", "Ubicación del cliente", width="max-w-[560px]")
     + call("warn", "Cliente sin cédula", "Marca <strong>El cliente no cuenta con cédula</strong> y escribe el <strong>nombre de la empresa</strong>. Estos clientes solo se pueden usar en <strong>Tiquetes</strong>; una Factura requiere cédula.")
     + p("No puedes registrar dos clientes con la misma cédula. Cada cliente guarda <strong>un correo</strong>; para enviar un documento a más personas, agrégalas como destinatarios al crear la factura o al reenviarla.")
     + h2("cedulas", "2. Tipos de identificación")
@@ -33,11 +38,14 @@ PAGES["productos.html"] = dict(
     title="Productos y CABYS",
     nav="Productos y CABYS",
     desc="Tu catálogo de bienes y servicios con código CABYS, impuesto, moneda y unidad de medida.",
-    body=matrix("Productos: búsqueda CABYS y generación con IA")
+    body=shots("productos_menu", "Productos")
     + who("ver: todos los roles · crear y editar: Propietario, Administrador y Gerente")
     + h2("cabys", "1. El código CABYS")
     + p("Todo producto o servicio facturado lleva un código del <strong>Catálogo de Bienes y Servicios (CABYS)</strong> de <strong>13 dígitos</strong>. El código define la tarifa de IVA. Facturanza valida que tenga 13 dígitos y te ofrece <strong>Buscar CABYS</strong>: escribe una descripción en palabras comunes y elige entre los resultados (se muestran código, tarifa, descripción y categorías).")
+    + p("Toca <strong>Buscar CABYS</strong> en el formulario, describe el producto con palabras comunes (o escribe el código de 13 dígitos) y elige un resultado: se completan el código y la tarifa de IVA.")
+    + single("productos_cabys", "Buscador de CABYS", width="max-w-[260px]")
     + h2("crear", "2. Crear un producto")
+    + shots("productos_form", "Formulario Nuevo producto")
     + ul([
         "<strong>Nombre*</strong>, descripción y código interno del producto.",
         "<strong>Código CABYS*</strong>: tarifa y tipo de impuesto se completan según el código.",
@@ -47,6 +55,8 @@ PAGES["productos.html"] = dict(
     + p("Un precio en dólares se convierte a colones al emitir, con el tipo de cambio del documento. En cada producto del catálogo puedes <strong>Duplicar</strong> o <strong>Eliminar</strong>.")
     + h2("ia", "3. Generar con IA")
     + p("¿No sabes el código ni la tarifa? Toca <strong>Generar con IA</strong> y describe tu producto en una frase (hasta 100 caracteres). Facturito propone nombre, CABYS, impuesto y unidad. Cada intento descuenta de <strong>Cantidad de usos restantes</strong>, que depende de tu plan.")
+    + single("productos_ia", "Asistente Facturito: describe tu producto", width="max-w-[420px]")
+    + single("productos_ia_ok", "Producto generado con éxito: revisa y edita", width="max-w-[420px]")
     + call("warn", "Revisa siempre la tarifa", "La sugerencia de la IA es una ayuda. Confirma el código CABYS y la tarifa de IVA antes de facturar; si no coinciden con la ley, Hacienda puede rechazar el documento. Ver <a class='underline' href='ayuda.html#tarifas'>tarifas de IVA</a>."),
 )
 
@@ -55,11 +65,11 @@ PAGES["compras.html"] = dict(
     title="Compras",
     nav="Compras",
     desc="Registra las facturas de tus proveedores para tu reporte de IVA. La aceptación ante Hacienda se hace fuera de Facturanza.",
-    body=matrix("Compras: carga de XML y buzón")
+    body=shots("compras_menu", "Compras (agosto 2026)")
     + who("Propietario, Administrador y Contador")
-    + call("danger", "Importante: la aceptación se hace en TRIBU-CR", "Facturanza <strong>registra</strong> tus compras, pero <strong>no envía el Mensaje Receptor</strong> (Aceptación total, parcial o Rechazo) a Hacienda. Debes enviarlo en <strong>TRIBU-CR (Tico Factura)</strong> o con otro software certificado, dentro de los <strong>primeros 8 días hábiles del mes siguiente</strong>. Si no lo haces a tiempo, el comprobante pierde su condición de respaldo del crédito fiscal de IVA.")
     + call("info", "Mensaje Receptor en el correo de compra", "Cuando una compra entra por el buzón, Facturanza guarda el <strong>XML enviado</strong>, el <strong>XML recibido</strong> (Mensaje Receptor de Hacienda), el <strong>PDF</strong> y el <strong>cuerpo del correo</strong>. Facturanza no envía el Mensaje Receptor; no necesitas enviarlo por TRIBU-CR para registrar la compra. <strong>Próximamente:</strong> al subir una compra a mano también cargarás el XML recibido, y se creará una compra con ambos XML.")
     + h2("subir", "1. Subir facturas de proveedores")
+    + shots("compras_subir", "Diálogo Facturas de compra")
     + ol([
         "En <strong>Compras</strong> (o desde Inicio) toca <strong>Subir compra</strong>.",
         "Toca <strong>Seleccionar archivos</strong> y elige uno o varios XML de <strong>Factura Electrónica</strong>.",
@@ -75,6 +85,7 @@ PAGES["compras.html"] = dict(
         "Si un proveedor te emite una Factura Electrónica de Compra (FEC), también se registra.",
     ])
     + h2("lista", "3. Consultar y usar tus compras")
+    + shots("compras_form", "Detalle de una compra")
     + p("La lista muestra el mes actual; filtra por fecha y busca por proveedor o clave. Las compras registradas alimentan la sección de compras del <a class='underline' href='reportes.html'>reporte de IVA</a> y el gráfico de Egresos de Inicio; también puedes exportarlas a Excel o PDF."),
 )
 
@@ -83,7 +94,7 @@ PAGES["facturito.html"] = dict(
     title="Facturito, tu asistente con IA",
     nav="Facturito (IA)",
     desc="Pídele a Facturito que prepare facturas, registre clientes y productos, busque códigos CABYS, resuma ventas y responda dudas tributarias.",
-    body=matrix("Facturito: chat y tarjeta de factura")
+    body=single("facturito_chat", "Chat de Facturito: opciones de inicio", width="max-w-[690px]")
     + h2("donde", "1. Dónde está")
     + p("En <strong>Inicio</strong>, como una barra en la parte inferior. Tócala para abrir el chat en pantalla completa. Si no la ves, actívala en <strong>Negocio › Membresía › Experimentos › Habilitar interfaz de chat Facturito</strong> (depende de tu plan).")
     + h2("hace", "2. Qué puede hacer")
@@ -109,13 +120,13 @@ PAGES["facturito.html"] = dict(
 
 # ---------------------------------------------------------------- reportes
 PAGES["reportes.html"] = dict(
-    title="Reportes e IVA (Formulario 150)",
-    nav="Reportes e IVA",
+    title="Declaraciones (Formulario 150)",
+    nav="Declaraciones",
     desc="Un borrador mensual de tu declaración de IVA, calculado con tus ventas y compras registradas, listo para exportar.",
-    body=matrix("Reportes: declaración de IVA e historial")
-    + who("Propietario, Administrador, Contador y Gerente")
+    body=who("Propietario, Administrador, Contador y Gerente")
     + call("warn", "Es un apoyo, no la declaración", "El reporte <strong>no presenta nada ante Hacienda</strong>. Úsalo para llenar el <strong>Formulario 150 en TRIBU-CR</strong> (reemplazó al antiguo D-104 en octubre de 2025). El plazo es dentro de los <strong>primeros 15 días naturales</strong> del mes siguiente (si cae en feriado o fin de semana, pasa al siguiente día hábil).")
     + h2("declaracion", "1. Pestaña Declaración")
+    + shots("declaraciones_declaracion", "Pestaña Declaración")
     + ul([
         "<strong>Liquidación final de IVA</strong>: Débito fiscal efectivo (ventas), Exceso de notas de crédito (Art. 22), Crédito fiscal soportado (compras) y <strong>Impuesto neto a pagar</strong> o <strong>Saldo a favor</strong>. Tócalo para copiar el valor.",
         "<strong>Paso 1</strong> (ventas) y <strong>Paso 3</strong> (compras) desglosados por tarifa: 0%, 0.5%, 1%, 2%, 4%, 8% y 13%, igual que en TRIBU-CR.",
@@ -123,6 +134,7 @@ PAGES["reportes.html"] = dict(
     ])
     + call("info", "Sobre las compras", "El crédito fiscal usa las compras que registraste o recibiste por el buzón. Facturanza <strong>no verifica</strong> que hayas enviado la aceptación a Hacienda: confírmalo en TRIBU-CR antes de declarar. Ver <a class='underline' href='compras.html'>Compras</a>.")
     + h2("historial", "2. Pestaña Historial y envío automático")
+    + shots("declaraciones_historial", "Pestaña Historial")
     + p("El <strong>día 1 de cada mes a las 12:05 a. m.</strong> (hora de Costa Rica) Facturanza genera el reporte del mes anterior, lo guarda en <strong>Historial</strong> y lo envía por correo al Propietario, Administradores y Contadores. Desde Historial puedes descargarlo en PDF o Excel.")
     + h2("otros", "3. Reportes de ingresos y egresos")
     + p("En <strong>Inicio</strong>, los gráficos de Ingresos y Egresos permiten descargar el listado del período en Excel o PDF (por ejemplo, para tu contador). También puedes pedirle a Facturito un resumen de ventas o gastos.")
