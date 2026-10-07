@@ -102,7 +102,7 @@ PAGES["sucursales.html"] = dict(
         ("Terminal", "Un punto de emisión (caja). Cada sucursal nace con la terminal 00001, llamada <strong>Principal</strong>. Cada terminal lleva su propio consecutivo."),
     ])
     + h2("administrar", "2. Crear y administrar")
-    + shots("sucursales_terminales", "Terminales de una sucursal")
+    + shots("sucursales_terminal", "Detalle de una terminal")
     + ul([
         "<strong>Crear sucursal</strong>: escribe el nombre. Se crea con la siguiente numeración (002, 003…) y una terminal Principal.",
         "Dentro de una sucursal, <strong>Crear terminal</strong>.",
