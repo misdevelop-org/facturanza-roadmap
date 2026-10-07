@@ -55,14 +55,15 @@ PAGES["roles.html"] = dict(
     title="Roles y acceso",
     nav="Roles y acceso",
     desc="Invita a tu equipo, asigna un rol y limita desde qué sucursal o terminal puede facturar cada persona.",
-    body=matrix("Roles: invitar usuarios y nivel de acceso")
+    body=shots("roles_tab", "Negocio › Roles")
     + h2("invitar", "1. Agregar a una persona")
     + who("ver: Propietario, Administrador, Contador y Gerente · editar roles: Propietario, Administrador y Gerente")
-    + ol([
-        "Ve a <strong>Negocio › Roles</strong> y agrega un usuario.",
-        "Elige el rol: <strong>Gerente, Administrador, Empleado o Contador</strong>.",
-        "Escribe el <strong>correo</strong> de la persona y toca <strong>Invitar</strong>. La empresa aparecerá en su lista de <em>Mis Empresas</em>.",
-    ])
+    + ol(["Ve a <strong>Negocio › Roles</strong> y agrega un usuario."])
+    + single("roles_agregar", "Botón Agregar rol en la pestaña Roles", width="max-w-[560px]")
+    + ol(["Elige el rol: <strong>Gerente, Administrador, Empleado o Contador</strong>."], start=2)
+    + single("roles_dialogo_rol", "¿Qué rol desea agregar?", width="max-w-[560px]")
+    + ol(["Escribe el <strong>correo</strong> de la persona y toca <strong>Invitar</strong>. La empresa aparecerá en su lista de <em>Mis Empresas</em>."], start=3)
+    + single("roles_dialogo_correo", "Ingresa el correo de la persona e invítala", width="max-w-[420px]")
     + p("En el menú de cada usuario puedes <strong>Editar rol</strong>, <strong>Establecer nivel de acceso</strong>, <strong>Establecer terminal asignada</strong> o <strong>Eliminar usuario</strong>.")
     + h2("roles", "2. Qué ve y puede hacer cada rol")
     + table(["Pantalla o acción", "Propietario", "Administrador", "Contador", "Gerente", "Empleado"], [
@@ -83,6 +84,7 @@ PAGES["roles.html"] = dict(
         ["Acceso a sucursales", "Una o varias sucursales."],
         ["Acceso a terminales", "Una o varias terminales dentro de una sucursal."],
     ])
+    + single("roles_menu", "Menú de cada usuario: nivel de acceso y terminal asignada", width="max-w-[300px]")
     + p("Con <strong>Establecer terminal asignada</strong> defines la terminal desde la que factura por defecto. Así logras, por ejemplo, que un cajero solo emita desde su caja."),
 )
 
@@ -91,7 +93,7 @@ PAGES["sucursales.html"] = dict(
     title="Sucursales y terminales",
     nav="Sucursales y terminales",
     desc="Cómo se numeran tus documentos: sucursales, terminales y consecutivos.",
-    body=matrix("Sucursales y terminales")
+    body=shots("sucursales_menu", "Sucursales")
     + who("Propietario, Administrador y Contador")
     + h2("estructura", "1. Cómo funciona")
     + p("Cada documento lleva un <strong>consecutivo de 20 dígitos</strong> compuesto por <strong>sucursal (3) + terminal (5) + tipo de documento (2) + número (10)</strong>. Facturanza lo administra por ti.")
@@ -100,6 +102,7 @@ PAGES["sucursales.html"] = dict(
         ("Terminal", "Un punto de emisión (caja). Cada sucursal nace con la terminal 00001, llamada <strong>Principal</strong>. Cada terminal lleva su propio consecutivo."),
     ])
     + h2("administrar", "2. Crear y administrar")
+    + shots("sucursales_terminales", "Terminales de una sucursal")
     + ul([
         "<strong>Crear sucursal</strong>: escribe el nombre. Se crea con la siguiente numeración (002, 003…) y una terminal Principal.",
         "Dentro de una sucursal, <strong>Crear terminal</strong>.",
@@ -115,7 +118,8 @@ PAGES["marcas.html"] = dict(
     title="Marcas",
     nav="Marcas",
     desc="Factura con distinto nombre, logo y datos de contacto dentro de una misma empresa.",
-    body=matrix("Marcas de la empresa")
+    body=single("negocio_info", "Datos de la empresa (escritorio)", width="max-w-[380px]")
+    + single("negocio_info_movil", "Datos de la empresa (tablet y móvil)", width="max-w-[420px]")
     + who("planes de pago · crear y editar: Propietario, Administrador y Contador")
     + p("Una <strong>marca</strong> te permite emitir documentos con un nombre comercial, logo, correo y teléfono propios, por <strong>actividad económica</strong>, sin crear otra empresa. Es la forma de manejar varias actividades con distinta imagen. No es obligatoria: en el plan gratuito también puedes elegir otra actividad directamente en el formulario de la factura.")
     + h2("crear", "1. Crear una marca")
@@ -125,6 +129,7 @@ PAGES["marcas.html"] = dict(
         "Guarda. Puedes eliminarla cuando quieras: las facturas ya emitidas no se afectan.",
     ])
     + h2("usar", "2. Usar una marca al facturar")
+    + single("marcas_drawer", "Panel de empresas: sección Marcas", width="max-w-[380px]")
     + p("Elige la marca (con el selector del panel de Negocio) antes de crear la factura. El documento usará el nombre, contacto, logo y sucursal/terminal de esa marca. En el plan gratuito las marcas adicionales aparecen bloqueadas."),
 )
 
@@ -133,7 +138,7 @@ PAGES["planes.html"] = dict(
     title="Planes, facturas y pagos",
     nav="Planes y pagos",
     desc="Qué incluye cada plan, cuántas facturas te quedan y cómo pagar.",
-    body=matrix("Membresía y planes")
+    body=shots("planes_menu", "Planes de suscripción")
     + who("ver y contratar: Propietario, Administrador, Contador y Gerente")
     + h2("cupo", "1. Tu cupo de facturas")
     + ul([
@@ -143,6 +148,9 @@ PAGES["planes.html"] = dict(
         "Cuando llegas a 0, la app te ofrece <strong>Planes de suscripción</strong> o <strong>Facturas unitarias</strong>.",
     ])
     + h2("planes", "2. Qué incluye un plan")
+    + single("planes_recomendado", "Plan recomendado: Crecimiento", width="max-w-[300px]")
+    + call("ok", "Paga al año y ahorra 20%", "En la parte superior elige <strong>Mensual</strong> o <strong>Anual</strong>. Con el pago <strong>anual</strong> obtienes un <strong>20% de descuento</strong> sobre el precio mensual (por ejemplo, el plan Crecimiento baja de ₡10,000 a ₡8,000 por mes: ₡96,000 al año).")
+    + single("planes_selector", "Selector Mensual / Anual con el 20% de ahorro", width="max-w-[380px]")
     + p("Cada plan define: <strong>facturas mensuales</strong>, <strong>usuarios</strong>, precio por <strong>factura extra</strong>, <strong>usos del creador de productos con IA</strong> y <strong>FacturiTokens</strong>. Los planes de pago agregan:")
     + ul([
         "Facturas programadas.",
@@ -152,6 +160,7 @@ PAGES["planes.html"] = dict(
     ])
     + p("En <strong>Membresía</strong> ves tu plan actual, el uso de facturas, usuarios y FacturiTokens, y los botones <strong>Mejorar plan</strong>, <strong>Comprar facturas</strong>, <strong>Administrar mi plan</strong> e <strong>Historial de pagos</strong>. Puedes alternar precios mensuales y anuales. El plan <strong>Empresarial</strong> es a la medida: se coordina por contacto con ventas.")
     + h2("pagos", "3. Cómo pagar")
+    + shots("planes_pago", "Desglose de pago del plan recomendado")
     + table(["Método", "Cómo funciona"], [
         ["Tarjeta", "Pago en línea. Monto mínimo ₡3,000. Al aprobarse se activa el plan o se acreditan las facturas y se emite tu comprobante."],
         ["Transferencia (IBAN)", "Transfieres a la cuenta indicada y adjuntas el comprobante. Un administrador de Facturanza aprueba el pago."],
