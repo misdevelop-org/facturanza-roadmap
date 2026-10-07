@@ -1,4 +1,4 @@
-from template import h2, h3, p, ul, ol, code, who, call, cards, table, matrix, shots
+from template import h2, h3, p, ul, ol, code, who, call, cards, table, matrix, shots, single
 
 PAGES = {}
 
@@ -120,7 +120,7 @@ PAGES["facturas.html"] = dict(
     title="Facturas",
     nav="Facturas",
     desc="Crea y consulta facturas y tiquetes electrónicos, entiende cada estado y sabe qué hacer cuando algo falla.",
-    body=matrix("Facturas: lista de documentos")
+    body=shots("facturas_lista", "Lista de facturas")
     + h2("tipos", "1. Qué documentos puedes emitir")
     + table(["Documento", "Cómo se genera", "Estado"], [
         ["<strong>Factura Electrónica (FE)</strong>", "Facturas &rsaquo; Crear factura, con un cliente que tenga cédula.", "Disponible"],
@@ -178,8 +178,7 @@ PAGES["notas-credito.html"] = dict(
     title="Notas de crédito",
     nav="Notas de crédito",
     desc="Cómo corregir o anular una factura o tiquete ya aceptado por Hacienda.",
-    body=matrix("Crear una nota de crédito")
-    + p("Una factura o tiquete aceptado por Hacienda no se edita ni se elimina: se corrige con una <strong>nota de crédito (NC)</strong> que lo referencia.")
+    body=p("Una factura o tiquete aceptado por Hacienda no se edita ni se elimina: se corrige con una <strong>nota de crédito (NC)</strong> que lo referencia.")
     + h2("cuando", "1. Cuándo puedes crearla")
     + ul([
         "El documento original es una <strong>Factura o Tiquete</strong> en estado <strong>Completado</strong>.",
@@ -192,6 +191,10 @@ PAGES["notas-credito.html"] = dict(
         "Revisa los montos: el <strong>total de la nota no puede superar el de la factura</strong>.",
         "Toca <strong>Crear nota de crédito</strong>. Se envía a Hacienda igual que cualquier documento.",
     ])
+    + single("nc_menu", "Menú del documento: Crear nota de crédito")
+    + shots("nc_dialogo", "Diálogo Nota de crédito: Razón y Motivo")
+    + shots("nc_formulario", "Formulario de la nota de crédito")
     + call("ok", "Sin costo de cupo", "Las notas de crédito <strong>no descuentan</strong> facturas de tu plan.")
+    + shots("nc_adjunta", "La nota de crédito queda enlazada a la factura original")
     + p("La factura original y su nota quedan enlazadas (pestaña <em>Nota de crédito</em> / <em>Referencia</em>). En el reporte de IVA, la nota reduce el débito fiscal del período. Si necesitas <em>aumentar</em> un monto ya facturado, consulta con tu contador: la Nota de Débito aún no está disponible en Facturanza."),
 )

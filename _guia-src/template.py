@@ -283,3 +283,17 @@ def shots(key, caption):
         out += "</div>"
     out += f'<figcaption class="text-xs text-slate-500 dark:text-slate-400 self-start">{caption}</figcaption></figure>\n'
     return out
+
+
+def single(key, caption, width="max-w-[230px]"):
+    """Una sola imagen (recorte) con par claro/oscuro, sin matriz de dispositivos."""
+    img = _pair(key, ["chrome"], caption, "w-full h-auto rounded-xl")
+    # _pair solo mira {key}_chrome_*; para recortes usamos el nombre sin dispositivo
+    lf, df = f"{key}_light.png", f"{key}_dark.png"
+    a = _h.escape(caption)
+    return (
+        f'<figure class="my-8 mx-auto {width}">'
+        f'<img src="assets/img/{lf}" alt="{a}" loading="lazy" class="w-full h-auto rounded-xl shadow-lg block dark:hidden" />'
+        f'<img src="assets/img/{df}" alt="{a} (tema oscuro)" loading="lazy" class="w-full h-auto rounded-xl shadow-lg hidden dark:block" />'
+        f'<figcaption class="mt-2 text-xs text-slate-500 dark:text-slate-400">{caption}</figcaption></figure>\n'
+    )
