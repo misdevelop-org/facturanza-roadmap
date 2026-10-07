@@ -257,7 +257,7 @@ def shots(key, caption):
     """
     desk = _pair(key, ["chrome"], caption + " - Escritorio", "w-full h-auto rounded-xl")
     h = "h-[300px] sm:h-[360px] md:h-[440px] lg:h-[480px]"
-    tab = _pair(key, ["fold"], caption + " - Tablet", "h-full w-auto object-contain rounded-xl")
+    tab = _pair(key, ["fold", "tablet"], caption + " - Tablet", "h-full w-auto object-contain rounded-xl")
     mob = _pair(key, ["iphone", "phone"], caption + " - Móvil", "h-full w-auto object-contain rounded-2xl")
     if not (desk or tab or mob):
         return ""

@@ -120,7 +120,7 @@ PAGES["facturas.html"] = dict(
     title="Facturas",
     nav="Facturas",
     desc="Crea y consulta facturas y tiquetes electrónicos, entiende cada estado y sabe qué hacer cuando algo falla.",
-    body=matrix("Facturas: formulario de emisión y lista")
+    body=matrix("Facturas: lista de documentos")
     + h2("tipos", "1. Qué documentos puedes emitir")
     + table(["Documento", "Cómo se genera", "Estado"], [
         ["<strong>Factura Electrónica (FE)</strong>", "Facturas &rsaquo; Crear factura, con un cliente que tenga cédula.", "Disponible"],
@@ -132,6 +132,7 @@ PAGES["facturas.html"] = dict(
     + p("Facturanza emite con el esquema <strong>v4.4</strong> de Hacienda, obligatorio desde el 1 de septiembre de 2025.")
     + h2("crear", "2. Crear una factura paso a paso")
     + who("todos los roles (según tu nivel de acceso a sucursales y terminales)")
+    + shots("facturas_crear", "Formulario Crear factura")
     + ol([
         "Toca <strong>Crear factura</strong> en Inicio o en Facturas. Si ves un aviso de configuración, completa primero <a class='underline' href='negocio.html#credenciales'>las credenciales de Hacienda</a>.",
         "<strong>Tipo de documento</strong>: Factura o Tiquete.",
