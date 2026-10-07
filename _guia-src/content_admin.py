@@ -1,4 +1,4 @@
-from template import h2, h3, p, ul, ol, code, who, call, cards, table, matrix
+from template import h2, h3, p, ul, ol, code, who, call, cards, table, matrix, shots, single
 
 PAGES = {}
 
@@ -7,7 +7,7 @@ PAGES["negocio.html"] = dict(
     title="Negocio y credenciales de Hacienda",
     nav="Negocio y credenciales",
     desc="Datos de tu empresa y, lo más importante, cómo conectar Facturanza con Hacienda para poder emitir.",
-    body=matrix("Negocio: datos de la empresa y facturación")
+    body=shots("negocio_facturacion", "Negocio: Mi empresa")
     + p("<strong>Negocio</strong> (la pantalla se titula <em>Mi empresa</em>) tiene a la izquierda los datos de la empresa y a la derecha tres pestañas: <strong>Facturación</strong>, <strong>Roles</strong> y <strong>Membresía</strong>.")
     + h2("empresa", "1. Datos de la empresa")
     + who("ver: Propietario, Administrador, Contador y Gerente · editar: Propietario, Administrador y Contador")
@@ -17,6 +17,8 @@ PAGES["negocio.html"] = dict(
         "El <strong>nombre legal</strong>, el tipo de identificación y la cédula vienen de Hacienda y no se editan.",
         "Si tu plan lo permite, puedes agregar <a class='underline' href='marcas.html'>marcas</a>.",
     ])
+    + single("negocio_info", "Datos de la empresa (escritorio)", width="max-w-[380px]")
+    + single("negocio_info_movil", "Datos de la empresa (tablet y móvil)", width="max-w-[420px]")
     + h2("credenciales", "2. Conectar con Hacienda (credenciales)")
     + who("Propietario, Administrador y Contador")
     + p("Para firmar y enviar comprobantes necesitas tres cosas de Hacienda: <strong>usuario</strong>, <strong>contraseña</strong> y <strong>llave criptográfica (.p12) con su PIN</strong>. Desde el 6 de octubre de 2025 se generan en <strong>TRIBU-CR</strong> (reemplazó a ATV).")
@@ -37,13 +39,13 @@ PAGES["negocio.html"] = dict(
     + call("warn", "Sobre el PIN y la vigencia", "La guía oficial de Hacienda (mayo de 2025) indica un PIN de 4 dígitos. Fuentes de la industria (blogs, no documentación oficial de Hacienda) reportan que desde el 27 de julio de 2026 se exige un PIN de mínimo 14 caracteres con mayúscula, minúscula, número y símbolo, y una vigencia de la llave de 4 años. Usa el PIN que te pida Hacienda al generarla. Generar una llave nueva puede dejar sin efecto la anterior: actualízala en todos los sistemas que la usen.")
     + "<!-- TBD: validar regla de PIN y vigencia contra comunicado oficial de Hacienda -->\n"
     + h3("Paso 3 — Cargar todo en Facturanza")
-    + ol([
-        "Ve a <strong>Negocio › Facturación</strong>.",
-        "Toca <strong>Pegar desde Hacienda</strong> y pega el texto del correo que contiene <code class=\"code-font\">usuario:</code> y <code class=\"code-font\">contraseña:</code>; se llenan los campos solos. También puedes escribirlos en <em>Correo de facturación</em> y <em>Contraseña de correo</em> (con el botón de editar).",
-        "En <strong>Llave criptográfica</strong> toca <strong>Actualizar</strong> y sube el archivo .p12.",
-        "En <strong>Pin de la llave criptográfica</strong> toca editar, escribe el PIN y guarda.",
-        "Vuelve a <strong>Inicio</strong>: debe decir <strong>Facturación habilitada</strong>. La facturación se habilita sola cuando usuario, contraseña, PIN y llave están completos.",
-    ])
+    + ol(["Ve a <strong>Negocio › Facturación</strong>."])
+    + ol(["Toca <strong>Pegar desde Hacienda</strong> y pega el texto del correo que contiene <code class=\"code-font\">usuario:</code> y <code class=\"code-font\">contraseña:</code>; se llenan los campos solos. También puedes escribirlos en <em>Correo de facturación</em> y <em>Contraseña de correo</em> (con el botón de editar)."], start=2)
+    + single("negocio_usuario", "Usuario y contraseña: Pegar desde Hacienda", width="max-w-[560px]")
+    + ol(["En <strong>Llave criptográfica</strong> toca <strong>Actualizar</strong> y sube el archivo .p12.",
+        "En <strong>Pin de la llave criptográfica</strong> toca editar, escribe el PIN y guarda."], start=3)
+    + single("negocio_llave", "Llave criptográfica y PIN", width="max-w-[560px]")
+    + ol(["Vuelve a <strong>Inicio</strong>: debe decir <strong>Facturación habilitada</strong>. La facturación se habilita sola cuando usuario, contraseña, PIN y llave están completos."], start=5)
     + p("Aquí ves y puedes cambiar la <strong>actividad económica predeterminada</strong>. Las actividades <strong>no se pueden eliminar</strong>: solo se actualizan con el ícono de actualizar junto a <strong>Actividades</strong>, que las consulta de nuevo en Hacienda. Con otra actividad puedes facturar eligiéndola en el formulario de la factura (todas las empresas) o con una <a class='underline' href='marcas.html'>marca</a> (plan de pago). En <strong>Sucursal y terminal predeterminada</strong> verás con cuál se emite por defecto (se administran en <a class='underline' href='sucursales.html'>Sucursales</a>).")
     + call("danger", "Protege tus credenciales", "Estos datos permiten emitir comprobantes a nombre de tu empresa. Solo compártelos con personas de confianza y dales el rol adecuado. Si sospechas que se filtraron, genera nuevas en TRIBU-CR."),
 )

@@ -79,6 +79,7 @@ PAGES["compras.html"] = dict(
     + h2("buzon", "2. Buzón automático")
     + who("planes de pago")
     + p("Pide a tus proveedores que envíen sus facturas (XML) a <strong>compras@facturanza.com</strong>. El correo es único para todos; Facturanza asigna cada factura a tu empresa por la <strong>cédula del receptor</strong> que aparece en el XML. La compra aparece en la lista con la leyenda <em>Ingresado automáticamente desde compras@facturanza.com</em>.")
+    + single("compras_auto", "Las compras recibidas por el buzón llevan la etiqueta Auto", width="max-w-[690px]")
     + ul([
         "En el plan gratuito el buzón no procesa tus correos.",
         "Los tiquetes electrónicos sin receptor identificado se descartan.",
