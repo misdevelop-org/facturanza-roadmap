@@ -147,6 +147,7 @@ PAGES["planes.html"] = dict(
         "Una factura se descuenta al quedar <strong>Completada</strong>. Las <strong>notas de crédito no descuentan</strong>. Las rechazadas no descuentan, pero cuentan para el límite de rechazos.",
         "Cuando llegas a 0, la app te ofrece <strong>Planes de suscripción</strong> o <strong>Facturas unitarias</strong>.",
     ])
+    + shots("planes_sin_facturas", "Diálogo ¡Sin facturas disponibles!")
     + h2("planes", "2. Qué incluye un plan")
     + single("planes_recomendado", "Plan recomendado: Crecimiento", width="max-w-[300px]")
     + call("ok", "Paga al año y ahorra 20%", "En la parte superior elige <strong>Mensual</strong> o <strong>Anual</strong>. Con el pago <strong>anual</strong> obtienes un <strong>20% de descuento</strong> sobre el precio mensual (por ejemplo, el plan Crecimiento baja de ₡10,000 a ₡8,000 por mes: ₡96,000 al año).")
