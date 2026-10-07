@@ -195,6 +195,7 @@ PAGES["notas-credito.html"] = dict(
     + shots("nc_dialogo", "Diálogo Nota de crédito: Razón y Motivo")
     + shots("nc_formulario", "Formulario de la nota de crédito")
     + call("ok", "Sin costo de cupo", "Las notas de crédito <strong>no descuentan</strong> facturas de tu plan.")
+    + single("nc_tarjeta", "En la lista, la factura muestra la pestaña Nota de crédito", width="max-w-[580px]")
     + shots("nc_adjunta", "La nota de crédito queda enlazada a la factura original")
     + p("La factura original y su nota quedan enlazadas (pestaña <em>Nota de crédito</em> / <em>Referencia</em>). En el reporte de IVA, la nota reduce el débito fiscal del período. Si necesitas <em>aumentar</em> un monto ya facturado, consulta con tu contador: la Nota de Débito aún no está disponible en Facturanza."),
 )
