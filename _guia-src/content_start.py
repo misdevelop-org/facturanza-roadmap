@@ -185,17 +185,15 @@ PAGES["notas-credito.html"] = dict(
         "No tiene ya una nota de crédito aceptada (si la anterior fue rechazada, puedes crear otra).",
     ])
     + h2("pasos", "2. Paso a paso")
-    + ol([
-        "Abre el menú (⋮) del documento y toca <strong>Crear nota de crédito</strong> (o el botón <em>Elaborar nota de crédito</em> dentro del detalle).",
-        "Completa <strong>Razón</strong> y <strong>Motivo</strong> (máximo 50 caracteres).",
-        "Revisa los montos: el <strong>total de la nota no puede superar el de la factura</strong>.",
-        "Toca <strong>Crear nota de crédito</strong>. Se envía a Hacienda igual que cualquier documento.",
-    ])
+    + ol(["Abre el menú (⋮) del documento y toca <strong>Crear nota de crédito</strong> (o el botón <em>Elaborar nota de crédito</em> dentro del detalle)."])
     + single("nc_menu", "Menú del documento: Crear nota de crédito")
+    + ol(["Completa <strong>Razón</strong> y <strong>Motivo</strong> (máximo 50 caracteres) y toca <strong>Crear nota de crédito</strong>."], start=2)
     + shots("nc_dialogo", "Diálogo Nota de crédito: Razón y Motivo")
+    + ol(["Revisa los montos en el formulario: el <strong>total de la nota no puede superar el de la factura</strong>."], start=3)
     + shots("nc_formulario", "Formulario de la nota de crédito")
-    + call("ok", "Sin costo de cupo", "Las notas de crédito <strong>no descuentan</strong> facturas de tu plan.")
+    + ol(["Toca <strong>Generar documento</strong>. La nota se envía a Hacienda igual que cualquier documento."], start=4)
     + single("nc_tarjeta", "En la lista, la factura muestra la pestaña Nota de crédito", width="max-w-[580px]")
+    + call("ok", "Sin costo de cupo", "Las notas de crédito <strong>no descuentan</strong> facturas de tu plan.")
     + shots("nc_adjunta", "La nota de crédito queda enlazada a la factura original")
     + p("La factura original y su nota quedan enlazadas (pestaña <em>Nota de crédito</em> / <em>Referencia</em>). En el reporte de IVA, la nota reduce el débito fiscal del período. Si necesitas <em>aumentar</em> un monto ya facturado, consulta con tu contador: la Nota de Débito aún no está disponible en Facturanza."),
 )

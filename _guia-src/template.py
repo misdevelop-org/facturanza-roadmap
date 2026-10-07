@@ -27,9 +27,9 @@ def ul(items):
     return f'<ul class="list-disc pl-5 space-y-1.5 {P_CLS}">{lis}</ul>\n'
 
 
-def ol(items):
+def ol(items, start=1):
     lis = "".join(f"<li>{x}</li>" for x in items)
-    return f'<ol class="list-decimal pl-5 space-y-2 {P_CLS}">{lis}</ol>\n'
+    return f'<ol start="{start}" class="list-decimal pl-5 space-y-2 {P_CLS}">{lis}</ol>\n'
 
 
 def code(t):
