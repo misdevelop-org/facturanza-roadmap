@@ -192,6 +192,7 @@ PAGES["notas-credito.html"] = dict(
     + ol(["Revisa los montos en el formulario: el <strong>total de la nota no puede superar el de la factura</strong>."], start=3)
     + shots("nc_formulario", "Formulario de la nota de crédito")
     + ol(["Toca <strong>Generar documento</strong>. La nota se envía a Hacienda igual que cualquier documento."], start=4)
+    + ol(["Verifica el resultado: en la lista, la factura original muestra la pestaña <strong>Nota de crédito</strong>; al abrirla, el detalle muestra el número de la nota."], start=5)
     + single("nc_tarjeta", "En la lista, la factura muestra la pestaña Nota de crédito", width="max-w-[580px]")
     + call("ok", "Sin costo de cupo", "Las notas de crédito <strong>no descuentan</strong> facturas de tu plan.")
     + shots("nc_adjunta", "La nota de crédito queda enlazada a la factura original")
