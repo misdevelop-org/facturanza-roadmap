@@ -176,10 +176,12 @@ PAGES["perfil.html"] = dict(
     title="Perfil de usuario",
     nav="Perfil",
     desc="Tus datos, tus formas de iniciar sesión, preferencias y cómo eliminar tu cuenta.",
-    body=matrix("Perfil: datos, métodos de acceso y preferencias")
+    body=shots("perfil_pagina", "Perfil")
     + h2("datos", "1. Mis datos")
     + p("<strong>Nombre de usuario</strong>, <strong>teléfono</strong> (mínimo 8 dígitos) y <strong>correo electrónico</strong>. Desde aquí también puedes <strong>Cerrar sesión</strong> y abrir los términos y condiciones, la política de privacidad y la de cookies.")
+    + single("perfil_datos", "Datos del usuario y avatar", width="max-w-[300px]")
     + h2("metodos", "2. Métodos de inicio de sesión")
+    + single("perfil_metodos", "Métodos de inicio de sesión", width="max-w-[300px]")
     + ul([
         "<strong>Google</strong>: vincular o desvincular.",
         "<strong>Apple</strong>: aparece en dispositivos Apple o si ya está vinculado.",
@@ -188,7 +190,9 @@ PAGES["perfil.html"] = dict(
     ])
     + h2("preferencias", "3. Sonidos y vibración")
     + p("Puedes apagar los <strong>sonidos de la interfaz</strong> y la <strong>vibración háptica</strong>.")
+    + single("perfil_sonidos", "Sonidos y vibración", width="max-w-[300px]")
     + h2("eliminar", "4. Eliminar tu cuenta")
+    + single("perfil_peligro", "Zona de peligro", width="max-w-[300px]")
     + call("danger", "Es irreversible", "Eliminar tu cuenta significa perder los datos relacionados con ella, incluido el acceso a negocios, facturas, clientes, productos y suscripciones. Antes de hacerlo, descarga los PDF y XML que necesites: tienes la obligación legal de conservar tus comprobantes electrónicos.")
     + "<!-- TBD: confirmar con negocio/legal qué ocurre con empresas de las que el usuario es único propietario -->\n",
 )
